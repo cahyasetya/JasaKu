@@ -2,8 +2,8 @@
 namespace App\Model;
 use Illuminate\Database\Eloquent\Model;
 
-class Paket extends Model
+class Memesan extends Model
 {
 	public $timestamps = false;
-    protected $table = 'paket';
+    protected $table = 'memesan';
 }

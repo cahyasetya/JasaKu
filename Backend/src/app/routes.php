@@ -16,7 +16,7 @@ $app->group('', function(){
         $this->put('/', 'App\Controller\PelangganController:update');
         $this->delete('/{id}', 'App\Controller\PelangganController:delete');
     });
-    //Route Table Penyedia Jasa
+    //Route Table Toko
     $this->group('/jasa', function(){
         $this->get('/all', 'App\Controller\JasaController:getall');
         $this->get('/{id}', 'App\Controller\JasaController:get');
@@ -26,7 +26,7 @@ $app->group('', function(){
         $this->put('/', 'App\Controller\JasaController:update');
         $this->delete('/{id}', 'App\Controller\JasaController:delete');
     });
-    //Route Paket
+    //Route Jasa
  	$this->group('/paket', function(){
         $this->get('/all', 'App\Controller\PaketController:getall');
         $this->get('/{id}', 'App\Controller\PaketController:get');
@@ -38,6 +38,17 @@ $app->group('', function(){
     });
     //Route Transaksi
     $this->group('/transaksi', function(){
+        $this->get('/all', 'App\Controller\TransaksiController:getall');
+        $this->get('/{id}', 'App\Controller\TransaksiController:get');
+        //Proses search dilakukan pada semua kolom, BUKAN hanya 1 kolom tertentu(Tidak termasuk kolom primary key)
+        $this->get('/search/{term}', 'App\Controller\TransaksiController:search');
+        $this->post('/', 'App\Controller\TransaksiController:create');
+        $this->put('/', 'App\Controller\TransaksiController:update');
+        $this->delete('/{id}', 'App\Controller\TransaksiController:delete');
+ 
+    });
+    //Route Pemesanan
+    $this->group('/memesan', function(){
         $this->get('/all', 'App\Controller\TransaksiController:getall');
         $this->get('/{id}', 'App\Controller\TransaksiController:get');
         //Proses search dilakukan pada semua kolom, BUKAN hanya 1 kolom tertentu(Tidak termasuk kolom primary key)

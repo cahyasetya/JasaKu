@@ -18,7 +18,10 @@ final class PelangganController {
 
         $pelanggan->nama = $post['nama'];
         $pelanggan->alamat = $post['alamat'];
-        $pelanggan->no_telepon = $post['no_telepon'];
+        $pelanggan->kontak = $post['kontak'];
+        $pelanggan->kelamin = $post['kelamin'];
+        $pelanggan->username = $post['username'];
+        $pelanggan->password = $post['password'];
         $pelanggan->save();
 
         $response->withHeader('Content-type', 'application/json');
@@ -48,7 +51,7 @@ final class PelangganController {
 
     //Cari data
     public function search(Request $request, Response $response, $args){
-        $pelanggans = Pelanggan::whereRaw('concat(nama," ",alamat,"",no_telepon) like ?', "%".$args['term']."%")->get();
+        $pelanggans = Pelanggan::whereRaw('concat(nama," ",alamat,"",kontak,"",username,"",password) like ?', "%".$args['term']."%")->get();
         $response->withHeader('Content-type', 'application/json');
         $response->write(json_encode($pelanggans));
         return $response;
@@ -66,7 +69,10 @@ final class PelangganController {
 
         if(isset($post['nama'])) $pelanggan->nama = $post['nama'];
         if(isset($post['alamat'])) $pelanggan->alamat = $post['alamat'];
-        if(isset($post['no_telepon'])) $pelanggan->no_telepon = $post['no_telepon'];
+        if(isset($post['kontak'])) $pelanggan->kontak = $post['kontak'];
+        if(isset($post['kelamin'])) $pelanggan->kelamin = $post['kelamin'];
+        if(isset($post['username'])) $pelanggan->username = $post['username'];
+        if(isset($post['password'])) $pelanggan->password = $post['password'];
         $pelanggan->save();
 
         $response->withHeader('Content-type', 'application/json');

@@ -4,21 +4,22 @@ namespace App\Controller;
 
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
-use \App\Model\Jasa as Jasa;
+use \App\Model\Memesan as Memesan;
 
-final class JasaController {
+final class MemesanController {
 
     public function __construct(){}
     //Tambah data
     public function create(Request $request, Response $response, $args){
         $post = $request->getParsedBody();
 
-        $jasa = new Jasa();
+        $memesan = new Memesan();
 
-        $jasa->id_toko = $post['id_toko'];
-        $jasa->nama = $post['nama'];
-        $jasa->harga = $post['harga'];
-        $jasa->save();
+        $memesan->id_jasa = $post['id_jasa'];
+        $memesan->id_transaksi = $post['id_transaksi'];
+        $memesan->id_pelanggan = $post['id_pelanggan'];
+        $memesan->jumlah = $post['jumlah'];
+        $memesan->save();
 
         $response->withHeader('Content-type', 'application/json');
         $response->write(json_encode([
@@ -29,27 +30,18 @@ final class JasaController {
 
 	// Get semua data
     public function getall(Request $request, Response $response, $args){
-        $jasas = Jasa::all();
+        $memesans = Memesan::all();
 
         $response->withHeader('Content-type', 'application/json');
-        $response->write(json_encode($jasas));
-        return $response;
-    }
-
-    //Get 1 data
-    public function get(Request $request, Response $response, $args){
-        $jasa = Jasa::find($args['id']);
-
-        $response->withHeader('Content-type', 'application/json');
-        $response->write(json_encode($jasa));
+        $response->write(json_encode($memesans));
         return $response;
     }
 
     //Cari data
     public function search(Request $request, Response $response, $args){
-        $jasas = Jasa::whereRaw('concat(id_toko," ",nama,"",harga) like ?', "%".$args['term']."%")->get();
+        $memesans = Memesan::whereRaw('concat(id_jasa," ",id_pelanggan,"",id_transaksi,"",jumlah) like ?', "%".$args['term']."%")->get();
         $response->withHeader('Content-type', 'application/json');
-        $response->write(json_encode($jasas));
+        $response->write(json_encode($memesans));
         return $response;
     }
 
@@ -57,13 +49,14 @@ final class JasaController {
     public function update(Request $request, Response $response, $args){
         $post = $request->getParsedBody();
 
-        $jasa = Jasa::find($post['id']);
+        $memesan = Memesan::find($post['id']);
 
 
-        if(isset($post['id_toko'])) $jasa->id_toko = $post['id_toko'];
-        if(isset($post['nama'])) $jasa->nama = $post['nama'];
-        if(isset($post['harga'])) $jasa->harga = $post['harga'];
-        $jasa->save();
+        if(isset($post['id_jasa'])) $memesan->id_jasa = $post['id_jasa'];
+        if(isset($post['id_transaksi'])) $memesan->id_transaksi = $post['id_transaksi'];
+        if(isset($post['id_pelanggan'])) $memesan->id_pelanggan = $post['id_pelanggan'];
+        if(isset($post['jumlah'])) $memesan->jumlah = $post['jumlah'];
+        $memesan->save();
 
         $response->withHeader('Content-type', 'application/json');
         $response->write(json_encode([
@@ -72,10 +65,10 @@ final class JasaController {
         return $response;
     }
 
-    //Hapus jasa
+    //Hapus memesan
     public function delete(Request $request, Response $response, $args){
-        $jasa = Jasa::find($args['id']);
-        $jasa->delete();
+        $memesan = Memesan::find($args['id_transaksi']);
+        $memesan->delete();
 
         $response->withHeader('Content-type', 'application/json');
         $response->write(json_encode([

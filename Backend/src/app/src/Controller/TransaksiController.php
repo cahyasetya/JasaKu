@@ -16,8 +16,8 @@ final class TransaksiController {
 
         $transaksi = new Transaksi();
 
-        $transaksi->id_pelanggan = $post['id_pelanggan'];
-        $transaksi->id_paket = $post['id_paket'];
+        // $transaksi->id_pelanggan = $post['id_pelanggan'];
+        // $transaksi->id_paket = $post['id_paket'];
         $transaksi->jumlah = $post['jumlah'];
         $transaksi->total_harga = $post['total_harga'];
         $transaksi->updated_at = $post['updated_at'];
@@ -52,7 +52,7 @@ final class TransaksiController {
 
     //Cari data
     public function search(Request $request, Response $response, $args){
-        $transaksis = Transaksi::whereRaw('concat(id_pelanggan," ",id_paket,"",jumlah,"",total_harga,"",updated_at,"",created_at) like ?', "%".$args['term']."%")->get();
+        $transaksis = Transaksi::whereRaw('concat(jumlah,"",total_harga,"",updated_at,"",created_at) like ?', "%".$args['term']."%")->get();
         $response->withHeader('Content-type', 'application/json');
         $response->write(json_encode($transaksis));
         return $response;
@@ -64,8 +64,8 @@ final class TransaksiController {
 
         $transaksi = Transaksi::find($post['id']);
 
-        if(isset($post['id_pelanggan'])) $transaksi->id_pelanggan = $post['id_pelanggan'];
-        if(isset($post['id_paket'])) $transaksi->id_paket = $post['id_paket'];
+        // if(isset($post['id_pelanggan'])) $transaksi->id_pelanggan = $post['id_pelanggan'];
+        // if(isset($post['id_paket'])) $transaksi->id_paket = $post['id_paket'];
         if(isset($post['jumlah'])) $transaksi->jumlah = $post['jumlah'];
         if(isset($post['total_harga'])) $transaksi->total_harga = $post['total_harga'];
         if(isset($post['updated_at'])) $transaksi->no_telepon = $post['updated_at'];
