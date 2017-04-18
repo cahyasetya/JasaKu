@@ -16,6 +16,7 @@ import android.view.MenuItem;
 
 import com.example.jasaku.fragment.HalamanUtamaFragment;
 import com.example.jasaku.fragment.KelolaTokoFragment;
+import com.example.jasaku.penjual.EditTokoActivity;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -89,7 +90,7 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.buat_toko) {
             // Handle the camera action
         } else if (id == R.id.kelola_toko) {
-            getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.content_main,new KelolaTokoFragment()).commit();
+            startActivity(new Intent(this, EditTokoActivity.class));
         } else if (id == R.id.profil) {
             startActivity(new Intent(this,ProfileActivity.class));
         } else if (id == R.id.keluar) {
