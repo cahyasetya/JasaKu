@@ -27,7 +27,7 @@
 
         <EditText
             android:id="@+id/editTextNama"
-            android:text="Nama Lengkap"
+            android:text="Buthoro Kunto Raharjo"
             android:textStyle="bold"
             android:textSize="30sp"
             android:layout_width="0dp"

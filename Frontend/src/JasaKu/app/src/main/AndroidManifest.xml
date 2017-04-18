@@ -25,6 +25,12 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".LoginActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".RegisterActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
             android:name=".DetilTokoActivity"
             android:label="@string/title_activity_detil_toko"
             android:parentActivityName=".MainActivity"
