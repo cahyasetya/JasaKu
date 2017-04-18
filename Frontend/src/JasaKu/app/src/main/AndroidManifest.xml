@@ -27,8 +27,10 @@
         <activity
             android:name=".DetilTokoActivity"
             android:label="@string/title_activity_detil_toko"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:parentActivityName=".MainActivity"></activity>
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".DataPemesanActivity"
+            android:parentActivityName=".DetilTokoActivity"></activity>
     </application>
 
 </manifest>
