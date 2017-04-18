@@ -19,6 +19,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".DetilTokoActivity"
+            android:label="@string/title_activity_detil_toko"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:parentActivityName=".MainActivity"></activity>
     </application>
 
 </manifest>

@@ -1,12 +1,14 @@
 package com.example.jasaku.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.jasaku.DetilTokoActivity;
 import com.example.jasaku.R;
 import com.example.jasaku.model.Toko;
 
@@ -40,6 +42,12 @@ public class TokoAdapter extends RecyclerView.Adapter<TokoAdapter.TokoViewHolder
         Toko toko=tokoList.get(position);
         holder.namaTokoTextView.setText(toko.getNama());
         holder.deskripsiTokoTextView.setText(toko.getDeskripsi());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                context.startActivity(new Intent(context, DetilTokoActivity.class));
+            }
+        });
     }
 
     @Override
