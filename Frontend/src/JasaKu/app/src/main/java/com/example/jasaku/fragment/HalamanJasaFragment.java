@@ -2,6 +2,7 @@ package com.example.jasaku.fragment;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,8 +10,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.jasaku.DataPemesanActivity;
 import com.example.jasaku.R;
 import com.example.jasaku.model.Jasa;
 
@@ -19,14 +22,18 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnCheckedChanged;
+import butterknife.OnClick;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class HalamanJasaFragment extends Fragment {
+public class HalamanJasaFragment extends Fragment implements View.OnClickListener{
 
     @BindView(R.id.jasa_recyclerview)
     RecyclerView jasaRecyclerView;
+    @BindView(R.id.pesan)
+    Button pesanButton;
 
     private List<Jasa> jasaList;
     private LinearLayoutManager llm;
@@ -61,6 +68,13 @@ public class HalamanJasaFragment extends Fragment {
         }
         adapter=new JasaAdapter(getContext(),jasaList);
         jasaRecyclerView.setAdapter(adapter);
+
+        pesanButton.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        getContext().startActivity(new Intent(getActivity(), DataPemesanActivity.class));
     }
 }
 
