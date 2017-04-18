@@ -5,12 +5,12 @@
     tools:context="com.example.jasaku.fragment.HalamanTokoFragment">
 
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:paddingBottom="50dp">
 
             <LinearLayout
@@ -30,7 +30,7 @@
                 android:id="@+id/textDescriptionHolder"
                 android:layout_marginTop="200dp"
                 android:padding="10dp"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
@@ -39,7 +39,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Nama Toko"
-                    android:textSize="30dp"
+                    android:textSize="30sp"
                     android:textStyle="bold"
                     android:paddingLeft="10dp"/>
 
@@ -48,7 +48,7 @@
                     android:layout_margin="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="15dp"
+                    android:textSize="15sp"
                     android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book." />
 
                 <TextView
@@ -57,7 +57,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Alamat"
-                    android:textSize="20dp"
+                    android:textSize="20sp"
                     android:textStyle="bold"/>
 
                 <TextView
@@ -65,7 +65,7 @@
                     android:layout_margin="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="15dp"
+                    android:textSize="15sp"
                     android:text="Keputih gang Makam Blok H-19A"/>
 
                 <TextView
@@ -74,7 +74,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="No Telp"
-                    android:textSize="20dp"
+                    android:textSize="20sp"
                     android:textStyle="bold"/>
 
                 <TextView
@@ -82,7 +82,7 @@
                     android:layout_margin="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="15dp"
+                    android:textSize="15sp"
                     android:text="085728976789"/>
 
                 <TextView
@@ -91,7 +91,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Jam Operasional"
-                    android:textSize="20dp"
+                    android:textSize="20sp"
                     android:textStyle="bold"/>
 
                 <TextView
@@ -99,7 +99,7 @@
                     android:layout_margin="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="15dp"
+                    android:textSize="15sp"
                     android:text="15.00 WIB - 22.00 WIB"/>
 
             </LinearLayout>
