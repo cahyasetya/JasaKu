@@ -15,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.jasaku.fragment.HalamanUtamaFragment;
+import com.example.jasaku.fragment.KelolaTokoFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -88,11 +89,15 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.buat_toko) {
             // Handle the camera action
         } else if (id == R.id.kelola_toko) {
-
+            getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.content_main,new KelolaTokoFragment()).commit();
         } else if (id == R.id.profil) {
             startActivity(new Intent(this,ProfileActivity.class));
         } else if (id == R.id.keluar) {
 
+        }else if(id==R.id.masuk){
+            startActivity(new Intent(this, LoginActivity.class));
+        }else if(id==R.id.beranda){
+            getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.content_main,new HalamanUtamaFragment()).commit();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

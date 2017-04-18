@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.example.jasaku.DetilTokoActivity;
 import com.example.jasaku.R;
 import com.example.jasaku.model.Toko;
+import com.example.jasaku.penjual.EditTokoActivity;
 
 import java.util.List;
 
@@ -25,10 +26,12 @@ public class TokoAdapter extends RecyclerView.Adapter<TokoAdapter.TokoViewHolder
 
     private Context context;
     private List<Toko> tokoList;
+    private int mode;
 
-    public TokoAdapter(Context context, List<Toko> tokoList) {
+    public TokoAdapter(Context context, List<Toko> tokoList,int mode) {
         this.context=context;
         this.tokoList=tokoList;
+        this.mode=mode;
     }
 
     @Override
@@ -45,7 +48,10 @@ public class TokoAdapter extends RecyclerView.Adapter<TokoAdapter.TokoViewHolder
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                context.startActivity(new Intent(context, DetilTokoActivity.class));
+                if(mode==1)
+                    context.startActivity(new Intent(context, DetilTokoActivity.class));
+                else
+                    context.startActivity(new Intent(context, EditTokoActivity.class));
             }
         });
     }

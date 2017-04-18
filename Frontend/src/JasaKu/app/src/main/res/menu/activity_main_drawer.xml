@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <group android:checkableBehavior="single" android:id="@+id/grup1">
+        <item
+            android:id="@+id/beranda"
+            android:title="Beranda" />
         <item
             android:id="@+id/buat_toko"
             android:title="Buat Toko" />
@@ -17,6 +21,9 @@
         <item
             android:id="@+id/keluar"
             android:title="Keluar" />
+        <item
+            android:id="@+id/masuk"
+            android:title="Masuk" />
     </group>
 
 </menu>

@@ -59,7 +59,7 @@ public class HalamanUtamaFragment extends Fragment {
         for(int i=0; i<10; i++){
             tokoList.add(toko);
         }
-        adapter=new TokoAdapter(getContext(), tokoList);
+        adapter=new TokoAdapter(getContext(), tokoList,1);
         tokoRecyclerView.setLayoutManager(glm);
         tokoRecyclerView.setAdapter(adapter);
     }
