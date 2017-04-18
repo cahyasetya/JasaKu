@@ -29,11 +29,17 @@
             android:label="@string/title_activity_detil_toko"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ProfileActivity"
+        <activity
+            android:name=".ProfileActivity"
+            android:label="Profil"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".DataPemesanActivity"
+            android:parentActivityName=".DetilTokoActivity" />
+        <activity
+            android:name=".RegisterTokoActivity"
+            android:label="Registrasi Toko"
             android:parentActivityName=".MainActivity"/>
-
-        <activity android:name=".DataPemesanActivity"
-            android:parentActivityName=".DetilTokoActivity"></activity>
     </application>
 
 </manifest>
