@@ -41,7 +41,7 @@
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".DataPemesanActivity"
-            android:parentActivityName=".DetilTokoActivity" />
+            android:parentActivityName=".DetilPesananActivity" />
         <activity
             android:name=".RegisterTokoActivity"
             android:label="Registrasi Toko"
