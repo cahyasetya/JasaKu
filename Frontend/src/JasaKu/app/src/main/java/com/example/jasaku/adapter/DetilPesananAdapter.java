@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 
@@ -41,11 +42,27 @@ public class DetilPesananAdapter extends RecyclerView.Adapter<DetilPesananAdapte
     }
 
     @Override
-    public void onBindViewHolder(DetilPesananAdapter.DetilPesananViewHolder holder, int position) {
-        Belanjaan belanjaan=belanjaanList.get(position);
+    public void onBindViewHolder(final DetilPesananAdapter.DetilPesananViewHolder holder, int position) {
+        final Belanjaan belanjaan=belanjaanList.get(position);
         holder.namaJasaTextView.setText(belanjaan.getJasa().getNama());
-        holder.hargaJasaTextView.setText(String.valueOf(belanjaan.getJasa().getHarga()));
+        holder.hargaJasaTextView.setText("Rp "+String.valueOf(belanjaan.getJasa().getHarga()));
         holder.jumlahJasaEdittext.setText(String.valueOf(belanjaan.getKuantitas()));
+        if(belanjaan.getKuantitas()<1)
+            holder.kurangiJasaButton.setEnabled(false);
+        holder.kurangiJasaButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                belanjaan.kurangiKuantitas();
+                holder.jumlahJasaEdittext.setText(String.valueOf(belanjaan.getKuantitas()));
+            }
+        });
+        holder.tambahJasaButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                belanjaan.tambahKuantitas();
+                holder.jumlahJasaEdittext.setText(String.valueOf(belanjaan.getKuantitas()));
+            }
+        });
     }
 
     @Override
@@ -60,7 +77,12 @@ public class DetilPesananAdapter extends RecyclerView.Adapter<DetilPesananAdapte
         @BindView(R.id.harga_jasa)
         TextView hargaJasaTextView;
         @BindView(R.id.jumlah_jasa)
-        EditText jumlahJasaEdittext;
+        TextView jumlahJasaEdittext;
+        @BindView(R.id.kurangi_jasa)
+        ImageButton kurangiJasaButton;
+        @BindView(R.id.tambah_jasa)
+        ImageButton tambahJasaButton;
+
 
         public DetilPesananViewHolder(View itemView) {
             super(itemView);

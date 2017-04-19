@@ -32,4 +32,12 @@ public class Belanjaan {
     public void setTotal(long total) {
         this.total = total;
     }
+
+    public void tambahKuantitas(){
+        this.kuantitas+=1;
+    }
+
+    public void kurangiKuantitas(){
+        this.kuantitas-=1;
+    }
 }
