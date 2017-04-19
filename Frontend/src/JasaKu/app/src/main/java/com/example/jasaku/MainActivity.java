@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.buat_toko) {
-            // Handle the camera action
+            startActivity(new Intent(this, RegisterTokoActivity.class));
         } else if (id == R.id.kelola_toko) {
             startActivity(new Intent(this, EditTokoActivity.class));
         } else if (id == R.id.profil) {

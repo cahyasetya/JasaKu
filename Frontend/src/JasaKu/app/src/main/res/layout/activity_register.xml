@@ -69,6 +69,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/LoginHolder"
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -76,11 +77,13 @@
         android:padding="16dp">
 
         <TextView
+            android:id="@+id/textViewtLogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Sudah punya akun?" />
 
         <TextView
+            android:id="@+id/textViewLogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Masuk"
