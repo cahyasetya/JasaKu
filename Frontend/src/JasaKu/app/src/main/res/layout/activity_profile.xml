@@ -54,7 +54,7 @@
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp">
+                android:layout_marginBottom="10dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -62,86 +62,39 @@
                     android:orientation="vertical"
                     android:padding="12dp">
 
-                    <EditText
-                        android:id="@+id/editTextNama"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="15dp"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginRight="15dp"
-                        android:layout_marginStart="15dp"
-                        android:layout_marginTop="8dp"
-                        android:text="Buthoro Kunto Raharjo"
-                        android:textSize="30sp"
-                        android:textStyle="bold"
-                        app:layout_constraintHorizontal_bias="0.501"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/imageViewProfileImg" />
-
                     <TextView
                         android:id="@+id/textViewTitleKontak"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="15dp"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginRight="15dp"
-                        android:layout_marginStart="20dp"
                         android:layout_marginTop="15dp"
+                        android:layout_marginLeft="2dp"
                         android:text="Nomor Telp/HP"
                         android:textSize="20sp"
-                        android:textStyle="bold"
-                        app:layout_constraintHorizontal_bias="0.501"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/editTextNama" />
+                        android:textStyle="bold" />
 
                     <EditText
                         android:id="@+id/editTextKontak"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="15dp"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginRight="15dp"
-                        android:layout_marginStart="15dp"
                         android:text="085702789987"
-                        android:textSize="20sp"
-                        app:layout_constraintHorizontal_bias="0.501"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textViewTitleKontak" />
+                        android:textSize="20sp" />
 
                     <TextView
                         android:id="@+id/textViewTitleAlamat"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="15dp"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginRight="15dp"
-                        android:layout_marginStart="20dp"
                         android:layout_marginTop="15dp"
+                        android:layout_marginLeft="2dp"
                         android:text="Alamat"
                         android:textSize="20sp"
-                        android:textStyle="bold"
-                        app:layout_constraintHorizontal_bias="0.501"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/editTextKontak" />
+                        android:textStyle="bold" />
 
                     <EditText
                         android:id="@+id/editTextAlamat"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="15dp"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginRight="15dp"
-                        android:layout_marginStart="15dp"
                         android:text="Keputih gang Makam Blok H-19A"
-                        android:textSize="20sp"
-                        app:layout_constraintHorizontal_bias="0.501"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textViewTitleAlamat" />
+                        android:textSize="20sp" />
 
                 </LinearLayout>
 
