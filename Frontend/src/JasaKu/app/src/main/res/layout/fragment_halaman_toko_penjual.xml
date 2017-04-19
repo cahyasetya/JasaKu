@@ -10,16 +10,18 @@
 
         <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:paddingBottom="100dp">
 
             <LinearLayout
                 android:id="@+id/imageHolder"
+                android:scaleType="fitXY"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <ImageView
                     android:id="@+id/imageViewToko"
+                    android:scaleType="fitXY"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/contoh_image"/>

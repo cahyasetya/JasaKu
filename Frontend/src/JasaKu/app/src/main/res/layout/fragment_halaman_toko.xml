@@ -16,10 +16,12 @@
             <LinearLayout
                 android:id="@+id/imageHolder"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:scaleType="fitXY">
 
                 <ImageView
                     android:id="@+id/imageViewToko"
+                    android:scaleType="fitXY"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/contoh_image"/>
