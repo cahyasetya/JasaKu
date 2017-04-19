@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.jasaku.DataPemesanActivity;
+import com.example.jasaku.DetilPesananActivity;
 import com.example.jasaku.R;
 import com.example.jasaku.model.Jasa;
 
@@ -74,7 +75,7 @@ public class HalamanJasaFragment extends Fragment implements View.OnClickListene
 
     @Override
     public void onClick(View v) {
-        getContext().startActivity(new Intent(getActivity(), DataPemesanActivity.class));
+        getContext().startActivity(new Intent(getActivity(), DetilPesananActivity.class));
     }
 }
 
