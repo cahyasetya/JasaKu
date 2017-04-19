@@ -31,7 +31,7 @@ public class PesananDiterimaAdapter extends RecyclerView.Adapter<PesananDiterima
 
     @Override
     public PesanDiterimaViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(context).inflate(R.layout.jasa_item_penjual,parent,false);
+        View view= LayoutInflater.from(context).inflate(R.layout.pesanan_diterima_item,parent,false);
         return new PesanDiterimaViewHolder(view);
     }
 

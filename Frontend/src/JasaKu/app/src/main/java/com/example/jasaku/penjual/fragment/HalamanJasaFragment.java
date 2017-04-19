@@ -14,6 +14,7 @@ import android.widget.Button;
 import com.example.jasaku.R;
 import com.example.jasaku.model.Jasa;
 import com.example.jasaku.penjual.KelolaJasa;
+import com.example.jasaku.penjual.adapter.JasaAdapter;
 import com.example.jasaku.penjual.adapter.PesananMasukAdapter;
 
 import java.util.ArrayList;
@@ -33,7 +34,7 @@ public class HalamanJasaFragment extends Fragment implements View.OnClickListene
     Button tambahJasaButton;
 
     private LinearLayoutManager llm;
-    private PesananMasukAdapter adapter;
+    private JasaAdapter adapter;
     private List<Jasa> jasaList;
 
     public HalamanJasaFragment() {
@@ -63,7 +64,7 @@ public class HalamanJasaFragment extends Fragment implements View.OnClickListene
         for(int i=0; i<20; i++){
             jasaList.add(jasa);
         }
-        adapter=new PesananMasukAdapter(getContext(),jasaList);
+        adapter=new JasaAdapter(getContext(),jasaList);
         jasaRecyclerView.setAdapter(adapter);
 
         tambahJasaButton.setOnClickListener(this);
