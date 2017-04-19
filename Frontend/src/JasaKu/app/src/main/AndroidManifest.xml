@@ -38,7 +38,8 @@
         <activity
             android:name=".ProfileActivity"
             android:label="Profil"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme2"/>
         <activity
             android:name=".DataPemesanActivity"
             android:parentActivityName=".DetilPesananActivity" />
