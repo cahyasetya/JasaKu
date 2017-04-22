@@ -1,5 +1,6 @@
 package com.example.jasaku;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -14,6 +15,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.jasaku.fragment.HalamanUtamaFragment;
+import com.example.jasaku.fragment.KelolaTokoFragment;
+import com.example.jasaku.penjual.EditTokoActivity;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -84,18 +87,18 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        if (id == R.id.buat_toko) {
+            startActivity(new Intent(this, RegisterTokoActivity.class));
+        } else if (id == R.id.kelola_toko) {
+            startActivity(new Intent(this, EditTokoActivity.class));
+        } else if (id == R.id.profil) {
+            startActivity(new Intent(this,ProfileActivity.class));
+        } else if (id == R.id.keluar) {
 
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+        }else if(id==R.id.masuk){
+            startActivity(new Intent(this, LoginActivity.class));
+        }else if(id==R.id.beranda){
+            getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.content_main,new HalamanUtamaFragment()).commit();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

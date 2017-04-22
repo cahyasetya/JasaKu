@@ -4,7 +4,9 @@ package com.example.jasaku.fragment;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,8 +30,8 @@ public class HalamanUtamaFragment extends Fragment {
     RecyclerView tokoRecyclerView;
 
     private List<Toko> tokoList;
-    GridLayoutManager glm;
     TokoAdapter adapter;
+    LinearLayoutManager llm;
 
     public HalamanUtamaFragment() {
         // Required empty public constructor
@@ -50,7 +52,7 @@ public class HalamanUtamaFragment extends Fragment {
     }
 
     private void init(){
-        glm=new GridLayoutManager(getContext(),2);
+        llm=new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
         tokoList=new ArrayList<>();
         Toko toko=new Toko();
         toko.setNama("Toko Ibu Bejo");
@@ -58,8 +60,8 @@ public class HalamanUtamaFragment extends Fragment {
         for(int i=0; i<10; i++){
             tokoList.add(toko);
         }
-        adapter=new TokoAdapter(getContext(), tokoList);
-        tokoRecyclerView.setLayoutManager(glm);
+        adapter=new TokoAdapter(getContext(), tokoList,1);
+        tokoRecyclerView.setLayoutManager(llm);
         tokoRecyclerView.setAdapter(adapter);
     }
 
