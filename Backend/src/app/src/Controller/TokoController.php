@@ -16,13 +16,14 @@ final class TokoController {
 
         $toko = new Toko();
 
+        $toko->id = (Toko::all()->last()->id)+1;
         $toko->nama = $post['nama'];
         $toko->alamat = $post['alamat'];
-        $toko->foto = $post['foto'];
         $toko->kontak = $post['kontak'];
+        // $toko->foto = $post['foto'];
         $toko->deskripsi = $post['deskripsi'];
         $toko->id_pelanggan = $post['id_pelanggan'];
-        $toko->jam_operasional = $post['jam_operasional'];
+        $toko->jamOperasional = $post['jamOperasional'];
         $toko->save();
 
         $response->withHeader('Content-type', 'application/json');
@@ -52,7 +53,7 @@ final class TokoController {
 
     //Cari data
     public function search(Request $request, Response $response, $args){
-        $tokos = Toko::whereRaw('concat(alamat," ",nama,"",kontak,"",deskripsi,"",id_pelanggan,"",jam_operasional) like ?', "%".$args['term']."%")->get();
+        $tokos = Toko::whereRaw('concat(alamat," ",nama,"",kontak,"",deskripsi,"",id_pelanggan,"",jamOperasional) like ?', "%".$args['term']."%")->get();
         $response->withHeader('Content-type', 'application/json');
         $response->write(json_encode($tokos));
         return $response;
@@ -67,9 +68,9 @@ final class TokoController {
         if(isset($post['id_pelanggan'])) $toko->id_pelanggan = $post['id_pelanggan'];
         if(isset($post['alamat'])) $toko->alamat = $post['alamat'];
         if(isset($post['kontak'])) $toko->kontak = $post['kontak'];
-        if(isset($post['foto'])) $toko->foto = $post['foto'];
+        // if(isset($post['foto'])) $toko->foto = $post['foto'];
         if(isset($post['deskripsi'])) $toko->deskripsi = $post['deskripsi'];
-        if(isset($post['jam_operasional'])) $toko->jam_operasional = $post['jam_operasional'];
+        if(isset($post['jamOperasional'])) $toko->jamOperasional = $post['jamOperasional'];
         $toko->save();
 
         $response->withHeader('Content-type', 'application/json');

@@ -28,7 +28,7 @@ return [
         'database' => [
             'driver'    => 'mysql',
             'host'      => 'localhost',
-            'database'  => 'senja',
+            'database'  => 'jasaku',
             'username'  => 'root',
             'password'  => '',
             'charset'   => 'utf8',
