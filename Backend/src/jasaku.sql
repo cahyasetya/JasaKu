@@ -32,7 +32,7 @@ CREATE TABLE `jasa` (
 
 /*Data for the table `jasa` */
 
-insert  into `jasa`(`id`,`nama`,`harga`,`id_toko`) values (1,'Cuci Kering',20000,2),(2,'Cuci Basah',10000,2),(3,'Ganti Oli',35000,1);
+insert  into `jasa`(`id`,`nama`,`harga`,`id_toko`) values (1,'Cuci Kering',20000,2),(2,'Cuci Basah',10000,2),(3,'Ganti Oli',35000,1),(4,'Permak Jeans',5000,3);
 
 /*Table structure for table `pemesanan` */
 
@@ -42,23 +42,20 @@ CREATE TABLE `pemesanan` (
   `kuantitas` int(11) NOT NULL,
   `total` int(11) NOT NULL,
   `id_jasa` int(11) NOT NULL,
-  `id_pelanggan` int(11) NOT NULL,
   `id_transaksi` int(11) NOT NULL,
   `status_pemesanan` int(11) NOT NULL,
   KEY `kuantitas` (`kuantitas`),
-  KEY `pemesanan_ibfk_2` (`id_pelanggan`),
   KEY `pemesanan_ibfk_4` (`status_pemesanan`),
   KEY `pemesanan_ibfk_1` (`id_jasa`),
   KEY `pemesanan_ibfk_3` (`id_transaksi`),
   CONSTRAINT `pemesanan_ibfk_1` FOREIGN KEY (`id_jasa`) REFERENCES `jasa` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `pemesanan_ibfk_2` FOREIGN KEY (`id_pelanggan`) REFERENCES `pengguna` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `pemesanan_ibfk_3` FOREIGN KEY (`id_transaksi`) REFERENCES `transaksi` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `pemesanan_ibfk_4` FOREIGN KEY (`status_pemesanan`) REFERENCES `status_pemesanan` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `pemesanan` */
 
-insert  into `pemesanan`(`kuantitas`,`total`,`id_jasa`,`id_pelanggan`,`id_transaksi`,`status_pemesanan`) values (1,10000,2,1,1,1),(1,25000,3,2,1,1);
+insert  into `pemesanan`(`kuantitas`,`total`,`id_jasa`,`id_transaksi`,`status_pemesanan`) values (1,10000,2,1,1),(1,25000,3,1,1),(1,10000,2,2,1),(1,35000,3,2,1);
 
 /*Table structure for table `pengguna` */
 
@@ -77,7 +74,7 @@ CREATE TABLE `pengguna` (
 
 /*Data for the table `pengguna` */
 
-insert  into `pengguna`(`id`,`nama`,`alamat`,`jenisKelamin`,`kontak`,`username`,`password`) values (1,'Amin','Jl Pahlawan Rt 2 No 1','L','08133546789','admin','admin'),(2,'Sueb','Jl Keputih 3 no 21','P','3987089','admin2','admin2'),(3,'Adik','Jl Dr Wahidin SH','P','031567892','admin3','admin3');
+insert  into `pengguna`(`id`,`nama`,`alamat`,`jenisKelamin`,`kontak`,`username`,`password`) values (1,'Amin','Jl Pahlawan Rt 2 No 1','L','08133546789','admin','admin'),(2,'Sueb','Jl Keputih 3 no 21','P','3987089','admin2','admin2');
 
 /*Table structure for table `status_pemesanan` */
 
@@ -91,7 +88,7 @@ CREATE TABLE `status_pemesanan` (
 
 /*Data for the table `status_pemesanan` */
 
-insert  into `status_pemesanan`(`id`,`nama`) values (1,'Menunggu Persetujuan Penjual'),(2,'Disetujui Penjual'),(3,'Transaksi Sukses');
+insert  into `status_pemesanan`(`id`,`nama`) values (1,'Menunggu Persetujuan Penjual'),(2,'Disetujui Penjual'),(3,'Ditolak Penjual'),(4,'Transaksi Sukses');
 
 /*Table structure for table `toko` */
 
@@ -104,15 +101,15 @@ CREATE TABLE `toko` (
   `kontak` varchar(20) NOT NULL,
   `deskripsi` varchar(9999) NOT NULL,
   `jamOperasional` varchar(9999) NOT NULL,
-  `id_pelanggan` int(11) NOT NULL,
+  `id_pengguna` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `toko_ibfk_1` (`id_pelanggan`),
-  CONSTRAINT `toko_ibfk_1` FOREIGN KEY (`id_pelanggan`) REFERENCES `pengguna` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+  KEY `toko_ibfk_1` (`id_pengguna`),
+  CONSTRAINT `toko_ibfk_1` FOREIGN KEY (`id_pengguna`) REFERENCES `pengguna` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `toko` */
 
-insert  into `toko`(`id`,`nama`,`alamat`,`kontak`,`deskripsi`,`jamOperasional`,`id_pelanggan`) values (1,'Bengkel','Jl Keputih No 2 , Surabaya','0897865789','Menerima Spededa 4 tak dan matik','8.00-16.00',2),(2,'Laundry','Jl Mulyorejo No 1, Surabaya','3987654','Menerima Segala macam cucian','07.00-15.00',1);
+insert  into `toko`(`id`,`nama`,`alamat`,`kontak`,`deskripsi`,`jamOperasional`,`id_pengguna`) values (1,'Bengkel','Jl Keputih No 2 , Surabaya','0897865789','Menerima Spededa 4 tak dan matik','8.00-16.00',2),(2,'Laundry','Jl Mulyorejo No 1, Surabaya','3987654','Menerima Segala macam cucian','07.00-15.00',1),(3,'jahitin23','Jl Gebang timur no 27, Surabaya','089980789567','Menerima permak jeans, jahit seragam, memperbaiki tas,dll','07.00-17.00',2);
 
 /*Table structure for table `transaksi` */
 
@@ -120,15 +117,18 @@ DROP TABLE IF EXISTS `transaksi`;
 
 CREATE TABLE `transaksi` (
   `id` int(11) NOT NULL,
+  `id_pengguna` int(11) DEFAULT NULL,
   `total` int(11) NOT NULL,
   `updated_at` date NOT NULL,
   `created_at` date NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `id_pelanggan` (`id_pengguna`),
+  CONSTRAINT `transaksi_ibfk_1` FOREIGN KEY (`id_pengguna`) REFERENCES `pengguna` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `transaksi` */
 
-insert  into `transaksi`(`id`,`total`,`updated_at`,`created_at`) values (1,45000,'2017-04-22','2017-04-22');
+insert  into `transaksi`(`id`,`id_pengguna`,`total`,`updated_at`,`created_at`) values (1,2,45000,'2017-04-22','2017-04-22'),(2,1,45000,'2017-04-23','2017-04-23');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
