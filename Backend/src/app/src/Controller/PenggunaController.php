@@ -28,17 +28,17 @@ final class PenggunaController {
             $pengguna->save();
 
             $response->write(json_encode([
-            'status' => 'Sukses',
-            'message'=> 'Penambahan data berhasil'
-            
-        ]));
+                'status' => 'Sukses',
+                'message'=> 'Penambahan data berhasil'
+            ]));
+
             $status=200;
         }catch (\Illuminate\Database\QueryException $e){
             $response->write(json_encode([
-            'status' => 'Gagal',
-            'message'=> 'Penambahan data gagal'
-            
-        ]));
+                'status' => 'Gagal',
+                'message'=> 'Penambahan data gagal',
+                'dev_message'=> $e->getMessage()
+            ]));
             $status=500;
         }
 
@@ -47,83 +47,161 @@ final class PenggunaController {
 
 //Login
     public function login(Request $request, Response $response, $args){
-        $post = $request->getParsedBody();
-
-        $username=$post['username'];
-        $password=$post['password'];
-
-        $response->withHeader('Content-type', 'application/json');
-        if(Pengguna::whereName($username)->wherePassword($password)){
-            $response->write(json_encode([
-            'status' => 'sukses'
-        ]));
-        }else{
-            $response->write(json_encode([
-            'status' => 'failed'
-        ]));
+        try{
+            $post = $request->getParsedBody();
+            $username=$post['username'];
+            $password=$post['password'];
+            $a=Pengguna::where([
+                ['username', '=', $username],
+                ['password', '=', $password]
+            ])->get();
+            
+            if (json_decode($a)){
+                $response->write(json_encode($a));
+                //  $response->write(json_encode([
+                //      'status' => 'Sukses',
+                //      'message'=> 'Login Berhasil'
+                //  ]));
+                $status=200;    
+            }else{
+                $response->write(json_encode([
+                    'status' => 'Gagal',
+                    'message'=> 'Login Gagal'
+                ]));
+                $status=400;    
+            }
+        }catch (\Illuminate\Database\QueryException $e){
+             $response->write(json_encode([
+                'status' => 'Gagal',
+                'message'=> 'Login Gagal',
+                'dev_message'=> $e->getMessage()
+            ]));
+            $status=500;    
         }
         
         
-        return $response;
+        return $response->withHeader('Content-type', 'application/json')->withStatus($status);
     }
 
 	// Get semua data
     public function getall(Request $request, Response $response, $args){
-        $penggunas = Pengguna::all();
+        try{
+            $penggunas = Pengguna::all();
 
-        $response->withHeader('Content-type', 'application/json');
-        $response->write(json_encode($penggunas));
-        return $response;
+            $response->withHeader('Content-type', 'application/json');
+            $response->write(json_encode($penggunas));
+            $status=200;
+        }catch (\Illuminate\Database\QueryException $e){
+             $response->write(json_encode([
+                'status' => 'Gagal',
+                'message'=> 'Penambahan data gagal',
+                'dev_message'=> $e->getMessage()
+            ]));
+            $status=500;    
+        }
+        return $response->withHeader('Content-type', 'application/json')->withStatus($status);
     }
 
     //Get 1 data
     public function get(Request $request, Response $response, $args){
-        $pengguna = Pengguna::find($args['id']);
-        var_dump($pengguna);
-        $response->withHeader('Content-type', 'application/json');
-        $response->write(json_encode($pengguna));
-        return $response;
+        try{
+            $pengguna = Pengguna::find($args['id']);
+            $response->write(json_encode($pengguna));
+            $status=200;
+        }catch (\Illuminate\Database\QueryException $e){
+             $response->write(json_encode([
+                'status' => 'Gagal',
+                'message'=> 'Penambahan data gagal',
+                'dev_message'=> $e->getMessage()
+            ]));
+            $status=500;    
+        }
+        return $response->withHeader('Content-type', 'application/json')->withStatus($status);
     }
 
     //Cari data
     public function search(Request $request, Response $response, $args){
-        $penggunas = Pengguna::whereRaw('concat(nama," ",alamat,"",kontak,"",username,"",password) like ?', "%".$args['term']."%")->get();
-        $response->withHeader('Content-type', 'application/json');
-        $response->write(json_encode($penggunas));
-        return $response;
-
-
+        try{
+            $penggunas = Pengguna::whereRaw('concat(nama," ",alamat,"",kontak,"",username,"",password) like ?', "%".$args['term']."%")->get();
+            $response->withHeader('Content-type', 'application/json');
+            $response->write(json_encode($penggunas));
+            $status=200;
+        }catch (\Illuminate\Database\QueryException $e){
+             $response->write(json_encode([
+                'status' => 'Gagal',
+                'message'=> 'Penambahan data gagal',
+                'dev_message'=> $e->getMessage()
+            ]));
+            $status=500;    
+        }
+        return $response->withHeader('Content-type', 'application/json')->withStatus($status);
     }
 
     //Update Jasa
     public function update(Request $request, Response $response, $args){
-        $post = $request->getParsedBody();
-        $pengguna = Pengguna::find($post['id']);
+        try{
+            $post = $request->getParsedBody();
+            $pengguna = Pengguna::find($post['id']);
 
-        if(isset($post['nama'])) $pengguna->nama = $post['nama'];
-        if(isset($post['alamat'])) $pengguna->alamat = $post['alamat'];
-        if(isset($post['kontak'])) $pengguna->kontak = $post['kontak'];
-        if(isset($post['jenisKelamin'])) $pengguna->jenisKelamin = $post['jenisKelamin'];
-        if(isset($post['username'])) $pengguna->username = $post['username'];
-        if(isset($post['password'])) $pengguna->password = $post['password'];
-        $pengguna->save();
+            if(!$pengguna){
+                $response->write(json_encode([
+                    'status' => 'Gagal',
+                    'message'=> 'Pengguna Tidak ditemukan'
+                ]));
+                $status=400;
+            }else{
+                if(isset($post['nama'])) $pengguna->nama = $post['nama'];
+                if(isset($post['alamat'])) $pengguna->alamat = $post['alamat'];
+                if(isset($post['kontak'])) $pengguna->kontak = $post['kontak'];
+                if(isset($post['jenisKelamin'])) $pengguna->jenisKelamin = $post['jenisKelamin'];
+                if(isset($post['username'])) $pengguna->username = $post['username'];
+                if(isset($post['password'])) $pengguna->password = $post['password'];
+                $pengguna->save();
 
-        $response->withHeader('Content-type', 'application/json');
-        $response->write(json_encode([
-            'status' => 'sukses'
-        ]));
-        return $response;
+                $response->write(json_encode([
+                    'status' => 'Sukses',
+                    'message'=> 'Update data berhasil'
+                ]));
+                $status=200;   
+            }
+        }catch (\Illuminate\Database\QueryException $e){
+             $response->write(json_encode([
+                'status' => 'Gagal',
+                'message'=> 'Update data gagal',
+                'dev_message'=> $e->getMessage()
+            ]));
+            $status=500;    
+        }
+        return $response->withHeader('Content-type', 'application/json')->withStatus($status);
     }
 
     //Hapus pengguna
     public function delete(Request $request, Response $response, $args){
-        $pengguna = Pengguna::find($args['id']);
-        $pengguna->delete();
+        try{
+            $pengguna = Pengguna::find($args['id']);
+            if(!$pengguna){
+                $response->write(json_encode([
+                    'status' => 'Gagal',
+                    'message'=> 'Pengguna Tidak ditemukan'
+                ]));
+                $status=400;
+            }else{
+                $pengguna->delete();
 
-        $response->withHeader('Content-type', 'application/json');
-        $response->write(json_encode([
-            'status' => 'sukses'
-        ]));
-        return $response;
+                $response->write(json_encode([
+                    'status' => 'Sukses',
+                    'message'=> 'Hapus data berhasil'
+                ]));
+                $status=200;
+            }
+        }catch (\Illuminate\Database\QueryException $e){
+             $response->write(json_encode([
+                'status' => 'Gagal',
+                'message'=> 'Hapus data gagal',
+                'dev_message'=> $e->getMessage()
+            ]));
+            $status=500;    
+        }
+        return $response->withHeader('Content-type', 'application/json')->withStatus($status);
     }
 }
