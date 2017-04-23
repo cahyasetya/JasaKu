@@ -23,7 +23,7 @@ final class TokoController {
             $toko->kontak = $post['kontak'];
             // $toko->foto = $post['foto'];
             $toko->deskripsi = $post['deskripsi'];
-            $toko->id_pelanggan = $post['id_pelanggan'];
+            $toko->id_pengguna = $post['id_pengguna'];
             $toko->jamOperasional = $post['jamOperasional'];
             $toko->save();
 
@@ -89,7 +89,7 @@ final class TokoController {
     //Cari data
     public function search(Request $request, Response $response, $args){
         try{
-            $tokos = Toko::whereRaw('concat(alamat," ",nama,"",kontak,"",deskripsi,"",id_pelanggan,"",jamOperasional) like ?', "%".$args['term']."%")->get();
+            $tokos = Toko::whereRaw('concat(alamat," ",nama,"",kontak,"",deskripsi,"",id_pengguna,"",jamOperasional) like ?', "%".$args['term']."%")->get();
             $response->write(json_encode($tokos));
             $status=200;
         }catch (\Illuminate\Database\QueryException $e){
@@ -116,7 +116,7 @@ final class TokoController {
                 $status=400;
             }else{
                 if(isset($post['nama'])) $toko->nama = $post['nama'];
-                if(isset($post['id_pelanggan'])) $toko->id_pelanggan = $post['id_pelanggan'];
+                if(isset($post['id_pengguna'])) $toko->id_pengguna = $post['id_pengguna'];
                 if(isset($post['alamat'])) $toko->alamat = $post['alamat'];
                 if(isset($post['kontak'])) $toko->kontak = $post['kontak'];
                 // if(isset($post['foto'])) $toko->foto = $post['foto'];

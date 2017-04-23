@@ -80,7 +80,11 @@ final class JasaController {
         }
         return $response->withHeader('Content-type', 'application/json')->withStatus($status);
     }
-
+    //Get 1 data
+    public function get_json($id){
+        $jasa = Jasa::find($id);
+        return json_encode($jasa);
+    }
     //Cari data
     public function search(Request $request, Response $response, $args){
         try{

@@ -11,34 +11,36 @@ final class PemesananController {
 
     public function __construct(){}
     //Tambah data
-    public function create(Request $request, Response $response, $args){
-        $post = $request->getParsedBody();
-
-        $pemesanan = new Pemesanan();
-
-        $pemesanan->id_jasa = $post['id_jasa'];
-        $pemesanan->id_transaksi = $post['id_transaksi'];
-        $pemesanan->id_pelanggan = $post['id_pelanggan'];
-        $pemesanan->total = $post['total'];
-        $pemesanan->kuantitas = $post['kuantitas'];
-        $pemesanan->status_pemesanan = 1;
-        $pemesanan->save();
-
-        $response->withHeader('Content-type', 'application/json');
-        $response->write(json_encode([
-            'status' => 'success'
-        ]));
-        return $response;
+    public function create($data_pemesanan){
+        foreach($data_pemesanan as $pemesanan2){
+            $pemesanan = new Pemesanan();
+            $pemesanan->id_jasa = $pemesanan2['id_jasa'];
+            $pemesanan->id_transaksi = $pemesanan2['id_transaksi'];
+            $pemesanan->total = $pemesanan2['total'];
+            $pemesanan->kuantitas = $pemesanan2['kuantitas'];
+            $pemesanan->status_pemesanan = $pemesanan2['status_pemesanan'];
+            $pemesanan->save();            
+        }
     }
 
-	// Get semua data
-    public function getall(Request $request, Response $response, $args){
+    
+    // Get data by id transaksi
+    public function get_by_transaksi($id_transaksi){
+        $detail_transaksi=Pemesanan::where([
+                ['id_transaksi', '=', $id_transaksi]
+        ])->get();
+
+        return json_encode($detail_transaksi);
+    }
+	// Get data by id transaksi
+    public function gettra(Request $request, Response $response, $args){
         $pemesanans = Pemesanan::all();
 
         $response->withHeader('Content-type', 'application/json');
         $response->write(json_encode($pemesanans));
         return $response;
     }
+
 
     //Cari data
     public function search(Request $request, Response $response, $args){

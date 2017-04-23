@@ -5,6 +5,8 @@ namespace App\Controller;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 use \App\Model\Transaksi as Transaksi;
+use \App\Controller\JasaController as JasaController;
+use \App\Controller\PemesananController as PemesananController;
 
 final class TransaksiController {
 
@@ -12,33 +14,71 @@ final class TransaksiController {
         
     //Tambah data
     public function create(Request $request, Response $response, $args){
-        $post = $request->getParsedBody();
+        try{
+            $post = $request->getParsedBody();
+            $array=json_decode(json_encode($post),true);
 
-        $transaksi = new Transaksi();
+            $transaksi = new Transaksi();
+            $transaksi->id = (Transaksi::all()->last()->id)+1;
+            $temp_id=$transaksi->id;
+            $transaksi->id_pengguna = $array['id_pengguna'];
+            $transaksi->total = 0;
+            $transaksi->save();
 
-        // $transaksi->id_pelanggan = $post['id_pelanggan'];
-        // $transaksi->id_paket = $post['id_paket'];
-        $transaksi->id = Transaksi::all()->last()->id;
-        $transaksi->total = $post['total'];
-        $transaksi->updated_at = $post['updated_at'];
-        $transaksi->created_at = $post['created_at'];
-        $transaksi->save();
+            $transaksi = Transaksi::find($temp_id);
+            
+            $total=0;
 
+            $data_pemesanan=array();
+            
+            foreach($array['paket'] as $item){
+                 $id= $item['id_jasa'];
+                 $jasa = new JasaController();
+                 $pemesanan = new PemesananController();
+                 $jasa =json_decode($jasa->get_json($id),true);
 
-        $response->withHeader('Content-type', 'application/json');
-        $response->write(json_encode([
-            'status' => 'success'
-        ]));
-        return $response;
+                $data_pemesanan=array(array(
+                    'kuantitas' => $item['kuantitas'],
+                    'total'     =>  (int)$jasa['harga'],
+                    'id_jasa'   => $item['id_jasa'],
+                    'id_transaksi'  =>$transaksi->id,
+                    'status_pemesanan'=>1
+                ));
+                 $pemesanan->create($data_pemesanan);
+
+                 //Menghitung Total Transaksi
+                 $total=$total+(int)$jasa['harga'];
+            }
+            $transaksi->total = $total;
+            $transaksi->save();
+            $response->write(json_encode([
+                'status' => 'Sukses',
+                'message'=> 'Pembelian Berhasil',
+            ]));
+            $status=200;
+        }catch (\Illuminate\Database\QueryException $e){
+            $response->write(json_encode([
+                'status' => 'Gagal',
+                'message'=> 'Pembelian gagal',
+                'dev_message'=> $e->getMessage()
+            ]));
+            $status=500;
+        }
+        return $response->withHeader('Content-type', 'application/json')->withStatus($status);
     }
 
 	// Get semua data
     public function getall(Request $request, Response $response, $args){
         $transaksis = Transaksi::all();
-
-        $response->withHeader('Content-type', 'application/json');
-        $response->write(json_encode($transaksis));
-        return $response;
+        $pemesanan = new PemesananController();
+        $data_pemesanan=array();
+        foreach ($transaksis as $transaksi) {
+            var_dump(json_decode($pemesanan->get_by_transaksi($transaksi["id"]),true));
+        }
+     
+        //$response->write(json_encode($transaksis));
+        $status=200;
+        return $response->withHeader('Content-type', 'application/json')->withStatus($status);;
     }
 
     //Get 1 data
