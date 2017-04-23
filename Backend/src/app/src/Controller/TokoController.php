@@ -12,83 +12,162 @@ final class TokoController {
         
     //Tambah data
     public function create(Request $request, Response $response, $args){
-        $post = $request->getParsedBody();
+        try{
+            $post = $request->getParsedBody();
 
-        $toko = new Toko();
+            $toko = new Toko();
 
-        $toko->id = (Toko::all()->last()->id)+1;
-        $toko->nama = $post['nama'];
-        $toko->alamat = $post['alamat'];
-        $toko->kontak = $post['kontak'];
-        // $toko->foto = $post['foto'];
-        $toko->deskripsi = $post['deskripsi'];
-        $toko->id_pelanggan = $post['id_pelanggan'];
-        $toko->jamOperasional = $post['jamOperasional'];
-        $toko->save();
+            $toko->id = (Toko::all()->last()->id)+1;
+            $toko->nama = $post['nama'];
+            $toko->alamat = $post['alamat'];
+            $toko->kontak = $post['kontak'];
+            // $toko->foto = $post['foto'];
+            $toko->deskripsi = $post['deskripsi'];
+            $toko->id_pelanggan = $post['id_pelanggan'];
+            $toko->jamOperasional = $post['jamOperasional'];
+            $toko->save();
 
-        $response->withHeader('Content-type', 'application/json');
-        $response->write(json_encode([
-            'status' => 'success'
-        ]));
-        return $response;
+            $response->write(json_encode([
+                'status' => 'Sukses',
+                'message'=> 'Penambahan data berhasil'
+            ]));
+
+            $status=200;
+        }catch (\Illuminate\Database\QueryException $e){
+            $response->write(json_encode([
+                'status' => 'Gagal',
+                'message'=> 'Penambahan data gagal',
+                'dev_message'=> $e->getMessage()
+            ]));
+            $status=500;
+        }
+        return $response->withHeader('Content-type', 'application/json')->withStatus($status);
     }
 
 	// Get semua data
     public function getall(Request $request, Response $response, $args){
-        $tokos = Toko::all();
-
-        $response->withHeader('Content-type', 'application/json');
-        $response->write(json_encode($tokos));
-        return $response;
+        try{
+            $tokos = Toko::all();
+            $response->write(json_encode($tokos));
+            $status=200;
+        }catch (\Illuminate\Database\QueryException $e){
+            $response->write(json_encode([
+                'status' => 'Gagal',
+                'message'=> 'Penambahan data gagal',
+                'dev_message'=> $e->getMessage()
+            ]));
+            $status=500;
+        }
+        return $response->withHeader('Content-type', 'application/json')->withStatus($status);
     }
 
     //Get 1 data
     public function get(Request $request, Response $response, $args){
-        $toko = Toko::find($args['id']);
-
-        $response->withHeader('Content-type', 'application/json');
-        $response->write(json_encode($toko));
-        return $response;
+        try{
+            $toko = Toko::find($args['id']);
+            if(!$toko){
+                $response->write(json_encode([
+                    'status' => 'Gagal',
+                    'message'=> 'Toko Tidak ditemukan'
+                ]));
+                $status=400;
+            }else{
+                $response->write(json_encode($toko));
+                $status=200;
+            }
+        }catch (\Illuminate\Database\QueryException $e){
+            $response->write(json_encode([
+                'status' => 'Gagal',
+                'message'=> 'Penambahan data gagal',
+                'dev_message'=> $e->getMessage()
+            ]));
+            $status=500;
+        }
+        return $response->withHeader('Content-type', 'application/json')->withStatus($status);
     }
 
     //Cari data
     public function search(Request $request, Response $response, $args){
-        $tokos = Toko::whereRaw('concat(alamat," ",nama,"",kontak,"",deskripsi,"",id_pelanggan,"",jamOperasional) like ?', "%".$args['term']."%")->get();
-        $response->withHeader('Content-type', 'application/json');
-        $response->write(json_encode($tokos));
-        return $response;
+        try{
+            $tokos = Toko::whereRaw('concat(alamat," ",nama,"",kontak,"",deskripsi,"",id_pelanggan,"",jamOperasional) like ?', "%".$args['term']."%")->get();
+            $response->write(json_encode($tokos));
+            $status=200;
+        }catch (\Illuminate\Database\QueryException $e){
+            $response->write(json_encode([
+                'status' => 'Gagal',
+                'message'=> 'Penambahan data gagal',
+                'dev_message'=> $e->getMessage()
+            ]));
+            $status=500;
+        }
+        return $response->withHeader('Content-type', 'application/json')->withStatus($status);
     }
     //Update Toko
     public function update(Request $request, Response $response, $args){
-        $post = $request->getParsedBody();
+        try{
+            $post = $request->getParsedBody();
 
-        $toko = Toko::find($post['id']);
+            $toko = Toko::find($post['id']);
+            if(!$toko){
+                $response->write(json_encode([
+                    'status' => 'Gagal',
+                    'message'=> 'Toko Tidak ditemukan'
+                ]));
+                $status=400;
+            }else{
+                if(isset($post['nama'])) $toko->nama = $post['nama'];
+                if(isset($post['id_pelanggan'])) $toko->id_pelanggan = $post['id_pelanggan'];
+                if(isset($post['alamat'])) $toko->alamat = $post['alamat'];
+                if(isset($post['kontak'])) $toko->kontak = $post['kontak'];
+                // if(isset($post['foto'])) $toko->foto = $post['foto'];
+                if(isset($post['deskripsi'])) $toko->deskripsi = $post['deskripsi'];
+                if(isset($post['jamOperasional'])) $toko->jamOperasional = $post['jamOperasional'];
+                $toko->save();
 
-        if(isset($post['nama'])) $toko->nama = $post['nama'];
-        if(isset($post['id_pelanggan'])) $toko->id_pelanggan = $post['id_pelanggan'];
-        if(isset($post['alamat'])) $toko->alamat = $post['alamat'];
-        if(isset($post['kontak'])) $toko->kontak = $post['kontak'];
-        // if(isset($post['foto'])) $toko->foto = $post['foto'];
-        if(isset($post['deskripsi'])) $toko->deskripsi = $post['deskripsi'];
-        if(isset($post['jamOperasional'])) $toko->jamOperasional = $post['jamOperasional'];
-        $toko->save();
-
-        $response->withHeader('Content-type', 'application/json');
-        $response->write(json_encode([
-            'status' => 'success'
-        ]));
-        return $response;
+                $response->write(json_encode([
+                    'status' => 'Sukses',
+                    'message'=> 'Update data berhasil'
+                ]));
+                $status=200;
+             }   
+        }catch (\Illuminate\Database\QueryException $e){
+            $response->write(json_encode([
+                'status' => 'Gagal',
+                'message'=> 'Penambahan data gagal',
+                'dev_message'=> $e->getMessage()
+            ]));
+            $status=500;
+        }
+        return $response->withHeader('Content-type', 'application/json')->withStatus($status);
     }
 
     //Hapus toko
     public function delete(Request $request, Response $response, $args){
-        $toko = Toko::find($args['id']);
-        $toko->delete();
+        try{
+            $toko = Toko::find($args['id']);
+            if(!$toko){
+                $response->write(json_encode([
+                    'status' => 'Gagal',
+                    'message'=> 'Toko Tidak ditemukan'
+                ]));
+                $status=400;
+            }else{
+                $toko->delete();
 
-        $response->withHeader('Content-type', 'application/json');
-        $response->write(json_encode([
-            'status' => 'success'
-        ]));
-        return $response;
+                $response->write(json_encode([
+                    'status' => 'Sukses',
+                    'message'=> 'Hapus data berhasil'
+                ]));
+                $status=200;
+            }
+        }catch (\Illuminate\Database\QueryException $e){
+            $response->write(json_encode([
+                'status' => 'Gagal',
+                'message'=> 'Penambahan data gagal',
+                'dev_message'=> $e->getMessage()
+            ]));
+            $status=500;
+        }
+        return $response->withHeader('Content-type', 'application/json')->withStatus($status);
     }
 }

@@ -38,7 +38,7 @@ $app->group('', function(){
         $this->get('[/]', 'App\Controller\TokoController:getall');
         $this->get('/{id}', 'App\Controller\TokoController:get');
         //Proses search dilakukan pada semua kolom, BUKAN hanya 1 kolom tertentu (Tidak termasuk kolom primary key)
-        $this->get('/search/{term}', 'App\Controller\PenyediaTokoController:search');
+        $this->get('/search/{term}', 'App\Controller\TokoController:search');
         $this->post('/', 'App\Controller\TokoController:create');
         $this->put('/', 'App\Controller\TokoController:update');
         $this->delete('/{id}', 'App\Controller\TokoController:delete');

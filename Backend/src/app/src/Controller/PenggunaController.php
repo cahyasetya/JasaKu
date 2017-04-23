@@ -87,8 +87,6 @@ final class PenggunaController {
     public function getall(Request $request, Response $response, $args){
         try{
             $penggunas = Pengguna::all();
-
-            $response->withHeader('Content-type', 'application/json');
             $response->write(json_encode($penggunas));
             $status=200;
         }catch (\Illuminate\Database\QueryException $e){
@@ -106,8 +104,16 @@ final class PenggunaController {
     public function get(Request $request, Response $response, $args){
         try{
             $pengguna = Pengguna::find($args['id']);
-            $response->write(json_encode($pengguna));
-            $status=200;
+            if(!$pengguna){
+                $response->write(json_encode([
+                    'status' => 'Gagal',
+                    'message'=> 'Pengguna Tidak ditemukan'
+                ]));
+                $status=400;
+            }else{
+                $response->write(json_encode($pengguna));
+                $status=200;
+            }
         }catch (\Illuminate\Database\QueryException $e){
              $response->write(json_encode([
                 'status' => 'Gagal',

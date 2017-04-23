@@ -11,77 +11,155 @@ final class JasaController {
     public function __construct(){}
     //Tambah data
     public function create(Request $request, Response $response, $args){
-        $post = $request->getParsedBody();
+        try{
+            $post = $request->getParsedBody();
 
-        $jasa = new Jasa();
+            $jasa = new Jasa();
 
-        $jasa->id = Jasa::all()->last()->id;
-        $jasa->id_toko = $post['id_toko'];
-        $jasa->nama = $post['nama'];
-        $jasa->harga = $post['harga'];
-        $jasa->save();
+            $jasa->id = (Jasa::all()->last()->id)+1;
+            $jasa->id_toko = $post['id_toko'];
+            $jasa->nama = $post['nama'];
+            $jasa->harga = $post['harga'];
+            $jasa->save();
 
-        $response->withHeader('Content-type', 'application/json');
-        $response->write(json_encode([
-            'status' => 'success'
-        ]));
-        return $response;
+           $response->write(json_encode([
+                'status' => 'Sukses',
+                'message'=> 'Penambahan data berhasil'
+            ]));
+
+            $status=200;
+        }catch (\Illuminate\Database\QueryException $e){
+            $response->write(json_encode([
+                'status' => 'Gagal',
+                'message'=> 'Penambahan data gagal',
+                'dev_message'=> $e->getMessage()
+            ]));
+            $status=500;
+        }
+        return $response->withHeader('Content-type', 'application/json')->withStatus($status);
     }
 
 	// Get semua data
     public function getall(Request $request, Response $response, $args){
-        $jasas = Jasa::all();
-
-        $response->withHeader('Content-type', 'application/json');
-        $response->write(json_encode($jasas));
-        return $response;
+        try{
+            $jasas = Jasa::all();
+            $response->write(json_encode($jasas));
+            $status=200;
+        }catch (\Illuminate\Database\QueryException $e){
+            $response->write(json_encode([
+                'status' => 'Gagal',
+                'message'=> 'Penambahan data gagal',
+                'dev_message'=> $e->getMessage()
+            ]));
+            $status=500;
+        }
+        return $response->withHeader('Content-type', 'application/json')->withStatus($status);
     }
 
     //Get 1 data
     public function get(Request $request, Response $response, $args){
-        $jasa = Jasa::find($args['id']);
-
-        $response->withHeader('Content-type', 'application/json');
-        $response->write(json_encode($jasa));
-        return $response;
+        try{
+            $jasa = Jasa::find($args['id']);
+            if(!$jasa){
+                $response->write(json_encode([
+                    'status' => 'Gagal',
+                    'message'=> 'Jasa Tidak ditemukan'
+                ]));
+                $status=400;
+            }else{
+                $response->write(json_encode($jasa));
+                $status=200;
+            }
+        }catch (\Illuminate\Database\QueryException $e){
+            $response->write(json_encode([
+                'status' => 'Gagal',
+                'message'=> 'Penambahan data gagal',
+                'dev_message'=> $e->getMessage()
+            ]));
+            $status=500;
+        }
+        return $response->withHeader('Content-type', 'application/json')->withStatus($status);
     }
 
     //Cari data
     public function search(Request $request, Response $response, $args){
-        $jasas = Jasa::whereRaw('concat(id_toko," ",nama,"",harga) like ?', "%".$args['term']."%")->get();
-        $response->withHeader('Content-type', 'application/json');
-        $response->write(json_encode($jasas));
-        return $response;
+        try{
+            $jasas = Jasa::whereRaw('concat(id_toko," ",nama,"",harga) like ?', "%".$args['term']."%")->get();
+            $response->write(json_encode($jasas));
+            $status=200;
+        }
+        catch (\Illuminate\Database\QueryException $e){
+            $response->write(json_encode([
+                'status' => 'Gagal',
+                'message'=> 'Penambahan data gagal',
+                'dev_message'=> $e->getMessage()
+            ]));
+            $status=500;
+        }
+        return $response->withHeader('Content-type', 'application/json')->withStatus($status);
     }
 
     //Update Jasa
     public function update(Request $request, Response $response, $args){
-        $post = $request->getParsedBody();
+        try{
+            $post = $request->getParsedBody();
 
-        $jasa = Jasa::find($post['id']);
+            $jasa = Jasa::find($post['id']);
+            if(!$jasa){
+                $response->write(json_encode([
+                    'status' => 'Gagal',
+                    'message'=> 'Jasa Tidak ditemukan'
+                ]));
+                $status=400;
+            }else{
+                if(isset($post['id_toko'])) $jasa->id_toko = $post['id_toko'];
+                if(isset($post['nama'])) $jasa->nama = $post['nama'];
+                if(isset($post['harga'])) $jasa->harga = $post['harga'];
+                $jasa->save();
 
-
-        if(isset($post['id_toko'])) $jasa->id_toko = $post['id_toko'];
-        if(isset($post['nama'])) $jasa->nama = $post['nama'];
-        if(isset($post['harga'])) $jasa->harga = $post['harga'];
-        $jasa->save();
-
-        $response->withHeader('Content-type', 'application/json');
-        $response->write(json_encode([
-            'status' => 'success'
-        ]));
-        return $response;
+                $response->write(json_encode([
+                    'status' => 'Sukses',
+                    'message'=> 'Update data berhasil'
+                ]));
+                $status=200;
+            }
+        }catch (\Illuminate\Database\QueryException $e){
+            $response->write(json_encode([
+                'status' => 'Gagal',
+                'message'=> 'Penambahan data gagal',
+                'dev_message'=> $e->getMessage()
+            ]));
+            $status=500;
+        }
+        return $response->withHeader('Content-type', 'application/json')->withStatus($status);
     }
 
     //Hapus jasa
     public function delete(Request $request, Response $response, $args){
-        $jasa = Jasa::find($args['id']);
-        $jasa->delete();
-
-        $response->withHeader('Content-type', 'application/json');
-        $response->write(json_encode([
-            'status' => 'success'
-        ]));
-        return $response;
+        try{
+            $jasa = Jasa::find($args['id']);
+            if(!$jasa){
+                $response->write(json_encode([
+                    'status' => 'Gagal',
+                    'message'=> 'Jasa Tidak ditemukan'
+                ]));
+                $status=400;
+            }else{
+                $jasa->delete();
+                $response->write(json_encode([
+                    'status' => 'Sukses',
+                    'message'=> 'Hapus data berhasil'
+                ]));
+                $status=200;
+            }
+        }catch (\Illuminate\Database\QueryException $e){
+            $response->write(json_encode([
+                'status' => 'Gagal',
+                'message'=> 'Penambahan data gagal',
+                'dev_message'=> $e->getMessage()
+            ]));
+            $status=500;
+        }
+        return $response->withHeader('Content-type', 'application/json')->withStatus($status);
     }
 }
