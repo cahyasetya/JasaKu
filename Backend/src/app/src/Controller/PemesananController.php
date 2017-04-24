@@ -73,14 +73,26 @@ final class PemesananController {
     }
 
     //Hapus pemesanan
-    public function delete(Request $request, Response $response, $args){
-        $pemesanan = Pemesanan::find($args['id_transaksi']);
-        $pemesanan->delete();
+    public function delete($id){
+        $pemesanan = Pemesanan::where([
+                ['id_transaksi', '=', $id]
+            ])->get();
+        if($pemesanan){
+            $pemesanan->delete();
+        }
+    }
+    //Ubah Status pemesanan
+    public function ubah_status($id_transaksi,$id_jasa,$status_pemesanan){
+        $pemesanan = Pemesanan::where([
+                ['id_transaksi', '=', $id_transaksi],
+                ['id_jasa', '=', $id_jasa]
+            ])->update([
+                'status_pemesanan' => $status_pemesanan
+                ]);
 
-        $response->withHeader('Content-type', 'application/json');
-        $response->write(json_encode([
-            'status' => 'success'
-        ]));
-        return $response;
+        // if($pemesanan){
+        //     $pemesanan->status_pemesanan=$status_pemesanan;
+        //     $pemesanan->update();
+        // }
     }
 }

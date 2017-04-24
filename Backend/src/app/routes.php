@@ -55,30 +55,22 @@ $app->group('', function(){
     });
 
     //Route Transaksi
-    $this->post('/beli', 'App\Controller\TransaksiController:create');
+    $this->post('/membeli', 'App\Controller\TransaksiController:create');
     $this->group('/transaksi', function(){
         $this->get('[/]', 'App\Controller\TransaksiController:getall');
         $this->get('/{id}', 'App\Controller\TransaksiController:get');
-        //Proses search dilakukan pada semua kolom, BUKAN hanya 1 kolom tertentu(Tidak termasuk kolom primary key)
-        $this->get('/search/{term}', 'App\Controller\TransaksiController:search');
-        // $this->post('/', 'App\Controller\TransaksiController:create');
-        $this->put('/', 'App\Controller\TransaksiController:update');
         $this->delete('/{id}', 'App\Controller\TransaksiController:delete');
- 
-    });
-
-
-    //Route Pemesanan
-    $this->group('/pemesanan', function(){
-        $this->get('[/]', 'App\Controller\PemesananController:getall');
-        $this->get('/{id}', 'App\Controller\PemesananController:get');
+        $this->post('/disetujui', 'App\Controller\TransaksiController:disetujui');
+        $this->post('/ditolak', 'App\Controller\TransaksiController:ditolak');
+        $this->post('/sukses', 'App\Controller\TransaksiController:sukses');
         //Proses search dilakukan pada semua kolom, BUKAN hanya 1 kolom tertentu(Tidak termasuk kolom primary key)
-        $this->get('/search/{term}', 'App\Controller\PemesananController:search');
-        $this->post('/', 'App\Controller\PemesananController:create');
-        $this->put('/', 'App\Controller\PemesananController:update');
-        $this->delete('/{id}', 'App\Controller\PemesananController:delete');
+        // $this->get('/search/{term}', 'App\Controller\TransaksiController:search');
+        // $this->post('/', 'App\Controller\TransaksiController:create');
+        // $this->put('/', 'App\Controller\TransaksiController:update');
+        
  
     });
+
 });
 // $app->get('/table', function($req, $res){
 //     \App\Schema::createTables();

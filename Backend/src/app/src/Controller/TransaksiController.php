@@ -37,17 +37,19 @@ final class TransaksiController {
                  $pemesanan = new PemesananController();
                  $jasa =json_decode($jasa->get_json($id),true);
 
-                $data_pemesanan=array(array(
-                    'kuantitas' => $item['kuantitas'],
-                    'total'     =>  (int)$jasa['harga'],
-                    'id_jasa'   => $item['id_jasa'],
-                    'id_transaksi'  =>$transaksi->id,
-                    'status_pemesanan'=>1
-                ));
+                $data_pemesanan=array(
+                    array(
+                        'kuantitas' => $item['kuantitas'],
+                        'total'     =>  (int)$jasa['harga'],
+                        'id_jasa'   => $item['id_jasa'],
+                        'id_transaksi'  =>$transaksi->id,
+                        'status_pemesanan'=>1
+                    )
+                );
                  $pemesanan->create($data_pemesanan);
 
                  //Menghitung Total Transaksi
-                 $total=$total+(int)$jasa['harga'];
+                 $total=$total+((int)$jasa['harga']*(int)$item['kuantitas']);
             }
             $transaksi->total = $total;
             $transaksi->save();
@@ -69,25 +71,94 @@ final class TransaksiController {
 
 	// Get semua data
     public function getall(Request $request, Response $response, $args){
-        $transaksis = Transaksi::all();
-        $pemesanan = new PemesananController();
-        $data_pemesanan=array();
-        foreach ($transaksis as $transaksi) {
-            var_dump(json_decode($pemesanan->get_by_transaksi($transaksi["id"]),true));
+        try{
+            $transaksis = Transaksi::all();
+            $pemesanan = new PemesananController();
+            $output=array();
+            foreach ($transaksis as $transaksi) {
+                $transaksi_lengkap=array();
+                $detail_transaksi=json_decode($pemesanan->get_by_transaksi($transaksi["id"]),true);
+                $detail_pemesanan=Array();
+                foreach ($detail_transaksi as $detail) {
+                    $temp2=array(
+                                'kuantitas' => $detail['kuantitas'],
+                                'total'     =>  (int)$detail['total'],
+                                'id_jasa'   => $detail['id_jasa'],
+                                'id_transaksi'  =>$detail['id_transaksi'],
+                                'status_pemesanan'=>$detail['status_pemesanan']
+                        );
+                    array_push($detail_pemesanan,$temp2);
+                }
+                $transaksi_lengkap=array(
+                            "id" => $transaksi["id"],
+                            "id_pengguna" =>$transaksi['id_pengguna'],
+                            "total" => $transaksi['total'],
+                            "updated_at" =>$transaksi['updated_at'],
+                            "created_at" =>$transaksi['created_at'],
+                            "pemesanan" =>$detail_pemesanan
+                            );
+                array_push($output,$transaksi_lengkap);
+            }
+            $response->write(json_encode($output));
+            $status=200;
+        }catch (\Illuminate\Database\QueryException $e){
+            $response->write(json_encode([
+                'status' => 'Gagal',
+                'message'=> 'Penampilan transaksi gagal',
+                'dev_message'=> $e->getMessage()
+            ]));
+            $status=500;
         }
-     
-        //$response->write(json_encode($transaksis));
-        $status=200;
-        return $response->withHeader('Content-type', 'application/json')->withStatus($status);;
+        return $response->withHeader('Content-type', 'application/json')->withStatus($status);
     }
 
     //Get 1 data
     public function get(Request $request, Response $response, $args){
-        $transaksi = Transaksi::find($args['id']);
-
-        $response->withHeader('Content-type', 'application/json');
-        $response->write(json_encode($transaksi));
-        return $response;
+        try{
+            $transaksi = Transaksi::find($args['id']);
+            if(!$transaksi){
+                $response->write(json_encode([
+                    'status' => 'Gagal',
+                    'message'=> 'Transaksi Tidak ditemukan'
+                ]));
+                $status=400;
+            }else{
+                $pemesanan = new PemesananController();
+                $output=array();
+                $transaksi_lengkap=array();
+                $detail_transaksi=json_decode($pemesanan->get_by_transaksi($transaksi["id"]),true);
+                $detail_pemesanan=Array();
+                foreach ($detail_transaksi as $detail) {
+                    $temp2=array(
+                                'kuantitas' => $detail['kuantitas'],
+                                'total'     =>  (int)$detail['total'],
+                                    'id_jasa'   => $detail['id_jasa'],
+                                    'id_transaksi'  =>$detail['id_transaksi'],
+                                    'status_pemesanan'=>$detail['status_pemesanan']
+                            );
+                        array_push($detail_pemesanan,$temp2);
+                    }
+                    $transaksi_lengkap=array(
+                                "id" => $transaksi["id"],
+                                "id_pengguna" =>$transaksi['id_pengguna'],
+                                "total" => $transaksi['total'],
+                                "updated_at" =>$transaksi['updated_at'],
+                                "created_at" =>$transaksi['created_at'],
+                                "pemesanan" =>$detail_pemesanan
+                                );
+                array_push($output,$transaksi_lengkap);
+                $status=200;
+                $response->write(json_encode($output));
+            }
+        }catch (\Illuminate\Database\QueryException $e){
+            $response->write(json_encode([
+                'status' => 'Gagal',
+                'message'=> 'Penampilan transaksi gagal',
+                'dev_message'=> $e->getMessage()
+            ]));
+            $status=500;
+        }
+        return $response->withHeader('Content-type', 'application/json')->withStatus($status);
     }
 
     //Cari data
@@ -120,13 +191,133 @@ final class TransaksiController {
 
     //Hapus transaksi
     public function delete(Request $request, Response $response, $args){
-        $transaksi = Transaksi::find($args['id']);
-        $transaksi->delete();
+        try{
+            $transaksi = Transaksi::find($args['id']);
+            if(!$transaksi){
+                $response->write(json_encode([
+                    'status' => 'Gagal',
+                    'message'=> 'Transaksi Tidak ditemukan'
+                ]));
+                $status=400;
+            }else{
+                $pemesanan = new PemesananController();
+                $pemesanan->delete($args['id']);
+                $transaksi->delete();
 
-        $response->withHeader('Content-type', 'application/json');
-        $response->write(json_encode([
-            'status' => 'success'
-        ]));
-        return $response;
+                $response->write(json_encode([
+                    'status' => 'Sukses',
+                    'message'=> 'Hapus data berhasil'
+                ]));
+                $status=200;
+            }
+        }catch (\Illuminate\Database\QueryException $e){
+             $response->write(json_encode([
+                'status' => 'Gagal',
+                'message'=> 'Hapus data gagal',
+                'dev_message'=> $e->getMessage()
+            ]));
+            $status=500;    
+        }
+        
+        return $response->withHeader('Content-type', 'application/json')->withStatus($status);;
+    }
+    //Menyetujui Pemesanan oleh Penjual
+    public function disetujui(Request $request, Response $response, $args){
+        try{
+            $post = $request->getParsedBody();
+            $transaksi = Transaksi::find($post['id']);
+            $id_jasa = $post['id_jasa'];
+            if(!$transaksi){
+                $response->write(json_encode([
+                    'status' => 'Gagal',
+                    'message'=> 'Transaksi Tidak ditemukan'
+                ]));
+                $status=400;
+            }else{
+                $pemesanan = new PemesananController();
+                $pemesanan->ubah_status($post['id'],$id_jasa,2);                
+
+                $response->write(json_encode([
+                    'status' => 'Sukses',
+                    'message'=> 'Ubah data pemesanan berhasil'
+                ]));
+                $status=200;
+            }
+        }catch (\Illuminate\Database\QueryException $e){
+             $response->write(json_encode([
+                'status' => 'Gagal',
+                'message'=> 'Hapus data gagal',
+                'dev_message'=> $e->getMessage()
+            ]));
+            $status=500;    
+        }
+        
+        return $response->withHeader('Content-type', 'application/json')->withStatus($status);;
+    }
+    //Menyetujui Pemesanan oleh Penjual
+    public function ditolak(Request $request, Response $response, $args){
+        try{
+            $post = $request->getParsedBody();
+            $transaksi = Transaksi::find($post['id']);
+            $id_jasa = $post['id_jasa'];
+            if(!$transaksi){
+                $response->write(json_encode([
+                    'status' => 'Gagal',
+                    'message'=> 'Transaksi Tidak ditemukan'
+                ]));
+                $status=400;
+            }else{
+                $pemesanan = new PemesananController();
+                $pemesanan->ubah_status($post['id'],$id_jasa,3);                
+
+                $response->write(json_encode([
+                    'status' => 'Sukses',
+                    'message'=> 'Ubah data pemesanan berhasil'
+                ]));
+                $status=200;
+            }
+        }catch (\Illuminate\Database\QueryException $e){
+             $response->write(json_encode([
+                'status' => 'Gagal',
+                'message'=> 'Hapus data gagal',
+                'dev_message'=> $e->getMessage()
+            ]));
+            $status=500;    
+        }
+        
+        return $response->withHeader('Content-type', 'application/json')->withStatus($status);;
+    }
+    //Menyetujui Pemesanan oleh Penjual
+    public function sukses(Request $request, Response $response, $args){
+        try{
+            $post = $request->getParsedBody();
+            $transaksi = Transaksi::find($post['id']);
+            $id_jasa = $post['id_jasa'];
+            if(!$transaksi){
+                $response->write(json_encode([
+                    'status' => 'Gagal',
+                    'message'=> 'Transaksi Tidak ditemukan'
+                ]));
+                $status=400;
+            }else{
+                $pemesanan = new PemesananController();
+                $pemesanan->ubah_status($post['id'],$id_jasa,4);                
+
+                $response->write(json_encode([
+                    'status' => 'Sukses',
+                    'message'=> 'Ubah data pemesanan berhasil'
+                ]));
+                $status=200;
+            }
+        }catch (\Illuminate\Database\QueryException $e){
+             $response->write(json_encode([
+                'status' => 'Gagal',
+                'message'=> 'Hapus data gagal',
+                'dev_message'=> $e->getMessage()
+            ]));
+            $status=500;    
+        }
+        
+        return $response->withHeader('Content-type', 'application/json')->withStatus($status);;
     }
 }
