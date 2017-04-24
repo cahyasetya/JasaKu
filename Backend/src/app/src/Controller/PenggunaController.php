@@ -16,23 +16,35 @@ final class PenggunaController {
             $post = $request->getParsedBody();
 
             $pengguna = new Pengguna();
+            $username_used = Pengguna::where([
+                ['username', '=', $post['username']]
+            ])->get();
 
-            $pengguna->id=(Pengguna::all()->last()->id)+1;
-            $pengguna->nama = $post['nama'];
-            $pengguna->alamat = $post['alamat'];
-            $pengguna->jenisKelamin = $post['jenisKelamin'];
-            $pengguna->kontak = $post['kontak'];
-            $pengguna->username = $post['username'];
-            $pengguna->password = $post['password'];
-        
-            $pengguna->save();
+            if(json_decode($username_used)){
+                $response->write(json_encode([
+                    'status' => 'Gagal',
+                    'message'=> 'Username sudah digunakan'
+                ]));
 
-            $response->write(json_encode([
-                'status' => 'Sukses',
-                'message'=> 'Penambahan data berhasil'
-            ]));
+                $status=400;
+            }else{
+                $pengguna->id=(Pengguna::all()->last()->id)+1;
+                $pengguna->nama = $post['nama'];
+                $pengguna->alamat = $post['alamat'];
+                $pengguna->jenisKelamin = $post['jenisKelamin'];
+                $pengguna->kontak = $post['kontak'];
+                $pengguna->username = $post['username'];
+                $pengguna->password = $post['password'];
+            
+                $pengguna->save();
 
-            $status=200;
+                $response->write(json_encode([
+                    'status' => 'Sukses',
+                    'message'=> 'Penambahan data berhasil'
+                ]));
+
+                $status=200;
+            }
         }catch (\Illuminate\Database\QueryException $e){
             $response->write(json_encode([
                 'status' => 'Gagal',
