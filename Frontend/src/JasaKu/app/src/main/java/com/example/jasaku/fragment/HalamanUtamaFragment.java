@@ -1,11 +1,13 @@
 package com.example.jasaku.fragment;
 
 
+import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.os.CancellationSignal;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -17,6 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.jasaku.FilterActivity;
 import com.example.jasaku.R;
 import com.example.jasaku.adapter.TokoAdapter;
 import com.example.jasaku.model.Toko;
@@ -96,5 +99,15 @@ public class HalamanUtamaFragment extends Fragment {
         filterIcon.mutate().setColorFilter(ContextCompat.getColor(getContext(),R.color.white),PorterDuff.Mode.SRC_IN);
         filter.setIcon(filterIcon);
         super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.filter:
+                startActivity(new Intent(getContext(), FilterActivity.class));
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
