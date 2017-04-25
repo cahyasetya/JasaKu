@@ -181,7 +181,7 @@ final class TransaksiController {
                 $transaksis=json_decode((json_encode($transaksi_json)),true);
                 //var_dump($transaksi);
                 $output=array();
-                foreach ($transaksis as $transaksi) {
+                foreach ($transaksi_json as $transaksi) {
                     $pemesanan = new PemesananController();
                     
                     $transaksi_lengkap=array();

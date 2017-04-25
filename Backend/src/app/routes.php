@@ -26,6 +26,7 @@ $app->group('', function(){
     $this->group('/pengguna', function(){
         $this->get('[/]', 'App\Controller\PenggunaController:getall');
         $this->get('/{id}', 'App\Controller\PenggunaController:get');
+        $this->get('/{id}/pesananmasuk', 'App\Controller\PenggunaController:pesananmasuk');
         //Proses search dilakukan pada semua kolom, BUKAN hanya 1 kolom tertentu (Tidak termasuk kolom primary key)
         $this->get('/search/{term}', 'App\Controller\PenggunaController:search');
         $this->put('/', 'App\Controller\PenggunaController:update');
