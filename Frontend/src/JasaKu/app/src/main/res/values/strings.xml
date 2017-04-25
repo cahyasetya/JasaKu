@@ -14,37 +14,37 @@
     <string name="section_format">Hello World from section: %1$d</string>
 
     <string-array name="provinsi">
-        <string>Aceh</string>
-        <string>Sumatera Utara</string>
-        <string>Sumatera Barat</string>
-        <string>Riau</string>
-        <string>Kepulauan Riau</string>
-        <string>Jambi</string>
-        <string>Bengkulu</string>
-        <string>Sumatera Selatan</string>
-        <string>Kepulauan Bangka Belitung</string>
-        <string>Lampung</string>
+        <item>Aceh</item>
+        <item>Sumatera Utara</item>
+        <item>Sumatera Barat</item>
+        <item>Riau</item>
+        <item>Kepulauan Riau</item>
+        <item>Jambi</item>
+        <item>Bengkulu</item>
+        <item>Sumatera Selatan</item>
+        <item>Kepulauan Bangka Belitung</item>
+        <item>Lampung</item>
     </string-array>
     <string-array name="kota">
-        <string>Asahan</string>
-        <string>Batubara</string>
-        <string>Dairi</string>
-        <string>Deli Serdang</string>
-        <string>Humbang Hasundutan</string>
-        <string>Karo</string>
-        <string>Labuhanbatu</string>
-        <string>Labuhanbatu Selatan</string>
-        <string>Labuhanbatu Utara</string>
-        <string>Langkat</string>
-        <string>Mandailing Natal</string>
-        <string>Nias</string>
-        <string>Nias Barat</string>
-        <string>Nias Selatan</string>
-        <string>Nias Utara</string>
-        <string>Padang Lawas</string>
-        <string>Padang Lawas Utara</string>
-        <string>Pakpak Bharat</string>
-        <string>Samosir</string>
+        <item>Asahan</item>
+        <item>Batubara</item>
+        <item>Dairi</item>
+        <item>Deli Serdang</item>
+        <item>Humbang Hasundutan</item>
+        <item>Karo</item>
+        <item>Labuhanbatu</item>
+        <item>Labuhanbatu Selatan</item>
+        <item>Labuhanbatu Utara</item>
+        <item>Langkat</item>
+        <item>Mandailing Natal</item>
+        <item>Nias</item>
+        <item>Nias Barat</item>
+        <item>Nias Selatan</item>
+        <item>Nias Utara</item>
+        <item>Padang Lawas</item>
+        <item>Padang Lawas Utara</item>
+        <item>Pakpak Bharat</item>
+        <item>Samosir</item>
     </string-array>
 
     <string name="sumatera_utara">Sumatera Utara</string>
