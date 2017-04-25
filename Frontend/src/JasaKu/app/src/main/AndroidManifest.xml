@@ -39,7 +39,7 @@
             android:name=".ProfileActivity"
             android:label="Profil"
             android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme2"/>
+            android:theme="@style/AppTheme2" />
         <activity
             android:name=".DataPemesanActivity"
             android:parentActivityName=".DetilPesananActivity" />
@@ -54,7 +54,9 @@
         <activity
             android:name=".DetilPesananActivity"
             android:parentActivityName=".DetilTokoActivity" />
-        <activity android:name=".penjual.KelolaJasa"></activity>
+        <activity android:name=".penjual.KelolaJasa" />
+        <activity android:name=".FilterActivity"
+            android:parentActivityName=".MainActivity"></activity>
     </application>
 
 </manifest>
