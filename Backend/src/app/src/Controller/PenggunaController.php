@@ -5,6 +5,10 @@ namespace App\Controller;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 use \App\Model\Pengguna as Pengguna;
+use \App\Model\Jasa as Jasa;
+use \App\Model\Toko as Toko;
+use \App\Model\Pemesanan as Pemesanan;
+use \App\Model\Transaksi as Transaksi;
 
 final class PenggunaController {
 
@@ -136,7 +140,67 @@ final class PenggunaController {
         }
         return $response->withHeader('Content-type', 'application/json')->withStatus($status);
     }
-
+    //Get 1 data
+    public function pesananmasuk(Request $request, Response $response, $args){
+        try{
+            $tokos=Toko::where([
+                ['id_pengguna', '=', $args['id']]
+            ])->get();
+            if(!json_decode($tokos)){
+                $response->write(json_encode([
+                    'status' => 'Gagal',
+                    'message'=> 'Toko Tidak ditemukan'
+                ]));
+                $status=400;
+            }else{
+                $output=array();
+                foreach ($tokos as $toko) {
+                    $tokolengkap=array();
+                    $jasas=Jasa::where([
+                        ['id_toko', '=', $toko['id']]
+                    ])->get();
+                    foreach ($jasas as $jasa) {
+                        $detail_pemesanan=array();
+                        $pemesanans=Pemesanan::where([
+                        ['id_jasa', '=', $jasa['id']]
+                        ])->get();
+                        foreach ($pemesanans as $pemesanan) {
+                            $temp2=array(
+                                    'kuantitas' => $pemesanan['kuantitas'],
+                                    'total'     =>  (int)$pemesanan['total'],
+                                    'id_jasa'   => $pemesanan['id_jasa'],
+                                    'id_transaksi'  =>$pemesanan['id_transaksi'],
+                                    'status_pemesanan'=>$pemesanan['status_pemesanan']
+                                );
+                            array_push($detail_pemesanan,$temp2);
+                        }
+                            $tokolengkap=array(
+                                    "id" => $toko["id"],
+                                    "nama" =>$toko['nama'],
+                                    "alamat" => $toko['alamat'],
+                                    "kontak" =>$toko['kontak'],
+                                    "deskripsi" =>$toko['deskripsi'],
+                                    "id_pengguna" =>$toko['id_pengguna'],
+                                    "jamOperasional" =>$toko['jamOperasional'],
+                                    "pemesananmasuk" =>$detail_pemesanan
+                                );
+                    //array_push($tokolengkap,$detail_pemesanan);
+                    }
+                    
+                    array_push($output,$tokolengkap);   
+                }
+                $response->write(json_encode($output));    
+            }
+        }catch (\Illuminate\Database\QueryException $e){
+            $response->write(json_encode([
+                'status' => 'Gagal',
+                'message'=> 'Penampilan toko gagal',
+                'dev_message'=> $e->getMessage()
+            ]));
+            $status=500;
+        }
+        return $response->withHeader('Content-type', 'application/json');
+    }
     //Cari data
     public function search(Request $request, Response $response, $args){
         try{

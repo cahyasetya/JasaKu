@@ -116,6 +116,7 @@ final class TransaksiController {
     public function get(Request $request, Response $response, $args){
         try{
             $transaksi = Transaksi::find($args['id']);
+            var_dump($transaksi);
             if(!$transaksi){
                 $response->write(json_encode([
                     'status' => 'Gagal',
@@ -158,7 +159,66 @@ final class TransaksiController {
             ]));
             $status=500;
         }
-        return $response->withHeader('Content-type', 'application/json')->withStatus($status);
+        return $response->withHeader('Content-type', 'application/json');
+    }
+    //Get 1 data
+    public function get_byidpengguna(Request $request, Response $response, $args){
+        try{
+            //$transaksi = Transaksi::find($args['id']);
+            $transaksi_json=Transaksi::where([
+                ['id_pengguna', '=', $args['id']]
+            ])->get();
+            // $konr=json_decode(json_encode($transaksi_json),true);
+            // echo $konr[0]["id"];
+            
+            if(!json_decode($transaksi_json)){
+                $response->write(json_encode([
+                    'status' => 'Gagal',
+                    'message'=> 'Transaksi Tidak ditemukan'
+                ]));
+                $status=400;
+            }else{
+                $transaksis=json_decode((json_encode($transaksi_json)),true);
+                //var_dump($transaksi);
+                $output=array();
+                foreach ($transaksi_json as $transaksi) {
+                    $pemesanan = new PemesananController();
+                    
+                    $transaksi_lengkap=array();
+                    $detail_transaksi=json_decode($pemesanan->get_by_transaksi($transaksi["id"]),true);
+                    $detail_pemesanan=Array();
+                    foreach ($detail_transaksi as $detail) {
+                        $temp2=array(
+                                    'kuantitas' => $detail['kuantitas'],
+                                    'total'     =>  (int)$detail['total'],
+                                        'id_jasa'   => $detail['id_jasa'],
+                                        'id_transaksi'  =>$detail['id_transaksi'],
+                                        'status_pemesanan'=>$detail['status_pemesanan']
+                                );
+                            array_push($detail_pemesanan,$temp2);
+                        }
+                        $transaksi_lengkap=array(
+                                    "id" => $transaksi["id"],
+                                    "id_pengguna" =>$transaksi['id_pengguna'],
+                                    "total" => $transaksi['total'],
+                                    "updated_at" =>$transaksi['updated_at'],
+                                    "created_at" =>$transaksi['created_at'],
+                                    "pemesanan" =>$detail_pemesanan
+                                    );
+                    array_push($output,$transaksi_lengkap);
+                }
+                $status=200;
+                $response->write(json_encode($output));
+            }                
+        }catch (\Illuminate\Database\QueryException $e){
+            $response->write(json_encode([
+                'status' => 'Gagal',
+                'message'=> 'Penampilan transaksi gagal',
+                'dev_message'=> $e->getMessage()
+            ]));
+            $status=500;
+        }
+        return $response->withHeader('Content-type', 'application/json');
     }
 
     //Cari data

@@ -26,6 +26,7 @@ $app->group('', function(){
     $this->group('/pengguna', function(){
         $this->get('[/]', 'App\Controller\PenggunaController:getall');
         $this->get('/{id}', 'App\Controller\PenggunaController:get');
+        $this->get('/{id}/pesananmasuk', 'App\Controller\PenggunaController:pesananmasuk');
         //Proses search dilakukan pada semua kolom, BUKAN hanya 1 kolom tertentu (Tidak termasuk kolom primary key)
         $this->get('/search/{term}', 'App\Controller\PenggunaController:search');
         $this->put('/', 'App\Controller\PenggunaController:update');
@@ -37,6 +38,7 @@ $app->group('', function(){
     $this->group('/toko', function(){
         $this->get('[/]', 'App\Controller\TokoController:getall');
         $this->get('/{id}', 'App\Controller\TokoController:get');
+        $this->get('/id_pengguna/{id}', 'App\Controller\TokoController:get_byidpengguna');
         //Proses search dilakukan pada semua kolom, BUKAN hanya 1 kolom tertentu (Tidak termasuk kolom primary key)
         $this->get('/search/{term}', 'App\Controller\TokoController:search');
         $this->post('/', 'App\Controller\TokoController:create');
@@ -47,6 +49,7 @@ $app->group('', function(){
  	$this->group('/jasa', function(){
         $this->get('[/]', 'App\Controller\JasaController:getall');
         $this->get('/{id}', 'App\Controller\JasaController:get');
+        $this->get('/id_toko/{id}', 'App\Controller\JasaController:get_byidtoko');
         //Proses search dilakukan pada semua kolom, BUKAN hanya 1 kolom tertentu (Tidak termasuk kolom primary key)
         $this->get('/search/{term}', 'App\Controller\JasaController:search');
         $this->post('/', 'App\Controller\JasaController:create');
@@ -59,6 +62,7 @@ $app->group('', function(){
     $this->group('/transaksi', function(){
         $this->get('[/]', 'App\Controller\TransaksiController:getall');
         $this->get('/{id}', 'App\Controller\TransaksiController:get');
+        $this->get('/id_pengguna/{id}', 'App\Controller\TransaksiController:get_byidpengguna');
         $this->delete('/{id}', 'App\Controller\TransaksiController:delete');
         $this->post('/disetujui', 'App\Controller\TransaksiController:disetujui');
         $this->post('/ditolak', 'App\Controller\TransaksiController:ditolak');
