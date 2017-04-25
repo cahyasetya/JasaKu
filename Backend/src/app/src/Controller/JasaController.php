@@ -17,7 +17,7 @@ final class JasaController {
             $jasa = new Jasa();
 
             $jasa->id = (Jasa::all()->last()->id)+1;
-            $jasa->id_toko = $post['id_toko'];
+            $jasa->id_jasa = $post['id_jasa'];
             $jasa->nama = $post['nama'];
             $jasa->harga = $post['harga'];
             $jasa->save();
@@ -81,6 +81,35 @@ final class JasaController {
         return $response->withHeader('Content-type', 'application/json')->withStatus($status);
     }
     //Get 1 data
+    public function get_byidtoko(Request $request, Response $response, $args){
+        try{
+            //$jasa = Transaksi::find($args['id']);
+            $jasa_json=Jasa::where([
+                ['id_toko', '=', $args['id']]
+            ])->get();
+            if(!json_decode($jasa_json)){
+                $response->write(json_encode([
+                    'status' => 'Gagal',
+                    'message'=> 'Jasa Tidak ditemukan'
+                ]));
+                $status=400;
+            }else{
+                 $status=200;
+                $response->write(json_encode($jasa_json));
+            }
+               
+
+        }catch (\Illuminate\Database\QueryException $e){
+            $response->write(json_encode([
+                'status' => 'Gagal',
+                'message'=> 'Penampilan jasa gagal',
+                'dev_message'=> $e->getMessage()
+            ]));
+            $status=500;
+        }
+        return $response->withHeader('Content-type', 'application/json');
+    }
+    //Get 1 data
     public function get_json($id){
         $jasa = Jasa::find($id);
         return json_encode($jasa);
@@ -88,7 +117,7 @@ final class JasaController {
     //Cari data
     public function search(Request $request, Response $response, $args){
         try{
-            $jasas = Jasa::whereRaw('concat(id_toko," ",nama,"",harga) like ?', "%".$args['term']."%")->get();
+            $jasas = Jasa::whereRaw('concat(id_jasa," ",nama,"",harga) like ?', "%".$args['term']."%")->get();
             $response->write(json_encode($jasas));
             $status=200;
         }
@@ -116,7 +145,7 @@ final class JasaController {
                 ]));
                 $status=400;
             }else{
-                if(isset($post['id_toko'])) $jasa->id_toko = $post['id_toko'];
+                if(isset($post['id_jasa'])) $jasa->id_jasa = $post['id_jasa'];
                 if(isset($post['nama'])) $jasa->nama = $post['nama'];
                 if(isset($post['harga'])) $jasa->harga = $post['harga'];
                 $jasa->save();
