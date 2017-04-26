@@ -26,10 +26,12 @@
         </activity>
         <activity
             android:name=".LoginActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".RegisterActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".DetilTokoActivity"
             android:label="@string/title_activity_detil_toko"
@@ -39,24 +41,32 @@
             android:name=".ProfileActivity"
             android:label="Profil"
             android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme2" />
+            android:theme="@style/AppTheme2"
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".DataPemesanActivity"
             android:parentActivityName=".DetilPesananActivity" />
         <activity
             android:name=".RegisterTokoActivity"
             android:label="Registrasi Toko"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".MainActivity"
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".penjual.EditTokoActivity"
             android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".DetilPesananActivity"
             android:parentActivityName=".DetilTokoActivity" />
         <activity android:name=".penjual.KelolaJasa" />
-        <activity android:name=".FilterActivity"
-            android:parentActivityName=".MainActivity"></activity>
+        <activity
+            android:name=".FilterActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".TambahAlamatActivity"
+            android:parentActivityName=".DataPemesanActivity"
+            android:windowSoftInputMode="stateHidden" />
     </application>
 
 </manifest>
