@@ -23,8 +23,11 @@ final class TokoController {
             $toko->kontak = $post['kontak'];
             // $toko->foto = $post['foto'];
             $toko->deskripsi = $post['deskripsi'];
-            $toko->id_pengguna = $post['id_pengguna'];
             $toko->jamOperasional = $post['jamOperasional'];
+            $toko->rating = $post['rating'];
+            $toko->id_pengguna = $post['id_pengguna'];
+            $toko->id_kategori = $post['id_kategori'];
+            $toko->id_kecamatan = $post['id_kecamatan'];
             $toko->save();
 
             $response->write(json_encode([
@@ -150,6 +153,9 @@ final class TokoController {
                 // if(isset($post['foto'])) $toko->foto = $post['foto'];
                 if(isset($post['deskripsi'])) $toko->deskripsi = $post['deskripsi'];
                 if(isset($post['jamOperasional'])) $toko->jamOperasional = $post['jamOperasional'];
+                if(isset($post['id_kategori'])) $toko->id_kategori = $post['id_kategori'];
+                if(isset($post['id_kecamatan'])) $toko->id_kecamatan = $post['id_kecamatan'];
+                if(isset($post['rating'])) $toko->rating = $post['rating'];
                 $toko->save();
 
                 $response->write(json_encode([
