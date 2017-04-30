@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/sort"
+        android:icon="@mipmap/ic_sort_black_24dp"
+        android:title="Sort"
+        app:showAsAction="always">
+        <menu>
+            <item
+                android:id="@+id/harga"
+                android:title="Harga">
+                <menu>
+                    <item
+                        android:id="@+id/harga_ascending"
+                        android:title="A -> Z" />
+                    <item
+                        android:id="@+id/harga_descending"
+                        android:title="Z -> A" />
+                </menu>
+            </item>
+            <item
+                android:id="@+id/rating"
+                android:title="Rating">
+                <menu>
+                    <item
+                        android:id="@+id/rating_ascending"
+                        android:title="A -> Z" />
+                    <item
+                        android:id="@+id/rating_descending"
+                        android:title="Z -> A" />
+                </menu>
+            </item>
+        </menu>
+    </item>
+    <item
+        android:id="@+id/filter"
+        android:icon="@mipmap/ic_filter_list_black_24dp"
+        android:title="Filter"
+        app:showAsAction="always" />
+</menu>

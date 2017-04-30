@@ -12,4 +12,41 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_detil_toko">Detil Toko</string>
     <string name="section_format">Hello World from section: %1$d</string>
+
+    <string-array name="provinsi">
+        <item>Aceh</item>
+        <item>Sumatera Utara</item>
+        <item>Sumatera Barat</item>
+        <item>Riau</item>
+        <item>Kepulauan Riau</item>
+        <item>Jambi</item>
+        <item>Bengkulu</item>
+        <item>Sumatera Selatan</item>
+        <item>Kepulauan Bangka Belitung</item>
+        <item>Lampung</item>
+    </string-array>
+    <string-array name="kota">
+        <item>Asahan</item>
+        <item>Batubara</item>
+        <item>Dairi</item>
+        <item>Deli Serdang</item>
+        <item>Humbang Hasundutan</item>
+        <item>Karo</item>
+        <item>Labuhanbatu</item>
+        <item>Labuhanbatu Selatan</item>
+        <item>Labuhanbatu Utara</item>
+        <item>Langkat</item>
+        <item>Mandailing Natal</item>
+        <item>Nias</item>
+        <item>Nias Barat</item>
+        <item>Nias Selatan</item>
+        <item>Nias Utara</item>
+        <item>Padang Lawas</item>
+        <item>Padang Lawas Utara</item>
+        <item>Pakpak Bharat</item>
+        <item>Samosir</item>
+    </string-array>
+
+    <string name="sumatera_utara">Sumatera Utara</string>
+    <string name="nias">Nias</string>
 </resources>

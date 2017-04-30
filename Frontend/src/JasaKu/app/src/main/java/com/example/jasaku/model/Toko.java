@@ -10,6 +10,7 @@ public class Toko {
     private String deskripsi;
     private String jamOperasional;
     private String kontak;
+    private long hargaMinimal;
 
     public String getNama() {
         return nama;
@@ -49,5 +50,13 @@ public class Toko {
 
     public void setKontak(String kontak) {
         this.kontak = kontak;
+    }
+
+    public long getHargaMinimal() {
+        return hargaMinimal;
+    }
+
+    public void setHargaMinimal(long hargaMinimal) {
+        this.hargaMinimal = hargaMinimal;
     }
 }

@@ -45,6 +45,8 @@ public class TokoAdapter extends RecyclerView.Adapter<TokoAdapter.TokoViewHolder
         Toko toko=tokoList.get(position);
         holder.namaTokoTextView.setText(toko.getNama());
         holder.deskripsiTokoTextView.setText(toko.getDeskripsi());
+        holder.alamatToko.setText(toko.getAlamat());
+        holder.hargaMinimal.setText(String.valueOf(toko.getHargaMinimal()));
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -66,6 +68,10 @@ public class TokoAdapter extends RecyclerView.Adapter<TokoAdapter.TokoViewHolder
         TextView namaTokoTextView;
         @BindView(R.id.deskripsi_toko)
         TextView deskripsiTokoTextView;
+        @BindView(R.id.alamat_toko)
+        TextView alamatToko;
+        @BindView(R.id.harga_minimal)
+        TextView hargaMinimal;
         public TokoViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this,itemView);
