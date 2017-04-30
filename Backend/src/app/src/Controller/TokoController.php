@@ -5,6 +5,7 @@ namespace App\Controller;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 use \App\Model\Toko as Toko;
+use \App\Model\Jasa as Jasa;
 
 final class TokoController {
 
@@ -51,7 +52,27 @@ final class TokoController {
     public function getall(Request $request, Response $response, $args){
         try{
             $tokos = Toko::all();
-            $response->write(json_encode($tokos));
+            $toko_lengkap=Array();
+            foreach ($tokos as $toko) {
+                $harga_terendah = Jasa::where([
+                    ['id_toko', '=', $toko->id]
+                ])->min("harga");
+                $temp=array(
+                    'id' => $toko->id,
+                    'nama'=>$toko->nama,
+                    'alamat' => $toko->alamat,
+                    'kontak'=> $toko->kontak,
+                    'deskripsi' => $toko->deskripsi,
+                    'jamOperasional'=> $toko->jamOperasional,
+                    'rating' => $toko->rating,
+                    'id_pengguna'=> $toko->id_pengguna,
+                    'id_kategori' => $toko->id_kategori,
+                    'id_kecamatan'=> $toko->id_kecamatan,
+                    'harga_terendah' => $harga_terendah
+                );
+                array_push($toko_lengkap,$temp);
+            }
+            $response->write(json_encode($toko_lengkap));
             $status=200;
         }catch (\Illuminate\Database\QueryException $e){
             $response->write(json_encode([
@@ -75,8 +96,23 @@ final class TokoController {
                 ]));
                 $status=400;
             }else{
-                $response->write(json_encode($toko));
-                $status=200;
+                $harga_terendah = Jasa::where([
+                    ['id_toko', '=', $args['id']]
+                ])->min("harga");
+                $response->write(json_encode([
+                    'id' => $toko->id,
+                    'nama'=>$toko->nama,
+                    'alamat' => $toko->alamat,
+                    'kontak'=> $toko->kontak,
+                    'deskripsi' => $toko->deskripsi,
+                    'jamOperasional'=> $toko->jamOperasional,
+                    'rating' => $toko->rating,
+                    'id_pengguna'=> $toko->id_pengguna,
+                    'id_kategori' => $toko->id_kategori,
+                    'id_kecamatan'=> $toko->id_kecamatan,
+                    'harga_terendah' => $harga_terendah
+                ]));
+            $status=200;
             }
         }catch (\Illuminate\Database\QueryException $e){
             $response->write(json_encode([
