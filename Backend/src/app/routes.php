@@ -37,6 +37,8 @@ $app->group('', function(){
     //Route Table Toko
     $this->group('/toko', function(){
         $this->get('[/]', 'App\Controller\TokoController:getall');
+        $this->get('/filterby', 'App\Controller\TokoController:filterby');
+        //[/kabupaten/{id_kabupaten}][/provinsi/{id_provinsi}]
         $this->get('/{id}', 'App\Controller\TokoController:get');
         $this->get('/id_pengguna/{id}', 'App\Controller\TokoController:get_byidpengguna');
         //Proses search dilakukan pada semua kolom, BUKAN hanya 1 kolom tertentu (Tidak termasuk kolom primary key)
@@ -56,7 +58,40 @@ $app->group('', function(){
         $this->put('/', 'App\Controller\JasaController:update');
         $this->delete('/{id}', 'App\Controller\JasaController:delete');
     });
-
+    //Route Kategori
+    $this->group('/kategori', function(){
+        $this->get('[/]', 'App\Controller\KategoriController:getall');
+        $this->get('/{id}', 'App\Controller\KategoriController:get');
+        $this->post('/', 'App\Controller\KategoriController:create');
+        $this->put('/', 'App\Controller\KategoriController:update');
+        $this->delete('/{id}', 'App\Controller\KategoriController:delete');
+    });
+    //Route Kecamatan
+    $this->group('/kecamatan', function(){
+        $this->get('[/]', 'App\Controller\KecamatanController:getall');
+        $this->get('/id_kabupaten/{id}', 'App\Controller\KecamatanController:get_byidkabupaten');
+        $this->get('/{id}', 'App\Controller\KecamatanController:get');
+        $this->post('/', 'App\Controller\KecamatanController:create');
+        $this->put('/', 'App\Controller\KecamatanController:update');
+        $this->delete('/{id}', 'App\Controller\KecamatanController:delete');
+    });
+    //Route Kabupaten
+    $this->group('/kabupaten', function(){
+        $this->get('[/]', 'App\Controller\KabupatenController:getall');
+        $this->get('/id_provinsi/{id}', 'App\Controller\KabupatenController:get_byidprovinsi');
+        $this->get('/{id}', 'App\Controller\KabupatenController:get');
+        $this->post('/', 'App\Controller\KabupatenController:create');
+        $this->put('/', 'App\Controller\KabupatenController:update');
+        $this->delete('/{id}', 'App\Controller\KabupatenController:delete');
+    });
+    //Route Provinsi
+    $this->group('/provinsi', function(){
+        $this->get('[/]', 'App\Controller\ProvinsiController:getall');
+        $this->get('/{id}', 'App\Controller\ProvinsiController:get');
+        $this->post('/', 'App\Controller\ProvinsiController:create');
+        $this->put('/', 'App\Controller\ProvinsiController:update');
+        $this->delete('/{id}', 'App\Controller\ProvinsiController:delete');
+    });
     //Route Transaksi
     $this->post('/membeli', 'App\Controller\TransaksiController:create');
     $this->group('/transaksi', function(){

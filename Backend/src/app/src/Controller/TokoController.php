@@ -134,7 +134,7 @@ final class TokoController {
             if(!json_decode($toko_json)){
                 $response->write(json_encode([
                     'status' => 'Gagal',
-                    'message'=> 'Jasa Tidak ditemukan'
+                    'message'=> 'Toko Tidak ditemukan'
                 ]));
                 $status=400;
             }else{
@@ -143,6 +143,48 @@ final class TokoController {
             }
                
 
+        }catch (\Illuminate\Database\QueryException $e){
+            $response->write(json_encode([
+                'status' => 'Gagal',
+                'message'=> 'Penampilan toko gagal',
+                'dev_message'=> $e->getMessage()
+            ]));
+            $status=500;
+        }
+        return $response->withHeader('Content-type', 'application/json')->withStatus($status);
+    }
+     //Filter Data
+    public function filterby(Request $request, Response $response, $args){
+        try{
+            $array = $request->getQueryParams();
+            $query=array();
+            if(isset($array['kategori'])){
+                $temp=array(
+                        'id_kategori','=',$array['kategori']
+                    );
+                array_push($query, $temp);
+                
+            }
+
+            if(isset($array['kecamatan'])){
+                $temp=array(
+                        'id_kecamatan','=',$array['kecamatan']
+                    );
+                array_push($query, $temp);
+            }
+            //var_dump(json_encode($query));
+            $toko=Toko::where($query)->get();
+            if(!json_decode($toko)){
+                $response->write(json_encode([
+                    'status' => 'Gagal',
+                    'message'=> 'Toko Tidak ditemukan'
+                ]));
+                $status=400;
+            }else{
+                 $status=200;
+                $response->write(json_encode($toko));
+            }
+            // //$response->write(json_encode(["hgjg"=>"hj"]));
         }catch (\Illuminate\Database\QueryException $e){
             $response->write(json_encode([
                 'status' => 'Gagal',

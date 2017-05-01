@@ -37,7 +37,34 @@ final class KabupatenController {
         }
         return $response->withHeader('Content-type', 'application/json')->withStatus($status);
     }
+    //Get 1 data
+    public function get_byidprovinsi(Request $request, Response $response, $args){
+        try{
+            //$toko = Transaksi::find($args['id']);
+            $toko_json=Kabupaten::where([
+                ['id_provinsi', '=', $args['id']]
+            ])->get();
+            if(!json_decode($toko_json)){
+                $response->write(json_encode([
+                    'status' => 'Gagal',
+                    'message'=> 'Jasa Tidak ditemukan'
+                ]));
+                $status=400;
+            }else{
+                 $status=200;
+                $response->write(json_encode($toko_json));
+            }
+               
 
+        }catch (\Illuminate\Database\QueryException $e){
+            $response->write(json_encode([
+                'status' => 'Gagal',
+                'message'=> 'Penampilan toko gagal',
+                'dev_message'=> $e->getMessage()
+            ]));
+            $status=500;
+        }
+        return $response->withHeader('Content-type', 'application/json')->withStatus($status);
     // Get semua data
     public function getall(Request $request, Response $response, $args){
         try{
