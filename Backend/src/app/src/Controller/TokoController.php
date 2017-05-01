@@ -51,7 +51,28 @@ final class TokoController {
 	// Get semua data
     public function getall(Request $request, Response $response, $args){
         try{
-            $tokos = Toko::all();
+            $array = $request->getQueryParams();
+            $query=array();
+            //Untuk Filter
+            if(isset($array['id_kategori'])&&$array['id_kategori']>0){
+                $temp=array(
+                        'id_kategori','=',$array['id_kategori']
+                    );
+                array_push($query, $temp);
+                
+            }
+            if(isset($array['id_kecamatan'])&&$array['id_kecamatan']>0){
+                $temp=array(
+                        'id_kecamatan','=',$array['id_kecamatan']
+                    );
+                array_push($query, $temp);
+            }
+            
+            
+            //Untuk Sorting
+
+            // var_dump(json_encode($query));
+            $tokos=Toko::where($query)->get();
             $toko_lengkap=Array();
             foreach ($tokos as $toko) {
                 $harga_terendah = Jasa::where([
@@ -71,6 +92,27 @@ final class TokoController {
                     'harga_terendah' => $harga_terendah
                 );
                 array_push($toko_lengkap,$temp);
+            }
+            //Untuk Sorting
+            if(isset($array['sort'])){
+                $array_harga=array();
+                $array_rating=array();
+                foreach ($toko_lengkap as $tokoo) {
+                    array_push($array_harga,$tokoo['harga_terendah']);
+                    array_push($array_rating,$tokoo['rating']);
+                }
+           
+                if($array['sort']=="rating_asc"){
+                    array_multisort($array_rating, SORT_ASC, $toko_lengkap);
+                }elseif ($array['sort']=="harga_asc"){
+                    array_multisort($array_harga, SORT_ASC, $toko_lengkap);
+                }
+                elseif ($array['sort']=="harga_dsc"){
+                    array_multisort($array_harga, SORT_DESC, $toko_lengkap);
+                }
+                elseif ($array['sort']=="rating_dsc"){
+                    array_multisort($array_rating, SORT_DESC, $toko_lengkap);
+                }
             }
             $response->write(json_encode($toko_lengkap));
             $status=200;
@@ -158,22 +200,25 @@ final class TokoController {
         try{
             $array = $request->getQueryParams();
             $query=array();
-            if(isset($array['kategori'])){
+            
+            if(isset($array['id_kategori'])&&$array['id_kategori']>0){
                 $temp=array(
-                        'id_kategori','=',$array['kategori']
+                        'id_kategori','=',$array['id_kategori']
                     );
                 array_push($query, $temp);
                 
             }
 
-            if(isset($array['kecamatan'])){
+            if(isset($array['id_kecamatan'])&&$array['id_kecamatan']>0){
                 $temp=array(
-                        'id_kecamatan','=',$array['kecamatan']
+                        'id_kecamatan','=',$array['id_kecamatan']
                     );
                 array_push($query, $temp);
             }
-            //var_dump(json_encode($query));
+            
+            // var_dump(json_encode($query));
             $toko=Toko::where($query)->get();
+
             if(!json_decode($toko)){
                 $response->write(json_encode([
                     'status' => 'Gagal',

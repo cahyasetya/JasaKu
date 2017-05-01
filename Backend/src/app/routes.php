@@ -36,9 +36,9 @@ $app->group('', function(){
 
     //Route Table Toko
     $this->group('/toko', function(){
+        //Untuk Route /toko filter bisa dilakukan dengan menyertakan param id_kategori dan id_kecamatan
+        //Untuk Route /toko sort bisa dilakukan dengan menyertakan param sort dg value = harga_asc / harga_dsc / rating_asc / rating_dsc
         $this->get('[/]', 'App\Controller\TokoController:getall');
-        $this->get('/filterby', 'App\Controller\TokoController:filterby');
-        //[/kabupaten/{id_kabupaten}][/provinsi/{id_provinsi}]
         $this->get('/{id}', 'App\Controller\TokoController:get');
         $this->get('/id_pengguna/{id}', 'App\Controller\TokoController:get_byidpengguna');
         //Proses search dilakukan pada semua kolom, BUKAN hanya 1 kolom tertentu (Tidak termasuk kolom primary key)
