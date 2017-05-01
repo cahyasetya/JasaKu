@@ -199,7 +199,7 @@ final class PenggunaController {
             ]));
             $status=500;
         }
-        return $response->withHeader('Content-type', 'application/json');
+        return $response->withHeader('Content-type', 'application/json')->withStatus($status);
     }
     //Cari data
     public function search(Request $request, Response $response, $args){
