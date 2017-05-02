@@ -17,7 +17,7 @@ final class JasaController {
             $jasa = new Jasa();
 
             $jasa->id = (Jasa::all()->last()->id)+1;
-            $jasa->id_jasa = $post['id_jasa'];
+            $jasa->id_toko = $post['id_toko'];
             $jasa->nama = $post['nama'];
             $jasa->harga = $post['harga'];
             $jasa->save();
@@ -48,7 +48,7 @@ final class JasaController {
         }catch (\Illuminate\Database\QueryException $e){
             $response->write(json_encode([
                 'status' => 'Gagal',
-                'message'=> 'Penambahan data gagal',
+                'message'=> 'Penampilan data gagal',
                 'dev_message'=> $e->getMessage()
             ]));
             $status=500;
@@ -73,7 +73,7 @@ final class JasaController {
         }catch (\Illuminate\Database\QueryException $e){
             $response->write(json_encode([
                 'status' => 'Gagal',
-                'message'=> 'Penambahan data gagal',
+                'message'=> 'Penampilan data gagal',
                 'dev_message'=> $e->getMessage()
             ]));
             $status=500;
@@ -145,7 +145,7 @@ final class JasaController {
                 ]));
                 $status=400;
             }else{
-                if(isset($post['id_jasa'])) $jasa->id_jasa = $post['id_jasa'];
+                if(isset($post['id_toko'])) $jasa->id_toko = $post['id_toko'];
                 if(isset($post['nama'])) $jasa->nama = $post['nama'];
                 if(isset($post['harga'])) $jasa->harga = $post['harga'];
                 $jasa->save();
@@ -159,7 +159,7 @@ final class JasaController {
         }catch (\Illuminate\Database\QueryException $e){
             $response->write(json_encode([
                 'status' => 'Gagal',
-                'message'=> 'Penambahan data gagal',
+                'message'=> 'Update data gagal',
                 'dev_message'=> $e->getMessage()
             ]));
             $status=500;

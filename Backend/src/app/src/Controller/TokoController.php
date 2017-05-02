@@ -25,7 +25,7 @@ final class TokoController {
             // $toko->foto = $post['foto'];
             $toko->deskripsi = $post['deskripsi'];
             $toko->jamOperasional = $post['jamOperasional'];
-            $toko->rating = $post['rating'];
+            $toko->rating = 0;
             $toko->id_pengguna = $post['id_pengguna'];
             $toko->id_kategori = $post['id_kategori'];
             $toko->id_kecamatan = $post['id_kecamatan'];
@@ -119,7 +119,7 @@ final class TokoController {
         }catch (\Illuminate\Database\QueryException $e){
             $response->write(json_encode([
                 'status' => 'Gagal',
-                'message'=> 'Penambahan data gagal',
+                'message'=> 'Penampilan data gagal',
                 'dev_message'=> $e->getMessage()
             ]));
             $status=500;
@@ -159,7 +159,7 @@ final class TokoController {
         }catch (\Illuminate\Database\QueryException $e){
             $response->write(json_encode([
                 'status' => 'Gagal',
-                'message'=> 'Penambahan data gagal',
+                'message'=> 'Penampilan data gagal',
                 'dev_message'=> $e->getMessage()
             ]));
             $status=500;
@@ -195,51 +195,51 @@ final class TokoController {
         }
         return $response->withHeader('Content-type', 'application/json')->withStatus($status);
     }
-     //Filter Data
-    public function filterby(Request $request, Response $response, $args){
-        try{
-            $array = $request->getQueryParams();
-            $query=array();
+    //  //Filter Data
+    // public function filterby(Request $request, Response $response, $args){
+    //     try{
+    //         $array = $request->getQueryParams();
+    //         $query=array();
             
-            if(isset($array['id_kategori'])&&$array['id_kategori']>0){
-                $temp=array(
-                        'id_kategori','=',$array['id_kategori']
-                    );
-                array_push($query, $temp);
+    //         if(isset($array['id_kategori'])&&$array['id_kategori']>0){
+    //             $temp=array(
+    //                     'id_kategori','=',$array['id_kategori']
+    //                 );
+    //             array_push($query, $temp);
                 
-            }
+    //         }
 
-            if(isset($array['id_kecamatan'])&&$array['id_kecamatan']>0){
-                $temp=array(
-                        'id_kecamatan','=',$array['id_kecamatan']
-                    );
-                array_push($query, $temp);
-            }
+    //         if(isset($array['id_kecamatan'])&&$array['id_kecamatan']>0){
+    //             $temp=array(
+    //                     'id_kecamatan','=',$array['id_kecamatan']
+    //                 );
+    //             array_push($query, $temp);
+    //         }
             
-            // var_dump(json_encode($query));
-            $toko=Toko::where($query)->get();
+    //         // var_dump(json_encode($query));
+    //         $toko=Toko::where($query)->get();
 
-            if(!json_decode($toko)){
-                $response->write(json_encode([
-                    'status' => 'Gagal',
-                    'message'=> 'Toko Tidak ditemukan'
-                ]));
-                $status=400;
-            }else{
-                 $status=200;
-                $response->write(json_encode($toko));
-            }
-            // //$response->write(json_encode(["hgjg"=>"hj"]));
-        }catch (\Illuminate\Database\QueryException $e){
-            $response->write(json_encode([
-                'status' => 'Gagal',
-                'message'=> 'Penampilan toko gagal',
-                'dev_message'=> $e->getMessage()
-            ]));
-            $status=500;
-        }
-        return $response->withHeader('Content-type', 'application/json');
-    }
+    //         if(!json_decode($toko)){
+    //             $response->write(json_encode([
+    //                 'status' => 'Gagal',
+    //                 'message'=> 'Toko Tidak ditemukan'
+    //             ]));
+    //             $status=400;
+    //         }else{
+    //              $status=200;
+    //             $response->write(json_encode($toko));
+    //         }
+    //         // //$response->write(json_encode(["hgjg"=>"hj"]));
+    //     }catch (\Illuminate\Database\QueryException $e){
+    //         $response->write(json_encode([
+    //             'status' => 'Gagal',
+    //             'message'=> 'Penampilan toko gagal',
+    //             'dev_message'=> $e->getMessage()
+    //         ]));
+    //         $status=500;
+    //     }
+    //     return $response->withHeader('Content-type', 'application/json');
+    // }
     //Cari data
     public function search(Request $request, Response $response, $args){
         try{
@@ -290,7 +290,7 @@ final class TokoController {
         }catch (\Illuminate\Database\QueryException $e){
             $response->write(json_encode([
                 'status' => 'Gagal',
-                'message'=> 'Penambahan data gagal',
+                'message'=> 'Update data gagal',
                 'dev_message'=> $e->getMessage()
             ]));
             $status=500;
@@ -320,7 +320,7 @@ final class TokoController {
         }catch (\Illuminate\Database\QueryException $e){
             $response->write(json_encode([
                 'status' => 'Gagal',
-                'message'=> 'Penambahan data gagal',
+                'message'=> 'Hapus data gagal',
                 'dev_message'=> $e->getMessage()
             ]));
             $status=500;
