@@ -250,7 +250,8 @@ Semua operasi dengan tabel pengguna
 	
 		*Tidak ada Parameter*
 	- Contoh Respon Sukses
-		- ```json
+		
+```json
 		[
   {
     "id": 1,
@@ -279,12 +280,13 @@ Semua operasi dengan tabel pengguna
     "username": "admin3",
     "password": "admin"
   }]
-		```
+```
 		- Status Code `200`.
 	- Contoh Respon Gagal
 		
 		Error Sql
-		- ```json
+		
+		```json
 		{
 			"status": "Gagal",
   			"message": "Login Gagal",
