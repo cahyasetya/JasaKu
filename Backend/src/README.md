@@ -250,9 +250,10 @@ Semua operasi dengan tabel pengguna
 	
 		*Tidak ada Parameter*
 	- Contoh Respon Sukses
-		
+
+
 ```json
-		[
+[
   {
     "id": 1,
     "nama": "Amin",
@@ -279,24 +280,25 @@ Semua operasi dengan tabel pengguna
     "kontak": "031567892",
     "username": "admin3",
     "password": "admin"
-  }]
-```
+  }
+]
+		```
+		
 		- Status Code `200`.
 
 	- Contoh Respon Gagal
 		
 		Error Sql
-		
+
 ```json
 		{
 			"status": "Gagal",
   			"message": "Login Gagal",
   			"dev_message": "blablablablabl"
   		}
-```
-
+		```
+		
 		- Status Code `500`.
-
 - Get 1 Data
 
 	Request data pelanggan dengan id tertentu.Menggunakan metode HTTP `GET`.
@@ -307,8 +309,9 @@ Semua operasi dengan tabel pengguna
 	
 		*Tidak ada Parameter*
 	- Contoh Respon Sukses
-		- ```json
-		{
+
+```json
+{
   "id": 1,
   "nama": "Amin",
   "alamat": "Jl Pahlawan Rt 2 No 1",
@@ -321,10 +324,11 @@ Semua operasi dengan tabel pengguna
 		- Status Code `200`.
 	- Contoh Respon Gagal (1)
 		
-		```{id}``` yang dimasukkan tidak ditemukan		
-		Error Sql
-		- ```json
-		{
+		```{id}``` yang dimasukkan tidak ditemukan. Error Sql
+		
+
+```json
+{
   "status": "Gagal",
   "message": "Pengguna Tidak ditemukan"
 }
@@ -341,6 +345,7 @@ Semua operasi dengan tabel pengguna
   		}
 		```
 		- Status Code `500`.
+
 - Get Pesanan Masuk
 
 
@@ -352,9 +357,10 @@ Semua operasi dengan tabel pengguna
 	
 		*Tidak ada Parameter*
 	- Contoh Respon Sukses
-		
-		- ```json
-		[
+		- Request : [http://localhost/slim/Backend/src/public/pengguna/2/pesananmasuk]()
+
+```json
+[
   {
     "id": 1,
     "nama": "Bengkel",
@@ -392,30 +398,32 @@ Semua operasi dengan tabel pengguna
   }
 ]
 		```
-		- Request : [http://localhost/slim/Backend/src/public/pengguna/2/pesananmasuk]()
 		- Status Code `200`.
 	- Contoh Respon Gagal (1)
 		
 		```{id}``` yang dimasukkan tidak ditemukan		
 		Error Sql
-		- ```json
+		
+		- Request : [http://localhost/slim/Backend/src/public/pengguna/25/pesananmasuk]()
+		
+```json
 		{
   "status": "Gagal",
   "message": "Toko Tidak ditemukan"
 }
 		```
-		- Request : [http://localhost/slim/Backend/src/public/pengguna/25/pesananmasuk]()
+
 		- Status Code `400`.
 	- Contoh Respon Gagal (2)
 		
 		Error Sql
-		- ```json
+```json
 		{
 			"status": "Gagal",
   			"message": "Login Gagal",
   			"dev_message": "blablablablabl"
   		}
-		```
+```
 		- Status Code `500`.
 - Ubah Data
 
@@ -433,39 +441,44 @@ Semua operasi dengan tabel pengguna
 		+ `kontak` *optional*. 
 		+ `username` *optional*.
 		+ `password` *optional*.
-		+ 
+
 	- Contoh Respon Sukses
 		
-		- ```json
-		{
+		- Request : [http://localhost/slim/Backend/src/public/pengguna/](). Dengan argumen id dan nama
+		
+```json
+{
   "status": "Sukses",
   "message": "Update data berhasil"
 }
-		```
-		- Request : [http://localhost/slim/Backend/src/public/pengguna/](). Dengan argumen id dan nama
+```
+		
 		- Status Code `200`.
 	- Contoh Respon Gagal (1)
 		
 		```{id}``` yang dimasukkan tidak ditemukan		
 		Error Sql
-		- ```json
-		{
+		
+		- Request : [http://localhost/slim/Backend/src/public/pengguna/]() Dengan argumen id dan nama
+		
+```json
+{
   "status": "Gagal",
   "message": "Pengguna Tidak ditemukan"
 }
 		```
-		- Request : [http://localhost/slim/Backend/src/public/pengguna/]() Dengan argumen id dan nama
+		
 		- Status Code `400`.
 	- Contoh Respon Gagal (2)
 		
 		Error Sql
-		- ```json
-		{
-			"status": "Gagal",
-  			"message": "Login Gagal",
-  			"dev_message": "blablablablabl"
-  		}
-		```
+```json
+{
+	"status": "Gagal",
+	"message": "Login Gagal",
+	"dev_message": "blablablablabl"
+}
+```
 		- Status Code `500`.
 - Hapus Data
 
@@ -479,37 +492,41 @@ Semua operasi dengan tabel pengguna
 
 		*Tidak ada Parameter*
 	- Contoh Respon Sukses
+
+		- Request : [http://localhost/slim/Backend/src/public/pengguna/4](). 
 		
-		- ```json
+```json
 		{
   "status": "Sukses",
   "message": "Hapus data berhasil"
 }
 		```
-		- Request : [http://localhost/slim/Backend/src/public/pengguna/4](). 
+		
 		- Status Code `200`.
 	- Contoh Respon Gagal (1)
-		
+
+		- Request : [http://localhost/slim/Backend/src/public/pengguna/456]()
+
 		```{id}``` yang dimasukkan tidak ditemukan		
 		Error Sql
-		- ```json
-		{
+```json
+{
   "status": "Gagal",
   "message": "Pengguna Tidak ditemukan"
 }
-		```
-		- Request : [http://localhost/slim/Backend/src/public/pengguna/456]() 
+```
+ 
 		- Status Code `400`.
 	- Contoh Respon Gagal (2)
 		
 		Error Sql
-		- ```json
-		{
-			"status": "Gagal",
-  			"message": "Login Gagal",
-  			"dev_message": "blablablablabl"
-  		}
-		```
+```json
+{
+	"status": "Gagal",
+  	"message": "Login Gagal",
+  	"dev_message": "blablablablabl"
+}
+```
 		- Status Code `500`.
 
 
@@ -525,8 +542,10 @@ Semua operasi dengan tabel pengguna
 	
 		*Tidak ada Parameter*
 	- Contoh Respon Sukses
-		- ```json
-		[
+
+
+```json
+[
   {
     "id": 1,
     "nama": "Amin",
@@ -553,19 +572,24 @@ Semua operasi dengan tabel pengguna
     "kontak": "031567892",
     "username": "admin3",
     "password": "admin"
-  }]
+  }
+]
 		```
+		
 		- Status Code `200`.
+
 	- Contoh Respon Gagal
 		
 		Error Sql
-		- ```json
+
+```json
 		{
 			"status": "Gagal",
   			"message": "Login Gagal",
   			"dev_message": "blablablablabl"
   		}
 		```
+		
 		- Status Code `500`.
 - Get 1 Data
 
@@ -577,8 +601,9 @@ Semua operasi dengan tabel pengguna
 	
 		*Tidak ada Parameter*
 	- Contoh Respon Sukses
-		- ```json
-		{
+
+```json
+{
   "id": 1,
   "nama": "Amin",
   "alamat": "Jl Pahlawan Rt 2 No 1",
@@ -591,10 +616,11 @@ Semua operasi dengan tabel pengguna
 		- Status Code `200`.
 	- Contoh Respon Gagal (1)
 		
-		```{id}``` yang dimasukkan tidak ditemukan		
-		Error Sql
-		- ```json
-		{
+		```{id}``` yang dimasukkan tidak ditemukan. Error Sql
+		
+
+```json
+{
   "status": "Gagal",
   "message": "Pengguna Tidak ditemukan"
 }
@@ -611,6 +637,7 @@ Semua operasi dengan tabel pengguna
   		}
 		```
 		- Status Code `500`.
+
 - Get Pesanan Masuk
 
 
@@ -622,9 +649,10 @@ Semua operasi dengan tabel pengguna
 	
 		*Tidak ada Parameter*
 	- Contoh Respon Sukses
-		
-		- ```json
-		[
+		- Request : [http://localhost/slim/Backend/src/public/pengguna/2/pesananmasuk]()
+
+```json
+[
   {
     "id": 1,
     "nama": "Bengkel",
@@ -662,30 +690,32 @@ Semua operasi dengan tabel pengguna
   }
 ]
 		```
-		- Request : [http://localhost/slim/Backend/src/public/pengguna/2/pesananmasuk]()
 		- Status Code `200`.
 	- Contoh Respon Gagal (1)
 		
 		```{id}``` yang dimasukkan tidak ditemukan		
 		Error Sql
-		- ```json
+		
+		- Request : [http://localhost/slim/Backend/src/public/pengguna/25/pesananmasuk]()
+		
+```json
 		{
   "status": "Gagal",
   "message": "Toko Tidak ditemukan"
 }
 		```
-		- Request : [http://localhost/slim/Backend/src/public/pengguna/25/pesananmasuk]()
+
 		- Status Code `400`.
 	- Contoh Respon Gagal (2)
 		
 		Error Sql
-		- ```json
+```json
 		{
 			"status": "Gagal",
   			"message": "Login Gagal",
   			"dev_message": "blablablablabl"
   		}
-		```
+```
 		- Status Code `500`.
 - Ubah Data
 
@@ -703,50 +733,48 @@ Semua operasi dengan tabel pengguna
 		+ `kontak` *optional*. 
 		+ `username` *optional*.
 		+ `password` *optional*.
-		+ 
+
 	- Contoh Respon Sukses
 		
-		- ```json
-		{
+		- Request : [http://localhost/slim/Backend/src/public/pengguna/](). Dengan argumen id dan nama
+		
+```json
+{
   "status": "Sukses",
   "message": "Update data berhasil"
 }
-		```
-		- Request : [http://localhost/slim/Backend/src/public/pengguna/](). Dengan argumen id dan nama
+```
+		
 		- Status Code `200`.
 	- Contoh Respon Gagal (1)
 		
 		```{id}``` yang dimasukkan tidak ditemukan		
 		Error Sql
-		- ```json
-		{
+		
+		- Request : [http://localhost/slim/Backend/src/public/pengguna/]() Dengan argumen id dan nama
+		
+```json
+{
   "status": "Gagal",
   "message": "Pengguna Tidak ditemukan"
 }
 		```
-		- Request : [http://localhost/slim/Backend/src/public/pengguna/]() Dengan argumen id dan nama
+		
 		- Status Code `400`.
 	- Contoh Respon Gagal (2)
 		
 		Error Sql
-		- ```json
-		{
-			"status": "Gagal",
-  			"message": "Login Gagal",
-  			"dev_message": "blablablablabl"
-  		}
-		```
+```json
+{
+	"status": "Gagal",
+	"message": "Login Gagal",
+	"dev_message": "blablablablabl"
+}
+```
 		- Status Code `500`.
 - Hapus Data
 
 	Menghapus data pelanggan dengan id tertentu.Menggunakan metode HTTP `DELETE`.
-
-	- URL
-		- [http://localhost/slim/Backend/src/public/pengguna/](). Dengan Parameter.
-
-	- Parameter
-
-			Menghapus data pelanggan dengan id tertentu.Menggunakan metode HTTP `DELETE`.
 
 	- URL
 		- [http://localhost/slim/Backend/src/public/pengguna/{id}](). Tidak ada Parameter.
@@ -756,37 +784,41 @@ Semua operasi dengan tabel pengguna
 
 		*Tidak ada Parameter*
 	- Contoh Respon Sukses
+
+		- Request : [http://localhost/slim/Backend/src/public/pengguna/4](). 
 		
-		- ```json
+```json
 		{
   "status": "Sukses",
   "message": "Hapus data berhasil"
 }
 		```
-		- Request : [http://localhost/slim/Backend/src/public/pengguna/4](). 
+		
 		- Status Code `200`.
 	- Contoh Respon Gagal (1)
-		
+
+		- Request : [http://localhost/slim/Backend/src/public/pengguna/456]()
+
 		```{id}``` yang dimasukkan tidak ditemukan		
 		Error Sql
-		- ```json
-		{
+```json
+{
   "status": "Gagal",
   "message": "Pengguna Tidak ditemukan"
 }
-		```
-		- Request : [http://localhost/slim/Backend/src/public/pengguna/456]() 
+```
+ 
 		- Status Code `400`.
 	- Contoh Respon Gagal (2)
 		
 		Error Sql
-		- ```json
-		{
-			"status": "Gagal",
-  			"message": "Login Gagal",
-  			"dev_message": "blablablablabl"
-  		}
-		```
+```json
+{
+	"status": "Gagal",
+  	"message": "Login Gagal",
+  	"dev_message": "blablablablabl"
+}
+```
 		- Status Code `500`.
 
 ### Jasa
@@ -801,8 +833,10 @@ Semua operasi dengan tabel pengguna
 	
 		*Tidak ada Parameter*
 	- Contoh Respon Sukses
-		- ```json
-		[
+
+
+```json
+[
   {
     "id": 1,
     "nama": "Amin",
@@ -829,19 +863,24 @@ Semua operasi dengan tabel pengguna
     "kontak": "031567892",
     "username": "admin3",
     "password": "admin"
-  }]
+  }
+]
 		```
+		
 		- Status Code `200`.
+
 	- Contoh Respon Gagal
 		
 		Error Sql
-		- ```json
+
+```json
 		{
 			"status": "Gagal",
   			"message": "Login Gagal",
   			"dev_message": "blablablablabl"
   		}
 		```
+		
 		- Status Code `500`.
 - Get 1 Data
 
@@ -853,8 +892,9 @@ Semua operasi dengan tabel pengguna
 	
 		*Tidak ada Parameter*
 	- Contoh Respon Sukses
-		- ```json
-		{
+
+```json
+{
   "id": 1,
   "nama": "Amin",
   "alamat": "Jl Pahlawan Rt 2 No 1",
@@ -867,10 +907,11 @@ Semua operasi dengan tabel pengguna
 		- Status Code `200`.
 	- Contoh Respon Gagal (1)
 		
-		```{id}``` yang dimasukkan tidak ditemukan		
-		Error Sql
-		- ```json
-		{
+		```{id}``` yang dimasukkan tidak ditemukan. Error Sql
+		
+
+```json
+{
   "status": "Gagal",
   "message": "Pengguna Tidak ditemukan"
 }
@@ -887,6 +928,7 @@ Semua operasi dengan tabel pengguna
   		}
 		```
 		- Status Code `500`.
+
 - Get Pesanan Masuk
 
 
@@ -898,9 +940,10 @@ Semua operasi dengan tabel pengguna
 	
 		*Tidak ada Parameter*
 	- Contoh Respon Sukses
-		
-		- ```json
-		[
+		- Request : [http://localhost/slim/Backend/src/public/pengguna/2/pesananmasuk]()
+
+```json
+[
   {
     "id": 1,
     "nama": "Bengkel",
@@ -938,30 +981,32 @@ Semua operasi dengan tabel pengguna
   }
 ]
 		```
-		- Request : [http://localhost/slim/Backend/src/public/pengguna/2/pesananmasuk]()
 		- Status Code `200`.
 	- Contoh Respon Gagal (1)
 		
 		```{id}``` yang dimasukkan tidak ditemukan		
 		Error Sql
-		- ```json
+		
+		- Request : [http://localhost/slim/Backend/src/public/pengguna/25/pesananmasuk]()
+		
+```json
 		{
   "status": "Gagal",
   "message": "Toko Tidak ditemukan"
 }
 		```
-		- Request : [http://localhost/slim/Backend/src/public/pengguna/25/pesananmasuk]()
+
 		- Status Code `400`.
 	- Contoh Respon Gagal (2)
 		
 		Error Sql
-		- ```json
+```json
 		{
 			"status": "Gagal",
   			"message": "Login Gagal",
   			"dev_message": "blablablablabl"
   		}
-		```
+```
 		- Status Code `500`.
 - Ubah Data
 
@@ -979,50 +1024,48 @@ Semua operasi dengan tabel pengguna
 		+ `kontak` *optional*. 
 		+ `username` *optional*.
 		+ `password` *optional*.
-		+ 
+
 	- Contoh Respon Sukses
 		
-		- ```json
-		{
+		- Request : [http://localhost/slim/Backend/src/public/pengguna/](). Dengan argumen id dan nama
+		
+```json
+{
   "status": "Sukses",
   "message": "Update data berhasil"
 }
-		```
-		- Request : [http://localhost/slim/Backend/src/public/pengguna/](). Dengan argumen id dan nama
+```
+		
 		- Status Code `200`.
 	- Contoh Respon Gagal (1)
 		
 		```{id}``` yang dimasukkan tidak ditemukan		
 		Error Sql
-		- ```json
-		{
+		
+		- Request : [http://localhost/slim/Backend/src/public/pengguna/]() Dengan argumen id dan nama
+		
+```json
+{
   "status": "Gagal",
   "message": "Pengguna Tidak ditemukan"
 }
 		```
-		- Request : [http://localhost/slim/Backend/src/public/pengguna/]() Dengan argumen id dan nama
+		
 		- Status Code `400`.
 	- Contoh Respon Gagal (2)
 		
 		Error Sql
-		- ```json
-		{
-			"status": "Gagal",
-  			"message": "Login Gagal",
-  			"dev_message": "blablablablabl"
-  		}
-		```
+```json
+{
+	"status": "Gagal",
+	"message": "Login Gagal",
+	"dev_message": "blablablablabl"
+}
+```
 		- Status Code `500`.
 - Hapus Data
 
 	Menghapus data pelanggan dengan id tertentu.Menggunakan metode HTTP `DELETE`.
-
-	- URL
-		- [http://localhost/slim/Backend/src/public/pengguna/](). Dengan Parameter.
-
-	- Parameter
-
-			Menghapus data pelanggan dengan id tertentu.Menggunakan metode HTTP `DELETE`.
 
 	- URL
 		- [http://localhost/slim/Backend/src/public/pengguna/{id}](). Tidak ada Parameter.
@@ -1032,37 +1075,41 @@ Semua operasi dengan tabel pengguna
 
 		*Tidak ada Parameter*
 	- Contoh Respon Sukses
+
+		- Request : [http://localhost/slim/Backend/src/public/pengguna/4](). 
 		
-		- ```json
+```json
 		{
   "status": "Sukses",
   "message": "Hapus data berhasil"
 }
 		```
-		- Request : [http://localhost/slim/Backend/src/public/pengguna/4](). 
+		
 		- Status Code `200`.
 	- Contoh Respon Gagal (1)
-		
+
+		- Request : [http://localhost/slim/Backend/src/public/pengguna/456]()
+
 		```{id}``` yang dimasukkan tidak ditemukan		
 		Error Sql
-		- ```json
-		{
+```json
+{
   "status": "Gagal",
   "message": "Pengguna Tidak ditemukan"
 }
-		```
-		- Request : [http://localhost/slim/Backend/src/public/pengguna/456]() 
+```
+ 
 		- Status Code `400`.
 	- Contoh Respon Gagal (2)
 		
 		Error Sql
-		- ```json
-		{
-			"status": "Gagal",
-  			"message": "Login Gagal",
-  			"dev_message": "blablablablabl"
-  		}
-		```
+```json
+{
+	"status": "Gagal",
+  	"message": "Login Gagal",
+  	"dev_message": "blablablablabl"
+}
+```
 		- Status Code `500`.
 
 ### Transaksi
@@ -1077,8 +1124,10 @@ Semua operasi dengan tabel pengguna
 	
 		*Tidak ada Parameter*
 	- Contoh Respon Sukses
-		- ```json
-		[
+
+
+```json
+[
   {
     "id": 1,
     "nama": "Amin",
@@ -1105,19 +1154,24 @@ Semua operasi dengan tabel pengguna
     "kontak": "031567892",
     "username": "admin3",
     "password": "admin"
-  }]
+  }
+]
 		```
+		
 		- Status Code `200`.
+
 	- Contoh Respon Gagal
 		
 		Error Sql
-		- ```json
+
+```json
 		{
 			"status": "Gagal",
   			"message": "Login Gagal",
   			"dev_message": "blablablablabl"
   		}
 		```
+		
 		- Status Code `500`.
 - Get 1 Data
 
@@ -1129,8 +1183,9 @@ Semua operasi dengan tabel pengguna
 	
 		*Tidak ada Parameter*
 	- Contoh Respon Sukses
-		- ```json
-		{
+
+```json
+{
   "id": 1,
   "nama": "Amin",
   "alamat": "Jl Pahlawan Rt 2 No 1",
@@ -1143,10 +1198,11 @@ Semua operasi dengan tabel pengguna
 		- Status Code `200`.
 	- Contoh Respon Gagal (1)
 		
-		```{id}``` yang dimasukkan tidak ditemukan		
-		Error Sql
-		- ```json
-		{
+		```{id}``` yang dimasukkan tidak ditemukan. Error Sql
+		
+
+```json
+{
   "status": "Gagal",
   "message": "Pengguna Tidak ditemukan"
 }
@@ -1163,6 +1219,7 @@ Semua operasi dengan tabel pengguna
   		}
 		```
 		- Status Code `500`.
+
 - Get Pesanan Masuk
 
 
@@ -1174,9 +1231,10 @@ Semua operasi dengan tabel pengguna
 	
 		*Tidak ada Parameter*
 	- Contoh Respon Sukses
-		
-		- ```json
-		[
+		- Request : [http://localhost/slim/Backend/src/public/pengguna/2/pesananmasuk]()
+
+```json
+[
   {
     "id": 1,
     "nama": "Bengkel",
@@ -1214,30 +1272,32 @@ Semua operasi dengan tabel pengguna
   }
 ]
 		```
-		- Request : [http://localhost/slim/Backend/src/public/pengguna/2/pesananmasuk]()
 		- Status Code `200`.
 	- Contoh Respon Gagal (1)
 		
 		```{id}``` yang dimasukkan tidak ditemukan		
 		Error Sql
-		- ```json
+		
+		- Request : [http://localhost/slim/Backend/src/public/pengguna/25/pesananmasuk]()
+		
+```json
 		{
   "status": "Gagal",
   "message": "Toko Tidak ditemukan"
 }
 		```
-		- Request : [http://localhost/slim/Backend/src/public/pengguna/25/pesananmasuk]()
+
 		- Status Code `400`.
 	- Contoh Respon Gagal (2)
 		
 		Error Sql
-		- ```json
+```json
 		{
 			"status": "Gagal",
   			"message": "Login Gagal",
   			"dev_message": "blablablablabl"
   		}
-		```
+```
 		- Status Code `500`.
 - Ubah Data
 
@@ -1255,50 +1315,48 @@ Semua operasi dengan tabel pengguna
 		+ `kontak` *optional*. 
 		+ `username` *optional*.
 		+ `password` *optional*.
-		+ 
+
 	- Contoh Respon Sukses
 		
-		- ```json
-		{
+		- Request : [http://localhost/slim/Backend/src/public/pengguna/](). Dengan argumen id dan nama
+		
+```json
+{
   "status": "Sukses",
   "message": "Update data berhasil"
 }
-		```
-		- Request : [http://localhost/slim/Backend/src/public/pengguna/](). Dengan argumen id dan nama
+```
+		
 		- Status Code `200`.
 	- Contoh Respon Gagal (1)
 		
 		```{id}``` yang dimasukkan tidak ditemukan		
 		Error Sql
-		- ```json
-		{
+		
+		- Request : [http://localhost/slim/Backend/src/public/pengguna/]() Dengan argumen id dan nama
+		
+```json
+{
   "status": "Gagal",
   "message": "Pengguna Tidak ditemukan"
 }
 		```
-		- Request : [http://localhost/slim/Backend/src/public/pengguna/]() Dengan argumen id dan nama
+		
 		- Status Code `400`.
 	- Contoh Respon Gagal (2)
 		
 		Error Sql
-		- ```json
-		{
-			"status": "Gagal",
-  			"message": "Login Gagal",
-  			"dev_message": "blablablablabl"
-  		}
-		```
+```json
+{
+	"status": "Gagal",
+	"message": "Login Gagal",
+	"dev_message": "blablablablabl"
+}
+```
 		- Status Code `500`.
 - Hapus Data
 
 	Menghapus data pelanggan dengan id tertentu.Menggunakan metode HTTP `DELETE`.
-
-	- URL
-		- [http://localhost/slim/Backend/src/public/pengguna/](). Dengan Parameter.
-
-	- Parameter
-
-			Menghapus data pelanggan dengan id tertentu.Menggunakan metode HTTP `DELETE`.
 
 	- URL
 		- [http://localhost/slim/Backend/src/public/pengguna/{id}](). Tidak ada Parameter.
@@ -1308,37 +1366,41 @@ Semua operasi dengan tabel pengguna
 
 		*Tidak ada Parameter*
 	- Contoh Respon Sukses
+
+		- Request : [http://localhost/slim/Backend/src/public/pengguna/4](). 
 		
-		- ```json
+```json
 		{
   "status": "Sukses",
   "message": "Hapus data berhasil"
 }
 		```
-		- Request : [http://localhost/slim/Backend/src/public/pengguna/4](). 
+		
 		- Status Code `200`.
 	- Contoh Respon Gagal (1)
-		
+
+		- Request : [http://localhost/slim/Backend/src/public/pengguna/456]()
+
 		```{id}``` yang dimasukkan tidak ditemukan		
 		Error Sql
-		- ```json
-		{
+```json
+{
   "status": "Gagal",
   "message": "Pengguna Tidak ditemukan"
 }
-		```
-		- Request : [http://localhost/slim/Backend/src/public/pengguna/456]() 
+```
+ 
 		- Status Code `400`.
 	- Contoh Respon Gagal (2)
 		
 		Error Sql
-		- ```json
-		{
-			"status": "Gagal",
-  			"message": "Login Gagal",
-  			"dev_message": "blablablablabl"
-  		}
-		```
+```json
+{
+	"status": "Gagal",
+  	"message": "Login Gagal",
+  	"dev_message": "blablablablabl"
+}
+```
 		- Status Code `500`.
 ### Kategori
 Semua operasi dengan tabel pengguna
@@ -1352,8 +1414,10 @@ Semua operasi dengan tabel pengguna
 	
 		*Tidak ada Parameter*
 	- Contoh Respon Sukses
-		- ```json
-		[
+
+
+```json
+[
   {
     "id": 1,
     "nama": "Amin",
@@ -1380,19 +1444,24 @@ Semua operasi dengan tabel pengguna
     "kontak": "031567892",
     "username": "admin3",
     "password": "admin"
-  }]
+  }
+]
 		```
+		
 		- Status Code `200`.
+
 	- Contoh Respon Gagal
 		
 		Error Sql
-		- ```json
+
+```json
 		{
 			"status": "Gagal",
   			"message": "Login Gagal",
   			"dev_message": "blablablablabl"
   		}
 		```
+		
 		- Status Code `500`.
 - Get 1 Data
 
@@ -1404,8 +1473,9 @@ Semua operasi dengan tabel pengguna
 	
 		*Tidak ada Parameter*
 	- Contoh Respon Sukses
-		- ```json
-		{
+
+```json
+{
   "id": 1,
   "nama": "Amin",
   "alamat": "Jl Pahlawan Rt 2 No 1",
@@ -1418,10 +1488,11 @@ Semua operasi dengan tabel pengguna
 		- Status Code `200`.
 	- Contoh Respon Gagal (1)
 		
-		```{id}``` yang dimasukkan tidak ditemukan		
-		Error Sql
-		- ```json
-		{
+		```{id}``` yang dimasukkan tidak ditemukan. Error Sql
+		
+
+```json
+{
   "status": "Gagal",
   "message": "Pengguna Tidak ditemukan"
 }
@@ -1438,6 +1509,7 @@ Semua operasi dengan tabel pengguna
   		}
 		```
 		- Status Code `500`.
+
 - Get Pesanan Masuk
 
 
@@ -1449,9 +1521,10 @@ Semua operasi dengan tabel pengguna
 	
 		*Tidak ada Parameter*
 	- Contoh Respon Sukses
-		
-		- ```json
-		[
+		- Request : [http://localhost/slim/Backend/src/public/pengguna/2/pesananmasuk]()
+
+```json
+[
   {
     "id": 1,
     "nama": "Bengkel",
@@ -1489,30 +1562,32 @@ Semua operasi dengan tabel pengguna
   }
 ]
 		```
-		- Request : [http://localhost/slim/Backend/src/public/pengguna/2/pesananmasuk]()
 		- Status Code `200`.
 	- Contoh Respon Gagal (1)
 		
 		```{id}``` yang dimasukkan tidak ditemukan		
 		Error Sql
-		- ```json
+		
+		- Request : [http://localhost/slim/Backend/src/public/pengguna/25/pesananmasuk]()
+		
+```json
 		{
   "status": "Gagal",
   "message": "Toko Tidak ditemukan"
 }
 		```
-		- Request : [http://localhost/slim/Backend/src/public/pengguna/25/pesananmasuk]()
+
 		- Status Code `400`.
 	- Contoh Respon Gagal (2)
 		
 		Error Sql
-		- ```json
+```json
 		{
 			"status": "Gagal",
   			"message": "Login Gagal",
   			"dev_message": "blablablablabl"
   		}
-		```
+```
 		- Status Code `500`.
 - Ubah Data
 
@@ -1530,50 +1605,48 @@ Semua operasi dengan tabel pengguna
 		+ `kontak` *optional*. 
 		+ `username` *optional*.
 		+ `password` *optional*.
-		+ 
+
 	- Contoh Respon Sukses
 		
-		- ```json
-		{
+		- Request : [http://localhost/slim/Backend/src/public/pengguna/](). Dengan argumen id dan nama
+		
+```json
+{
   "status": "Sukses",
   "message": "Update data berhasil"
 }
-		```
-		- Request : [http://localhost/slim/Backend/src/public/pengguna/](). Dengan argumen id dan nama
+```
+		
 		- Status Code `200`.
 	- Contoh Respon Gagal (1)
 		
 		```{id}``` yang dimasukkan tidak ditemukan		
 		Error Sql
-		- ```json
-		{
+		
+		- Request : [http://localhost/slim/Backend/src/public/pengguna/]() Dengan argumen id dan nama
+		
+```json
+{
   "status": "Gagal",
   "message": "Pengguna Tidak ditemukan"
 }
 		```
-		- Request : [http://localhost/slim/Backend/src/public/pengguna/]() Dengan argumen id dan nama
+		
 		- Status Code `400`.
 	- Contoh Respon Gagal (2)
 		
 		Error Sql
-		- ```json
-		{
-			"status": "Gagal",
-  			"message": "Login Gagal",
-  			"dev_message": "blablablablabl"
-  		}
-		```
+```json
+{
+	"status": "Gagal",
+	"message": "Login Gagal",
+	"dev_message": "blablablablabl"
+}
+```
 		- Status Code `500`.
 - Hapus Data
 
 	Menghapus data pelanggan dengan id tertentu.Menggunakan metode HTTP `DELETE`.
-
-	- URL
-		- [http://localhost/slim/Backend/src/public/pengguna/](). Dengan Parameter.
-
-	- Parameter
-
-			Menghapus data pelanggan dengan id tertentu.Menggunakan metode HTTP `DELETE`.
 
 	- URL
 		- [http://localhost/slim/Backend/src/public/pengguna/{id}](). Tidak ada Parameter.
@@ -1583,37 +1656,41 @@ Semua operasi dengan tabel pengguna
 
 		*Tidak ada Parameter*
 	- Contoh Respon Sukses
+
+		- Request : [http://localhost/slim/Backend/src/public/pengguna/4](). 
 		
-		- ```json
+```json
 		{
   "status": "Sukses",
   "message": "Hapus data berhasil"
 }
 		```
-		- Request : [http://localhost/slim/Backend/src/public/pengguna/4](). 
+		
 		- Status Code `200`.
 	- Contoh Respon Gagal (1)
-		
+
+		- Request : [http://localhost/slim/Backend/src/public/pengguna/456]()
+
 		```{id}``` yang dimasukkan tidak ditemukan		
 		Error Sql
-		- ```json
-		{
+```json
+{
   "status": "Gagal",
   "message": "Pengguna Tidak ditemukan"
 }
-		```
-		- Request : [http://localhost/slim/Backend/src/public/pengguna/456]() 
+```
+ 
 		- Status Code `400`.
 	- Contoh Respon Gagal (2)
 		
 		Error Sql
-		- ```json
-		{
-			"status": "Gagal",
-  			"message": "Login Gagal",
-  			"dev_message": "blablablablabl"
-  		}
-		```
+```json
+{
+	"status": "Gagal",
+  	"message": "Login Gagal",
+  	"dev_message": "blablablablabl"
+}
+```
 		- Status Code `500`.
 
 ### Kecamatan
@@ -1628,8 +1705,10 @@ Semua operasi dengan tabel pengguna
 	
 		*Tidak ada Parameter*
 	- Contoh Respon Sukses
-		- ```json
-		[
+
+
+```json
+[
   {
     "id": 1,
     "nama": "Amin",
@@ -1656,19 +1735,24 @@ Semua operasi dengan tabel pengguna
     "kontak": "031567892",
     "username": "admin3",
     "password": "admin"
-  }]
+  }
+]
 		```
+		
 		- Status Code `200`.
+
 	- Contoh Respon Gagal
 		
 		Error Sql
-		- ```json
+
+```json
 		{
 			"status": "Gagal",
   			"message": "Login Gagal",
   			"dev_message": "blablablablabl"
   		}
 		```
+		
 		- Status Code `500`.
 - Get 1 Data
 
@@ -1680,8 +1764,9 @@ Semua operasi dengan tabel pengguna
 	
 		*Tidak ada Parameter*
 	- Contoh Respon Sukses
-		- ```json
-		{
+
+```json
+{
   "id": 1,
   "nama": "Amin",
   "alamat": "Jl Pahlawan Rt 2 No 1",
@@ -1694,10 +1779,11 @@ Semua operasi dengan tabel pengguna
 		- Status Code `200`.
 	- Contoh Respon Gagal (1)
 		
-		```{id}``` yang dimasukkan tidak ditemukan		
-		Error Sql
-		- ```json
-		{
+		```{id}``` yang dimasukkan tidak ditemukan. Error Sql
+		
+
+```json
+{
   "status": "Gagal",
   "message": "Pengguna Tidak ditemukan"
 }
@@ -1714,6 +1800,7 @@ Semua operasi dengan tabel pengguna
   		}
 		```
 		- Status Code `500`.
+
 - Get Pesanan Masuk
 
 
@@ -1725,9 +1812,10 @@ Semua operasi dengan tabel pengguna
 	
 		*Tidak ada Parameter*
 	- Contoh Respon Sukses
-		
-		- ```json
-		[
+		- Request : [http://localhost/slim/Backend/src/public/pengguna/2/pesananmasuk]()
+
+```json
+[
   {
     "id": 1,
     "nama": "Bengkel",
@@ -1765,30 +1853,32 @@ Semua operasi dengan tabel pengguna
   }
 ]
 		```
-		- Request : [http://localhost/slim/Backend/src/public/pengguna/2/pesananmasuk]()
 		- Status Code `200`.
 	- Contoh Respon Gagal (1)
 		
 		```{id}``` yang dimasukkan tidak ditemukan		
 		Error Sql
-		- ```json
+		
+		- Request : [http://localhost/slim/Backend/src/public/pengguna/25/pesananmasuk]()
+		
+```json
 		{
   "status": "Gagal",
   "message": "Toko Tidak ditemukan"
 }
 		```
-		- Request : [http://localhost/slim/Backend/src/public/pengguna/25/pesananmasuk]()
+
 		- Status Code `400`.
 	- Contoh Respon Gagal (2)
 		
 		Error Sql
-		- ```json
+```json
 		{
 			"status": "Gagal",
   			"message": "Login Gagal",
   			"dev_message": "blablablablabl"
   		}
-		```
+```
 		- Status Code `500`.
 - Ubah Data
 
@@ -1806,50 +1896,48 @@ Semua operasi dengan tabel pengguna
 		+ `kontak` *optional*. 
 		+ `username` *optional*.
 		+ `password` *optional*.
-		+ 
+
 	- Contoh Respon Sukses
 		
-		- ```json
-		{
+		- Request : [http://localhost/slim/Backend/src/public/pengguna/](). Dengan argumen id dan nama
+		
+```json
+{
   "status": "Sukses",
   "message": "Update data berhasil"
 }
-		```
-		- Request : [http://localhost/slim/Backend/src/public/pengguna/](). Dengan argumen id dan nama
+```
+		
 		- Status Code `200`.
 	- Contoh Respon Gagal (1)
 		
 		```{id}``` yang dimasukkan tidak ditemukan		
 		Error Sql
-		- ```json
-		{
+		
+		- Request : [http://localhost/slim/Backend/src/public/pengguna/]() Dengan argumen id dan nama
+		
+```json
+{
   "status": "Gagal",
   "message": "Pengguna Tidak ditemukan"
 }
 		```
-		- Request : [http://localhost/slim/Backend/src/public/pengguna/]() Dengan argumen id dan nama
+		
 		- Status Code `400`.
 	- Contoh Respon Gagal (2)
 		
 		Error Sql
-		- ```json
-		{
-			"status": "Gagal",
-  			"message": "Login Gagal",
-  			"dev_message": "blablablablabl"
-  		}
-		```
+```json
+{
+	"status": "Gagal",
+	"message": "Login Gagal",
+	"dev_message": "blablablablabl"
+}
+```
 		- Status Code `500`.
 - Hapus Data
 
 	Menghapus data pelanggan dengan id tertentu.Menggunakan metode HTTP `DELETE`.
-
-	- URL
-		- [http://localhost/slim/Backend/src/public/pengguna/](). Dengan Parameter.
-
-	- Parameter
-
-			Menghapus data pelanggan dengan id tertentu.Menggunakan metode HTTP `DELETE`.
 
 	- URL
 		- [http://localhost/slim/Backend/src/public/pengguna/{id}](). Tidak ada Parameter.
@@ -1859,37 +1947,41 @@ Semua operasi dengan tabel pengguna
 
 		*Tidak ada Parameter*
 	- Contoh Respon Sukses
+
+		- Request : [http://localhost/slim/Backend/src/public/pengguna/4](). 
 		
-		- ```json
+```json
 		{
   "status": "Sukses",
   "message": "Hapus data berhasil"
 }
 		```
-		- Request : [http://localhost/slim/Backend/src/public/pengguna/4](). 
+		
 		- Status Code `200`.
 	- Contoh Respon Gagal (1)
-		
+
+		- Request : [http://localhost/slim/Backend/src/public/pengguna/456]()
+
 		```{id}``` yang dimasukkan tidak ditemukan		
 		Error Sql
-		- ```json
-		{
+```json
+{
   "status": "Gagal",
   "message": "Pengguna Tidak ditemukan"
 }
-		```
-		- Request : [http://localhost/slim/Backend/src/public/pengguna/456]() 
+```
+ 
 		- Status Code `400`.
 	- Contoh Respon Gagal (2)
 		
 		Error Sql
-		- ```json
-		{
-			"status": "Gagal",
-  			"message": "Login Gagal",
-  			"dev_message": "blablablablabl"
-  		}
-		```
+```json
+{
+	"status": "Gagal",
+  	"message": "Login Gagal",
+  	"dev_message": "blablablablabl"
+}
+```
 		- Status Code `500`.
 
 ### Kabupaten
@@ -1904,8 +1996,10 @@ Semua operasi dengan tabel pengguna
 	
 		*Tidak ada Parameter*
 	- Contoh Respon Sukses
-		- ```json
-		[
+
+
+```json
+[
   {
     "id": 1,
     "nama": "Amin",
@@ -1932,19 +2026,24 @@ Semua operasi dengan tabel pengguna
     "kontak": "031567892",
     "username": "admin3",
     "password": "admin"
-  }]
+  }
+]
 		```
+		
 		- Status Code `200`.
+
 	- Contoh Respon Gagal
 		
 		Error Sql
-		- ```json
+
+```json
 		{
 			"status": "Gagal",
   			"message": "Login Gagal",
   			"dev_message": "blablablablabl"
   		}
 		```
+		
 		- Status Code `500`.
 - Get 1 Data
 
@@ -1956,8 +2055,9 @@ Semua operasi dengan tabel pengguna
 	
 		*Tidak ada Parameter*
 	- Contoh Respon Sukses
-		- ```json
-		{
+
+```json
+{
   "id": 1,
   "nama": "Amin",
   "alamat": "Jl Pahlawan Rt 2 No 1",
@@ -1970,10 +2070,11 @@ Semua operasi dengan tabel pengguna
 		- Status Code `200`.
 	- Contoh Respon Gagal (1)
 		
-		```{id}``` yang dimasukkan tidak ditemukan		
-		Error Sql
-		- ```json
-		{
+		```{id}``` yang dimasukkan tidak ditemukan. Error Sql
+		
+
+```json
+{
   "status": "Gagal",
   "message": "Pengguna Tidak ditemukan"
 }
@@ -1990,6 +2091,7 @@ Semua operasi dengan tabel pengguna
   		}
 		```
 		- Status Code `500`.
+
 - Get Pesanan Masuk
 
 
@@ -2001,9 +2103,10 @@ Semua operasi dengan tabel pengguna
 	
 		*Tidak ada Parameter*
 	- Contoh Respon Sukses
-		
-		- ```json
-		[
+		- Request : [http://localhost/slim/Backend/src/public/pengguna/2/pesananmasuk]()
+
+```json
+[
   {
     "id": 1,
     "nama": "Bengkel",
@@ -2041,30 +2144,32 @@ Semua operasi dengan tabel pengguna
   }
 ]
 		```
-		- Request : [http://localhost/slim/Backend/src/public/pengguna/2/pesananmasuk]()
 		- Status Code `200`.
 	- Contoh Respon Gagal (1)
 		
 		```{id}``` yang dimasukkan tidak ditemukan		
 		Error Sql
-		- ```json
+		
+		- Request : [http://localhost/slim/Backend/src/public/pengguna/25/pesananmasuk]()
+		
+```json
 		{
   "status": "Gagal",
   "message": "Toko Tidak ditemukan"
 }
 		```
-		- Request : [http://localhost/slim/Backend/src/public/pengguna/25/pesananmasuk]()
+
 		- Status Code `400`.
 	- Contoh Respon Gagal (2)
 		
 		Error Sql
-		- ```json
+```json
 		{
 			"status": "Gagal",
   			"message": "Login Gagal",
   			"dev_message": "blablablablabl"
   		}
-		```
+```
 		- Status Code `500`.
 - Ubah Data
 
@@ -2082,50 +2187,48 @@ Semua operasi dengan tabel pengguna
 		+ `kontak` *optional*. 
 		+ `username` *optional*.
 		+ `password` *optional*.
-		+ 
+
 	- Contoh Respon Sukses
 		
-		- ```json
-		{
+		- Request : [http://localhost/slim/Backend/src/public/pengguna/](). Dengan argumen id dan nama
+		
+```json
+{
   "status": "Sukses",
   "message": "Update data berhasil"
 }
-		```
-		- Request : [http://localhost/slim/Backend/src/public/pengguna/](). Dengan argumen id dan nama
+```
+		
 		- Status Code `200`.
 	- Contoh Respon Gagal (1)
 		
 		```{id}``` yang dimasukkan tidak ditemukan		
 		Error Sql
-		- ```json
-		{
+		
+		- Request : [http://localhost/slim/Backend/src/public/pengguna/]() Dengan argumen id dan nama
+		
+```json
+{
   "status": "Gagal",
   "message": "Pengguna Tidak ditemukan"
 }
 		```
-		- Request : [http://localhost/slim/Backend/src/public/pengguna/]() Dengan argumen id dan nama
+		
 		- Status Code `400`.
 	- Contoh Respon Gagal (2)
 		
 		Error Sql
-		- ```json
-		{
-			"status": "Gagal",
-  			"message": "Login Gagal",
-  			"dev_message": "blablablablabl"
-  		}
-		```
+```json
+{
+	"status": "Gagal",
+	"message": "Login Gagal",
+	"dev_message": "blablablablabl"
+}
+```
 		- Status Code `500`.
 - Hapus Data
 
 	Menghapus data pelanggan dengan id tertentu.Menggunakan metode HTTP `DELETE`.
-
-	- URL
-		- [http://localhost/slim/Backend/src/public/pengguna/](). Dengan Parameter.
-
-	- Parameter
-
-			Menghapus data pelanggan dengan id tertentu.Menggunakan metode HTTP `DELETE`.
 
 	- URL
 		- [http://localhost/slim/Backend/src/public/pengguna/{id}](). Tidak ada Parameter.
@@ -2135,37 +2238,41 @@ Semua operasi dengan tabel pengguna
 
 		*Tidak ada Parameter*
 	- Contoh Respon Sukses
+
+		- Request : [http://localhost/slim/Backend/src/public/pengguna/4](). 
 		
-		- ```json
+```json
 		{
   "status": "Sukses",
   "message": "Hapus data berhasil"
 }
 		```
-		- Request : [http://localhost/slim/Backend/src/public/pengguna/4](). 
+		
 		- Status Code `200`.
 	- Contoh Respon Gagal (1)
-		
+
+		- Request : [http://localhost/slim/Backend/src/public/pengguna/456]()
+
 		```{id}``` yang dimasukkan tidak ditemukan		
 		Error Sql
-		- ```json
-		{
+```json
+{
   "status": "Gagal",
   "message": "Pengguna Tidak ditemukan"
 }
-		```
-		- Request : [http://localhost/slim/Backend/src/public/pengguna/456]() 
+```
+ 
 		- Status Code `400`.
 	- Contoh Respon Gagal (2)
 		
 		Error Sql
-		- ```json
-		{
-			"status": "Gagal",
-  			"message": "Login Gagal",
-  			"dev_message": "blablablablabl"
-  		}
-		```
+```json
+{
+	"status": "Gagal",
+  	"message": "Login Gagal",
+  	"dev_message": "blablablablabl"
+}
+```
 		- Status Code `500`.
 
 ### Provinsi
@@ -2180,8 +2287,10 @@ Semua operasi dengan tabel pengguna
 	
 		*Tidak ada Parameter*
 	- Contoh Respon Sukses
-		- ```json
-		[
+
+
+```json
+[
   {
     "id": 1,
     "nama": "Amin",
@@ -2208,19 +2317,24 @@ Semua operasi dengan tabel pengguna
     "kontak": "031567892",
     "username": "admin3",
     "password": "admin"
-  }]
+  }
+]
 		```
+		
 		- Status Code `200`.
+
 	- Contoh Respon Gagal
 		
 		Error Sql
-		- ```json
+
+```json
 		{
 			"status": "Gagal",
   			"message": "Login Gagal",
   			"dev_message": "blablablablabl"
   		}
 		```
+		
 		- Status Code `500`.
 - Get 1 Data
 
@@ -2232,8 +2346,9 @@ Semua operasi dengan tabel pengguna
 	
 		*Tidak ada Parameter*
 	- Contoh Respon Sukses
-		- ```json
-		{
+
+```json
+{
   "id": 1,
   "nama": "Amin",
   "alamat": "Jl Pahlawan Rt 2 No 1",
@@ -2246,10 +2361,11 @@ Semua operasi dengan tabel pengguna
 		- Status Code `200`.
 	- Contoh Respon Gagal (1)
 		
-		```{id}``` yang dimasukkan tidak ditemukan		
-		Error Sql
-		- ```json
-		{
+		```{id}``` yang dimasukkan tidak ditemukan. Error Sql
+		
+
+```json
+{
   "status": "Gagal",
   "message": "Pengguna Tidak ditemukan"
 }
@@ -2266,6 +2382,7 @@ Semua operasi dengan tabel pengguna
   		}
 		```
 		- Status Code `500`.
+
 - Get Pesanan Masuk
 
 
@@ -2277,9 +2394,10 @@ Semua operasi dengan tabel pengguna
 	
 		*Tidak ada Parameter*
 	- Contoh Respon Sukses
-		
-		- ```json
-		[
+		- Request : [http://localhost/slim/Backend/src/public/pengguna/2/pesananmasuk]()
+
+```json
+[
   {
     "id": 1,
     "nama": "Bengkel",
@@ -2317,30 +2435,32 @@ Semua operasi dengan tabel pengguna
   }
 ]
 		```
-		- Request : [http://localhost/slim/Backend/src/public/pengguna/2/pesananmasuk]()
 		- Status Code `200`.
 	- Contoh Respon Gagal (1)
 		
 		```{id}``` yang dimasukkan tidak ditemukan		
 		Error Sql
-		- ```json
+		
+		- Request : [http://localhost/slim/Backend/src/public/pengguna/25/pesananmasuk]()
+		
+```json
 		{
   "status": "Gagal",
   "message": "Toko Tidak ditemukan"
 }
 		```
-		- Request : [http://localhost/slim/Backend/src/public/pengguna/25/pesananmasuk]()
+
 		- Status Code `400`.
 	- Contoh Respon Gagal (2)
 		
 		Error Sql
-		- ```json
+```json
 		{
 			"status": "Gagal",
   			"message": "Login Gagal",
   			"dev_message": "blablablablabl"
   		}
-		```
+```
 		- Status Code `500`.
 - Ubah Data
 
@@ -2358,50 +2478,48 @@ Semua operasi dengan tabel pengguna
 		+ `kontak` *optional*. 
 		+ `username` *optional*.
 		+ `password` *optional*.
-		+ 
+
 	- Contoh Respon Sukses
 		
-		- ```json
-		{
+		- Request : [http://localhost/slim/Backend/src/public/pengguna/](). Dengan argumen id dan nama
+		
+```json
+{
   "status": "Sukses",
   "message": "Update data berhasil"
 }
-		```
-		- Request : [http://localhost/slim/Backend/src/public/pengguna/](). Dengan argumen id dan nama
+```
+		
 		- Status Code `200`.
 	- Contoh Respon Gagal (1)
 		
 		```{id}``` yang dimasukkan tidak ditemukan		
 		Error Sql
-		- ```json
-		{
+		
+		- Request : [http://localhost/slim/Backend/src/public/pengguna/]() Dengan argumen id dan nama
+		
+```json
+{
   "status": "Gagal",
   "message": "Pengguna Tidak ditemukan"
 }
 		```
-		- Request : [http://localhost/slim/Backend/src/public/pengguna/]() Dengan argumen id dan nama
+		
 		- Status Code `400`.
 	- Contoh Respon Gagal (2)
 		
 		Error Sql
-		- ```json
-		{
-			"status": "Gagal",
-  			"message": "Login Gagal",
-  			"dev_message": "blablablablabl"
-  		}
-		```
+```json
+{
+	"status": "Gagal",
+	"message": "Login Gagal",
+	"dev_message": "blablablablabl"
+}
+```
 		- Status Code `500`.
 - Hapus Data
 
 	Menghapus data pelanggan dengan id tertentu.Menggunakan metode HTTP `DELETE`.
-
-	- URL
-		- [http://localhost/slim/Backend/src/public/pengguna/](). Dengan Parameter.
-
-	- Parameter
-
-			Menghapus data pelanggan dengan id tertentu.Menggunakan metode HTTP `DELETE`.
 
 	- URL
 		- [http://localhost/slim/Backend/src/public/pengguna/{id}](). Tidak ada Parameter.
@@ -2411,35 +2529,39 @@ Semua operasi dengan tabel pengguna
 
 		*Tidak ada Parameter*
 	- Contoh Respon Sukses
+
+		- Request : [http://localhost/slim/Backend/src/public/pengguna/4](). 
 		
-		- ```json
+```json
 		{
   "status": "Sukses",
   "message": "Hapus data berhasil"
 }
 		```
-		- Request : [http://localhost/slim/Backend/src/public/pengguna/4](). 
+		
 		- Status Code `200`.
 	- Contoh Respon Gagal (1)
-		
+
+		- Request : [http://localhost/slim/Backend/src/public/pengguna/456]()
+
 		```{id}``` yang dimasukkan tidak ditemukan		
 		Error Sql
-		- ```json
-		{
+```json
+{
   "status": "Gagal",
   "message": "Pengguna Tidak ditemukan"
 }
-		```
-		- Request : [http://localhost/slim/Backend/src/public/pengguna/456]() 
+```
+ 
 		- Status Code `400`.
 	- Contoh Respon Gagal (2)
 		
 		Error Sql
-		- ```json
-		{
-			"status": "Gagal",
-  			"message": "Login Gagal",
-  			"dev_message": "blablablablabl"
-  		}
-		```
+```json
+{
+	"status": "Gagal",
+  	"message": "Login Gagal",
+  	"dev_message": "blablablablabl"
+}
+```
 		- Status Code `500`.
