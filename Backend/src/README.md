@@ -282,18 +282,21 @@ Semua operasi dengan tabel pengguna
   }]
 ```
 		- Status Code `200`.
+
 	- Contoh Respon Gagal
 		
 		Error Sql
 		
-		```json
+```json
 		{
 			"status": "Gagal",
   			"message": "Login Gagal",
   			"dev_message": "blablablablabl"
   		}
-		```
+```
+
 		- Status Code `500`.
+
 - Get 1 Data
 
 	Request data pelanggan dengan id tertentu.Menggunakan metode HTTP `GET`.
