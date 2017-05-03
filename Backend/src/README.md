@@ -1180,20 +1180,1910 @@ Semua operasi dengan tabel jasa
 
 ### Transaksi
 
-*Under Contruction*
+Semua operasi dengan tabel transaki dan pemesanan
+
+- Get Semua Data
+	
+	Request semua data yang ada di tabel transaksi dan pemesanan.Menggunakan metode HTTP `GET`.
+	- URL
+		- [http://localhost/slim/Backend/src/public/transaksi/](). Tanpa Parameter.
+	
+	- Parameter
+	
+		*Tanpa Parameter*.
+			
+	- Contoh Respon Sukses(1)
+		- ```json
+		[
+  {
+    "id": 1,
+    "id_pengguna": 2,
+    "total": 45000,
+    "updated_at": {
+      "date": "2017-04-22 00:00:00.000000",
+      "timezone_type": 3,
+      "timezone": "Europe/Berlin"
+    },
+    "created_at": {
+      "date": "2017-04-22 00:00:00.000000",
+      "timezone_type": 3,
+      "timezone": "Europe/Berlin"
+    },
+    "pemesanan": [
+      {
+        "kuantitas": 1,
+        "total": 10000,
+        "id_jasa": 2,
+        "id_transaksi": 1,
+        "status_pemesanan": 1
+      },
+      {
+        "kuantitas": 1,
+        "total": 25000,
+        "id_jasa": 3,
+        "id_transaksi": 1,
+        "status_pemesanan": 1
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "id_pengguna": 1,
+    "total": 200000,
+    "updated_at": {
+      "date": "2017-04-24 00:00:00.000000",
+      "timezone_type": 3,
+      "timezone": "Europe/Berlin"
+    },
+    "created_at": {
+      "date": "2017-04-24 00:00:00.000000",
+      "timezone_type": 3,
+      "timezone": "Europe/Berlin"
+    },
+    "pemesanan": [
+      {
+        "kuantitas": 3,
+        "total": 20000,
+        "id_jasa": 1,
+        "id_transaksi": 2,
+        "status_pemesanan": 1
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "id_pengguna": 1,
+    "total": 110000,
+    "updated_at": {
+      "date": "2017-04-25 00:00:00.000000",
+      "timezone_type": 3,
+      "timezone": "Europe/Berlin"
+    },
+    "created_at": {
+      "date": "2017-04-25 00:00:00.000000",
+      "timezone_type": 3,
+      "timezone": "Europe/Berlin"
+    },
+    "pemesanan": [
+      {
+        "kuantitas": 2,
+        "total": 20000,
+        "id_jasa": 1,
+        "id_transaksi": 3,
+        "status_pemesanan": 1
+      },
+      {
+        "kuantitas": 2,
+        "total": 35000,
+        "id_jasa": 3,
+        "id_transaksi": 3,
+        "status_pemesanan": 1
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "id_pengguna": 1,
+    "total": 230000,
+    "updated_at": {
+      "date": "2017-05-01 00:00:00.000000",
+      "timezone_type": 3,
+      "timezone": "Europe/Berlin"
+    },
+    "created_at": {
+      "date": "2017-05-01 00:00:00.000000",
+      "timezone_type": 3,
+      "timezone": "Europe/Berlin"
+    },
+    "pemesanan": [
+      {
+        "kuantitas": 8,
+        "total": 20000,
+        "id_jasa": 1,
+        "id_transaksi": 4,
+        "status_pemesanan": 1
+      },
+      {
+        "kuantitas": 2,
+        "total": 35000,
+        "id_jasa": 3,
+        "id_transaksi": 4,
+        "status_pemesanan": 1
+      }
+    ]
+  }
+]
+		```
+		
+		- Request = [http://localhost/slim/Backend/src/public/jasa/]()
+		- Status Code `200`.
+
+	- Contoh Respon Gagal
+		
+		Error Sql
+		- ```json
+		{
+			"status": "Gagal",
+  			"message": "Penampilan Transaksi Gagal",
+  			"dev_message": "blablablablabl"
+  		}
+		```
+		- Status Code `500`.
+- Get 1 Data
+
+	Request data transaksi dengan id tertentu.Menggunakan metode HTTP `GET`.
+	- URL
+		- [http://localhost/slim/Backend/src/public/transaksi/{id}](). Tanpa Parameter.
+			- ```{id}``` berupa angka
+	- Parameter
+	
+		*Tidak ada Parameter*
+	- Contoh Respon Sukses
+		- ```json
+		[
+  {
+    "id": 1,
+    "id_pengguna": 2,
+    "total": 45000,
+    "updated_at": {
+      "date": "2017-04-22 00:00:00.000000",
+      "timezone_type": 3,
+      "timezone": "Europe/Berlin"
+    },
+    "created_at": {
+      "date": "2017-04-22 00:00:00.000000",
+      "timezone_type": 3,
+      "timezone": "Europe/Berlin"
+    },
+    "pemesanan": [
+      {
+        "kuantitas": 1,
+        "total": 10000,
+        "id_jasa": 2,
+        "id_transaksi": 1,
+        "status_pemesanan": 1
+      },
+      {
+        "kuantitas": 1,
+        "total": 25000,
+        "id_jasa": 3,
+        "id_transaksi": 1,
+        "status_pemesanan": 1
+      }
+    ]
+  }
+]
+		```
+		- Status Code `200`.
+	- Contoh Respon Gagal (1)
+		
+		```{id}``` yang dimasukkan tidak ditemukan		
+		Error Sql
+		- ```json
+		{
+  "status": "Gagal",
+  "message": "Transaksi Tidak ditemukan"
+}
+		```
+		- Status Code `400`.
+	- Contoh Respon Gagal (2)
+		
+		Error Sql
+		- ```json
+		{
+			"status": "Gagal",
+  			"message": "Penampilan Transaksi Gagal",
+  			"dev_message": "blablablablabl"
+  		}
+		```
+		- Status Code `500`.
+- Get By Id Pengguna
+
+
+	Request data Transaksi dengan menyertakan ```id_pengguna``` pada argumen request.Menggunakan metode HTTP `GET`.
+	- URL
+		- [http://localhost/slim/Backend/src/public/transaksi/id_pengguna/{id_toko}](). Tanpa Parameter.
+			- ```{id_toko}``` berupa angka
+	- Parameter
+	
+		*Tidak ada Parameter*
+	- Contoh Respon Sukses
+		
+		- ```json
+		[
+  {
+    "id": 2,
+    "id_pengguna": 1,
+    "total": 200000,
+    "updated_at": {
+      "date": "2017-04-24 00:00:00.000000",
+      "timezone_type": 3,
+      "timezone": "Europe/Berlin"
+    },
+    "created_at": {
+      "date": "2017-04-24 00:00:00.000000",
+      "timezone_type": 3,
+      "timezone": "Europe/Berlin"
+    },
+    "pemesanan": [
+      {
+        "kuantitas": 3,
+        "total": 20000,
+        "id_jasa": 1,
+        "id_transaksi": 2,
+        "status_pemesanan": 1
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "id_pengguna": 1,
+    "total": 110000,
+    "updated_at": {
+      "date": "2017-04-25 00:00:00.000000",
+      "timezone_type": 3,
+      "timezone": "Europe/Berlin"
+    },
+    "created_at": {
+      "date": "2017-04-25 00:00:00.000000",
+      "timezone_type": 3,
+      "timezone": "Europe/Berlin"
+    },
+    "pemesanan": [
+      {
+        "kuantitas": 2,
+        "total": 20000,
+        "id_jasa": 1,
+        "id_transaksi": 3,
+        "status_pemesanan": 1
+      },
+      {
+        "kuantitas": 2,
+        "total": 35000,
+        "id_jasa": 3,
+        "id_transaksi": 3,
+        "status_pemesanan": 1
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "id_pengguna": 1,
+    "total": 230000,
+    "updated_at": {
+      "date": "2017-05-01 00:00:00.000000",
+      "timezone_type": 3,
+      "timezone": "Europe/Berlin"
+    },
+    "created_at": {
+      "date": "2017-05-01 00:00:00.000000",
+      "timezone_type": 3,
+      "timezone": "Europe/Berlin"
+    },
+    "pemesanan": [
+      {
+        "kuantitas": 8,
+        "total": 20000,
+        "id_jasa": 1,
+        "id_transaksi": 4,
+        "status_pemesanan": 1
+      },
+      {
+        "kuantitas": 2,
+        "total": 35000,
+        "id_jasa": 3,
+        "id_transaksi": 4,
+        "status_pemesanan": 1
+      }
+    ]
+  }
+]
+		```
+		- Request : [http://localhost/slim/Backend/src/public/transaksi/id_pengguna/1]()
+		- Status Code `200`.
+	- Contoh Respon Gagal (1)
+		
+		```{id_pengguna}``` yang dimasukkan tidak ditemukan		
+		Error Sql
+		- ```json
+		{
+  "status": "Gagal",
+  "message": "Transaksi Tidak ditemukan"
+}
+		```
+		- Request : [http://localhost/slim/Backend/src/public/transaksi/id_pengguna/234]()
+		- Status Code `400`.
+	- Contoh Respon Gagal (2)
+		
+		Error Sql
+		- ```json
+		{
+			"status": "Gagal",
+  			"message": "Penampilan Transaksi Gagal",
+  			"dev_message": "blablablablabl"
+  		}
+		```
+		- Status Code `500`.
+
+- Hapus Data
+
+	Menghapus data transaksi dengan id tertentu beserta pemesanannya.Menggunakan metode HTTP `DELETE`.
+
+	- URL
+		- [http://localhost/slim/Backend/src/public/transaksi/{id}](). Tidak ada Parameter.
+			- ```{id}``` berupa angka
+
+	- Parameter
+
+		*Tidak ada Parameter*
+	- Contoh Respon Sukses
+		
+		- ```json
+		{
+  "status": "Sukses",
+  "message": "Hapus data berhasil"
+}
+		```
+		- Request : [http://localhost/slim/Backend/src/public/transaksi/4](). 
+		- Status Code `200`.
+	- Contoh Respon Gagal (1)
+		
+		```{id}``` yang dimasukkan tidak ditemukan		
+		Error Sql
+		- ```json
+		{
+  "status": "Gagal",
+  "message": "Transaksi Tidak ditemukan"
+}
+		```
+		- Request : [http://localhost/slim/Backend/src/public/transaksi/456]() 
+		- Status Code `400`.
+	- Contoh Respon Gagal (2)
+		
+		Error Sql
+		- ```json
+		{
+			"status": "Gagal",
+  			"message": "Hapus Data Gagal",
+  			"dev_message": "blablablablabl"
+  		}
+		```
+		- Status Code `500`.
+- Menolak Status Pemesanan
+
+	Mengubah status pemesanan menjadi ```ditolak``` dengan menyertakan id transaksi.Menggunakan metode HTTP `POST`.
+
+	- URL
+		- [http://localhost/slim/Backend/src/public/transaksi/ditolak](). Tidak ada Parameter.
+
+	- Parameter
+
+		*Tidak ada Parameter*
+	- POST Request Data
+		- ```{id}``` berupa angka. id transaksi
+		- ```{id_jasa}``` berupa angka. Id jasa yang ditolak
+	- Contoh Respon Sukses
+		
+		- ```json
+		{
+  "status": "Sukses",
+  "message": "Ubah data pemesanan berhasil"
+}
+		```
+		- Request : [http://localhost/slim/Backend/src/public/transaksi/ditolak](). Dengan id 2 dan id_jasa 1 
+		- Status Code `200`.
+	- Contoh Respon Gagal (1)
+		
+		```{id}``` yang dimasukkan tidak ditemukan		
+		Error Sql
+		- ```json
+		{
+  "status": "Gagal",
+  "message": "Transaksi Tidak ditemukan"
+}
+		```
+		- Request : [http://localhost/slim/Backend/src/public/transaksi/ditolak]() 
+		- Status Code `400`.
+	- Contoh Respon Gagal (2)
+		
+		Error Sql
+		- ```json
+		{
+			"status": "Gagal",
+  			"message": "Ubah data pemesanan gagal",
+  			"dev_message": "blablablablabl"
+  		}
+		```
+		- Status Code `500`.
+
+- Menyetujui status pemesanan
+
+	Mengubah status pemesanan menjadi ```disetujui``` dengan menyertakan id transaksi.Menggunakan metode HTTP `POST`.
+
+	- URL
+		- [http://localhost/slim/Backend/src/public/transaksi/disetujui](). Tidak ada Parameter.
+
+	- Parameter
+
+		*Tidak ada Parameter*
+	- POST Request Data
+		- ```{id}``` berupa angka. id transaksi
+		- ```{id_jasa}``` berupa angka. Id jasa yang ditolak
+	- Contoh Respon Sukses
+		
+		- ```json
+		{
+  "status": "Sukses",
+  "message": "Ubah data pemesanan berhasil"
+}
+		```
+		- Request : [http://localhost/slim/Backend/src/public/transaksi/disetujui](). Dengan id 2 dan id_jasa 1 
+		- Status Code `200`.
+	- Contoh Respon Gagal (1)
+		
+		```{id}``` yang dimasukkan tidak ditemukan		
+		Error Sql
+		- ```json
+		{
+  "status": "Gagal",
+  "message": "Transaksi Tidak ditemukan"
+}
+		```
+		- Request : [http://localhost/slim/Backend/src/public/transaksi/disetujui]() 
+		- Status Code `400`.
+	- Contoh Respon Gagal (2)
+		
+		Error Sql
+		- ```json
+		{
+			"status": "Gagal",
+  			"message": "Ubah data pemesanan gagal",
+  			"dev_message": "blablablablabl"
+  		}
+		```
+		- Status Code `500`.
+
 
 ### Kategori
 
-*Under Contruction*
+Semua operasi dengan tabel kategori
+
+- Get Semua Data
+	
+	Request semua data yang ada di tabel kategori.Menggunakan metode HTTP `GET`.
+	- URL
+		- [http://localhost/slim/Backend/src/public/kategori/](). Tanpa Parameter.
+	
+	- Parameter
+	
+		*Tanpa Parameter*.
+			
+	- Contoh Respon Sukses(1)
+		- ```json
+	[
+  {
+    "id": 1,
+    "nama": "Laundry"
+  },
+  {
+    "id": 2,
+    "nama": "Makanan Ringan"
+  },
+  {
+    "id": 3,
+    "nama": "Makanan Berat"
+  },
+  {
+    "id": 4,
+    "nama": "Minuman"
+  },
+  {
+    "id": 5,
+    "nama": "Fashion"
+  },
+  {
+    "id": 6,
+    "nama": "Otomotif"
+  }
+]
+		```
+		
+		- Request = [http://localhost/slim/Backend/src/public/kategori/]()
+		- Status Code `200`.
+
+	- Contoh Respon Gagal
+		
+		Error Sql
+		- ```json
+		{
+			"status": "Gagal",
+  			"message": "Penampilan Data Gagal",
+  			"dev_message": "blablablablabl"
+  		}
+		```
+		- Status Code `500`.
+- Get 1 Data
+
+	Request data kategori dengan id tertentu.Menggunakan metode HTTP `GET`.
+	- URL
+		- [http://localhost/slim/Backend/src/public/kategori/{id}](). Tanpa Parameter.
+			- ```{id}``` berupa angka
+	- Parameter
+	
+		*Tidak ada Parameter*
+	- Contoh Respon Sukses
+		- ```json
+		{
+  "id": 3,
+  "nama": "Makanan Berat"
+}
+		```
+		- Status Code `200`.
+	- Contoh Respon Gagal (1)
+		
+		```{id}``` yang dimasukkan tidak ditemukan		
+		Error Sql
+		- ```json
+		{
+  "status": "Gagal",
+  "message": "Kategori Tidak ditemukan"
+}
+		```
+		- Status Code `400`.
+	- Contoh Respon Gagal (2)
+		
+		Error Sql
+		- ```json
+		{
+			"status": "Gagal",
+  			"message": "Penampilan Data Gagal",
+  			"dev_message": "blablablablabl"
+  		}
+		```
+		- Status Code `500`.
+
+- Buat Data
+
+	Mendaftarkan kategori pada database .Menggunakan metode HTTP `POST`.
+
+	- URL
+		- [http://localhost/slim/Backend/src/public/kategori/](). Tanpa Parameter.
+
+	- Parameter
+	
+		*Tidak Ada Parameter*
+	- Post Request Data
+
+		+ `nama` **(wajib)**. 
+		
+		
+	- Contoh Respon Sukses
+		
+		- ```json
+		{
+  "status": "Sukses",
+  "message": "Penambahan data berhasil"
+}
+		```
+		- Request : [http://localhost/slim/Backend/src/public/kategori/](). 
+		- Status Code `200`.
+	
+	- Contoh Respon Gagal
+		
+		Error Sql
+		- ```json
+		{
+  "status": "Gagal",
+  "message": "Penambahan data gagal",
+  "dev_message": "blablablab"
+}
+		```
+		- Status Code `500`.
+- Ubah Data
+
+	Merubah data kategori dengan id tertentu.Menggunakan metode HTTP `PUT`.
+	Pada hedaer sertakan '''Content-Type'''dengan nilai '''application/x-www-form-urlencoded'''
+
+	- URL
+		- [http://localhost/slim/Backend/src/public/kategori/](). Tanpa Parameter.
+
+	- Parameter
+	
+		*Tidak Ada Parameter*
+	- Put Request Data(x-www-url-encoded)
+
+		+ `id` **(wajib)**.
+		+ `nama` **(optional)**. 
+		
+		
+	- Contoh Respon Sukses
+		
+		- ```json
+		{
+  "status": "Sukses",
+  "message": "Update data berhasil"
+}
+		```
+		- Request : [http://localhost/slim/Backend/src/public/kategori/](). 
+		- Status Code `200`.
+	- Contoh Respon Gagal (1)
+		
+		```{id}``` yang dimasukkan tidak ditemukan		
+		Error Sql
+		- ```json
+		{
+  "status": "Gagal",
+  "message": "Kategori Tidak ditemukan"
+}
+		```
+		- Request : [http://localhost/slim/Backend/src/public/kategori/]() 
+		- Status Code `400`.
+	- Contoh Respon Gagal (2)
+		
+		Error Sql
+		- ```json
+		{
+			"status": "Gagal",
+  			"message": "Update Data Gagal",
+  			"dev_message": "blablablablabl"
+  		}
+		```
+		- Status Code `500`.
+- Hapus Data
+
+	Menghapus data kategori dengan id tertentu.Menggunakan metode HTTP `DELETE`.
+
+	- URL
+		- [http://localhost/slim/Backend/src/public/kategori/{id}](). Tidak ada Parameter.
+			- ```{id}``` berupa angka
+
+	- Parameter
+
+		*Tidak ada Parameter*
+	- Contoh Respon Sukses
+		
+		- ```json
+		{
+  "status": "Sukses",
+  "message": "Hapus data berhasil"
+}
+		```
+		- Request : [http://localhost/slim/Backend/src/public/kategori/7](). 
+		- Status Code `200`.
+	- Contoh Respon Gagal (1)
+		
+		```{id}``` yang dimasukkan tidak ditemukan		
+		Error Sql
+		- ```json
+		{
+  "status": "Gagal",
+  "message": "Kategori Tidak ditemukan"
+}
+		```
+		- Request : [http://localhost/slim/Backend/src/public/kategori/456]() 
+		- Status Code `400`.
+	- Contoh Respon Gagal (2)
+		
+		Error Sql
+		- ```json
+		{
+			"status": "Gagal",
+  			"message": "Hapus Data Gagal",
+  			"dev_message": "blablablablabl"
+  		}
+		```
+		- Status Code `500`.
+
 
 ### Kecamatan
 
-*Under Contruction*
+Semua operasi dengan tabel kecamatan 
+
+- Get Semua Data
+	
+	Request semua data yang ada di tabel kecamatan .Menggunakan metode HTTP `GET`.
+	- URL
+		- [http://localhost/slim/Backend/src/public/kecamatan/](). Tanpa Parameter.
+	
+	- Parameter
+	
+		*Tanpa Parameter*.
+			
+	- Contoh Respon Sukses(1)
+		- ```json
+	[
+  {
+    "id": 1,
+    "nama": "GENTENG",
+    "id_kabupaten": 1
+  },
+  {
+    "id": 2,
+    "nama": "BUBUTAN",
+    "id_kabupaten": 1
+  },
+  {
+    "id": 3,
+    "nama": "TEGALSARI",
+    "id_kabupaten": 1
+  },
+  {
+    "id": 4,
+    "nama": "SIMOKERTO",
+    "id_kabupaten": 1
+  },
+  {
+    "id": 5,
+    "nama": "TAMBAKSARI",
+    "id_kabupaten": 1
+  },
+  {
+    "id": 6,
+    "nama": "GUBENG",
+    "id_kabupaten": 1
+  },
+  {
+    "id": 7,
+    "nama": "KREMBANGAN",
+    "id_kabupaten": 1
+  },
+  {
+    "id": 8,
+    "nama": "SEMAMPIR",
+    "id_kabupaten": 1
+  },
+  {
+    "id": 9,
+    "nama": "PABEAN CANTIAN",
+    "id_kabupaten": 1
+  },
+  {
+    "id": 10,
+    "nama": "WONOKROMO",
+    "id_kabupaten": 1
+  },
+  {
+    "id": 11,
+    "nama": "SAWAHAN",
+    "id_kabupaten": 1
+  },
+  {
+    "id": 12,
+    "nama": "TANDES",
+    "id_kabupaten": 1
+  },
+  {
+    "id": 13,
+    "nama": "KARANG PILANG",
+    "id_kabupaten": 1
+  },
+  {
+    "id": 14,
+    "nama": "WONOCOLO",
+    "id_kabupaten": 1
+  },
+  {
+    "id": 15,
+    "nama": "RUNGKUT",
+    "id_kabupaten": 1
+  },
+  {
+    "id": 16,
+    "nama": "SUKOLILO",
+    "id_kabupaten": 1
+  },
+  {
+    "id": 17,
+    "nama": "KENJERAN",
+    "id_kabupaten": 1
+  },
+  {
+    "id": 18,
+    "nama": "BENOWO",
+    "id_kabupaten": 1
+  },
+  {
+    "id": 19,
+    "nama": "LAKARSANTRI",
+    "id_kabupaten": 1
+  },
+  {
+    "id": 20,
+    "nama": "MULYOREJO",
+    "id_kabupaten": 1
+  },
+  {
+    "id": 21,
+    "nama": "TENGGILIS MEJOYO",
+    "id_kabupaten": 1
+  },
+  {
+    "id": 22,
+    "nama": "GUNUNG ANYAR",
+    "id_kabupaten": 1
+  },
+  {
+    "id": 23,
+    "nama": "JAMBANGAN",
+    "id_kabupaten": 1
+  },
+  {
+    "id": 24,
+    "nama": "GAYUNGAN",
+    "id_kabupaten": 1
+  },
+  {
+    "id": 25,
+    "nama": "WIYUNG",
+    "id_kabupaten": 1
+  },
+  {
+    "id": 26,
+    "nama": "DUKUH PAKIS",
+    "id_kabupaten": 1
+  },
+  {
+    "id": 27,
+    "nama": "ASEMROWO",
+    "id_kabupaten": 1
+  },
+  {
+    "id": 28,
+    "nama": "SUKO MANUNGGAL",
+    "id_kabupaten": 1
+  },
+  {
+    "id": 29,
+    "nama": "BULAK",
+    "id_kabupaten": 1
+  },
+  {
+    "id": 30,
+    "nama": "PAKAL",
+    "id_kabupaten": 1
+  },
+  {
+    "id": 31,
+    "nama": "SAMBIKEREP",
+    "id_kabupaten": 1
+  },
+  {
+    "id": 32,
+    "nama": "Balongpanggang",
+    "id_kabupaten": 2
+  },
+  {
+    "id": 33,
+    "nama": "Benjeng",
+    "id_kabupaten": 2
+  },
+  {
+    "id": 34,
+    "nama": "Bungah",
+    "id_kabupaten": 2
+  },
+  {
+    "id": 35,
+    "nama": "Cerme",
+    "id_kabupaten": 2
+  },
+  {
+    "id": 36,
+    "nama": "Driyorejo",
+    "id_kabupaten": 2
+  },
+  {
+    "id": 37,
+    "nama": "Duduk Sampeyan",
+    "id_kabupaten": 2
+  },
+  {
+    "id": 38,
+    "nama": "Dukun ",
+    "id_kabupaten": 2
+  },
+  {
+    "id": 39,
+    "nama": "Gresik ",
+    "id_kabupaten": 2
+  },
+  {
+    "id": 40,
+    "nama": "Kebomas ",
+    "id_kabupaten": 2
+  },
+  {
+    "id": 41,
+    "nama": "Kedamean ",
+    "id_kabupaten": 2
+  },
+  {
+    "id": 42,
+    "nama": "Manyar ",
+    "id_kabupaten": 2
+  },
+  {
+    "id": 43,
+    "nama": "Menganti",
+    "id_kabupaten": 2
+  },
+  {
+    "id": 44,
+    "nama": " Panceng ",
+    "id_kabupaten": 2
+  },
+  {
+    "id": 45,
+    "nama": "Sangkapura ",
+    "id_kabupaten": 2
+  },
+  {
+    "id": 46,
+    "nama": "Sidayu ",
+    "id_kabupaten": 2
+  },
+  {
+    "id": 47,
+    "nama": "Tambak ",
+    "id_kabupaten": 2
+  },
+  {
+    "id": 48,
+    "nama": "Ujung Pangkah ",
+    "id_kabupaten": 2
+  },
+  {
+    "id": 49,
+    "nama": "Wringinanom",
+    "id_kabupaten": 2
+  }
+]
+		```
+		
+		- Request = [http://localhost/slim/Backend/src/public/kecamatan/]()
+		- Status Code `200`.
+
+	- Contoh Respon Gagal
+		
+		Error Sql
+		- ```json
+		{
+			"status": "Gagal",
+  			"message": "Penampilan Data Gagal",
+  			"dev_message": "blablablablabl"
+  		}
+		```
+		- Status Code `500`.
+- Get 1 Data
+
+	Request data kecamatan dengan id tertentu.Menggunakan metode HTTP `GET`.
+	- URL
+		- [http://localhost/slim/Backend/src/public/kecamatan/{id}](). Tanpa Parameter.
+			- ```{id}``` berupa angka
+	- Parameter
+	
+		*Tidak ada Parameter*
+	- Contoh Respon Sukses
+		- ```json
+		{
+  "id": 4,
+  "nama": "SIMOKERTO",
+  "id_kabupaten": 1
+}
+		```
+		- Status Code `200`.
+	- Contoh Respon Gagal (1)
+		
+		```{id}``` yang dimasukkan tidak ditemukan		
+		Error Sql
+		- ```json
+		{
+  "status": "Gagal",
+  "message": "Kecamatan Tidak ditemukan"
+}
+		```
+		- Status Code `400`.
+	- Contoh Respon Gagal (2)
+		
+		Error Sql
+		- ```json
+		{
+			"status": "Gagal",
+  			"message": "Penampilan Data Gagal",
+  			"dev_message": "blablablablabl"
+  		}
+		```
+		- Status Code `500`.
+- Get By Id Kabupaten
+
+
+	Request data kecamatan dengan menyertakan ```id_kabupaten``` pada argumen request.Menggunakan metode HTTP `GET`.
+	- URL
+		- [http://localhost/slim/Backend/src/public/kecamatan/id_kabupaten/{id_toko}](). Tanpa Parameter.
+			- ```{id_kabupaten}``` berupa angka
+	- Parameter
+	
+		*Tidak ada Parameter*
+	- Contoh Respon Sukses
+		
+		- ```json
+		[
+  {
+    "id": 32,
+    "nama": "Balongpanggang",
+    "id_kabupaten": 2
+  },
+  {
+    "id": 33,
+    "nama": "Benjeng",
+    "id_kabupaten": 2
+  },
+  {
+    "id": 34,
+    "nama": "Bungah",
+    "id_kabupaten": 2
+  },
+  {
+    "id": 35,
+    "nama": "Cerme",
+    "id_kabupaten": 2
+  },
+  {
+    "id": 36,
+    "nama": "Driyorejo",
+    "id_kabupaten": 2
+  },
+  {
+    "id": 37,
+    "nama": "Duduk Sampeyan",
+    "id_kabupaten": 2
+  },
+  {
+    "id": 38,
+    "nama": "Dukun ",
+    "id_kabupaten": 2
+  },
+  {
+    "id": 39,
+    "nama": "Gresik ",
+    "id_kabupaten": 2
+  },
+  {
+    "id": 40,
+    "nama": "Kebomas ",
+    "id_kabupaten": 2
+  },
+  {
+    "id": 41,
+    "nama": "Kedamean ",
+    "id_kabupaten": 2
+  },
+  {
+    "id": 42,
+    "nama": "Manyar ",
+    "id_kabupaten": 2
+  },
+  {
+    "id": 43,
+    "nama": "Menganti",
+    "id_kabupaten": 2
+  },
+  {
+    "id": 44,
+    "nama": " Panceng ",
+    "id_kabupaten": 2
+  },
+  {
+    "id": 45,
+    "nama": "Sangkapura ",
+    "id_kabupaten": 2
+  },
+  {
+    "id": 46,
+    "nama": "Sidayu ",
+    "id_kabupaten": 2
+  },
+  {
+    "id": 47,
+    "nama": "Tambak ",
+    "id_kabupaten": 2
+  },
+  {
+    "id": 48,
+    "nama": "Ujung Pangkah ",
+    "id_kabupaten": 2
+  },
+  {
+    "id": 49,
+    "nama": "Wringinanom",
+    "id_kabupaten": 2
+  }
+]
+		```
+		- Request : [http://localhost/slim/Backend/src/public/kecamatan/id_kabupaten/2]()
+		- Status Code `200`.
+	- Contoh Respon Gagal (1)
+		
+		```{id_kabupaten}``` yang dimasukkan tidak ditemukan		
+		Error Sql
+		- ```json
+		{
+  "status": "Gagal",
+  "message": "Kecamatan Tidak ditemukan"
+}
+		```
+		- Request : [http://localhost/slim/Backend/src/public/kecamatan/id_kabupaten/234]()
+		- Status Code `400`.
+	- Contoh Respon Gagal (2)
+		
+		Error Sql
+		- ```json
+		{
+			"status": "Gagal",
+  			"message": "Penampilan Kecamatan Gagal",
+  			"dev_message": "blablablablabl"
+  		}
+		```
+		- Status Code `500`.
+
+- Buat Data
+
+	Mendaftarkan Kecamatan pada database .Menggunakan metode HTTP `POST`.
+
+	- URL
+		- [http://localhost/slim/Backend/src/public/kecamatan/](). Tanpa Parameter.
+
+	- Parameter
+	
+		*Tidak Ada Parameter*
+	- Post Request Data
+
+		+ `nama` **(wajib)**.
+		+ `id_kabupaten` **(wajib)**.  
+		
+		
+	- Contoh Respon Sukses
+		
+		- ```json
+		{
+  "status": "Sukses",
+  "message": "Penambahan data berhasil"
+}
+		```
+		- Request : [http://localhost/slim/Backend/src/public/kecamatan/](). 
+		- Status Code `200`.
+	
+	- Contoh Respon Gagal
+		
+		Error Sql
+		- ```json
+		{
+  "status": "Gagal",
+  "message": "Penambahan data gagal",
+  "dev_message": "blablablab"
+}
+		```
+		- Status Code `500`.
+- Ubah Data
+
+	Merubah data kecamatan dengan id tertentu.Menggunakan metode HTTP `PUT`.
+	Pada hedaer sertakan '''Content-Type'''dengan nilai '''application/x-www-form-urlencoded'''
+
+	- URL
+		- [http://localhost/slim/Backend/src/public/kecamatan/](). Tanpa Parameter.
+
+	- Parameter
+	
+		*Tidak Ada Parameter*
+	- Put Request Data(x-www-url-encoded)
+
+		+ `id` **(wajib)**.
+		+ `nama` **(optional)**. 
+		+ `id_kabupaten` **(wajib)**. 
+		
+	- Contoh Respon Sukses
+		
+		- ```json
+		{
+  "status": "Sukses",
+  "message": "Update data berhasil"
+}
+		```
+		- Request : [http://localhost/slim/Backend/src/public/kecamatan/](). 
+		- Status Code `200`.
+	- Contoh Respon Gagal (1)
+		
+		```{id}``` yang dimasukkan tidak ditemukan		
+		Error Sql
+		- ```json
+		{
+  "status": "Gagal",
+  "message": "Kecamatan Tidak ditemukan"
+}
+		```
+		- Request : [http://localhost/slim/Backend/src/public/kecamatan/]() 
+		- Status Code `400`.
+	- Contoh Respon Gagal (2)
+		
+		Error Sql
+		- ```json
+		{
+			"status": "Gagal",
+  			"message": "Update Data Gagal",
+  			"dev_message": "blablablablabl"
+  		}
+		```
+		- Status Code `500`.
+- Hapus Data
+
+	Menghapus data kecamatan dengan id tertentu.Menggunakan metode HTTP `DELETE`.
+
+	- URL
+		- [http://localhost/slim/Backend/src/public/kecamatan/{id}](). Tidak ada Parameter.
+			- ```{id}``` berupa angka
+
+	- Parameter
+
+		*Tidak ada Parameter*
+	- Contoh Respon Sukses
+		
+		- ```json
+		{
+  "status": "Sukses",
+  "message": "Hapus data berhasil"
+}
+		```
+		- Request : [http://localhost/slim/Backend/src/public/kecamatan/7](). 
+		- Status Code `200`.
+	- Contoh Respon Gagal (1)
+		
+		```{id}``` yang dimasukkan tidak ditemukan		
+		Error Sql
+		- ```json
+		{
+  "status": "Gagal",
+  "message": "kecamatan Tidak ditemukan"
+}
+		```
+		- Request : [http://localhost/slim/Backend/src/public/provinsi/456]() 
+		- Status Code `400`.
+	- Contoh Respon Gagal (2)
+		
+		Error Sql
+		- ```json
+		{
+			"status": "Gagal",
+  			"message": "Hapus Data Gagal",
+  			"dev_message": "blablablablabl"
+  		}
+		```
+		- Status Code `500`.
+`.
+
 
 ### Kabupaten
 
-*Under Contruction*
+Semua operasi dengan tabel kabupaten 
+
+- Get Semua Data
+	
+	Request semua data yang ada di tabel kabupaten .Menggunakan metode HTTP `GET`.
+	- URL
+		- [http://localhost/slim/Backend/src/public/kabupaten/](). Tanpa Parameter.
+	
+	- Parameter
+	
+		*Tanpa Parameter*.
+			
+	- Contoh Respon Sukses(1)
+		- ```json
+	[
+  {
+    "id": 1,
+    "nama": "Surabaya",
+    "id_provinsi": 15
+  },
+  {
+    "id": 2,
+    "nama": "Gresik",
+    "id_provinsi": 15
+  }
+]
+		```
+		
+		- Request = [http://localhost/slim/Backend/src/public/kabupaten/]()
+		- Status Code `200`.
+
+	- Contoh Respon Gagal
+		
+		Error Sql
+		- ```json
+		{
+			"status": "Gagal",
+  			"message": "Penampilan Data Gagal",
+  			"dev_message": "blablablablabl"
+  		}
+		```
+		- Status Code `500`.
+- Get 1 Data
+
+	Request data kabupaten dengan id tertentu.Menggunakan metode HTTP `GET`.
+	- URL
+		- [http://localhost/slim/Backend/src/public/kabupaten/{id}](). Tanpa Parameter.
+			- ```{id}``` berupa angka
+	- Parameter
+	
+		*Tidak ada Parameter*
+	- Contoh Respon Sukses
+		- ```json
+		{
+  "id": 4,
+  "nama": "SIMOKERTO",
+  "id_kabupaten": 1
+}
+		```
+		- Status Code `200`.
+	- Contoh Respon Gagal (1)
+		
+		```{id}``` yang dimasukkan tidak ditemukan		
+		Error Sql
+		- ```json
+		{
+  "status": "Gagal",
+  "message": "Kabupaten Tidak ditemukan"
+}
+		```
+		- Status Code `400`.
+	- Contoh Respon Gagal (2)
+		
+		Error Sql
+		- ```json
+		{
+			"status": "Gagal",
+  			"message": "Penampilan Data Gagal",
+  			"dev_message": "blablablablabl"
+  		}
+		```
+		- Status Code `500`.
+- Get By Id Provinsi
+
+
+	Request data kabupaten dengan menyertakan ```id_provinsi``` pada argumen request.Menggunakan metode HTTP `GET`.
+	- URL
+		- [http://localhost/slim/Backend/src/public/kabupaten/id_provinsi/{id_toko}](). Tanpa Parameter.
+			- ```{id_provinsi}``` berupa angka
+	- Parameter
+	
+		*Tidak ada Parameter*
+	- Contoh Respon Sukses
+		
+		- ```json
+		[
+  {
+    "id": 1,
+    "nama": "Surabaya",
+    "id_provinsi": 15
+  },
+  {
+    "id": 2,
+    "nama": "Gresik",
+    "id_provinsi": 15
+  }
+]
+		```
+		- Request : [http://localhost/slim/Backend/src/public/kabupaten/id_provinsi/15]()
+		- Status Code `200`.
+	- Contoh Respon Gagal (1)
+		
+		```{id_provinsi}``` yang dimasukkan tidak ditemukan		
+		Error Sql
+		- ```json
+		{
+  "status": "Gagal",
+  "message": "Kabupaten Tidak ditemukan"
+}
+		```
+		- Request : [http://localhost/slim/Backend/src/public/kabupaten/id_provinsi/234]()
+		- Status Code `400`.
+	- Contoh Respon Gagal (2)
+		
+		Error Sql
+		- ```json
+		{
+			"status": "Gagal",
+  			"message": "Penampilan Kabupaten Gagal",
+  			"dev_message": "blablablablabl"
+  		}
+		```
+		- Status Code `500`.
+
+- Buat Data
+
+	Mendaftarkan kabupaten pada database .Menggunakan metode HTTP `POST`.
+
+	- URL
+		- [http://localhost/slim/Backend/src/public/kabupaten/](). Tanpa Parameter.
+
+	- Parameter
+	
+		*Tidak Ada Parameter*
+	- Post Request Data
+
+		+ `nama` **(wajib)**.
+		+ `id_provinsi` **(wajib)**.  
+		
+		
+	- Contoh Respon Sukses
+		
+		- ```json
+		{
+  "status": "Sukses",
+  "message": "Penambahan data berhasil"
+}
+		```
+		- Request : [http://localhost/slim/Backend/src/public/kabupaten/](). 
+		- Status Code `200`.
+	
+	- Contoh Respon Gagal
+		
+		Error Sql
+		- ```json
+		{
+  "status": "Gagal",
+  "message": "Penambahan data gagal",
+  "dev_message": "blablablab"
+}
+		```
+		- Status Code `500`.
+- Ubah Data
+
+	Merubah data kabupaten dengan id tertentu.Menggunakan metode HTTP `PUT`.
+	Pada hedaer sertakan '''Content-Type'''dengan nilai '''application/x-www-form-urlencoded'''
+
+	- URL
+		- [http://localhost/slim/Backend/src/public/kabupaten/](). Tanpa Parameter.
+
+	- Parameter
+	
+		*Tidak Ada Parameter*
+	- Put Request Data(x-www-url-encoded)
+
+		+ `id` **(wajib)**.
+		+ `nama` **(optional)**. 
+		+ `id_provinsi` **(wajib)**. 
+		
+	- Contoh Respon Sukses
+		
+		- ```json
+		{
+  "status": "Sukses",
+  "message": "Update data berhasil"
+}
+		```
+		- Request : [http://localhost/slim/Backend/src/public/kabupaten/](). 
+		- Status Code `200`.
+	- Contoh Respon Gagal (1)
+		
+		```{id}``` yang dimasukkan tidak ditemukan		
+		Error Sql
+		- ```json
+		{
+  "status": "Gagal",
+  "message": "Kabupaten Tidak ditemukan"
+}
+		```
+		- Request : [http://localhost/slim/Backend/src/public/kabupaten/]() 
+		- Status Code `400`.
+	- Contoh Respon Gagal (2)
+		
+		Error Sql
+		- ```json
+		{
+			"status": "Gagal",
+  			"message": "Update Data Gagal",
+  			"dev_message": "blablablablabl"
+  		}
+		```
+		- Status Code `500`.
+- Hapus Data
+
+	Menghapus data kabupaten dengan id tertentu.Menggunakan metode HTTP `DELETE`.
+
+	- URL
+		- [http://localhost/slim/Backend/src/public/kabupaten/{id}](). Tidak ada Parameter.
+			- ```{id}``` berupa angka
+
+	- Parameter
+
+		*Tidak ada Parameter*
+	- Contoh Respon Sukses
+		
+		- ```json
+		{
+  "status": "Sukses",
+  "message": "Hapus data berhasil"
+}
+		```
+		- Request : [http://localhost/slim/Backend/src/public/kabupaten/7](). 
+		- Status Code `200`.
+	- Contoh Respon Gagal (1)
+		
+		```{id}``` yang dimasukkan tidak ditemukan		
+		Error Sql
+		- ```json
+		{
+  "status": "Gagal",
+  "message": "Kabupaten Tidak ditemukan"
+}
+		```
+		- Request : [http://localhost/slim/Backend/src/public/kabupaten/456]() 
+		- Status Code `400`.
+	- Contoh Respon Gagal (2)
+		
+		Error Sql
+		- ```json
+		{
+			"status": "Gagal",
+  			"message": "Hapus Data Gagal",
+  			"dev_message": "blablablablabl"
+  		}
+		```
+		- Status Code `500`.
 
 ### Provinsi
 
-*Under Contruction*
+
+Semua operasi dengan tabel provinsi
+
+- Get Semua Data
+	
+	Request semua data yang ada di tabel provinsi.Menggunakan metode HTTP `GET`.
+	- URL
+		- [http://localhost/slim/Backend/src/public/provinsi/](). Tanpa Parameter.
+	
+	- Parameter
+	
+		*Tanpa Parameter*.
+			
+	- Contoh Respon Sukses(1)
+		- ```json
+	[
+  {
+    "id": 1,
+    "nama": "Aceh"
+  },
+  {
+    "id": 2,
+    "nama": "Sumatera Utara"
+  },
+  {
+    "id": 3,
+    "nama": "Bengkulu"
+  },
+  {
+    "id": 4,
+    "nama": "Jambi"
+  },
+  {
+    "id": 5,
+    "nama": "Riau"
+  },
+  {
+    "id": 6,
+    "nama": "Sumatera Barat"
+  },
+  {
+    "id": 7,
+    "nama": "Sumatera Selatan"
+  },
+  {
+    "id": 8,
+    "nama": "Lampung"
+  },
+  {
+    "id": 9,
+    "nama": "Kepulauan Bangka Belitung"
+  },
+  {
+    "id": 10,
+    "nama": "Kepulauan Riau"
+  },
+  {
+    "id": 11,
+    "nama": "Banten"
+  },
+  {
+    "id": 12,
+    "nama": "Jawa Barat"
+  },
+  {
+    "id": 13,
+    "nama": "DKI Jakarta"
+  },
+  {
+    "id": 14,
+    "nama": "Jawa Tengah"
+  },
+  {
+    "id": 15,
+    "nama": "Jawa Timur"
+  },
+  {
+    "id": 16,
+    "nama": "Daerah Istimewa Yogyakarta"
+  },
+  {
+    "id": 17,
+    "nama": "Bali"
+  },
+  {
+    "id": 18,
+    "nama": "Nusa Tenggara Barat"
+  },
+  {
+    "id": 19,
+    "nama": "Nusa Tenggara Timur"
+  },
+  {
+    "id": 20,
+    "nama": "Kalimantan Barat"
+  },
+  {
+    "id": 21,
+    "nama": "Kalimantan Selatan"
+  },
+  {
+    "id": 22,
+    "nama": "Kalimantan Tengah"
+  },
+  {
+    "id": 23,
+    "nama": "Kalimantan Timur"
+  },
+  {
+    "id": 24,
+    "nama": "Gorontalo"
+  },
+  {
+    "id": 25,
+    "nama": "Sulawesi Selatan"
+  },
+  {
+    "id": 26,
+    "nama": "Sulawesi Tenggara"
+  },
+  {
+    "id": 27,
+    "nama": "Sulawesi Tengah"
+  },
+  {
+    "id": 28,
+    "nama": "Sulawesi Utara"
+  },
+  {
+    "id": 29,
+    "nama": "Sulawesi Barat"
+  },
+  {
+    "id": 30,
+    "nama": "Maluku"
+  },
+  {
+    "id": 31,
+    "nama": "Maluku Utara"
+  },
+  {
+    "id": 32,
+    "nama": "Papua"
+  },
+  {
+    "id": 33,
+    "nama": "Papua Barat"
+  }
+]
+		```
+		
+		- Request = [http://localhost/slim/Backend/src/public/provinsi/]()
+		- Status Code `200`.
+
+	- Contoh Respon Gagal
+		
+		Error Sql
+		- ```json
+		{
+			"status": "Gagal",
+  			"message": "Penampilan Data Gagal",
+  			"dev_message": "blablablablabl"
+  		}
+		```
+		- Status Code `500`.
+- Get 1 Data
+
+	Request data provinsi dengan id tertentu.Menggunakan metode HTTP `GET`.
+	- URL
+		- [http://localhost/slim/Backend/src/public/provinsi/{id}](). Tanpa Parameter.
+			- ```{id}``` berupa angka
+	- Parameter
+	
+		*Tidak ada Parameter*
+	- Contoh Respon Sukses
+		- ```json
+		{
+  "id": 3,
+  "nama": "Bengkulu"
+}	```
+		- Status Code `200`.
+	- Contoh Respon Gagal (1)
+		
+		```{id}``` yang dimasukkan tidak ditemukan		
+		Error Sql
+		- ```json
+		{
+  "status": "Gagal",
+  "message": "Provinsi Tidak ditemukan"
+}
+		```
+		- Status Code `400`.
+	- Contoh Respon Gagal (2)
+		
+		Error Sql
+		- ```json
+		{
+			"status": "Gagal",
+  			"message": "Penampilan Data Gagal",
+  			"dev_message": "blablablablabl"
+  		}
+		```
+		- Status Code `500`.
+
+- Buat Data
+
+	Mendaftarkan Provinsi pada database .Menggunakan metode HTTP `POST`.
+
+	- URL
+		- [http://localhost/slim/Backend/src/public/provinsi/](). Tanpa Parameter.
+
+	- Parameter
+	
+		*Tidak Ada Parameter*
+	- Post Request Data
+
+		+ `nama` **(wajib)**. 
+		
+		
+	- Contoh Respon Sukses
+		
+		- ```json
+		{
+  "status": "Sukses",
+  "message": "Penambahan data berhasil"
+}
+		```
+		- Request : [http://localhost/slim/Backend/src/public/provinsi/](). 
+		- Status Code `200`.
+	
+	- Contoh Respon Gagal
+		
+		Error Sql
+		- ```json
+		{
+  "status": "Gagal",
+  "message": "Penambahan data gagal",
+  "dev_message": "blablablab"
+}
+		```
+		- Status Code `500`.
+- Ubah Data
+
+	Merubah data provinsi dengan id tertentu.Menggunakan metode HTTP `PUT`.
+	Pada hedaer sertakan '''Content-Type'''dengan nilai '''application/x-www-form-urlencoded'''
+
+	- URL
+		- [http://localhost/slim/Backend/src/public/provinsi/](). Tanpa Parameter.
+
+	- Parameter
+	
+		*Tidak Ada Parameter*
+	- Put Request Data(x-www-url-encoded)
+
+		+ `id` **(wajib)**.
+		+ `nama` **(optional)**. 
+		
+		
+	- Contoh Respon Sukses
+		
+		- ```json
+		{
+  "status": "Sukses",
+  "message": "Update data berhasil"
+}
+		```
+		- Request : [http://localhost/slim/Backend/src/public/provinsi/](). 
+		- Status Code `200`.
+	- Contoh Respon Gagal (1)
+		
+		```{id}``` yang dimasukkan tidak ditemukan		
+		Error Sql
+		- ```json
+		{
+  "status": "Gagal",
+  "message": "Provinsi Tidak ditemukan"
+}
+		```
+		- Request : [http://localhost/slim/Backend/src/public/provinsi/]() 
+		- Status Code `400`.
+	- Contoh Respon Gagal (2)
+		
+		Error Sql
+		- ```json
+		{
+			"status": "Gagal",
+  			"message": "Update Data Gagal",
+  			"dev_message": "blablablablabl"
+  		}
+		```
+		- Status Code `500`.
+- Hapus Data
+
+	Menghapus data provinsi dengan id tertentu.Menggunakan metode HTTP `DELETE`.
+
+	- URL
+		- [http://localhost/slim/Backend/src/public/provinsi/{id}](). Tidak ada Parameter.
+			- ```{id}``` berupa angka
+
+	- Parameter
+
+		*Tidak ada Parameter*
+	- Contoh Respon Sukses
+		
+		- ```json
+		{
+  "status": "Sukses",
+  "message": "Hapus data berhasil"
+}
+		```
+		- Request : [http://localhost/slim/Backend/src/public/provinsi/7](). 
+		- Status Code `200`.
+	- Contoh Respon Gagal (1)
+		
+		```{id}``` yang dimasukkan tidak ditemukan		
+		Error Sql
+		- ```json
+		{
+  "status": "Gagal",
+  "message": "Provinsi Tidak ditemukan"
+}
+		```
+		- Request : [http://localhost/slim/Backend/src/public/provinsi/456]() 
+		- Status Code `400`.
+	- Contoh Respon Gagal (2)
+		
+		Error Sql
+		- ```json
+		{
+			"status": "Gagal",
+  			"message": "Hapus Data Gagal",
+  			"dev_message": "blablablablabl"
+  		}
+		```
+		- Status Code `500`.

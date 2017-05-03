@@ -47,7 +47,7 @@ final class KabupatenController {
             if(!json_decode($toko_json)){
                 $response->write(json_encode([
                     'status' => 'Gagal',
-                    'message'=> 'Jasa Tidak ditemukan'
+                    'message'=> 'Kabupaten Tidak ditemukan'
                 ]));
                 $status=400;
             }else{
@@ -59,12 +59,13 @@ final class KabupatenController {
         }catch (\Illuminate\Database\QueryException $e){
             $response->write(json_encode([
                 'status' => 'Gagal',
-                'message'=> 'Penampilan toko gagal',
+                'message'=> 'Penampilan Kabupaten gagal',
                 'dev_message'=> $e->getMessage()
             ]));
             $status=500;
         }
         return $response->withHeader('Content-type', 'application/json')->withStatus($status);
+    }
     // Get semua data
     public function getall(Request $request, Response $response, $args){
         try{
@@ -74,7 +75,7 @@ final class KabupatenController {
         }catch (\Illuminate\Database\QueryException $e){
             $response->write(json_encode([
                 'status' => 'Gagal',
-                'message'=> 'Penambahan data gagal',
+                'message'=> 'Penampilan data gagal',
                 'dev_message'=> $e->getMessage()
             ]));
             $status=500;
@@ -99,7 +100,7 @@ final class KabupatenController {
         }catch (\Illuminate\Database\QueryException $e){
             $response->write(json_encode([
                 'status' => 'Gagal',
-                'message'=> 'Penambahan data gagal',
+                'message'=> 'Penampilan data gagal',
                 'dev_message'=> $e->getMessage()
             ]));
             $status=500;
@@ -133,7 +134,7 @@ final class KabupatenController {
         }catch (\Illuminate\Database\QueryException $e){
             $response->write(json_encode([
                 'status' => 'Gagal',
-                'message'=> 'Penambahan data gagal',
+                'message'=> 'Update data gagal',
                 'dev_message'=> $e->getMessage()
             ]));
             $status=500;
@@ -162,7 +163,7 @@ final class KabupatenController {
         }catch (\Illuminate\Database\QueryException $e){
             $response->write(json_encode([
                 'status' => 'Gagal',
-                'message'=> 'Penambahan data gagal',
+                'message'=> 'Hapus data gagal',
                 'dev_message'=> $e->getMessage()
             ]));
             $status=500;

@@ -46,7 +46,7 @@ final class KategoriController {
         }catch (\Illuminate\Database\QueryException $e){
             $response->write(json_encode([
                 'status' => 'Gagal',
-                'message'=> 'Penambahan data gagal',
+                'message'=> 'Penampilan data gagal',
                 'dev_message'=> $e->getMessage()
             ]));
             $status=500;
@@ -71,7 +71,7 @@ final class KategoriController {
         }catch (\Illuminate\Database\QueryException $e){
             $response->write(json_encode([
                 'status' => 'Gagal',
-                'message'=> 'Penambahan data gagal',
+                'message'=> 'Penampilan data gagal',
                 'dev_message'=> $e->getMessage()
             ]));
             $status=500;
@@ -104,7 +104,7 @@ final class KategoriController {
         }catch (\Illuminate\Database\QueryException $e){
             $response->write(json_encode([
                 'status' => 'Gagal',
-                'message'=> 'Penambahan data gagal',
+                'message'=> 'Update data gagal',
                 'dev_message'=> $e->getMessage()
             ]));
             $status=500;
@@ -133,7 +133,7 @@ final class KategoriController {
         }catch (\Illuminate\Database\QueryException $e){
             $response->write(json_encode([
                 'status' => 'Gagal',
-                'message'=> 'Penambahan data gagal',
+                'message'=> 'Hapus data gagal',
                 'dev_message'=> $e->getMessage()
             ]));
             $status=500;

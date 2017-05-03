@@ -47,7 +47,7 @@ final class KecamatanController {
             if(!json_decode($toko_json)){
                 $response->write(json_encode([
                     'status' => 'Gagal',
-                    'message'=> 'Jasa Tidak ditemukan'
+                    'message'=> 'Kecamatan Tidak ditemukan'
                 ]));
                 $status=400;
             }else{
@@ -59,13 +59,13 @@ final class KecamatanController {
         }catch (\Illuminate\Database\QueryException $e){
             $response->write(json_encode([
                 'status' => 'Gagal',
-                'message'=> 'Penampilan toko gagal',
+                'message'=> 'Penampilan Kecamatan gagal',
                 'dev_message'=> $e->getMessage()
             ]));
             $status=500;
         }
         return $response->withHeader('Content-type', 'application/json')->withStatus($status);
-
+    }   
     // Get semua data
     public function getall(Request $request, Response $response, $args){
         try{
@@ -75,7 +75,7 @@ final class KecamatanController {
         }catch (\Illuminate\Database\QueryException $e){
             $response->write(json_encode([
                 'status' => 'Gagal',
-                'message'=> 'Penambahan data gagal',
+                'message'=> 'Penampilan data gagal',
                 'dev_message'=> $e->getMessage()
             ]));
             $status=500;
@@ -100,7 +100,7 @@ final class KecamatanController {
         }catch (\Illuminate\Database\QueryException $e){
             $response->write(json_encode([
                 'status' => 'Gagal',
-                'message'=> 'Penambahan data gagal',
+                'message'=> 'Penampilan data gagal',
                 'dev_message'=> $e->getMessage()
             ]));
             $status=500;

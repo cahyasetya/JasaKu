@@ -7,6 +7,7 @@ use Psr\Http\Message\ResponseInterface as Response;
 use \App\Model\Transaksi as Transaksi;
 use \App\Controller\JasaController as JasaController;
 use \App\Controller\PemesananController as PemesananController;
+//use \App\Model\Pemesanan as Pemesanan;
 
 final class TransaksiController {
 
@@ -116,7 +117,6 @@ final class TransaksiController {
     public function get(Request $request, Response $response, $args){
         try{
             $transaksi = Transaksi::find($args['id']);
-            var_dump($transaksi);
             if(!$transaksi){
                 $response->write(json_encode([
                     'status' => 'Gagal',
@@ -139,7 +139,7 @@ final class TransaksiController {
                             );
                         array_push($detail_pemesanan,$temp2);
                     }
-                    $transaksi_lengkap=array(
+                $transaksi_lengkap=array(
                                 "id" => $transaksi["id"],
                                 "id_pengguna" =>$transaksi['id_pengguna'],
                                 "total" => $transaksi['total'],
@@ -229,25 +229,7 @@ final class TransaksiController {
         return $response;
     }
 
-    //Update Jasa
-    public function update(Request $request, Response $response, $args){
-        $post = $request->getParsedBody();
-
-        $transaksi = Transaksi::find($post['id']);
-
-        // if(isset($post['id_pelanggan'])) $transaksi->id_pelanggan = $post['id_pelanggan'];
-        // if(isset($post['id_paket'])) $transaksi->id_paket = $post['id_paket'];
-        if(isset($post['total'])) $transaksi->total = $post['total'];
-        if(isset($post['updated_at'])) $transaksi->no_telepon = $post['updated_at'];
-        if(isset($post['created_at'])) $transaksi->no_telepon = $post['created_at'];
-        $transaksi->save();
-
-        $response->withHeader('Content-type', 'application/json');
-        $response->write(json_encode([
-            'status' => 'success'
-        ]));
-        return $response;
-    }
+   
 
     //Hapus transaksi
     public function delete(Request $request, Response $response, $args){
@@ -306,7 +288,7 @@ final class TransaksiController {
         }catch (\Illuminate\Database\QueryException $e){
              $response->write(json_encode([
                 'status' => 'Gagal',
-                'message'=> 'Hapus data gagal',
+                'message'=> 'Ubah data pemesanan gagal',
                 'dev_message'=> $e->getMessage()
             ]));
             $status=500;    
@@ -339,7 +321,7 @@ final class TransaksiController {
         }catch (\Illuminate\Database\QueryException $e){
              $response->write(json_encode([
                 'status' => 'Gagal',
-                'message'=> 'Hapus data gagal',
+                'message'=> 'Ubah data pemesanan gagal',
                 'dev_message'=> $e->getMessage()
             ]));
             $status=500;    

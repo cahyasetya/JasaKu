@@ -76,10 +76,10 @@ final class PemesananController {
     public function delete($id){
         $pemesanan = Pemesanan::where([
                 ['id_transaksi', '=', $id]
-            ])->get();
-        if($pemesanan){
-            $pemesanan->delete();
-        }
+            ])->delete();
+        // if($pemesanan){
+        //     $pemesanan->delete();
+        // }
     }
     //Ubah Status pemesanan
     public function ubah_status($id_transaksi,$id_jasa,$status_pemesanan){
