@@ -13,23 +13,20 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.jasaku.DataPemesanActivity;
 import com.example.jasaku.DetilPesananActivity;
 import com.example.jasaku.R;
+import com.example.jasaku.interfaces.HalamanUtamaFragmentInterfaces;
 import com.example.jasaku.model.Jasa;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnCheckedChanged;
-import butterknife.OnClick;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class HalamanJasaFragment extends Fragment implements View.OnClickListener{
+public class HalamanJasaFragment extends Fragment implements View.OnClickListener {
 
     @BindView(R.id.jasa_recyclerview)
     RecyclerView jasaRecyclerView;
@@ -52,24 +49,14 @@ public class HalamanJasaFragment extends Fragment implements View.OnClickListene
         View view=inflater.inflate(R.layout.fragment_halaman_jasa, container, false);
         ButterKnife.bind(this,view);
 
-        init();
-
         return view;
     }
 
     private void init(){
         llm=new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
         jasaRecyclerView.setLayoutManager(llm);
-        jasaList=new ArrayList<>();
-        Jasa jasa=new Jasa();
-        jasa.setNama("Serabi Manis");
-        jasa.setHarga(2000);
-        for(int i=0; i<10; i++){
-            jasaList.add(jasa);
-        }
         adapter=new JasaAdapter(getContext(),jasaList);
         jasaRecyclerView.setAdapter(adapter);
-
         pesanButton.setOnClickListener(this);
     }
 

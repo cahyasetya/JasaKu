@@ -12,7 +12,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 
 public class ServiceGenerator {
-    private static final String API_BASE_URL="https://api.github.com";
+    private static final String API_BASE_URL="http://jasaq.esy.es/public/";
 
     private static OkHttpClient.Builder httpClient=new OkHttpClient.Builder();
 

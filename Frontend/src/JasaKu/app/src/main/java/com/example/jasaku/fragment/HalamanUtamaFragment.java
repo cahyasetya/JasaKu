@@ -7,8 +7,6 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.os.CancellationSignal;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
@@ -18,13 +16,15 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.jasaku.FilterActivity;
 import com.example.jasaku.R;
 import com.example.jasaku.adapter.TokoAdapter;
+import com.example.jasaku.interfaces.HalamanUtamaFragmentInterfaces;
 import com.example.jasaku.model.Toko;
+import com.example.jasaku.presenter.HalamanUtamaFragmentPresenter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -33,7 +33,7 @@ import butterknife.ButterKnife;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class HalamanUtamaFragment extends Fragment {
+public class HalamanUtamaFragment extends Fragment implements HalamanUtamaFragmentInterfaces{
 
     @BindView(R.id.toko_recyclerview)
     RecyclerView tokoRecyclerView;
@@ -43,6 +43,7 @@ public class HalamanUtamaFragment extends Fragment {
     private List<Toko> tokoList;
     TokoAdapter adapter;
     LinearLayoutManager llm;
+    HalamanUtamaFragmentPresenter presenter;
 
     public HalamanUtamaFragment() {
         // Required empty public constructor
@@ -60,6 +61,8 @@ public class HalamanUtamaFragment extends Fragment {
 
         init();
 
+        presenter=new HalamanUtamaFragmentPresenter(this);
+
         return view;
     }
 
@@ -67,20 +70,6 @@ public class HalamanUtamaFragment extends Fragment {
 
         tokoSearchview.onActionViewExpanded();
         tokoSearchview.clearFocus();
-
-        llm=new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
-        tokoList=new ArrayList<>();
-        Toko toko=new Toko();
-        toko.setNama("Toko Ibu Bejo");
-        toko.setDeskripsi("Menjual serabi khas Solo");
-        toko.setAlamat("Keputih Gg. 3f, Sukolilo, Surabaya");
-        toko.setHargaMinimal(5000);
-        for(int i=0; i<10; i++){
-            tokoList.add(toko);
-        }
-        adapter=new TokoAdapter(getContext(), tokoList,1);
-        tokoRecyclerView.setLayoutManager(llm);
-        tokoRecyclerView.setAdapter(adapter);
     }
 
     @Override
@@ -109,5 +98,25 @@ public class HalamanUtamaFragment extends Fragment {
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        presenter.loadData();
+    }
+
+    @Override
+    public void onDataLoaded(List<Toko> tokoList) {
+        this.tokoList=tokoList;
+        llm=new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
+        adapter=new TokoAdapter(getContext(), this.tokoList,1);
+        tokoRecyclerView.setLayoutManager(llm);
+        tokoRecyclerView.setAdapter(adapter);
+    }
+
+    @Override
+    public void onDataLoadError(Throwable t) {
+        Toast.makeText(getContext(),"Gangguan jaringan",Toast.LENGTH_SHORT).show();
     }
 }
