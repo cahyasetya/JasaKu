@@ -2,6 +2,9 @@
 
 namespace App\Controller;
 
+require __DIR__ . '/../Model/toko.php' ;
+require __DIR__ . '/../Model/jasa.php' ;
+
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 use \App\Model\Toko as Toko;

@@ -1,8 +1,8 @@
 <?php
 // Routes
 
-// $app->get('/', App\Action\HomeAction::class)
-//     ->setName('homepage');
+$app->get('/', App\Action\HomeAction::class)
+    ->setName('homepage');
 // 1. Pengguna
 //     . register 
 //     . login 
@@ -47,7 +47,7 @@ $app->group('', function(){
         $this->put('/', 'App\Controller\TokoController:update');
         $this->delete('/{id}', 'App\Controller\TokoController:delete');
     });
-    //Route Toko
+    //Route Jasa
  	$this->group('/jasa', function(){
         $this->get('[/]', 'App\Controller\JasaController:getall');
         $this->get('/{id}', 'App\Controller\JasaController:get');
@@ -101,7 +101,7 @@ $app->group('', function(){
         $this->delete('/{id}', 'App\Controller\TransaksiController:delete');
         $this->post('/disetujui', 'App\Controller\TransaksiController:disetujui');
         $this->post('/ditolak', 'App\Controller\TransaksiController:ditolak');
-        $this->post('/sukses', 'App\Controller\TransaksiController:sukses');
+        // $this->post('/sukses', 'App\Controller\TransaksiController:sukses');
         //Proses search dilakukan pada semua kolom, BUKAN hanya 1 kolom tertentu(Tidak termasuk kolom primary key)
         // $this->get('/search/{term}', 'App\Controller\TransaksiController:search');
         // $this->post('/', 'App\Controller\TransaksiController:create');

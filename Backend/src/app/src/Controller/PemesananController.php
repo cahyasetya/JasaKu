@@ -2,6 +2,9 @@
 
 namespace App\Controller;
 
+require __DIR__ . '/../Model/pemesanan.php' ;
+require __DIR__ . '/../Model/status_pemesanan.php' ;
+
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 use \App\Model\Pemesanan as Pemesanan;

@@ -2,6 +2,10 @@
 
 namespace App\Controller;
 
+require __DIR__ . '/../Model/transaksi.php' ;
+require __DIR__ . '/JasaController.php' ;
+require __DIR__ . '/PemesananController.php' ;
+
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 use \App\Model\Transaksi as Transaksi;

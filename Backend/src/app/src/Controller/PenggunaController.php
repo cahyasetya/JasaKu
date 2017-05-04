@@ -2,6 +2,12 @@
 
 namespace App\Controller;
 
+require __DIR__ . '/../Model/pengguna.php' ;
+require __DIR__ . '/../Model/jasa.php' ;
+require __DIR__ . '/../Model/toko.php' ;
+require __DIR__ . '/../Model/pemesanan.php' ;
+require __DIR__ . '/../Model/transaksi.php' ;
+
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 use \App\Model\Pengguna as Pengguna;

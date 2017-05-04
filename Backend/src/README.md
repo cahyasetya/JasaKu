@@ -1,12 +1,11 @@
-[Dokumentasi Jasaku API](#jasaku-api)
+#[Dokumentasi Jasaku API](#jasaku-api)
 
 ##
-Sebelum digunakan :
+Catatan :
 
-	1. Import file sql `jasaku.sql` dengan nama database jasaku
-	2. Download file-filenya, dan taruh di apache folder `/htdocs/slim/Backend/`
-	3. Nyalahkan apache dan mysql
-	4. Siap Digunakan 
+	Home Directory Api :
+
+	`jasaq.esy.es/public/`
 	
 ##
 
@@ -75,7 +74,7 @@ Untuk melakukan pendaftaran bagi pengguna baru.
 + Menggunakan metode HTTP`POST`.
 
 ##### URL
-+ [http://localhost/slim/Backend/src/public/register](). Tanpa Parameter.
++ [jasaq.esy.es/public/register](). Tanpa Parameter.
 
 ##### Parameters
 
@@ -127,7 +126,7 @@ Untuk melakukan aktivitas sign in bagi pengguna yang sudah terdaftar
 + Menggunakan metode HTTP`POST`.
 
 ##### URL
-+ [http://localhost/slim/Backend/src/public/login](). Tanpa Parameter.
++ [jasaq.esy.es/public/login](). Tanpa Parameter.
 
 ##### Parameters
 
@@ -182,7 +181,7 @@ Untuk melakukan Pembelian.
 + Menggunakan metode HTTP `POST`.
 
 ##### URL
-+ [http://localhost/slim/Backend/src/public/membeli](). Tanpa Parameter
++ [jasaq.esy.es/public/membeli](). Tanpa Parameter
 
 ##### Parameters
 
@@ -198,6 +197,8 @@ Untuk melakukan Pembelian.
         "kuantitas": $kuantitas,
         "id_jasa": $id_jasa
     },
+
+
     .
     .
     .......
@@ -205,6 +206,8 @@ Untuk melakukan Pembelian.
     .......
     .
     .
+
+
     {
         "kuantitas": $kuantitas,
         "id_jasa": $id_jasa
@@ -212,8 +215,8 @@ Untuk melakukan Pembelian.
   ]
 }
 ```
-- Ket = ```"paket"``` sejumlah barang yang akan dipesan pengguna
-- Dalam header sertakan ```Content-Type``` dengan isian ```application/json```
+- Ket = `paket` sejumlah barang yang akan dipesan pengguna
+- Dalam header sertakan `Content-Type` dengan isian `application/json`
 ##### Contoh Respon Sukses
 ```json
 {
@@ -221,7 +224,7 @@ Untuk melakukan Pembelian.
   "message": "Pembelian Berhasil"
 }
 ```
-+ Request : [http://localhost/slim/Backend/src/public/membeli](). Dengan data:
++ Request : [jasaq.esy.es/public/membeli](). Dengan data:
 
 ```json
 {
@@ -258,13 +261,13 @@ Semua operasi dengan tabel pengguna
 	
 	Request semua data yang ada di tabel pelanggan.Menggunakan metode HTTP `GET`.
 	- URL
-		- [http://localhost/slim/Backend/src/public/pengguna](). Tanpa Parameter.
+		- [jasaq.esy.es/public/pengguna](). Tanpa Parameter.
 	- Parameter
 	
 		*Tidak ada Parameter*
+
 	- Contoh Respon Sukses
-		- ```json
-		[
+		- ```json[
   {
     "id": 1,
     "nama": "Amin",
@@ -293,6 +296,7 @@ Semua operasi dengan tabel pengguna
     "password": "admin"
   }]
 		```
+
 		- Status Code `200`.
 	- Contoh Respon Gagal
 		
@@ -309,8 +313,8 @@ Semua operasi dengan tabel pengguna
 
 	Request data pelanggan dengan id tertentu.Menggunakan metode HTTP `GET`.
 	- URL
-		- [http://localhost/slim/Backend/src/public/pengguna/{id}](). Tanpa Parameter.
-			- ```{id}``` berupa angka
+		- [jasaq.esy.es/public/pengguna/{id}](). Tanpa Parameter.
+			- `{id}` berupa angka
 	- Parameter
 	
 		*Tidak ada Parameter*
@@ -329,7 +333,7 @@ Semua operasi dengan tabel pengguna
 		- Status Code `200`.
 	- Contoh Respon Gagal (1)
 		
-		```{id}``` yang dimasukkan tidak ditemukan		
+		`{id}` yang dimasukkan tidak ditemukan		
 		Error Sql
 		- ```json
 		{
@@ -354,8 +358,8 @@ Semua operasi dengan tabel pengguna
 
 	Request data pesanan masuk pada **setiap toko** yang dimiliki pengguna.Pengguna hanya perlu input id nya.Menggunakan metode HTTP `GET`.
 	- URL
-		- [http://localhost/slim/Backend/src/public/pengguna/{id}/pesananmasuk](). Tanpa Parameter.
-			- ```{id}``` berupa angka
+		- [jasaq.esy.es/public/pengguna/{id}/pesananmasuk](). Tanpa Parameter.
+			- `{id}` berupa angka
 	- Parameter
 	
 		*Tidak ada Parameter*
@@ -400,11 +404,11 @@ Semua operasi dengan tabel pengguna
   }
 ]
 		```
-		- Request : [http://localhost/slim/Backend/src/public/pengguna/2/pesananmasuk]()
+		- Request : [jasaq.esy.es/public/pengguna/2/pesananmasuk]()
 		- Status Code `200`.
 	- Contoh Respon Gagal (1)
 		
-		```{id}``` yang dimasukkan tidak ditemukan		
+		`{id}` yang dimasukkan tidak ditemukan		
 		Error Sql
 		- ```json
 		{
@@ -412,7 +416,7 @@ Semua operasi dengan tabel pengguna
   "message": "Toko Tidak ditemukan"
 }
 		```
-		- Request : [http://localhost/slim/Backend/src/public/pengguna/25/pesananmasuk]()
+		- Request : [jasaq.esy.es/public/pengguna/25/pesananmasuk]()
 		- Status Code `400`.
 	- Contoh Respon Gagal (2)
 		
@@ -427,10 +431,10 @@ Semua operasi dengan tabel pengguna
 		- Status Code `500`.
 - Ubah Data
 
-	Merubah data pelanggan dengan id tertentu.Menggunakan metode HTTP `PUT`. Pada hedaer sertakan '''Content-Type'''dengan nilai '''application/x-www-form-urlencoded'''
+	Merubah data pelanggan dengan id tertentu.Menggunakan metode HTTP `PUT`. Pada hedaer sertakan 'Content-Type' dengan nilai 'application/x-www-form-urlencoded`
 
 	- URL
-		- [http://localhost/slim/Backend/src/public/pengguna/](). Tanpa Parameter.
+		- [jasaq.esy.es/public/pengguna/](). Tanpa Parameter.
 
 	- Parameter(x-www-form-urlencoded)
 	
@@ -454,7 +458,7 @@ Semua operasi dengan tabel pengguna
   "message": "Update data berhasil"
 }
 		```
-		- Request : [http://localhost/slim/Backend/src/public/pengguna/](). 
+		- Request : [jasaq.esy.es/public/pengguna/](). 
 		- Status Code `200`.
 	- Contoh Respon Gagal (1)
 		
@@ -466,7 +470,7 @@ Semua operasi dengan tabel pengguna
   "message": "Pengguna Tidak ditemukan"
 }
 		```
-		- Request : [http://localhost/slim/Backend/src/public/pengguna/]() Dengan argumen id dan nama
+		- Request : [jasaq.esy.es/public/pengguna/]() Dengan argumen id dan nama
 		- Status Code `400`.
 	- Contoh Respon Gagal (2)
 		
@@ -484,8 +488,8 @@ Semua operasi dengan tabel pengguna
 	Menghapus data pelanggan dengan id tertentu.Menggunakan metode HTTP `DELETE`.
 
 	- URL
-		- [http://localhost/slim/Backend/src/public/pengguna/{id}](). Tidak ada Parameter.
-			- ```{id}``` berupa angka
+		- [jasaq.esy.es/public/pengguna/{id}](). Tidak ada Parameter.
+			- `{id}` berupa angka
 
 	- Parameter
 
@@ -498,11 +502,11 @@ Semua operasi dengan tabel pengguna
   "message": "Hapus data berhasil"
 }
 		```
-		- Request : [http://localhost/slim/Backend/src/public/pengguna/4](). 
+		- Request : [jasaq.esy.es/public/pengguna/4](). 
 		- Status Code `200`.
 	- Contoh Respon Gagal (1)
 		
-		```{id}``` yang dimasukkan tidak ditemukan		
+		`{id}` yang dimasukkan tidak ditemukan		
 		Error Sql
 		- ```json
 		{
@@ -510,7 +514,7 @@ Semua operasi dengan tabel pengguna
   "message": "Pengguna Tidak ditemukan"
 }
 		```
-		- Request : [http://localhost/slim/Backend/src/public/pengguna/456]() 
+		- Request : [jasaq.esy.es/public/pengguna/456]() 
 		- Status Code `400`.
 	- Contoh Respon Gagal (2)
 		
@@ -531,14 +535,14 @@ Semua operasi dengan tabel toko
 	
 	Request semua data yang ada di tabel toko.Menggunakan metode HTTP `GET`.
 	- URL
-		- [http://localhost/slim/Backend/src/public/toko/](). Tanpa Parameter.
+		- [jasaq.esy.es/public/toko/](). Tanpa Parameter.
 	
-		- [http://localhost/slim/Backend/src/public/toko/?id_kategori={id_kategori}&id_kecamatan={id_kecamatan}&sort={sort}](). Dengan Parameter.
+		- [jasaq.esy.es/public/toko/?id_kategori={id_kategori}&id_kecamatan={id_kecamatan}&sort={sort}](). Dengan Parameter.
 	- Parameter
 	
-		- ```{id_kategori}``` *(optional)* bernilai angka
-		- ```{id_kecamatan}```*(optional)* bernilai angka
-		- ```{sort}```*(optional)* bernilai :
+		- `{id_kategori}` *(optional)* bernilai angka
+		- `{id_kecamatan}`*(optional)* bernilai angka
+		- `{sort}`*(optional)* bernilai :
 			- harga_asc (untuk sorting ascending berdasarkan harga)
 			- harga_dsc (untuk sorting descending berdasarkan harga)
 			- rating_asc (untuk sorting ascending berdasarkan rating)
@@ -589,7 +593,7 @@ Semua operasi dengan tabel toko
 ]
 		```
 		
-		- Request = [http://localhost/slim/Backend/src/public/toko/]()
+		- Request = [jasaq.esy.es/public/toko/]()
 		- Status Code `200`.
 - Contoh Respon Sukses(2)
 		- ```json
@@ -623,7 +627,7 @@ Semua operasi dengan tabel toko
 ]
 		```
 		
-		- Request = [http://localhost/slim/Backend/src/public/toko/?id_kategori=&id_kecamatan=16&sort=harga_asc]()
+		- Request = [jasaq.esy.es/public/toko/?id_kategori=&id_kecamatan=16&sort=harga_asc]()
 		- Status Code `200`.
 	- Contoh Respon Gagal
 		
@@ -640,8 +644,8 @@ Semua operasi dengan tabel toko
 
 	Request data toko dengan id tertentu.Menggunakan metode HTTP `GET`.
 	- URL
-		- [http://localhost/slim/Backend/src/public/toko/{id}](). Tanpa Parameter.
-			- ```{id}``` berupa angka
+		- [jasaq.esy.es/public/toko/{id}](). Tanpa Parameter.
+			- `{id}` berupa angka
 	- Parameter
 	
 		*Tidak ada Parameter*
@@ -664,7 +668,7 @@ Semua operasi dengan tabel toko
 		- Status Code `200`.
 	- Contoh Respon Gagal (1)
 		
-		```{id}``` yang dimasukkan tidak ditemukan		
+		`{id}` yang dimasukkan tidak ditemukan		
 		Error Sql
 		- ```json
 		{
@@ -689,8 +693,8 @@ Semua operasi dengan tabel toko
 
 	Request data toko dengan menyertakan ```id_pengguna``` pada argumen request.Menggunakan metode HTTP `GET`.
 	- URL
-		- [http://localhost/slim/Backend/src/public/toko/id_pengguna/{id_pengguna}](). Tanpa Parameter.
-			- ```{id_pengguna}``` berupa angka
+		- [jasaq.esy.es/public/toko/id_pengguna/{id_pengguna}](). Tanpa Parameter.
+			- `{id_pengguna}` berupa angka
 	- Parameter
 	
 		*Tidak ada Parameter*
@@ -724,11 +728,11 @@ Semua operasi dengan tabel toko
   }
 ]
 		```
-		- Request : [http://localhost/slim/Backend/src/public/toko/id_pengguna/2]()
+		- Request : [jasaq.esy.es/public/toko/id_pengguna/2]()
 		- Status Code `200`.
 	- Contoh Respon Gagal (1)
 		
-		```{id_pengguna}``` yang dimasukkan tidak ditemukan		
+		`{id_pengguna}` yang dimasukkan tidak ditemukan		
 		Error Sql
 		- ```json
 		{
@@ -736,7 +740,7 @@ Semua operasi dengan tabel toko
   "message": "Toko Tidak ditemukan"
 }
 		```
-		- Request : [http://localhost/slim/Backend/src/public/toko/id_pengguna/234]()
+		- Request : [jasaq.esy.es/public/toko/id_pengguna/234]()
 		- Status Code `400`.
 	- Contoh Respon Gagal (2)
 		
@@ -754,7 +758,7 @@ Semua operasi dengan tabel toko
 	Mendaftarkan toko pada database tertentu.Menggunakan metode HTTP `POST`.
 
 	- URL
-		- [http://localhost/slim/Backend/src/public/toko/](). Tanpa Parameter.
+		- [jasaq.esy.es/public/toko/](). Tanpa Parameter.
 
 	- Parameter
 	
@@ -778,7 +782,7 @@ Semua operasi dengan tabel toko
   "message": "Penambahan data berhasil"
 }
 		```
-		- Request : [http://localhost/slim/Backend/src/public/toko/](). 
+		- Request : [jasaq.esy.es/public/toko/](). 
 		- Status Code `200`.
 	
 	- Contoh Respon Gagal
@@ -794,10 +798,10 @@ Semua operasi dengan tabel toko
 		- Status Code `500`.
 - Ubah Data
 
-	Merubah data toko dengan id tertentu.Menggunakan metode HTTP `PUT`.Pada hedaer sertakan '''Content-Type'''dengan nilai '''application/x-www-form-urlencoded'''
+	Merubah data toko dengan id tertentu.Menggunakan metode HTTP `PUT`.Pada hedaer sertakan 'Content-Type' dengan nilai 'application/x-www-form-urlencoded'
 
 	- URL
-		- [http://localhost/slim/Backend/src/public/toko/](). Tanpa Parameter.
+		- [jasaq.esy.es/public/toko/](). Tanpa Parameter.
 
 	- Parameter
 	
@@ -822,7 +826,7 @@ Semua operasi dengan tabel toko
   "message": "Update data berhasil"
 }
 		```
-		- Request : [http://localhost/slim/Backend/src/public/toko/](). 
+		- Request : [jasaq.esy.es/public/toko/](). 
 		- Status Code `200`.
 	- Contoh Respon Gagal (1)
 		
@@ -834,7 +838,7 @@ Semua operasi dengan tabel toko
   "message": "Toko Tidak ditemukan"
 }
 		```
-		- Request : [http://localhost/slim/Backend/src/public/toko/]() 
+		- Request : [jasaq.esy.es/public/toko/]() 
 		- Status Code `400`.
 	- Contoh Respon Gagal (2)
 		
@@ -852,8 +856,8 @@ Semua operasi dengan tabel toko
 	Menghapus data toko dengan id tertentu.Menggunakan metode HTTP `DELETE`.
 
 	- URL
-		- [http://localhost/slim/Backend/src/public/toko/{id}](). Tidak ada Parameter.
-			- ```{id}``` berupa angka
+		- [jasaq.esy.es/public/toko/{id}](). Tidak ada Parameter.
+			- `{id}` berupa angka
 
 	- Parameter
 
@@ -866,11 +870,11 @@ Semua operasi dengan tabel toko
   "message": "Hapus data berhasil"
 }
 		```
-		- Request : [http://localhost/slim/Backend/src/public/toko/3](). 
+		- Request : [jasaq.esy.es/public/toko/3](). 
 		- Status Code `200`.
 	- Contoh Respon Gagal (1)
 		
-		```{id}``` yang dimasukkan tidak ditemukan		
+		`{id}` yang dimasukkan tidak ditemukan		
 		Error Sql
 		- ```json
 		{
@@ -878,7 +882,7 @@ Semua operasi dengan tabel toko
   "message": "Toko Tidak ditemukan"
 }
 		```
-		- Request : [http://localhost/slim/Backend/src/public/pengguna/456]() 
+		- Request : [jasaq.esy.es/public/pengguna/456]() 
 		- Status Code `400`.
 	- Contoh Respon Gagal (2)
 		
@@ -899,7 +903,7 @@ Semua operasi dengan tabel jasa
 	
 	Request semua data yang ada di tabel jasa.Menggunakan metode HTTP `GET`.
 	- URL
-		- [http://localhost/slim/Backend/src/public/jasa/](). Tanpa Parameter.
+		- [jasaq.esy.es/public/jasa/](). Tanpa Parameter.
 	
 	- Parameter
 	
@@ -935,7 +939,7 @@ Semua operasi dengan tabel jasa
 ]
 		```
 		
-		- Request = [http://localhost/slim/Backend/src/public/jasa/]()
+		- Request = [jasaq.esy.es/public/jasa/]()
 		- Status Code `200`.
 
 	- Contoh Respon Gagal
@@ -951,10 +955,10 @@ Semua operasi dengan tabel jasa
 		- Status Code `500`.
 - Get 1 Data
 
-	Request data jasa dengan id tertentu.Menggunakan metode HTTP `GET`.
+	Request data jasa dengan id tertentu. Menggunakan metode HTTP `GET`.
 	- URL
-		- [http://localhost/slim/Backend/src/public/jasa/{id}](). Tanpa Parameter.
-			- ```{id}``` berupa angka
+		- [jasaq.esy.es/public/jasa/{id}](). Tanpa Parameter.
+			- `{id}` berupa angka
 	- Parameter
 	
 		*Tidak ada Parameter*
@@ -970,7 +974,7 @@ Semua operasi dengan tabel jasa
 		- Status Code `200`.
 	- Contoh Respon Gagal (1)
 		
-		```{id}``` yang dimasukkan tidak ditemukan		
+		`{id}` yang dimasukkan tidak ditemukan		
 		Error Sql
 		- ```json
 		{
@@ -993,10 +997,10 @@ Semua operasi dengan tabel jasa
 - Get By Id Toko
 
 
-	Request data jasa dengan menyertakan ```id_toko``` pada argumen request.Menggunakan metode HTTP `GET`.
+	Request data jasa dengan menyertakan `id_toko` pada argumen request. Menggunakan metode HTTP `GET`.
 	- URL
-		- [http://localhost/slim/Backend/src/public/jasa/id_toko/{id_toko}](). Tanpa Parameter.
-			- ```{id_toko}``` berupa angka
+		- [jasaq.esy.es/public/jasa/id_toko/{id_toko}](). Tanpa Parameter.
+			- `{id_toko}` berupa angka
 	- Parameter
 	
 		*Tidak ada Parameter*
@@ -1018,11 +1022,11 @@ Semua operasi dengan tabel jasa
   }
 ]
 		```
-		- Request : [http://localhost/slim/Backend/src/public/toko/id_toko/2]()
+		- Request : [jasaq.esy.es/public/toko/id_toko/2]()
 		- Status Code `200`.
 	- Contoh Respon Gagal (1)
 		
-		```{id_toko}``` yang dimasukkan tidak ditemukan		
+		`{id_toko}` yang dimasukkan tidak ditemukan		
 		Error Sql
 		- ```json
 		{
@@ -1030,7 +1034,7 @@ Semua operasi dengan tabel jasa
   "message": "Jasa Tidak ditemukan"
 }
 		```
-		- Request : [http://localhost/slim/Backend/src/public/jasa/id_toko/234]()
+		- Request : [jasaq.esy.es/public/jasa/id_toko/234]()
 		- Status Code `400`.
 	- Contoh Respon Gagal (2)
 		
@@ -1045,10 +1049,10 @@ Semua operasi dengan tabel jasa
 		- Status Code `500`.
 - Buat Data
 
-	Mendaftarkan jasa pada database .Menggunakan metode HTTP `POST`.
+	Mendaftarkan jasa pada database . Menggunakan metode HTTP `POST`.
 
 	- URL
-		- [http://localhost/slim/Backend/src/public/jasa/](). Tanpa Parameter.
+		- [jasaq.esy.es/public/jasa/](). Tanpa Parameter.
 
 	- Parameter
 	
@@ -1068,7 +1072,7 @@ Semua operasi dengan tabel jasa
   "message": "Penambahan data berhasil"
 }
 		```
-		- Request : [http://localhost/slim/Backend/src/public/jasa/](). 
+		- Request : [jasaq.esy.es/public/jasa/](). 
 		- Status Code `200`.
 	
 	- Contoh Respon Gagal
@@ -1085,10 +1089,10 @@ Semua operasi dengan tabel jasa
 - Ubah Data
 
 	Merubah data jasa dengan id tertentu.Menggunakan metode HTTP `PUT`.
-	Pada hedaer sertakan '''Content-Type'''dengan nilai '''application/x-www-form-urlencoded'''
+	Pada hedaer sertakan 'Content-Type` dengan nilai 'application/x-www-form-urlencoded'
 
 	- URL
-		- [http://localhost/slim/Backend/src/public/jasa/](). Tanpa Parameter.
+		- [jasaq.esy.es/public/jasa/](). Tanpa Parameter.
 
 	- Parameter
 	
@@ -1108,7 +1112,7 @@ Semua operasi dengan tabel jasa
   "message": "Update data berhasil"
 }
 		```
-		- Request : [http://localhost/slim/Backend/src/public/jasa/](). 
+		- Request : [jasaq.esy.es/public/jasa/](). 
 		- Status Code `200`.
 	- Contoh Respon Gagal (1)
 		
@@ -1120,7 +1124,7 @@ Semua operasi dengan tabel jasa
   "message": "Jasa Tidak ditemukan"
 }
 		```
-		- Request : [http://localhost/slim/Backend/src/public/toko/]() 
+		- Request : [jasaq.esy.es/public/toko/]() 
 		- Status Code `400`.
 	- Contoh Respon Gagal (2)
 		
@@ -1138,7 +1142,7 @@ Semua operasi dengan tabel jasa
 	Menghapus data jasa dengan id tertentu.Menggunakan metode HTTP `DELETE`.
 
 	- URL
-		- [http://localhost/slim/Backend/src/public/jasa/{id}](). Tidak ada Parameter.
+		- [jasaq.esy.es/public/jasa/{id}](). Tidak ada Parameter.
 			- ```{id}``` berupa angka
 
 	- Parameter
@@ -1152,7 +1156,7 @@ Semua operasi dengan tabel jasa
   "message": "Hapus data berhasil"
 }
 		```
-		- Request : [http://localhost/slim/Backend/src/public/jasa/3](). 
+		- Request : [jasaq.esy.es/public/jasa/3](). 
 		- Status Code `200`.
 	- Contoh Respon Gagal (1)
 		
@@ -1164,7 +1168,7 @@ Semua operasi dengan tabel jasa
   "message": "Jasa Tidak ditemukan"
 }
 		```
-		- Request : [http://localhost/slim/Backend/src/public/jasa/456]() 
+		- Request : [jasaq.esy.es/public/jasa/456]() 
 		- Status Code `400`.
 	- Contoh Respon Gagal (2)
 		
@@ -1186,7 +1190,7 @@ Semua operasi dengan tabel transaki dan pemesanan
 	
 	Request semua data yang ada di tabel transaksi dan pemesanan.Menggunakan metode HTTP `GET`.
 	- URL
-		- [http://localhost/slim/Backend/src/public/transaksi/](). Tanpa Parameter.
+		- [jasaq.esy.es/public/transaksi/](). Tanpa Parameter.
 	
 	- Parameter
 	
@@ -1315,7 +1319,7 @@ Semua operasi dengan tabel transaki dan pemesanan
 ]
 		```
 		
-		- Request = [http://localhost/slim/Backend/src/public/jasa/]()
+		- Request = [jasaq.esy.es/public/jasa/]()
 		- Status Code `200`.
 
 	- Contoh Respon Gagal
@@ -1333,7 +1337,7 @@ Semua operasi dengan tabel transaki dan pemesanan
 
 	Request data transaksi dengan id tertentu.Menggunakan metode HTTP `GET`.
 	- URL
-		- [http://localhost/slim/Backend/src/public/transaksi/{id}](). Tanpa Parameter.
+		- [jasaq.esy.es/public/transaksi/{id}](). Tanpa Parameter.
 			- ```{id}``` berupa angka
 	- Parameter
 	
@@ -1377,7 +1381,7 @@ Semua operasi dengan tabel transaki dan pemesanan
 		- Status Code `200`.
 	- Contoh Respon Gagal (1)
 		
-		```{id}``` yang dimasukkan tidak ditemukan		
+		`{id}` yang dimasukkan tidak ditemukan		
 		Error Sql
 		- ```json
 		{
@@ -1400,10 +1404,10 @@ Semua operasi dengan tabel transaki dan pemesanan
 - Get By Id Pengguna
 
 
-	Request data Transaksi dengan menyertakan ```id_pengguna``` pada argumen request.Menggunakan metode HTTP `GET`.
+	Request data Transaksi dengan menyertakan `id_pengguna` pada argumen request.Menggunakan metode HTTP `GET`.
 	- URL
-		- [http://localhost/slim/Backend/src/public/transaksi/id_pengguna/{id_toko}](). Tanpa Parameter.
-			- ```{id_toko}``` berupa angka
+		- [jasaq.esy.es/public/transaksi/id_pengguna/{id_toko}](). Tanpa Parameter.
+			- `{id_toko}` berupa angka
 	- Parameter
 	
 		*Tidak ada Parameter*
@@ -1499,11 +1503,11 @@ Semua operasi dengan tabel transaki dan pemesanan
   }
 ]
 		```
-		- Request : [http://localhost/slim/Backend/src/public/transaksi/id_pengguna/1]()
+		- Request : [jasaq.esy.es/public/transaksi/id_pengguna/1]()
 		- Status Code `200`.
 	- Contoh Respon Gagal (1)
 		
-		```{id_pengguna}``` yang dimasukkan tidak ditemukan		
+		`{id_pengguna}` yang dimasukkan tidak ditemukan		
 		Error Sql
 		- ```json
 		{
@@ -1511,7 +1515,7 @@ Semua operasi dengan tabel transaki dan pemesanan
   "message": "Transaksi Tidak ditemukan"
 }
 		```
-		- Request : [http://localhost/slim/Backend/src/public/transaksi/id_pengguna/234]()
+		- Request : [jasaq.esy.es/public/transaksi/id_pengguna/234]()
 		- Status Code `400`.
 	- Contoh Respon Gagal (2)
 		
@@ -1530,8 +1534,8 @@ Semua operasi dengan tabel transaki dan pemesanan
 	Menghapus data transaksi dengan id tertentu beserta pemesanannya.Menggunakan metode HTTP `DELETE`.
 
 	- URL
-		- [http://localhost/slim/Backend/src/public/transaksi/{id}](). Tidak ada Parameter.
-			- ```{id}``` berupa angka
+		- [jasaq.esy.es/public/transaksi/{id}](). Tidak ada Parameter.
+			- `{id}` berupa angka
 
 	- Parameter
 
@@ -1544,7 +1548,7 @@ Semua operasi dengan tabel transaki dan pemesanan
   "message": "Hapus data berhasil"
 }
 		```
-		- Request : [http://localhost/slim/Backend/src/public/transaksi/4](). 
+		- Request : [jasaq.esy.es/public/transaksi/4](). 
 		- Status Code `200`.
 	- Contoh Respon Gagal (1)
 		
@@ -1556,7 +1560,7 @@ Semua operasi dengan tabel transaki dan pemesanan
   "message": "Transaksi Tidak ditemukan"
 }
 		```
-		- Request : [http://localhost/slim/Backend/src/public/transaksi/456]() 
+		- Request : [jasaq.esy.es/public/transaksi/456]() 
 		- Status Code `400`.
 	- Contoh Respon Gagal (2)
 		
@@ -1571,17 +1575,17 @@ Semua operasi dengan tabel transaki dan pemesanan
 		- Status Code `500`.
 - Menolak Status Pemesanan
 
-	Mengubah status pemesanan menjadi ```ditolak``` dengan menyertakan id transaksi.Menggunakan metode HTTP `POST`.
+	Mengubah status pemesanan menjadi `ditolak` dengan menyertakan id transaksi.Menggunakan metode HTTP `POST`.
 
 	- URL
-		- [http://localhost/slim/Backend/src/public/transaksi/ditolak](). Tidak ada Parameter.
+		- [jasaq.esy.es/public/transaksi/ditolak](). Tidak ada Parameter.
 
 	- Parameter
 
 		*Tidak ada Parameter*
 	- POST Request Data
-		- ```{id}``` berupa angka. id transaksi
-		- ```{id_jasa}``` berupa angka. Id jasa yang ditolak
+		- `{id}` berupa angka. id transaksi
+		- `{id_jasa}` berupa angka. Id jasa yang ditolak
 	- Contoh Respon Sukses
 		
 		- ```json
@@ -1590,11 +1594,11 @@ Semua operasi dengan tabel transaki dan pemesanan
   "message": "Ubah data pemesanan berhasil"
 }
 		```
-		- Request : [http://localhost/slim/Backend/src/public/transaksi/ditolak](). Dengan id 2 dan id_jasa 1 
+		- Request : [jasaq.esy.es/public/transaksi/ditolak](). Dengan id 2 dan id_jasa 1 
 		- Status Code `200`.
 	- Contoh Respon Gagal (1)
 		
-		```{id}``` yang dimasukkan tidak ditemukan		
+		`{id}` yang dimasukkan tidak ditemukan		
 		Error Sql
 		- ```json
 		{
@@ -1602,7 +1606,7 @@ Semua operasi dengan tabel transaki dan pemesanan
   "message": "Transaksi Tidak ditemukan"
 }
 		```
-		- Request : [http://localhost/slim/Backend/src/public/transaksi/ditolak]() 
+		- Request : [jasaq.esy.es/public/transaksi/ditolak]() 
 		- Status Code `400`.
 	- Contoh Respon Gagal (2)
 		
@@ -1618,17 +1622,17 @@ Semua operasi dengan tabel transaki dan pemesanan
 
 - Menyetujui status pemesanan
 
-	Mengubah status pemesanan menjadi ```disetujui``` dengan menyertakan id transaksi.Menggunakan metode HTTP `POST`.
+	Mengubah status pemesanan menjadi `disetujui` dengan menyertakan id transaksi.Menggunakan metode HTTP `POST`.
 
 	- URL
-		- [http://localhost/slim/Backend/src/public/transaksi/disetujui](). Tidak ada Parameter.
+		- [jasaq.esy.es/public/transaksi/disetujui](). Tidak ada Parameter.
 
 	- Parameter
 
 		*Tidak ada Parameter*
 	- POST Request Data
-		- ```{id}``` berupa angka. id transaksi
-		- ```{id_jasa}``` berupa angka. Id jasa yang ditolak
+		- `{id}` berupa angka. id transaksi
+		- `{id_jasa}` berupa angka. Id jasa yang ditolak
 	- Contoh Respon Sukses
 		
 		- ```json
@@ -1637,11 +1641,11 @@ Semua operasi dengan tabel transaki dan pemesanan
   "message": "Ubah data pemesanan berhasil"
 }
 		```
-		- Request : [http://localhost/slim/Backend/src/public/transaksi/disetujui](). Dengan id 2 dan id_jasa 1 
+		- Request : [jasaq.esy.es/public/transaksi/disetujui](). Dengan id 2 dan id_jasa 1 
 		- Status Code `200`.
 	- Contoh Respon Gagal (1)
 		
-		```{id}``` yang dimasukkan tidak ditemukan		
+		`{id}` yang dimasukkan tidak ditemukan		
 		Error Sql
 		- ```json
 		{
@@ -1649,7 +1653,7 @@ Semua operasi dengan tabel transaki dan pemesanan
   "message": "Transaksi Tidak ditemukan"
 }
 		```
-		- Request : [http://localhost/slim/Backend/src/public/transaksi/disetujui]() 
+		- Request : [jasaq.esy.es/public/transaksi/disetujui]() 
 		- Status Code `400`.
 	- Contoh Respon Gagal (2)
 		
@@ -1672,7 +1676,7 @@ Semua operasi dengan tabel kategori
 	
 	Request semua data yang ada di tabel kategori.Menggunakan metode HTTP `GET`.
 	- URL
-		- [http://localhost/slim/Backend/src/public/kategori/](). Tanpa Parameter.
+		- [jasaq.esy.es/public/kategori/](). Tanpa Parameter.
 	
 	- Parameter
 	
@@ -1708,7 +1712,7 @@ Semua operasi dengan tabel kategori
 ]
 		```
 		
-		- Request = [http://localhost/slim/Backend/src/public/kategori/]()
+		- Request = [jasaq.esy.es/public/kategori/]()
 		- Status Code `200`.
 
 	- Contoh Respon Gagal
@@ -1726,8 +1730,8 @@ Semua operasi dengan tabel kategori
 
 	Request data kategori dengan id tertentu.Menggunakan metode HTTP `GET`.
 	- URL
-		- [http://localhost/slim/Backend/src/public/kategori/{id}](). Tanpa Parameter.
-			- ```{id}``` berupa angka
+		- [jasaq.esy.es/public/kategori/{id}](). Tanpa Parameter.
+			- `{id}` berupa angka
 	- Parameter
 	
 		*Tidak ada Parameter*
@@ -1741,7 +1745,7 @@ Semua operasi dengan tabel kategori
 		- Status Code `200`.
 	- Contoh Respon Gagal (1)
 		
-		```{id}``` yang dimasukkan tidak ditemukan		
+		`{id}` yang dimasukkan tidak ditemukan		
 		Error Sql
 		- ```json
 		{
@@ -1767,7 +1771,7 @@ Semua operasi dengan tabel kategori
 	Mendaftarkan kategori pada database .Menggunakan metode HTTP `POST`.
 
 	- URL
-		- [http://localhost/slim/Backend/src/public/kategori/](). Tanpa Parameter.
+		- [jasaq.esy.es/public/kategori/](). Tanpa Parameter.
 
 	- Parameter
 	
@@ -1785,7 +1789,7 @@ Semua operasi dengan tabel kategori
   "message": "Penambahan data berhasil"
 }
 		```
-		- Request : [http://localhost/slim/Backend/src/public/kategori/](). 
+		- Request : [jasaq.esy.es/public/kategori/](). 
 		- Status Code `200`.
 	
 	- Contoh Respon Gagal
@@ -1802,10 +1806,10 @@ Semua operasi dengan tabel kategori
 - Ubah Data
 
 	Merubah data kategori dengan id tertentu.Menggunakan metode HTTP `PUT`.
-	Pada hedaer sertakan '''Content-Type'''dengan nilai '''application/x-www-form-urlencoded'''
+	Pada hedaer sertakan 'Content-Type` dengan nilai 'application/x-www-form-urlencoded'
 
 	- URL
-		- [http://localhost/slim/Backend/src/public/kategori/](). Tanpa Parameter.
+		- [jasaq.esy.es/public/kategori/](). Tanpa Parameter.
 
 	- Parameter
 	
@@ -1824,7 +1828,7 @@ Semua operasi dengan tabel kategori
   "message": "Update data berhasil"
 }
 		```
-		- Request : [http://localhost/slim/Backend/src/public/kategori/](). 
+		- Request : [jasaq.esy.es/public/kategori/](). 
 		- Status Code `200`.
 	- Contoh Respon Gagal (1)
 		
@@ -1836,7 +1840,7 @@ Semua operasi dengan tabel kategori
   "message": "Kategori Tidak ditemukan"
 }
 		```
-		- Request : [http://localhost/slim/Backend/src/public/kategori/]() 
+		- Request : [jasaq.esy.es/public/kategori/]() 
 		- Status Code `400`.
 	- Contoh Respon Gagal (2)
 		
@@ -1854,8 +1858,8 @@ Semua operasi dengan tabel kategori
 	Menghapus data kategori dengan id tertentu.Menggunakan metode HTTP `DELETE`.
 
 	- URL
-		- [http://localhost/slim/Backend/src/public/kategori/{id}](). Tidak ada Parameter.
-			- ```{id}``` berupa angka
+		- [jasaq.esy.es/public/kategori/{id}](). Tidak ada Parameter.
+			- `{id}` berupa angka
 
 	- Parameter
 
@@ -1868,7 +1872,7 @@ Semua operasi dengan tabel kategori
   "message": "Hapus data berhasil"
 }
 		```
-		- Request : [http://localhost/slim/Backend/src/public/kategori/7](). 
+		- Request : [jasaq.esy.es/public/kategori/7](). 
 		- Status Code `200`.
 	- Contoh Respon Gagal (1)
 		
@@ -1880,7 +1884,7 @@ Semua operasi dengan tabel kategori
   "message": "Kategori Tidak ditemukan"
 }
 		```
-		- Request : [http://localhost/slim/Backend/src/public/kategori/456]() 
+		- Request : [jasaq.esy.es/public/kategori/456]() 
 		- Status Code `400`.
 	- Contoh Respon Gagal (2)
 		
@@ -1903,7 +1907,7 @@ Semua operasi dengan tabel kecamatan
 	
 	Request semua data yang ada di tabel kecamatan .Menggunakan metode HTTP `GET`.
 	- URL
-		- [http://localhost/slim/Backend/src/public/kecamatan/](). Tanpa Parameter.
+		- [jasaq.esy.es/public/kecamatan/](). Tanpa Parameter.
 	
 	- Parameter
 	
@@ -2160,7 +2164,7 @@ Semua operasi dengan tabel kecamatan
 ]
 		```
 		
-		- Request = [http://localhost/slim/Backend/src/public/kecamatan/]()
+		- Request = [jasaq.esy.es/public/kecamatan/]()
 		- Status Code `200`.
 
 	- Contoh Respon Gagal
@@ -2178,8 +2182,8 @@ Semua operasi dengan tabel kecamatan
 
 	Request data kecamatan dengan id tertentu.Menggunakan metode HTTP `GET`.
 	- URL
-		- [http://localhost/slim/Backend/src/public/kecamatan/{id}](). Tanpa Parameter.
-			- ```{id}``` berupa angka
+		- [jasaq.esy.es/public/kecamatan/{id}](). Tanpa Parameter.
+			- `{id}` berupa angka
 	- Parameter
 	
 		*Tidak ada Parameter*
@@ -2194,7 +2198,7 @@ Semua operasi dengan tabel kecamatan
 		- Status Code `200`.
 	- Contoh Respon Gagal (1)
 		
-		```{id}``` yang dimasukkan tidak ditemukan		
+		`{id}` yang dimasukkan tidak ditemukan		
 		Error Sql
 		- ```json
 		{
@@ -2217,10 +2221,10 @@ Semua operasi dengan tabel kecamatan
 - Get By Id Kabupaten
 
 
-	Request data kecamatan dengan menyertakan ```id_kabupaten``` pada argumen request.Menggunakan metode HTTP `GET`.
+	Request data kecamatan dengan menyertakan `id_kabupaten` pada argumen request.Menggunakan metode HTTP `GET`.
 	- URL
-		- [http://localhost/slim/Backend/src/public/kecamatan/id_kabupaten/{id_toko}](). Tanpa Parameter.
-			- ```{id_kabupaten}``` berupa angka
+		- [jasaq.esy.es/public/kecamatan/id_kabupaten/{id_toko}](). Tanpa Parameter.
+			- `{id_kabupaten}` berupa angka
 	- Parameter
 	
 		*Tidak ada Parameter*
@@ -2320,11 +2324,11 @@ Semua operasi dengan tabel kecamatan
   }
 ]
 		```
-		- Request : [http://localhost/slim/Backend/src/public/kecamatan/id_kabupaten/2]()
+		- Request : [jasaq.esy.es/public/kecamatan/id_kabupaten/2]()
 		- Status Code `200`.
 	- Contoh Respon Gagal (1)
 		
-		```{id_kabupaten}``` yang dimasukkan tidak ditemukan		
+		`{id_kabupaten}` yang dimasukkan tidak ditemukan		
 		Error Sql
 		- ```json
 		{
@@ -2332,7 +2336,7 @@ Semua operasi dengan tabel kecamatan
   "message": "Kecamatan Tidak ditemukan"
 }
 		```
-		- Request : [http://localhost/slim/Backend/src/public/kecamatan/id_kabupaten/234]()
+		- Request : [jasaq.esy.es/public/kecamatan/id_kabupaten/234]()
 		- Status Code `400`.
 	- Contoh Respon Gagal (2)
 		
@@ -2351,7 +2355,7 @@ Semua operasi dengan tabel kecamatan
 	Mendaftarkan Kecamatan pada database .Menggunakan metode HTTP `POST`.
 
 	- URL
-		- [http://localhost/slim/Backend/src/public/kecamatan/](). Tanpa Parameter.
+		- [jasaq.esy.es/public/kecamatan/](). Tanpa Parameter.
 
 	- Parameter
 	
@@ -2370,7 +2374,7 @@ Semua operasi dengan tabel kecamatan
   "message": "Penambahan data berhasil"
 }
 		```
-		- Request : [http://localhost/slim/Backend/src/public/kecamatan/](). 
+		- Request : [jasaq.esy.es/public/kecamatan/](). 
 		- Status Code `200`.
 	
 	- Contoh Respon Gagal
@@ -2387,10 +2391,10 @@ Semua operasi dengan tabel kecamatan
 - Ubah Data
 
 	Merubah data kecamatan dengan id tertentu.Menggunakan metode HTTP `PUT`.
-	Pada hedaer sertakan '''Content-Type'''dengan nilai '''application/x-www-form-urlencoded'''
+	Pada hedaer sertakan `Content-Type' dengan nilai 'application/x-www-form-urlencoded'
 
 	- URL
-		- [http://localhost/slim/Backend/src/public/kecamatan/](). Tanpa Parameter.
+		- [jasaq.esy.es/public/kecamatan/](). Tanpa Parameter.
 
 	- Parameter
 	
@@ -2409,11 +2413,11 @@ Semua operasi dengan tabel kecamatan
   "message": "Update data berhasil"
 }
 		```
-		- Request : [http://localhost/slim/Backend/src/public/kecamatan/](). 
+		- Request : [jasaq.esy.es/public/kecamatan/](). 
 		- Status Code `200`.
 	- Contoh Respon Gagal (1)
 		
-		```{id}``` yang dimasukkan tidak ditemukan		
+		`{id}` yang dimasukkan tidak ditemukan		
 		Error Sql
 		- ```json
 		{
@@ -2421,7 +2425,7 @@ Semua operasi dengan tabel kecamatan
   "message": "Kecamatan Tidak ditemukan"
 }
 		```
-		- Request : [http://localhost/slim/Backend/src/public/kecamatan/]() 
+		- Request : [jasaq.esy.es/public/kecamatan/]() 
 		- Status Code `400`.
 	- Contoh Respon Gagal (2)
 		
@@ -2439,8 +2443,8 @@ Semua operasi dengan tabel kecamatan
 	Menghapus data kecamatan dengan id tertentu.Menggunakan metode HTTP `DELETE`.
 
 	- URL
-		- [http://localhost/slim/Backend/src/public/kecamatan/{id}](). Tidak ada Parameter.
-			- ```{id}``` berupa angka
+		- [jasaq.esy.es/public/kecamatan/{id}](). Tidak ada Parameter.
+			- `{id}` berupa angka
 
 	- Parameter
 
@@ -2453,11 +2457,11 @@ Semua operasi dengan tabel kecamatan
   "message": "Hapus data berhasil"
 }
 		```
-		- Request : [http://localhost/slim/Backend/src/public/kecamatan/7](). 
+		- Request : [jasaq.esy.es/public/kecamatan/7](). 
 		- Status Code `200`.
 	- Contoh Respon Gagal (1)
 		
-		```{id}``` yang dimasukkan tidak ditemukan		
+		`{id}` yang dimasukkan tidak ditemukan		
 		Error Sql
 		- ```json
 		{
@@ -2465,7 +2469,7 @@ Semua operasi dengan tabel kecamatan
   "message": "kecamatan Tidak ditemukan"
 }
 		```
-		- Request : [http://localhost/slim/Backend/src/public/provinsi/456]() 
+		- Request : [jasaq.esy.es/public/provinsi/456]() 
 		- Status Code `400`.
 	- Contoh Respon Gagal (2)
 		
@@ -2489,7 +2493,7 @@ Semua operasi dengan tabel kabupaten
 	
 	Request semua data yang ada di tabel kabupaten .Menggunakan metode HTTP `GET`.
 	- URL
-		- [http://localhost/slim/Backend/src/public/kabupaten/](). Tanpa Parameter.
+		- [jasaq.esy.es/public/kabupaten/](). Tanpa Parameter.
 	
 	- Parameter
 	
@@ -2511,7 +2515,7 @@ Semua operasi dengan tabel kabupaten
 ]
 		```
 		
-		- Request = [http://localhost/slim/Backend/src/public/kabupaten/]()
+		- Request = [jasaq.esy.es/public/kabupaten/]()
 		- Status Code `200`.
 
 	- Contoh Respon Gagal
@@ -2529,8 +2533,8 @@ Semua operasi dengan tabel kabupaten
 
 	Request data kabupaten dengan id tertentu.Menggunakan metode HTTP `GET`.
 	- URL
-		- [http://localhost/slim/Backend/src/public/kabupaten/{id}](). Tanpa Parameter.
-			- ```{id}``` berupa angka
+		- [jasaq.esy.es/public/kabupaten/{id}](). Tanpa Parameter.
+			- `{id}` berupa angka
 	- Parameter
 	
 		*Tidak ada Parameter*
@@ -2545,7 +2549,7 @@ Semua operasi dengan tabel kabupaten
 		- Status Code `200`.
 	- Contoh Respon Gagal (1)
 		
-		```{id}``` yang dimasukkan tidak ditemukan		
+		`{id}` yang dimasukkan tidak ditemukan		
 		Error Sql
 		- ```json
 		{
@@ -2568,10 +2572,10 @@ Semua operasi dengan tabel kabupaten
 - Get By Id Provinsi
 
 
-	Request data kabupaten dengan menyertakan ```id_provinsi``` pada argumen request.Menggunakan metode HTTP `GET`.
+	Request data kabupaten dengan menyertakan `id_provinsi` pada argumen request.Menggunakan metode HTTP `GET`.
 	- URL
-		- [http://localhost/slim/Backend/src/public/kabupaten/id_provinsi/{id_toko}](). Tanpa Parameter.
-			- ```{id_provinsi}``` berupa angka
+		- [jasaq.esy.es/public/kabupaten/id_provinsi/{id_toko}](). Tanpa Parameter.
+			- `{id_provinsi}` berupa angka
 	- Parameter
 	
 		*Tidak ada Parameter*
@@ -2591,11 +2595,11 @@ Semua operasi dengan tabel kabupaten
   }
 ]
 		```
-		- Request : [http://localhost/slim/Backend/src/public/kabupaten/id_provinsi/15]()
+		- Request : [jasaq.esy.es/public/kabupaten/id_provinsi/15]()
 		- Status Code `200`.
 	- Contoh Respon Gagal (1)
 		
-		```{id_provinsi}``` yang dimasukkan tidak ditemukan		
+		`{id_provinsi}` yang dimasukkan tidak ditemukan		
 		Error Sql
 		- ```json
 		{
@@ -2603,7 +2607,7 @@ Semua operasi dengan tabel kabupaten
   "message": "Kabupaten Tidak ditemukan"
 }
 		```
-		- Request : [http://localhost/slim/Backend/src/public/kabupaten/id_provinsi/234]()
+		- Request : [jasaq.esy.es/public/kabupaten/id_provinsi/234]()
 		- Status Code `400`.
 	- Contoh Respon Gagal (2)
 		
@@ -2622,7 +2626,7 @@ Semua operasi dengan tabel kabupaten
 	Mendaftarkan kabupaten pada database .Menggunakan metode HTTP `POST`.
 
 	- URL
-		- [http://localhost/slim/Backend/src/public/kabupaten/](). Tanpa Parameter.
+		- [jasaq.esy.es/public/kabupaten/](). Tanpa Parameter.
 
 	- Parameter
 	
@@ -2641,7 +2645,7 @@ Semua operasi dengan tabel kabupaten
   "message": "Penambahan data berhasil"
 }
 		```
-		- Request : [http://localhost/slim/Backend/src/public/kabupaten/](). 
+		- Request : [jasaq.esy.es/public/kabupaten/](). 
 		- Status Code `200`.
 	
 	- Contoh Respon Gagal
@@ -2658,10 +2662,10 @@ Semua operasi dengan tabel kabupaten
 - Ubah Data
 
 	Merubah data kabupaten dengan id tertentu.Menggunakan metode HTTP `PUT`.
-	Pada hedaer sertakan '''Content-Type'''dengan nilai '''application/x-www-form-urlencoded'''
+	Pada hedaer sertakan 'Content-Type' dengan nilai `application/x-www-form-urlencoded`
 
 	- URL
-		- [http://localhost/slim/Backend/src/public/kabupaten/](). Tanpa Parameter.
+		- [jasaq.esy.es/public/kabupaten/](). Tanpa Parameter.
 
 	- Parameter
 	
@@ -2680,11 +2684,11 @@ Semua operasi dengan tabel kabupaten
   "message": "Update data berhasil"
 }
 		```
-		- Request : [http://localhost/slim/Backend/src/public/kabupaten/](). 
+		- Request : [jasaq.esy.es/public/kabupaten/](). 
 		- Status Code `200`.
 	- Contoh Respon Gagal (1)
 		
-		```{id}``` yang dimasukkan tidak ditemukan		
+		`{id}` yang dimasukkan tidak ditemukan		
 		Error Sql
 		- ```json
 		{
@@ -2692,7 +2696,7 @@ Semua operasi dengan tabel kabupaten
   "message": "Kabupaten Tidak ditemukan"
 }
 		```
-		- Request : [http://localhost/slim/Backend/src/public/kabupaten/]() 
+		- Request : [jasaq.esy.es/public/kabupaten/]() 
 		- Status Code `400`.
 	- Contoh Respon Gagal (2)
 		
@@ -2710,8 +2714,8 @@ Semua operasi dengan tabel kabupaten
 	Menghapus data kabupaten dengan id tertentu.Menggunakan metode HTTP `DELETE`.
 
 	- URL
-		- [http://localhost/slim/Backend/src/public/kabupaten/{id}](). Tidak ada Parameter.
-			- ```{id}``` berupa angka
+		- [jasaq.esy.es/public/kabupaten/{id}](). Tidak ada Parameter.
+			- `{id}` berupa angka
 
 	- Parameter
 
@@ -2724,11 +2728,11 @@ Semua operasi dengan tabel kabupaten
   "message": "Hapus data berhasil"
 }
 		```
-		- Request : [http://localhost/slim/Backend/src/public/kabupaten/7](). 
+		- Request : [jasaq.esy.es/public/kabupaten/7](). 
 		- Status Code `200`.
 	- Contoh Respon Gagal (1)
-		
-		```{id}``` yang dimasukkan tidak ditemukan		
+	
+		`{id}` yang dimasukkan tidak ditemukan		
 		Error Sql
 		- ```json
 		{
@@ -2736,7 +2740,7 @@ Semua operasi dengan tabel kabupaten
   "message": "Kabupaten Tidak ditemukan"
 }
 		```
-		- Request : [http://localhost/slim/Backend/src/public/kabupaten/456]() 
+		- Request : [jasaq.esy.es/public/kabupaten/456]() 
 		- Status Code `400`.
 	- Contoh Respon Gagal (2)
 		
@@ -2759,7 +2763,7 @@ Semua operasi dengan tabel provinsi
 	
 	Request semua data yang ada di tabel provinsi.Menggunakan metode HTTP `GET`.
 	- URL
-		- [http://localhost/slim/Backend/src/public/provinsi/](). Tanpa Parameter.
+		- [jasaq.esy.es/public/provinsi/](). Tanpa Parameter.
 	
 	- Parameter
 	
@@ -2903,7 +2907,7 @@ Semua operasi dengan tabel provinsi
 ]
 		```
 		
-		- Request = [http://localhost/slim/Backend/src/public/provinsi/]()
+		- Request = [jasaq.esy.es/public/provinsi/]()
 		- Status Code `200`.
 
 	- Contoh Respon Gagal
@@ -2921,8 +2925,8 @@ Semua operasi dengan tabel provinsi
 
 	Request data provinsi dengan id tertentu.Menggunakan metode HTTP `GET`.
 	- URL
-		- [http://localhost/slim/Backend/src/public/provinsi/{id}](). Tanpa Parameter.
-			- ```{id}``` berupa angka
+		- [jasaq.esy.es/public/provinsi/{id}](). Tanpa Parameter.
+			- `{id}` berupa angka
 	- Parameter
 	
 		*Tidak ada Parameter*
@@ -2961,7 +2965,7 @@ Semua operasi dengan tabel provinsi
 	Mendaftarkan Provinsi pada database .Menggunakan metode HTTP `POST`.
 
 	- URL
-		- [http://localhost/slim/Backend/src/public/provinsi/](). Tanpa Parameter.
+		- [jasaq.esy.es/public/provinsi/](). Tanpa Parameter.
 
 	- Parameter
 	
@@ -2979,7 +2983,7 @@ Semua operasi dengan tabel provinsi
   "message": "Penambahan data berhasil"
 }
 		```
-		- Request : [http://localhost/slim/Backend/src/public/provinsi/](). 
+		- Request : [jasaq.esy.es/public/provinsi/](). 
 		- Status Code `200`.
 	
 	- Contoh Respon Gagal
@@ -2999,7 +3003,7 @@ Semua operasi dengan tabel provinsi
 	Pada hedaer sertakan '''Content-Type'''dengan nilai '''application/x-www-form-urlencoded'''
 
 	- URL
-		- [http://localhost/slim/Backend/src/public/provinsi/](). Tanpa Parameter.
+		- [jasaq.esy.es/public/provinsi/](). Tanpa Parameter.
 
 	- Parameter
 	
@@ -3018,11 +3022,11 @@ Semua operasi dengan tabel provinsi
   "message": "Update data berhasil"
 }
 		```
-		- Request : [http://localhost/slim/Backend/src/public/provinsi/](). 
+		- Request : [jasaq.esy.es/public/provinsi/](). 
 		- Status Code `200`.
 	- Contoh Respon Gagal (1)
 		
-		```{id}``` yang dimasukkan tidak ditemukan		
+		`{id}` yang dimasukkan tidak ditemukan		
 		Error Sql
 		- ```json
 		{
@@ -3030,7 +3034,7 @@ Semua operasi dengan tabel provinsi
   "message": "Provinsi Tidak ditemukan"
 }
 		```
-		- Request : [http://localhost/slim/Backend/src/public/provinsi/]() 
+		- Request : [jasaq.esy.es/public/provinsi/]() 
 		- Status Code `400`.
 	- Contoh Respon Gagal (2)
 		
@@ -3048,8 +3052,8 @@ Semua operasi dengan tabel provinsi
 	Menghapus data provinsi dengan id tertentu.Menggunakan metode HTTP `DELETE`.
 
 	- URL
-		- [http://localhost/slim/Backend/src/public/provinsi/{id}](). Tidak ada Parameter.
-			- ```{id}``` berupa angka
+		- [jasaq.esy.es/public/provinsi/{id}](). Tidak ada Parameter.
+			- `{id}` berupa angka
 
 	- Parameter
 
@@ -3062,11 +3066,11 @@ Semua operasi dengan tabel provinsi
   "message": "Hapus data berhasil"
 }
 		```
-		- Request : [http://localhost/slim/Backend/src/public/provinsi/7](). 
+		- Request : [jasaq.esy.es/public/provinsi/7](). 
 		- Status Code `200`.
 	- Contoh Respon Gagal (1)
 		
-		```{id}``` yang dimasukkan tidak ditemukan		
+		`{id}` yang dimasukkan tidak ditemukan		
 		Error Sql
 		- ```json
 		{
@@ -3074,7 +3078,7 @@ Semua operasi dengan tabel provinsi
   "message": "Provinsi Tidak ditemukan"
 }
 		```
-		- Request : [http://localhost/slim/Backend/src/public/provinsi/456]() 
+		- Request : [jasaq.esy.es/public/provinsi/456]() 
 		- Status Code `400`.
 	- Contoh Respon Gagal (2)
 		

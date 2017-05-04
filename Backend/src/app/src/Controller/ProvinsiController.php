@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+require __DIR__ . '/../Model/provinsi.php' ;
+
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 use \App\Model\Provinsi as Provinsi;
