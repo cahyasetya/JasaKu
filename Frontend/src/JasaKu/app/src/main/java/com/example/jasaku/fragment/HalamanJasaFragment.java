@@ -117,7 +117,7 @@ class JasaAdapter extends RecyclerView.Adapter<JasaAdapter.JasaViewHolder>{
         holder.checkBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (holder.checkBox.isSelected())
+                if (holder.checkBox.isChecked())
                     jasa.setSelected(true);
                 else
                     jasa.setSelected(false);

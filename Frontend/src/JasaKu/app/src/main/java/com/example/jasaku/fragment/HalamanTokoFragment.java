@@ -50,7 +50,6 @@ public class HalamanTokoFragment extends Fragment {
     }
 
     private void init(){
-
         Toko toko=(Toko)getArguments().getSerializable("toko");
 
         namaTokoTextView.setText(toko.getNama());
