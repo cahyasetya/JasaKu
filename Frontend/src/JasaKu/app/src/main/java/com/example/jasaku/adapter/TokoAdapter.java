@@ -50,8 +50,12 @@ public class TokoAdapter extends RecyclerView.Adapter<TokoAdapter.TokoViewHolder
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(mode==1)
-                    context.startActivity(new Intent(context, DetilTokoActivity.class));
+                if(mode==1){
+                    Intent intent=new Intent(context, DetilTokoActivity.class);
+                    intent.putExtra("nama_toko",toko.getNama());
+                    intent.putExtra("id_toko",toko.getId());
+                    context.startActivity(intent);
+                }
                 else
                     context.startActivity(new Intent(context, EditTokoActivity.class));
             }

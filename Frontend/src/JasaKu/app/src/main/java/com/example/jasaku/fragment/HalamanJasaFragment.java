@@ -12,11 +12,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.jasaku.DetilPesananActivity;
 import com.example.jasaku.R;
-import com.example.jasaku.interfaces.HalamanUtamaFragmentInterfaces;
+import com.example.jasaku.interfaces.HalamanJasaFragmentInterfaces;
 import com.example.jasaku.model.Jasa;
+import com.example.jasaku.presenter.HalamanJasaFragmentPresenter;
 
 import java.util.List;
 
@@ -26,7 +28,7 @@ import butterknife.ButterKnife;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class HalamanJasaFragment extends Fragment implements View.OnClickListener {
+public class HalamanJasaFragment extends Fragment implements View.OnClickListener,HalamanJasaFragmentInterfaces {
 
     @BindView(R.id.jasa_recyclerview)
     RecyclerView jasaRecyclerView;
@@ -49,20 +51,34 @@ public class HalamanJasaFragment extends Fragment implements View.OnClickListene
         View view=inflater.inflate(R.layout.fragment_halaman_jasa, container, false);
         ButterKnife.bind(this,view);
 
-        return view;
-    }
+        String idToko=getArguments().getString("id_toko",null);
 
-    private void init(){
-        llm=new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
-        jasaRecyclerView.setLayoutManager(llm);
-        adapter=new JasaAdapter(getContext(),jasaList);
-        jasaRecyclerView.setAdapter(adapter);
-        pesanButton.setOnClickListener(this);
+        if(idToko!=null || !idToko.equals("")){
+            HalamanJasaFragmentPresenter presenter=new HalamanJasaFragmentPresenter(this);
+            presenter.loadData(idToko);
+        }
+
+        return view;
     }
 
     @Override
     public void onClick(View v) {
         getContext().startActivity(new Intent(getActivity(), DetilPesananActivity.class));
+    }
+
+    @Override
+    public void onDataLoaded(List<Jasa> jasaList) {
+        this.jasaList=jasaList;
+        llm=new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
+        jasaRecyclerView.setLayoutManager(llm);
+        adapter=new JasaAdapter(getContext(),this.jasaList);
+        jasaRecyclerView.setAdapter(adapter);
+        pesanButton.setOnClickListener(this);
+    }
+
+    @Override
+    public void onDataLoadError(Throwable t) {
+        Toast.makeText(getContext(),"Gangguan jaringan",Toast.LENGTH_SHORT).show();
     }
 }
 

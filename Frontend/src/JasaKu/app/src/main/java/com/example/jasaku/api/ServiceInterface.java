@@ -1,5 +1,6 @@
 package com.example.jasaku.api;
 
+import com.example.jasaku.model.Jasa;
 import com.example.jasaku.model.Toko;
 
 import java.util.List;
@@ -7,6 +8,7 @@ import java.util.Map;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;
+import retrofit2.http.Path;
 import retrofit2.http.QueryMap;
 
 /**
@@ -19,4 +21,10 @@ public interface ServiceInterface {
 
     @GET("toko")
     Observable<List<Toko>> getToko(@QueryMap Map<String, String> query);
+
+    @GET("jasa/id_toko/{idtoko}")
+    Observable<List<Jasa>> getJasa(@Path("idtoko") String idtoko);
+
+    @GET("transaksi/pengguna/{idpengguna}/pesananmasuk")
+    Observable<List<Jasa>> getPesananMasuk(@Path("idpengguna") String idpengguna);
 }

@@ -1,5 +1,6 @@
 package com.example.jasaku;
 
+import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -37,6 +38,8 @@ public class DetilTokoActivity extends AppCompatActivity {
     @BindView(R.id.tabs)
     TabLayout tabs;
 
+    String namaToko;
+    String idToko;
     /**
      * The {@link ViewPager} that will host the section contents.
      */
@@ -48,27 +51,22 @@ public class DetilTokoActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
+        //collect data
+        Intent args=getIntent();
+        namaToko=args.getStringExtra("nama_toko");
+        idToko=args.getStringExtra("id_toko");
+
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Nama Toko");
+        getSupportActionBar().setTitle(namaToko);
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
-        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager(),idToko);
 
         // Set up the ViewPager with the sections adapter.
         viewPager.setAdapter(mSectionsPagerAdapter);
 
         tabs.setupWithViewPager(viewPager);
-
-        /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        })*/;
-
     }
 
 
@@ -104,8 +102,11 @@ public class DetilTokoActivity extends AppCompatActivity {
      */
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
-        public SectionsPagerAdapter(FragmentManager fm) {
+        private String idToko;
+
+        public SectionsPagerAdapter(FragmentManager fm,String idToko) {
             super(fm);
+            this.idToko=idToko;
         }
 
         @Override
@@ -116,7 +117,11 @@ public class DetilTokoActivity extends AppCompatActivity {
                 case 0:
                     return new HalamanTokoFragment();
                 default:
-                    return new HalamanJasaFragment();
+                    HalamanJasaFragment halamanJasaFragment=new HalamanJasaFragment();
+                    Bundle bundle=new Bundle();
+                    bundle.putString("id_toko",idToko);
+                    halamanJasaFragment.setArguments(bundle);
+                    return halamanJasaFragment;
             }
         }
 
