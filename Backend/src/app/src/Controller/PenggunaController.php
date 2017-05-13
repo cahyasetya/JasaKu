@@ -147,8 +147,14 @@ final class PenggunaController {
         return $response->withHeader('Content-type', 'application/json')->withStatus($status);
     }
     //Get 1 data
-    public function pesananmasuk(Request $request, Response $response, $args){
+    public function pesanan(Request $request, Response $response, $args){
         try{
+            if(isset($args['status_pemesanan'])){
+                $id_status_pemesanan=$args["status_pemesanan"];
+            }else{
+                $id_status_pemesanan=1;
+            }
+            echo $id_status_pemesanan;
             $tokos=Toko::where([
                 ['id_pengguna', '=', $args['id']]
             ])->get();
@@ -160,15 +166,16 @@ final class PenggunaController {
                 $status=400;
             }else{
                 $output=array();
+                $tokolengkap=array();
+                $detail_pemesanan=array();
                 foreach ($tokos as $toko) {
-                    $tokolengkap=array();
                     $jasas=Jasa::where([
                         ['id_toko', '=', $toko['id']]
                     ])->get();
                     foreach ($jasas as $jasa) {
-                        $detail_pemesanan=array();
                         $pemesanans=Pemesanan::where([
-                        ['id_jasa', '=', $jasa['id']]
+                            ['id_jasa', '=', $jasa['id']],
+                            ['status_pemesanan', '=', $id_status_pemesanan]
                         ])->get();
                         foreach ($pemesanans as $pemesanan) {
                             $temp2=array(
@@ -196,6 +203,7 @@ final class PenggunaController {
                     array_push($output,$tokolengkap);   
                 }
                 $response->write(json_encode($output));    
+                $status=200;
             }
         }catch (\Illuminate\Database\QueryException $e){
             $response->write(json_encode([
