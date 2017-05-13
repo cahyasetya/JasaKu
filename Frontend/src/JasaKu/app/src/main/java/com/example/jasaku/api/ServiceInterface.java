@@ -2,6 +2,7 @@ package com.example.jasaku.api;
 
 import com.android.volley.Response;
 import com.example.jasaku.model.Jasa;
+import com.example.jasaku.model.Pengguna;
 import com.example.jasaku.model.Toko;
 
 import java.util.List;
@@ -10,6 +11,8 @@ import java.util.Map;
 import io.reactivex.Observable;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.http.FieldMap;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
@@ -31,4 +34,12 @@ public interface ServiceInterface {
 
     @GET("transaksi/pengguna/{idpengguna}/pesananmasuk")
     Observable<List<Jasa>> getPesananMasuk(@Path("idpengguna") String idpengguna);
+
+    @FormUrlEncoded
+    @POST("register")
+    Observable<ResponseBody> register(@FieldMap Map<String,String> field);
+
+    @FormUrlEncoded
+    @POST("login")
+    Observable<List<Pengguna>> login(@FieldMap Map<String,String> field);
 }

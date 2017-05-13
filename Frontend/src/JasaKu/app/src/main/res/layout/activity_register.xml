@@ -14,7 +14,7 @@
 
     <LinearLayout
         android:id="@+id/cardViewHolder"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
@@ -165,6 +165,22 @@
 
                 </android.support.design.widget.TextInputLayout>
 
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/layoutPass"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <android.support.v7.widget.AppCompatEditText
+                        android:id="@+id/editTextPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:inputType="textPassword"
+                        android:layout_marginRight="5dp"
+                        android:hint="Password" />
+
+                </android.support.design.widget.TextInputLayout>
+
             </LinearLayout>
 
         </android.support.v7.widget.CardView>
@@ -173,7 +189,7 @@
 
     <LinearLayout
         android:id="@+id/buttonHolder"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginRight="8dp"
         app:layout_constraintRight_toRightOf="parent"

@@ -1,10 +1,13 @@
 package com.example.jasaku.model;
 
+import java.io.Serializable;
+
 /**
  * Created by light on 17/04/17.
  */
 
-public class Pengguna {
+public class Pengguna implements Serializable{
+    private int id;
     private String nama;
     private String jenisKelamin;
     private String alamat;
@@ -40,5 +43,13 @@ public class Pengguna {
 
     public void setKontak(String kontak) {
         this.kontak = kontak;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

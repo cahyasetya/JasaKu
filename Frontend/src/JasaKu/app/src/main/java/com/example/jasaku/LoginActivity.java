@@ -6,15 +6,26 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.jasaku.interfaces.HalamanLoginActivityInterface;
+import com.example.jasaku.presenter.HalamanLoginActivityPresenter;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity implements HalamanLoginActivityInterface {
 
     @BindView(R.id.buttonLogin) Button buttonLogin;
     @BindView(R.id.textViewRegister) TextView textViewRegister;
+    @BindView(R.id.editTextUsername) EditText editTextUsername;
+    @BindView(R.id.editTextPassword) EditText editTextPassword;
+
+    HalamanLoginActivityPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,15 +34,29 @@ public class LoginActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
+        presenter=new HalamanLoginActivityPresenter(this);
     }
 
     @OnClick(R.id.buttonLogin)
     public void makeLogin(){
-        startActivity(new Intent(LoginActivity.this, MainActivity.class));
+        Map<String,String> fields=new HashMap<>();
+        fields.put("username",editTextUsername.getText().toString());
+        fields.put("password",editTextPassword.getText().toString());
+        presenter.login(fields);
     }
 
     @OnClick(R.id.textViewRegister)
     public void makeRegister(){
         startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
+    }
+
+    @Override
+    public void onLoginSuccess() {
+        startActivity(new Intent(LoginActivity.this,MainActivity.class));
+    }
+
+    @Override
+    public void onLoginError() {
+        Toast.makeText(this,"Gangguan jaringan",Toast.LENGTH_SHORT).show();
     }
 }
