@@ -358,8 +358,14 @@ Semua operasi dengan tabel pengguna
 
 	Request data pesanan masuk pada **setiap toko** yang dimiliki pengguna.Pengguna hanya perlu input id nya.Menggunakan metode HTTP `GET`.
 	- URL
-		- [jasaq.esy.es/public/pengguna/{id}/pesananmasuk](). Tanpa Parameter.
+		- [jasaq.esy.es/public/pengguna/{id}/pesanan](). Tanpa Parameter.
 			- `{id}` berupa angka
+		- [jasaq.esy.es/public/pengguna/{id}/pesanan/{status_pemesanan}](). Tanpa Parameter.
+			- `{id}` berupa angka
+			- `{status pemesanan}` berupa angka dimana
+				- Menunggu Persetujuan penjual
+				- Diterima Penjual
+				- Ditolak penjual
 	- Parameter
 	
 		*Tidak ada Parameter*
