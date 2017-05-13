@@ -54,6 +54,7 @@ public class TokoAdapter extends RecyclerView.Adapter<TokoAdapter.TokoViewHolder
                     Intent intent=new Intent(context, DetilTokoActivity.class);
                     intent.putExtra("nama_toko",toko.getNama());
                     intent.putExtra("id_toko",toko.getId());
+                    intent.putExtra("toko",toko);
                     context.startActivity(intent);
                 }
                 else

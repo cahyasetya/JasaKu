@@ -67,7 +67,7 @@
             android:name=".TambahAlamatActivity"
             android:parentActivityName=".DataPemesanActivity"
             android:windowSoftInputMode="stateHidden" />
-        <service android:name=".MyFirebaseMessagingService">
+        <!--<service android:name=".MyFirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT"/>
             </intent-filter>
@@ -76,7 +76,7 @@
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
             </intent-filter>
-        </service>
+        </service>-->
     </application>
 
 </manifest>

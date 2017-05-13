@@ -11,13 +11,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.jasaku.DetilPesananActivity;
 import com.example.jasaku.R;
 import com.example.jasaku.interfaces.HalamanJasaFragmentInterfaces;
+import com.example.jasaku.model.Belanjaan;
 import com.example.jasaku.model.Jasa;
+import com.example.jasaku.model.KeranjangBelanja;
 import com.example.jasaku.presenter.HalamanJasaFragmentPresenter;
 
 import java.util.List;
@@ -63,6 +66,14 @@ public class HalamanJasaFragment extends Fragment implements View.OnClickListene
 
     @Override
     public void onClick(View v) {
+        for(Jasa jasa:this.jasaList){
+            if(jasa.isSelected()==true){
+                Belanjaan belanjaan=new Belanjaan();
+                belanjaan.setJasa(jasa);
+                belanjaan.setKuantitas(1);
+                KeranjangBelanja.tambahBelanjaan(belanjaan);
+            }
+        }
         getContext().startActivity(new Intent(getActivity(), DetilPesananActivity.class));
     }
 
@@ -103,6 +114,15 @@ class JasaAdapter extends RecyclerView.Adapter<JasaAdapter.JasaViewHolder>{
         Jasa jasa=jasaList.get(position);
         holder.namaJasaTextView.setText(jasa.getNama());
         holder.hargaJasaTextView.setText(String.valueOf(jasa.getHarga()));
+        holder.checkBox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (holder.checkBox.isSelected())
+                    jasa.setSelected(true);
+                else
+                    jasa.setSelected(false);
+            }
+        });
     }
 
     @Override
@@ -116,6 +136,8 @@ class JasaAdapter extends RecyclerView.Adapter<JasaAdapter.JasaViewHolder>{
         TextView namaJasaTextView;
         @BindView(R.id.harga_jasa)
         TextView hargaJasaTextView;
+        @BindView(R.id.checkBox)
+        CheckBox checkBox;
 
         public JasaViewHolder(View itemView) {
             super(itemView);

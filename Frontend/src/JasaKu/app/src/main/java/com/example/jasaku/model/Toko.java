@@ -2,11 +2,13 @@ package com.example.jasaku.model;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 /**
  * Created by light on 17/04/17.
  */
 
-public class Toko {
+public class Toko implements Serializable{
     private String id;
     private String nama;
     private String alamat;

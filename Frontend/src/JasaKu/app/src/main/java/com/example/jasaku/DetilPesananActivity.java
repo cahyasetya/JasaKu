@@ -11,6 +11,7 @@ import android.widget.Button;
 import com.example.jasaku.adapter.DetilPesananAdapter;
 import com.example.jasaku.model.Belanjaan;
 import com.example.jasaku.model.Jasa;
+import com.example.jasaku.model.KeranjangBelanja;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,17 +45,7 @@ public class DetilPesananActivity extends AppCompatActivity implements View.OnCl
     private void init(){
         llm=new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false);
         detilPesananRecyclerView.setLayoutManager(llm);
-        belanjaanList=new ArrayList<>();
-        Belanjaan belanjaan=new Belanjaan();
-        Jasa jasa=new Jasa();
-        jasa.setNama("Gayung");
-        jasa.setHarga(5000);
-        belanjaan.setJasa(jasa);
-        belanjaan.setKuantitas(1);
-        for(int i=0; i<10; i++){
-            belanjaanList.add(belanjaan);
-        }
-        adapter=new DetilPesananAdapter(this,belanjaanList);
+        adapter=new DetilPesananAdapter(this);
         detilPesananRecyclerView.setAdapter(adapter);
 
         lanjutkanButton.setOnClickListener(this);
@@ -63,5 +54,11 @@ public class DetilPesananActivity extends AppCompatActivity implements View.OnCl
     @Override
     public void onClick(View v) {
         startActivity(new Intent(this, DataPemesanActivity.class));
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        KeranjangBelanja.getBelanjaanList().clear();
     }
 }

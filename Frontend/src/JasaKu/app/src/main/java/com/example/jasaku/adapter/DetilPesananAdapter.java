@@ -28,11 +28,9 @@ import butterknife.ButterKnife;
 public class DetilPesananAdapter extends RecyclerView.Adapter<DetilPesananAdapter.DetilPesananViewHolder> {
 
     private Context context;
-    private List<Belanjaan> belanjaanList;
 
-    public DetilPesananAdapter(Context context, List<Belanjaan> belanjaanList){
+    public DetilPesananAdapter(Context context){
         this.context=context;
-        this.belanjaanList=belanjaanList;
     }
 
     @Override
@@ -43,7 +41,7 @@ public class DetilPesananAdapter extends RecyclerView.Adapter<DetilPesananAdapte
 
     @Override
     public void onBindViewHolder(final DetilPesananAdapter.DetilPesananViewHolder holder, int position) {
-        final Belanjaan belanjaan=belanjaanList.get(position);
+        final Belanjaan belanjaan=KeranjangBelanja.getBelanjaanList().get(position);
         holder.namaJasaTextView.setText(belanjaan.getJasa().getNama());
         holder.hargaJasaTextView.setText("Rp "+String.valueOf(belanjaan.getJasa().getHarga()));
         holder.jumlahJasaEdittext.setText(String.valueOf(belanjaan.getKuantitas()));
@@ -67,7 +65,7 @@ public class DetilPesananAdapter extends RecyclerView.Adapter<DetilPesananAdapte
 
     @Override
     public int getItemCount() {
-        return belanjaanList.size();
+        return KeranjangBelanja.getBelanjaanList().size();
     }
 
     public class DetilPesananViewHolder extends RecyclerView.ViewHolder{

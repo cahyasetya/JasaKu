@@ -7,6 +7,7 @@ package com.example.jasaku.model;
 public class Jasa {
     private String nama;
     private long harga;
+    private boolean isSelected=false;
 
     public String getNama() {
         return nama;
@@ -22,5 +23,13 @@ public class Jasa {
 
     public void setHarga(long harga) {
         this.harga = harga;
+    }
+
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    public void setSelected(boolean selected) {
+        isSelected = selected;
     }
 }

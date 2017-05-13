@@ -15,6 +15,7 @@ import android.view.MenuItem;
 
 import com.example.jasaku.fragment.HalamanJasaFragment;
 import com.example.jasaku.fragment.HalamanTokoFragment;
+import com.example.jasaku.model.Toko;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -115,12 +116,18 @@ public class DetilTokoActivity extends AppCompatActivity {
             // Return a PlaceholderFragment (defined as a static inner class below).
             switch (position){
                 case 0:
-                    return new HalamanTokoFragment();
+                    Intent intentIn=getIntent();
+                    HalamanTokoFragment htf=new HalamanTokoFragment();
+                    Toko toko=(Toko)intentIn.getSerializableExtra("toko");
+                    Bundle bundle=new Bundle();
+                    bundle.putSerializable("toko",toko);
+                    htf.setArguments(bundle);
+                    return htf;
                 default:
                     HalamanJasaFragment halamanJasaFragment=new HalamanJasaFragment();
-                    Bundle bundle=new Bundle();
-                    bundle.putString("id_toko",idToko);
-                    halamanJasaFragment.setArguments(bundle);
+                    Bundle bundle1=new Bundle();
+                    bundle1.putString("id_toko",idToko);
+                    halamanJasaFragment.setArguments(bundle1);
                     return halamanJasaFragment;
             }
         }
