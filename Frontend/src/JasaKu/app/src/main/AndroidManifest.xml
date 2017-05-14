@@ -56,6 +56,7 @@
             android:name=".penjual.EditTokoActivity"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar"
+            android:launchMode="singleTask"
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".DetilPesananActivity"

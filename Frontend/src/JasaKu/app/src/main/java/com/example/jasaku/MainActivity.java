@@ -15,10 +15,17 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.jasaku.api.ServiceGenerator;
+import com.example.jasaku.api.ServiceInterface;
 import com.example.jasaku.fragment.HalamanUtamaFragment;
 import com.example.jasaku.fragment.KelolaTokoFragment;
+import com.example.jasaku.model.Toko;
 import com.example.jasaku.penjual.EditTokoActivity;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -103,7 +110,7 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.buat_toko) {
             startActivity(new Intent(this, RegisterTokoActivity.class));
         } else if (id == R.id.kelola_toko) {
-            startActivity(new Intent(this, EditTokoActivity.class));
+            getToko();
         } else if (id == R.id.profil) {
             startActivity(new Intent(this,ProfileActivity.class));
         } else if (id == R.id.keluar) {
@@ -117,5 +124,26 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void getToko(){
+        SharedPreferences preferences=getSharedPreferences("jasaku",MODE_PRIVATE);
+        String userId=preferences.getString("id_user",null);
+
+        ServiceInterface serviceInterface= ServiceGenerator.createService(ServiceInterface.class);
+        serviceInterface.getTokoByIdPengguna(userId).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(this::getTokoSuccess,this::getTokoFailed);
+    }
+
+    private void getTokoSuccess(Toko toko){
+        Intent intent=new Intent(this, EditTokoActivity.class);
+        intent.putExtra("id_toko",toko.getId());
+        intent.putExtra("nama_toko",toko.getNama());
+        startActivity(intent);
+    }
+
+    private void getTokoFailed(Throwable t){
+        Toast.makeText(this,"Gangguan jaringan",Toast.LENGTH_SHORT).show();
     }
 }

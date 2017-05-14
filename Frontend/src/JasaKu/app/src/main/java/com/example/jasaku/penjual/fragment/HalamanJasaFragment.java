@@ -54,11 +54,10 @@ public class HalamanJasaFragment extends Fragment implements View.OnClickListene
         View view=inflater.inflate(R.layout.fragment_halaman_jasa_penjual, container, false);
         ButterKnife.bind(this,view);
 
-        SharedPreferences preferences=getContext().getSharedPreferences("jasaku", Context.MODE_PRIVATE);
-        String id=preferences.getString("id_user","-1");
+        String idToko=getArguments().getString("id_toko");
 
         HalamanJasaFragmentPresenter presenter=new HalamanJasaFragmentPresenter(this);
-        presenter.loadData(id);
+        presenter.loadData(idToko);
 
         return view;
     }

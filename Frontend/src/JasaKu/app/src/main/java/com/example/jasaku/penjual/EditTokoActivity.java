@@ -1,5 +1,6 @@
 package com.example.jasaku.penjual;
 
+import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
@@ -59,12 +60,17 @@ public class EditTokoActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
+        Intent intent=getIntent();
+        String idToko=intent.getStringExtra("id_toko");
+        String namaToko=intent.getStringExtra("nama_toko");
+
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Nama Toko");
+        getSupportActionBar().setTitle(namaToko);
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
-        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+
+        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager(),idToko);
 
         // Set up the ViewPager with the sections adapter.
         viewPager.setAdapter(mSectionsPagerAdapter);
@@ -115,23 +121,36 @@ public class EditTokoActivity extends AppCompatActivity {
      */
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
-        public SectionsPagerAdapter(FragmentManager fm) {
+        private String idToko;
+
+        public SectionsPagerAdapter(FragmentManager fm, String idToko) {
             super(fm);
+            this.idToko=idToko;
         }
 
         @Override
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
+            Bundle bundle=new Bundle();
+            bundle.putString("id_toko",this.idToko);
             switch (position){
                 case 0:
-                    return new HalamanTokoFragment();
+                    HalamanTokoFragment htf=new HalamanTokoFragment();
+                    htf.setArguments(bundle);
+                    return htf;
                 case 1:
-                    return new HalamanJasaFragment();
+                    HalamanJasaFragment hjf=new HalamanJasaFragment();
+                    hjf.setArguments(bundle);
+                    return hjf;
                 case 2:
-                    return new PesananMasukFragment();
+                    PesananMasukFragment pmf=new PesananMasukFragment();
+                    pmf.setArguments(bundle);
+                    return pmf;
                 default:
-                    return new PesananDiterimaFragment();
+                    PesananDiterimaFragment pdf=new PesananDiterimaFragment();
+                    pdf.setArguments(bundle);
+                    return pdf;
             }
         }
 

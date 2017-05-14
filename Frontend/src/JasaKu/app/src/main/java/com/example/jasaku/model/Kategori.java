@@ -5,6 +5,7 @@ package com.example.jasaku.model;
  */
 
 public class Kategori {
+    private int id;
     private String nama;
 
     public Kategori(String nama) {
@@ -17,5 +18,13 @@ public class Kategori {
 
     public void setNama(String nama) {
         this.nama = nama;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

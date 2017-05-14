@@ -27,8 +27,6 @@ import butterknife.OnClick;
 
 public class DataPemesanActivity extends AppCompatActivity implements HalamanDataPemesanActivityInterface{
 
-    @BindView(R.id.buttonGantiAlamat)
-    Button buttonGantiAlamat;
     @BindView(R.id.textViewNama)
     TextView namaTextView;
     @BindView(R.id.textViewAlamat)
@@ -58,11 +56,6 @@ public class DataPemesanActivity extends AppCompatActivity implements HalamanDat
         Pengguna pengguna=gson.fromJson(preferences.getString("pengguna",null),Pengguna.class);
         namaTextView.setText(pengguna.getNama());
         alamatTextView.setText(pengguna.getAlamat());
-    }
-
-    @OnClick(R.id.buttonGantiAlamat)
-    public void makeNewAlamat(){
-        startActivity(new Intent(DataPemesanActivity.this, TambahAlamatActivity.class));
     }
 
     @OnClick(R.id.buttonPesan)
