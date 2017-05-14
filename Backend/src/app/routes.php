@@ -26,7 +26,7 @@ $app->group('', function(){
     $this->group('/pengguna', function(){
         $this->get('[/]', 'App\Controller\PenggunaController:getall');
         $this->get('/{id}', 'App\Controller\PenggunaController:get');
-        $this->get('/{id}/pemesanan[/{status_pemesanan}]', 'App\Controller\PenggunaController:pesanan');
+        //$this->get('/{id}/pemesanan[/{status_pemesanan}]', 'App\Controller\PenggunaController:pesanan');
         //Proses search dilakukan pada semua kolom, BUKAN hanya 1 kolom tertentu (Tidak termasuk kolom primary key)
         $this->get('/search/{term}', 'App\Controller\PenggunaController:search');
         $this->put('/', 'App\Controller\PenggunaController:update');
@@ -41,6 +41,7 @@ $app->group('', function(){
         $this->get('[/]', 'App\Controller\TokoController:getall');
         $this->get('/{id}', 'App\Controller\TokoController:get');
         $this->get('/id_pengguna/{id}', 'App\Controller\TokoController:get_byidpengguna');
+        $this->get('/{id}/pemesanan[/{status_pemesanan}]', 'App\Controller\TokoController:pesanan');
         //Proses search dilakukan pada semua kolom, BUKAN hanya 1 kolom tertentu (Tidak termasuk kolom primary key)
         $this->get('/search/{term}', 'App\Controller\TokoController:search');
         $this->post('/', 'App\Controller\TokoController:create');

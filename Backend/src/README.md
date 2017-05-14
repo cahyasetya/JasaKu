@@ -15,13 +15,13 @@ Catatan :
 - [Pengguna](#pengguna)
 	- Get Semua Data
 	- Get 1 Data
-	- Get Pesanan Masuk
 	- Ubah Data
 	- Hapus Data
 - [Toko](#toko)
-	- Get Semua Data
+	- Get Semua Data(Sisipkan id_kategori / id_kecamtan untuk lakukan filter Atau sisipkan metode sort untuk lakukan sorting)
 	- Get 1 Data
 	- Get 1 Data dg id pengguna
+	- Get Pesanan Masuk
 	- Buat Data
 	- Ubah Data
 	- Hapus Data
@@ -353,88 +353,7 @@ Semua operasi dengan tabel pengguna
   		}
 		```
 		- Status Code `500`.
-- Get Pesanan Masuk
 
-
-	Request data pesanan masuk pada **setiap toko** yang dimiliki pengguna.Pengguna hanya perlu input id nya.Menggunakan metode HTTP `GET`.
-	- URL
-		- [jasaq.esy.es/public/pengguna/{id}/pesanan](). Tanpa Parameter.
-			- `{id}` berupa angka
-		- [jasaq.esy.es/public/pengguna/{id}/pesanan/{status_pemesanan}](). Tanpa Parameter.
-			- `{id}` berupa angka
-			- `{status pemesanan}` berupa angka dimana
-				- Menunggu Persetujuan penjual
-				- Diterima Penjual
-				- Ditolak penjual
-	- Parameter
-	
-		*Tidak ada Parameter*
-	- Contoh Respon Sukses
-		
-		- ```json
-		[
-  {
-    "id": 1,
-    "nama": "Bengkel",
-    "alamat": "Jl Keputih No 2 , Surabaya",
-    "kontak": "0897865789",
-    "deskripsi": "Menerima Spededa 4 tak dan matik",
-    "id_pengguna": 2,
-    "jamOperasional": "8.00-16.00",
-    "pemesananmasuk": [
-      {
-        "kuantitas": 1,
-        "total": 25000,
-        "id_jasa": 3,
-        "id_transaksi": 1,
-        "status_pemesanan": 1
-      },
-      {
-        "kuantitas": 2,
-        "total": 35000,
-        "id_jasa": 3,
-        "id_transaksi": 3,
-        "status_pemesanan": 1
-      }
-    ]
-  },
-  {
-    "id": 3,
-    "nama": "jahitin23",
-    "alamat": "Jl Gebang timur no 27, Surabaya",
-    "kontak": "089980789567",
-    "deskripsi": "Menerima permak jeans, jahit seragam, memperbaiki tas,dll",
-    "id_pengguna": 2,
-    "jamOperasional": "07.00-17.00",
-    "pemesananmasuk": []
-  }
-]
-		```
-		- Request : [jasaq.esy.es/public/pengguna/2/pesananmasuk]()
-		- Status Code `200`.
-	- Contoh Respon Gagal (1)
-		
-		`{id}` yang dimasukkan tidak ditemukan		
-		Error Sql
-		- ```json
-		{
-  "status": "Gagal",
-  "message": "Toko Tidak ditemukan"
-}
-		```
-		- Request : [jasaq.esy.es/public/pengguna/25/pesananmasuk]()
-		- Status Code `400`.
-	- Contoh Respon Gagal (2)
-		
-		Error Sql
-		- ```json
-		{
-			"status": "Gagal",
-  			"message": "Login Gagal",
-  			"dev_message": "blablablablabl"
-  		}
-		```
-		- Status Code `500`.
 - Ubah Data
 
 	Merubah data pelanggan dengan id tertentu.Menggunakan metode HTTP `PUT`. Pada hedaer sertakan 'Content-Type' dengan nilai 'application/x-www-form-urlencoded`
@@ -690,6 +609,42 @@ Semua operasi dengan tabel toko
 		{
 			"status": "Gagal",
   			"message": "Penampilan Data Gagal",
+  			"dev_message": "blablablablabl"
+  		}
+		```
+		- Status Code `500`.
+- Get Pesanan Masuk
+
+
+	Request data pesanan masuk pada toko yg dimaksud.Menggunakan metode HTTP `GET`.
+	- URL
+		- [jasaq.esy.es/public/toko/{id}/pemesanan](). Tanpa Parameter.
+			- `{id}` berupa angka
+		- [jasaq.esy.es/public/pengguna/{id}/pesanan/{status_pemesanan}](). Tanpa Parameter.
+			- `{id}` berupa angka
+			- `{status pemesanan}` berupa angka dimana
+				- Menunggu Persetujuan penjual
+				- Diterima Penjual
+				- Ditolak penjual
+	- Parameter
+	
+		*Tidak ada Parameter*
+	- Contoh Respon Sukses
+		
+		- Request : [jasaq.esy.es/public/toko/2/pemesanan]()
+		- Status Code `200`.
+	- Contoh Respon Gagal (1)
+		
+		
+		- Request : [jasaq.esy.es/public/toko/225/pemesanan]()
+		- Status Code `400`.
+	- Contoh Respon Gagal (2)
+		
+		Error Sql
+		- ```json
+		{
+			"status": "Gagal",
+  			"message": "Penampilan Toko Gagal",
   			"dev_message": "blablablablabl"
   		}
 		```

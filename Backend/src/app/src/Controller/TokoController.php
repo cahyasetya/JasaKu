@@ -4,11 +4,13 @@ namespace App\Controller;
 
 require __DIR__ . '/../Model/toko.php' ;
 require __DIR__ . '/../Model/jasa.php' ;
+require __DIR__ . '/../Model/pemesanan.php' ;
 
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 use \App\Model\Toko as Toko;
 use \App\Model\Jasa as Jasa;
+use \App\Model\Pemesanan as Pemesanan;
 
 final class TokoController {
 
@@ -163,6 +165,63 @@ final class TokoController {
             $response->write(json_encode([
                 'status' => 'Gagal',
                 'message'=> 'Penampilan data gagal',
+                'dev_message'=> $e->getMessage()
+            ]));
+            $status=500;
+        }
+        return $response->withHeader('Content-type', 'application/json')->withStatus($status);
+    }
+
+    public function pesanan(Request $request, Response $response, $args){
+        try{
+            $toko = Toko::find($args['id']);
+            if(!json_decode($toko)){
+                $response->write(json_encode([
+                    'status' => 'Gagal',
+                    'message'=> 'Toko Tidak ditemukan'
+                ]));
+                $status=400;
+            }else{
+                $output=array();
+                $tokolengkap=array();
+                $detail_pemesanan=array();
+                
+                    $jasas=Jasa::where([
+                        ['id_toko', '=', $toko['id']]
+                    ])->get();
+                    foreach ($jasas as $jasa) {
+                        if(isset($args['status_pemesanan'])){
+                            $pemesanans=Pemesanan::where([
+                                ['id_jasa', '=', $jasa['id']],
+                                ['status_pemesanan', '=', $args["status_pemesanan"]]
+                            ])->get();
+                            
+                        }else{
+                            $pemesanans=Pemesanan::where([
+                                ['id_jasa', '=', $jasa['id']]
+                            ])->get();
+                        }
+
+                        foreach ($pemesanans as $pemesanan) {
+                            $temp2=array(
+                                    'id_jasa'   => $pemesanan['id_jasa'],
+                                    'nama'      => $jasa['nama'],
+                                    'harga'     =>$jasa['harga'],
+                                    'kuantitas' => $pemesanan['kuantitas'],
+                                    'total'     =>  (int)$pemesanan['total'],
+                                    // 'id_transaksi'  =>$pemesanan['id_transaksi'],
+                                    'status_pemesanan'=>$pemesanan['status_pemesanan']
+                                );
+                            array_push($detail_pemesanan,$temp2);
+                        }
+                    }
+                $response->write(json_encode($detail_pemesanan));    
+                $status=200;
+            }
+        }catch (\Illuminate\Database\QueryException $e){
+            $response->write(json_encode([
+                'status' => 'Gagal',
+                'message'=> 'Penampilan toko gagal',
                 'dev_message'=> $e->getMessage()
             ]));
             $status=500;

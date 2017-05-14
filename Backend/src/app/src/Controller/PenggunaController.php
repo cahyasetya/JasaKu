@@ -78,12 +78,12 @@ final class PenggunaController {
                 ['password', '=', $password]
             ])->get();
             
+            
             if (json_decode($a)){
-                $response->write(json_encode($a));
-                //  $response->write(json_encode([
-                //      'status' => 'Sukses',
-                //      'message'=> 'Login Berhasil'
-                //  ]));
+                foreach ($a as $b) {
+                    $pengguna = Pengguna::find($b['id']);
+                    $response->write(json_encode($pengguna));
+                }
                 $status=200;    
             }else{
                 $response->write(json_encode([
@@ -149,12 +149,6 @@ final class PenggunaController {
     //Get 1 data
     public function pesanan(Request $request, Response $response, $args){
         try{
-            if(isset($args['status_pemesanan'])){
-                $id_status_pemesanan=$args["status_pemesanan"];
-            }else{
-                $id_status_pemesanan=1;
-            }
-            echo $id_status_pemesanan;
             $tokos=Toko::where([
                 ['id_pengguna', '=', $args['id']]
             ])->get();
@@ -173,16 +167,26 @@ final class PenggunaController {
                         ['id_toko', '=', $toko['id']]
                     ])->get();
                     foreach ($jasas as $jasa) {
-                        $pemesanans=Pemesanan::where([
-                            ['id_jasa', '=', $jasa['id']],
-                            ['status_pemesanan', '=', $id_status_pemesanan]
-                        ])->get();
+                        if(isset($args['status_pemesanan'])){
+                            $pemesanans=Pemesanan::where([
+                                ['id_jasa', '=', $jasa['id']],
+                                ['status_pemesanan', '=', $args["status_pemesanan"]]
+                            ])->get();
+                            
+                        }else{
+                            $pemesanans=Pemesanan::where([
+                                ['id_jasa', '=', $jasa['id']]
+                            ])->get();
+                        }
+
                         foreach ($pemesanans as $pemesanan) {
                             $temp2=array(
+                                    'id_jasa'   => $pemesanan['id_jasa'],
+                                    'nama'      => $jasa['nama'],
+                                    'harga'     =>$jasa['harga'],
                                     'kuantitas' => $pemesanan['kuantitas'],
                                     'total'     =>  (int)$pemesanan['total'],
-                                    'id_jasa'   => $pemesanan['id_jasa'],
-                                    'id_transaksi'  =>$pemesanan['id_transaksi'],
+                                    // 'id_transaksi'  =>$pemesanan['id_transaksi'],
                                     'status_pemesanan'=>$pemesanan['status_pemesanan']
                                 );
                             array_push($detail_pemesanan,$temp2);
@@ -215,6 +219,8 @@ final class PenggunaController {
         }
         return $response->withHeader('Content-type', 'application/json')->withStatus($status);
     }
+
+
     //Cari data
     public function search(Request $request, Response $response, $args){
         try{
