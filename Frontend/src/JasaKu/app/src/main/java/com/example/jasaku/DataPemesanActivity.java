@@ -72,7 +72,7 @@ public class DataPemesanActivity extends AppCompatActivity implements HalamanDat
 
     private void prepareRequest(){
         SharedPreferences preferences=getSharedPreferences("jasaku", MODE_PRIVATE);
-        String id=preferences.getString("id_pengguna",null);
+        String id=preferences.getString("id_user",null);
 
         RequestMembeli requestMembeli=new RequestMembeli();
         requestMembeli.setId_pengguna(id);

@@ -42,10 +42,8 @@ public class MainActivity extends AppCompatActivity
         MenuItem kelolaToko=menu.findItem(R.id.kelola_toko);
         SharedPreferences preferences=getSharedPreferences("jasaku",MODE_PRIVATE);
         SharedPreferences.Editor editor=preferences.edit();
-        editor.putString("id_user","1");
         editor.commit();
         boolean isLoggedIn=preferences.getBoolean("isLoggedIn",false);
-        isLoggedIn=true;
         if(!isLoggedIn){
             if(kelolaToko.isVisible()){
                 kelolaToko.setVisible(false);
