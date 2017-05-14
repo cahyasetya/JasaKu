@@ -21,10 +21,12 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.jasaku.R;
+import com.example.jasaku.model.Toko;
 import com.example.jasaku.penjual.fragment.HalamanJasaFragment;
 import com.example.jasaku.penjual.fragment.HalamanTokoFragment;
 import com.example.jasaku.penjual.fragment.PesananDiterimaFragment;
 import com.example.jasaku.penjual.fragment.PesananMasukFragment;
+import com.google.gson.Gson;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -60,9 +62,12 @@ public class EditTokoActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
+        Gson gson=new Gson();
+
         Intent intent=getIntent();
         String idToko=intent.getStringExtra("id_toko");
         String namaToko=intent.getStringExtra("nama_toko");
+        Toko toko=gson.fromJson(intent.getStringExtra("toko"),Toko.class);
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -70,7 +75,7 @@ public class EditTokoActivity extends AppCompatActivity {
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
 
-        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager(),idToko);
+        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager(),idToko,toko);
 
         // Set up the ViewPager with the sections adapter.
         viewPager.setAdapter(mSectionsPagerAdapter);
@@ -122,10 +127,12 @@ public class EditTokoActivity extends AppCompatActivity {
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
         private String idToko;
+        private Toko toko;
 
-        public SectionsPagerAdapter(FragmentManager fm, String idToko) {
+        public SectionsPagerAdapter(FragmentManager fm, String idToko, Toko toko) {
             super(fm);
             this.idToko=idToko;
+            this.toko=toko;
         }
 
         @Override
@@ -136,6 +143,7 @@ public class EditTokoActivity extends AppCompatActivity {
             bundle.putString("id_toko",this.idToko);
             switch (position){
                 case 0:
+                    bundle.putSerializable("toko",this.toko);
                     HalamanTokoFragment htf=new HalamanTokoFragment();
                     htf.setArguments(bundle);
                     return htf;

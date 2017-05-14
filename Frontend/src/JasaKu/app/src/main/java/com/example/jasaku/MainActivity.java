@@ -23,6 +23,7 @@ import com.example.jasaku.fragment.HalamanUtamaFragment;
 import com.example.jasaku.fragment.KelolaTokoFragment;
 import com.example.jasaku.model.Toko;
 import com.example.jasaku.penjual.EditTokoActivity;
+import com.google.gson.Gson;
 
 import java.util.List;
 
@@ -140,9 +141,15 @@ public class MainActivity extends AppCompatActivity
 
     private void getTokoSuccess(List<Toko> tokoList){
         Toko toko=tokoList.get(0);
+
+        Gson gson=new Gson();
+        String tokoString=gson.toJson(toko);
+
         Intent intent=new Intent(this, EditTokoActivity.class);
         intent.putExtra("id_toko",toko.getId());
         intent.putExtra("nama_toko",toko.getNama());
+        intent.putExtra("toko",tokoString);
+
         startActivity(intent);
     }
 
