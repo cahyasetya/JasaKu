@@ -24,6 +24,8 @@ import com.example.jasaku.fragment.KelolaTokoFragment;
 import com.example.jasaku.model.Toko;
 import com.example.jasaku.penjual.EditTokoActivity;
 
+import java.util.List;
+
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
@@ -136,7 +138,8 @@ public class MainActivity extends AppCompatActivity
                 .subscribe(this::getTokoSuccess,this::getTokoFailed);
     }
 
-    private void getTokoSuccess(Toko toko){
+    private void getTokoSuccess(List<Toko> tokoList){
+        Toko toko=tokoList.get(0);
         Intent intent=new Intent(this, EditTokoActivity.class);
         intent.putExtra("id_toko",toko.getId());
         intent.putExtra("nama_toko",toko.getNama());

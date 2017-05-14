@@ -62,5 +62,5 @@ public interface ServiceInterface {
     Observable<ResponseBody> insertJasa(@FieldMap Map<String, String> fields);
 
     @GET("toko/id_pengguna/{id_pengguna}")
-    Observable<Toko> getTokoByIdPengguna(@Path("id_pengguna") String id_pengguna);
+    Observable<List<Toko>> getTokoByIdPengguna(@Path("id_pengguna") String id_pengguna);
 }
