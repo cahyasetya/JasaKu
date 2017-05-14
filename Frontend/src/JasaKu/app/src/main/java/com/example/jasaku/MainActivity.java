@@ -14,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.example.jasaku.fragment.HalamanUtamaFragment;
 import com.example.jasaku.fragment.KelolaTokoFragment;
@@ -54,6 +55,11 @@ public class MainActivity extends AppCompatActivity
                 kelolaToko.setVisible(true);
             }
         }
+
+        View headerView=navigationView.getHeaderView(0);
+        TextView nama=(TextView)headerView.findViewById(R.id.nama_pengguna);
+        String namaPengguna=preferences.getString("nama",null);
+        nama.setText(namaPengguna);
 
         getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.content_main,new HalamanUtamaFragment()).commit();
     }

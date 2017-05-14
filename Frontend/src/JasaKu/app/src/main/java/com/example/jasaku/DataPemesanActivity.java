@@ -7,14 +7,19 @@ import android.os.Bundle;
 import android.view.Display;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.jasaku.interfaces.HalamanDataPemesanActivityInterface;
 import com.example.jasaku.model.Belanjaan;
 import com.example.jasaku.model.KeranjangBelanja;
 import com.example.jasaku.model.Paket;
+import com.example.jasaku.model.Pengguna;
 import com.example.jasaku.model.RequestMembeli;
 import com.example.jasaku.presenter.HalamanDataPemesanActivityPresenter;
+import com.google.gson.Gson;
+
+import org.w3c.dom.Text;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -24,6 +29,10 @@ public class DataPemesanActivity extends AppCompatActivity implements HalamanDat
 
     @BindView(R.id.buttonGantiAlamat)
     Button buttonGantiAlamat;
+    @BindView(R.id.textViewNama)
+    TextView namaTextView;
+    @BindView(R.id.textViewAlamat)
+    TextView alamatTextView;
 
     HalamanDataPemesanActivityPresenter presenter;
 
@@ -36,7 +45,19 @@ public class DataPemesanActivity extends AppCompatActivity implements HalamanDat
 
         ButterKnife.bind(this);
 
+        init();
+
         presenter=new HalamanDataPemesanActivityPresenter(this);
+    }
+
+    private void init(){
+        SharedPreferences preferences=getSharedPreferences("jasaku",MODE_PRIVATE);
+
+        Gson gson=new Gson();
+
+        Pengguna pengguna=gson.fromJson(preferences.getString("pengguna",null),Pengguna.class);
+        namaTextView.setText(pengguna.getNama());
+        alamatTextView.setText(pengguna.getAlamat());
     }
 
     @OnClick(R.id.buttonGantiAlamat)

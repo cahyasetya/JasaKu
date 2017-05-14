@@ -43,7 +43,7 @@ public interface ServiceInterface {
 
     @FormUrlEncoded
     @POST("login")
-    Observable<List<Pengguna>> login(@FieldMap Map<String,String> field);
+    Observable<Pengguna> login(@FieldMap Map<String,String> field);
 
     @POST("membeli")
     Observable<ResponseBody> beli(@Body RequestMembeli body);

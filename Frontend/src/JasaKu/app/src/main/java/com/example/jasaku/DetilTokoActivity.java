@@ -150,10 +150,4 @@ public class DetilTokoActivity extends AppCompatActivity {
             return null;
         }
     }
-
-    @Override
-    protected void onNewIntent(Intent intent) {
-        super.onNewIntent(intent);
-        Toast.makeText(this,"OnNewIntent triggered",Toast.LENGTH_SHORT).show();
-    }
 }
