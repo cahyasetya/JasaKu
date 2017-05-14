@@ -3,6 +3,7 @@ package com.example.jasaku.api;
 import com.android.volley.Response;
 import com.example.jasaku.model.Jasa;
 import com.example.jasaku.model.Pengguna;
+import com.example.jasaku.model.RequestMembeli;
 import com.example.jasaku.model.Toko;
 
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.Map;
 import io.reactivex.Observable;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -42,4 +44,7 @@ public interface ServiceInterface {
     @FormUrlEncoded
     @POST("login")
     Observable<List<Pengguna>> login(@FieldMap Map<String,String> field);
+
+    @POST("membeli")
+    Observable<ResponseBody> beli(@Body RequestMembeli body);
 }

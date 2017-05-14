@@ -12,6 +12,7 @@ import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.example.jasaku.fragment.HalamanJasaFragment;
 import com.example.jasaku.fragment.HalamanTokoFragment;
@@ -148,5 +149,11 @@ public class DetilTokoActivity extends AppCompatActivity {
             }
             return null;
         }
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        Toast.makeText(this,"OnNewIntent triggered",Toast.LENGTH_SHORT).show();
     }
 }

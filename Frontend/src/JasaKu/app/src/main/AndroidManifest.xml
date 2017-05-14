@@ -35,6 +35,7 @@
         <activity
             android:name=".DetilTokoActivity"
             android:label="@string/title_activity_detil_toko"
+            android:launchMode="singleTask"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
@@ -58,6 +59,7 @@
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".DetilPesananActivity"
+            android:launchMode="singleTask"
             android:parentActivityName=".DetilTokoActivity" />
         <activity android:name=".penjual.KelolaJasa" />
         <activity

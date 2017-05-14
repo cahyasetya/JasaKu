@@ -5,6 +5,8 @@ package com.example.jasaku.model;
  */
 
 public class Jasa {
+
+    private String id;
     private String nama;
     private long harga;
     private boolean isSelected=false;
@@ -31,5 +33,13 @@ public class Jasa {
 
     public void setSelected(boolean selected) {
         isSelected = selected;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }
