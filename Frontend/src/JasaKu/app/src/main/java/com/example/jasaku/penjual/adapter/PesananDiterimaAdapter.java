@@ -1,10 +1,12 @@
 package com.example.jasaku.penjual.adapter;
 
 import android.content.Context;
+import android.support.annotation.BinderThread;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.jasaku.R;
@@ -40,6 +42,18 @@ public class PesananDiterimaAdapter extends RecyclerView.Adapter<PesananDiterima
         PesananMasuk pesananMasuk= pesananMasukList.get(position);
         holder.namaJasaTextView.setText(pesananMasuk.getNama());
         holder.hargaJasaTextView.setText(String.valueOf(pesananMasuk.getHarga()));
+        holder.alamatPembeliTextView.setText(pesananMasuk.getPembeli().getAlamat());
+        holder.namaPembeliTextView.setText(pesananMasuk.getPembeli().getNama());
+        holder.kontakPembeliTextView.setText(pesananMasuk.getPembeli().getKontak());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(holder.pembeliContainer.getVisibility()==View.VISIBLE)
+                    holder.pembeliContainer.setVisibility(View.GONE);
+                else
+                    holder.pembeliContainer.setVisibility(View.VISIBLE);
+            }
+        });
     }
 
     @Override
@@ -53,6 +67,14 @@ public class PesananDiterimaAdapter extends RecyclerView.Adapter<PesananDiterima
         TextView namaJasaTextView;
         @BindView(R.id.harga_jasa)
         TextView hargaJasaTextView;
+        @BindView(R.id.alamat_pembeli)
+        TextView alamatPembeliTextView;
+        @BindView(R.id.nama_pembeli)
+        TextView namaPembeliTextView;
+        @BindView(R.id.kontak_pembeli)
+        TextView kontakPembeliTextView;
+        @BindView(R.id.pembeli_container)
+        LinearLayout pembeliContainer;
 
         public PesanDiterimaViewHolder(View itemView) {
             super(itemView);

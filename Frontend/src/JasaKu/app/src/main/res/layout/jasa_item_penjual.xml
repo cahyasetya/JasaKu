@@ -9,7 +9,7 @@
         android:layout_height="wrap_content">
 
         <ImageButton
-            android:id="@+id/ubahButton"
+            android:id="@+id/selesaiButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="0dp"
@@ -29,9 +29,9 @@
             android:layout_marginRight="0dp"
             android:layout_marginTop="0dp"
             android:background="@color/white"
-            app:layout_constraintBottom_toBottomOf="@+id/ubahButton"
-            app:layout_constraintRight_toLeftOf="@+id/ubahButton"
-            app:layout_constraintTop_toTopOf="@+id/ubahButton"
+            app:layout_constraintBottom_toBottomOf="@+id/selesaiButton"
+            app:layout_constraintRight_toLeftOf="@+id/selesaiButton"
+            app:layout_constraintTop_toTopOf="@+id/selesaiButton"
             app:layout_constraintVertical_bias="0.0"
             app:srcCompat="@mipmap/ic_close_black_24dp" />
 

@@ -8,14 +8,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.jasaku.R;
-import com.example.jasaku.model.Jasa;
 import com.example.jasaku.model.PesananMasuk;
 import com.example.jasaku.penjual.adapter.PesananDiterimaAdapter;
-import com.example.jasaku.penjual.adapter.PesananMasukAdapter;
+import com.example.jasaku.penjual.interfaces.PesananDiterimaInterfaces;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -24,14 +23,14 @@ import butterknife.ButterKnife;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class PesananDiterimaFragment extends Fragment {
+public class PesananDiterimaFragment extends Fragment implements PesananDiterimaInterfaces{
 
     @BindView(R.id.jasa_recyclerview)
     RecyclerView jasaRecyclerView;
 
     private LinearLayoutManager llm;
     private PesananDiterimaAdapter adapter;
-    private List<PesananMasuk> jasaList;
+    private List<PesananMasuk> pesananMasukList;
 
     public PesananDiterimaFragment() {
         // Required empty public constructor
@@ -46,23 +45,20 @@ public class PesananDiterimaFragment extends Fragment {
 
         ButterKnife.bind(this,view);
 
-        //init();
-
         return view;
     }
 
-    private void init(){
+    @Override
+    public void onDataLoaded(List<PesananMasuk> pesananMasukList) {
         llm=new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
         jasaRecyclerView.setLayoutManager(llm);
-        jasaList=new ArrayList<>();
-        Jasa jasa=new Jasa();
-        jasa.setNama("Gayung");
-        jasa.setHarga(5000);
-        for(int i=0; i<20; i++){
-            //jasaList.add(jasa);
-        }
-        adapter=new PesananDiterimaAdapter(getContext(),jasaList);
+        this.pesananMasukList=pesananMasukList;
+        adapter=new PesananDiterimaAdapter(getContext(), this.pesananMasukList);
         jasaRecyclerView.setAdapter(adapter);
     }
 
+    @Override
+    public void onDataLoadFailed() {
+        Toast.makeText(getContext(),"Gangguan jaringan",Toast.LENGTH_SHORT).show();
+    }
 }

@@ -2,7 +2,6 @@ package com.example.jasaku.penjual.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -80,7 +79,7 @@ public class JasaAdapter extends RecyclerView.Adapter<JasaAdapter.JasaViewHolder
         TextView hargaJasaTextView;
         @BindView(R.id.hapusButton)
         ImageButton hapusButton;
-        @BindView(R.id.ubahButton)
+        @BindView(R.id.selesaiButton)
         ImageButton ubahButton;
 
         public JasaViewHolder(View itemView) {
