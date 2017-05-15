@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         Menu menu=navigationView.getMenu();
+        MenuItem buatToko=menu.findItem(R.id.buat_toko);
         MenuItem kelolaToko=menu.findItem(R.id.kelola_toko);
         MenuItem keluar=menu.findItem(R.id.keluar);
         MenuItem masuk=menu.findItem(R.id.masuk);
@@ -60,14 +61,14 @@ public class MainActivity extends AppCompatActivity
             keluar.setVisible(true);
             masuk.setVisible(false);
             if(hasToko==1){
-                kelolaToko.setVisible(false);
+                kelolaToko.setVisible(true);
             }else
                 kelolaToko.setVisible(false);
         }else{
             keluar.setVisible(false);
             masuk.setVisible(true);
             if(!kelolaToko.isVisible()){
-                kelolaToko.setVisible(true);
+                kelolaToko.setVisible(false);
             }
         }
 
@@ -116,19 +117,31 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+        SharedPreferences preferences=getSharedPreferences("jasaku",MODE_PRIVATE);
+        boolean isLoggedIn=preferences.getBoolean("isLoggedIn",false);
 
         if (id == R.id.buat_toko) {
-            startActivity(new Intent(this, RegisterTokoActivity.class));
+            if(isLoggedIn){
+                startActivity(new Intent(this, RegisterTokoActivity.class));
+            }
+            else {
+                startActivity(new Intent(this, BlmLoginActivity.class));
+            }
         } else if (id == R.id.kelola_toko) {
             getToko();
         } else if (id == R.id.profil) {
-            startActivity(new Intent(this,ProfileActivity.class));
+            if(isLoggedIn){
+                startActivity(new Intent(this, ProfileActivity.class));
+            }
+            else{
+                startActivity(new Intent(this, BlmLoginActivity.class));
+            }
         } else if (id == R.id.keluar) {
-            SharedPreferences preferences=getSharedPreferences("jasaku",MODE_PRIVATE);
             SharedPreferences.Editor editor=preferences.edit();
             editor.clear();
             editor.commit();
             startActivity(new Intent(this,LoginActivity.class));
+            finish();
         }else if(id==R.id.masuk){
             startActivity(new Intent(this, LoginActivity.class));
         }else if(id==R.id.beranda){
