@@ -1,6 +1,7 @@
 package com.example.jasaku.penjual.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 
 import com.example.jasaku.R;
 import com.example.jasaku.model.Jasa;
+import com.example.jasaku.penjual.KelolaJasa;
 import com.example.jasaku.presenter.HalamanJasaFragmentPenjualPresenter;
 
 import java.util.List;
@@ -54,6 +56,11 @@ public class JasaAdapter extends RecyclerView.Adapter<JasaAdapter.JasaViewHolder
         holder.ubahButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(context, KelolaJasa.class);
+                intent.putExtra("jasaId", jasa.getId());
+                intent.putExtra("jasaNama", jasa.getNama());
+                intent.putExtra("jasaHarga", jasa.getHarga());
+                context.startActivity(intent);
             }
         });
     }

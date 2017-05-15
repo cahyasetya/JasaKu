@@ -42,7 +42,7 @@
             android:id="@+id/textbiasa"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="aaaa"
+            android:text="Nantinya Logo Tulisan"
             tools:layout_editor_absoluteX="8dp"
             tools:layout_editor_absoluteY="43dp" />
 
@@ -71,7 +71,7 @@
             android:id="@+id/textbiasalagi"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="aaa"
+            android:text="Nantinya gambar Logo"
             tools:layout_editor_absoluteX="8dp"
             tools:layout_editor_absoluteY="0dp" />
 

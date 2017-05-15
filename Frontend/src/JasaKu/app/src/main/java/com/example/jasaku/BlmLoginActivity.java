@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -11,7 +12,7 @@ import butterknife.OnClick;
 
 public class BlmLoginActivity extends AppCompatActivity {
 
-    @BindView(R.id.buttonClose) Button buttonClose;
+    @BindView(R.id.buttonClose) ImageView buttonClose;
     @BindView(R.id.buttonLogin) Button buttonLogin;
     @BindView(R.id.buttonRegister) Button buttonRegister;
 
