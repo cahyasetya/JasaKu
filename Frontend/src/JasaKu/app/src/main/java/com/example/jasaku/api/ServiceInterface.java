@@ -70,4 +70,7 @@ public interface ServiceInterface {
 
     @GET("toko/{id}/pemesanan")
     Observable<List<PesananMasuk>> getPesananMasuk(@Path("id") String idToko);
+
+    @GET("pengguna/{idpengguna}/pesanan/{status}")
+    Observable<List<PesananMasuk>> getPesananDiterima(@Path("idpengguna") String idPengguna,@Path("status") String status);
 }

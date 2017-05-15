@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import com.example.jasaku.R;
 import com.example.jasaku.model.Jasa;
 import com.example.jasaku.model.PesananMasuk;
+import com.example.jasaku.penjual.adapter.PesananDiterimaAdapter;
 import com.example.jasaku.penjual.adapter.PesananMasukAdapter;
 
 import java.util.ArrayList;
@@ -29,7 +30,7 @@ public class PesananDiterimaFragment extends Fragment {
     RecyclerView jasaRecyclerView;
 
     private LinearLayoutManager llm;
-    private PesananMasukAdapter adapter;
+    private PesananDiterimaAdapter adapter;
     private List<PesananMasuk> jasaList;
 
     public PesananDiterimaFragment() {
@@ -60,7 +61,7 @@ public class PesananDiterimaFragment extends Fragment {
         for(int i=0; i<20; i++){
             //jasaList.add(jasa);
         }
-        adapter=new PesananMasukAdapter(getContext(),jasaList);
+        adapter=new PesananDiterimaAdapter(getContext(),jasaList);
         jasaRecyclerView.setAdapter(adapter);
     }
 

@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.jasaku.R;
-import com.example.jasaku.model.Jasa;
+import com.example.jasaku.model.PesananMasuk;
 
 import java.util.List;
 
@@ -22,11 +22,11 @@ import butterknife.ButterKnife;
 public class PesananDiterimaAdapter extends RecyclerView.Adapter<PesananDiterimaAdapter.PesanDiterimaViewHolder>{
 
     private Context context;
-    private List<Jasa> jasaList;
+    private List<PesananMasuk> pesananMasukList;
 
-    public PesananDiterimaAdapter(Context context, List<Jasa> jasaList){
+    public PesananDiterimaAdapter(Context context, List<PesananMasuk> pesananMasukList){
         this.context=context;
-        this.jasaList=jasaList;
+        this.pesananMasukList = pesananMasukList;
     }
 
     @Override
@@ -37,14 +37,14 @@ public class PesananDiterimaAdapter extends RecyclerView.Adapter<PesananDiterima
 
     @Override
     public void onBindViewHolder(PesanDiterimaViewHolder holder, int position) {
-        Jasa jasa=jasaList.get(position);
-        holder.namaJasaTextView.setText(jasa.getNama());
-        holder.hargaJasaTextView.setText(String.valueOf(jasa.getHarga()));
+        PesananMasuk pesananMasuk= pesananMasukList.get(position);
+        holder.namaJasaTextView.setText(pesananMasuk.getNama());
+        holder.hargaJasaTextView.setText(String.valueOf(pesananMasuk.getHarga()));
     }
 
     @Override
     public int getItemCount() {
-        return jasaList.size();
+        return pesananMasukList.size();
     }
 
     public class PesanDiterimaViewHolder extends RecyclerView.ViewHolder{
