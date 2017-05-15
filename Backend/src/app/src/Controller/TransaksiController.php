@@ -24,7 +24,7 @@ final class TransaksiController {
             $array=json_decode(json_encode($post),true);
 
             $transaksi = new Transaksi();
-            $transaksi->id = (Transaksi::all()->last()->id)+1;
+            // $transaksi->id = (Transaksi::all()->last()->id)+1;
             $temp_id=$transaksi->id;
             $transaksi->id_pengguna = $array['id_pengguna'];
             $transaksi->total = 0;

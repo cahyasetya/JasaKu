@@ -5,13 +5,18 @@ namespace App\Controller;
 require __DIR__ . '/../Model/toko.php' ;
 require __DIR__ . '/../Model/jasa.php' ;
 require __DIR__ . '/../Model/pemesanan.php' ;
+require __DIR__ . '/../Model/transaksi.php' ;
+require __DIR__ . '/../Model/pengguna.php' ;
+require __DIR__ . '/../Model/status_pemesanan.php' ;
 
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
-use \App\Model\Toko as Toko;
+use \App\Model\Pengguna as Pengguna;
 use \App\Model\Jasa as Jasa;
+use \App\Model\Toko as Toko;
 use \App\Model\Pemesanan as Pemesanan;
-
+use \App\Model\Transaksi as Transaksi;
+use \App\Model\Statuspemesanan as Statuspemesanan;
 final class TokoController {
 
     public function __construct(){}
@@ -20,28 +25,38 @@ final class TokoController {
     public function create(Request $request, Response $response, $args){
         try{
             $post = $request->getParsedBody();
+            $toko_json=Toko::where([
+                ['id_pengguna', '=', $post['id_pengguna']]
+            ])->get();
+            if(!json_decode($toko_json)){
+                $toko = new Toko();
 
-            $toko = new Toko();
+                // $toko->id = (Toko::all()->last()->id)+1;
+                $toko->nama = $post['nama'];
+                $toko->alamat = $post['alamat'];
+                $toko->kontak = $post['kontak'];
+                // $toko->foto = $post['foto'];
+                $toko->deskripsi = $post['deskripsi'];
+                $toko->jamOperasional = $post['jamOperasional'];
+                $toko->rating = 0;
+                $toko->id_pengguna = $post['id_pengguna'];
+                $toko->id_kategori = $post['id_kategori'];
+                $toko->id_kecamatan = $post['id_kecamatan'];
+                $toko->save();
 
-            $toko->id = (Toko::all()->last()->id)+1;
-            $toko->nama = $post['nama'];
-            $toko->alamat = $post['alamat'];
-            $toko->kontak = $post['kontak'];
-            // $toko->foto = $post['foto'];
-            $toko->deskripsi = $post['deskripsi'];
-            $toko->jamOperasional = $post['jamOperasional'];
-            $toko->rating = 0;
-            $toko->id_pengguna = $post['id_pengguna'];
-            $toko->id_kategori = $post['id_kategori'];
-            $toko->id_kecamatan = $post['id_kecamatan'];
-            $toko->save();
+                $response->write(json_encode([
+                    'status' => 'Sukses',
+                    'message'=> 'Penambahan data berhasil'
+                ]));
 
-            $response->write(json_encode([
-                'status' => 'Sukses',
-                'message'=> 'Penambahan data berhasil'
-            ]));
-
-            $status=200;
+                $status=200;
+            }else{
+                 $response->write(json_encode([
+                    'status' => 'Gagal',
+                    'message'=> 'Pengguna Sudah Memiliki Toko'
+                ]));
+                $status=400;
+            }
         }catch (\Illuminate\Database\QueryException $e){
             $response->write(json_encode([
                 'status' => 'Gagal',
@@ -203,14 +218,26 @@ final class TokoController {
                         }
 
                         foreach ($pemesanans as $pemesanan) {
+                            $transaksi = Transaksi::find($pemesanan['id_transaksi']);
+                            $pengguna = Pengguna::find($transaksi['id_pengguna']);
+                            $status_pemesanan= Statuspemesanan::find($pemesanan['status_pemesanan']);
+                            $temp_pembeli=array(
+                                    "id"=> $pengguna['id'],
+                                      "nama"=> $pengguna['nama'],
+                                      "alamat"=> $pengguna['alamat'],
+                                      "jenisKelamin"=> $pengguna['jenisKelamin'],
+                                      "kontak"=> $pengguna['kontak']
+                                );
                             $temp2=array(
+                                    'id_transaksi' => $pemesanan['id_transaksi'],
                                     'id_jasa'   => $pemesanan['id_jasa'],
                                     'nama'      => $jasa['nama'],
                                     'harga'     =>$jasa['harga'],
                                     'kuantitas' => $pemesanan['kuantitas'],
                                     'total'     =>  (int)$pemesanan['total'],
                                     // 'id_transaksi'  =>$pemesanan['id_transaksi'],
-                                    'status_pemesanan'=>$pemesanan['status_pemesanan']
+                                    'status_pemesanan'=>strtolower($status_pemesanan['nama']),
+                                    'data_pembeli'=>$temp_pembeli
                                 );
                             array_push($detail_pemesanan,$temp2);
                         }

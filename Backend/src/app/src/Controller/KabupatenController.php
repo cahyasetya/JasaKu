@@ -18,7 +18,7 @@ final class KabupatenController {
 
             $kabupaten = new Kabupaten();
 
-            $kabupaten->id = (Kabupaten::all()->last()->id)+1;
+            // $kabupaten->id = (Kabupaten::all()->last()->id)+1;
             $kabupaten->nama = $post['nama'];
             $kabupaten->id_provinsi = $post['id_provinsi'];
             $kabupaten->save();

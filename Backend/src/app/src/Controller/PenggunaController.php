@@ -38,13 +38,14 @@ final class PenggunaController {
 
                 $status=400;
             }else{
-                $pengguna->id=(Pengguna::all()->last()->id)+1;
+                // $pengguna->id=(Pengguna::all()->last()->id)+1;
                 $pengguna->nama = $post['nama'];
                 $pengguna->alamat = $post['alamat'];
                 $pengguna->jenisKelamin = $post['jenisKelamin'];
                 $pengguna->kontak = $post['kontak'];
                 $pengguna->username = $post['username'];
                 $pengguna->password = $post['password'];
+                $pengguna->token = $post['token'];
             
                 $pengguna->save();
 
@@ -82,8 +83,43 @@ final class PenggunaController {
             if (json_decode($a)){
                 foreach ($a as $b) {
                     $pengguna = Pengguna::find($b['id']);
-                    $response->write(json_encode($pengguna));
+                    if(isset($post['token'])){
+                        $pengguna->token = $post['token'];
+                        $pengguna->save();
+                    }
+                    $toko_json=Toko::where([
+                        ['id_pengguna', '=', $b['id']]
+                    ])->get();
+                    
+            
+                    if(!json_decode($toko_json)){
+                        $output=array(
+                                    'id'=>$b['id'],
+                                    'nama' => $b['nama'],
+                                    'alamat'     =>  $b['alamat'],
+                                    'jenisKelamin'   => $b['jenisKelamin'],
+                                    'kontak'  =>$b['kontak'],
+                                    'username'=>$b['username'],
+                                    'password'=>$b['password'],
+                                    'toko'=>0
+                        );
+                    }else{
+                       $output=array(
+                                    'id'=>$b['id'],
+                                    'nama' => $b['nama'],
+                                    'alamat'     =>  $b['alamat'],
+                                    'jenisKelamin'   => $b['jenisKelamin'],
+                                    'kontak'  =>$b['kontak'],
+                                    'username'=>$b['username'],
+                                    'password'=>$b['password'],
+                                    'toko'=>1
+                        ); 
+                      
+                    }
+                    $response->write(json_encode($output));
                 }
+                
+
                 $status=200;    
             }else{
                 $response->write(json_encode([
