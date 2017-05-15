@@ -68,10 +68,10 @@ public interface ServiceInterface {
     @PUT("jasa")
     Observable<ResponseBody> ubahJasa(@FieldMap Map<String, String> fields);
 
-    @GET("toko/{id}/pemesanan")
-    Observable<List<PesananMasuk>> getPesananMasuk(@Path("id") String idToko);
+    @GET("toko/{id}/pemesanan/{status}")
+    Observable<List<PesananMasuk>> getPesananMasuk(@Path("id") String idToko,@Path("status") String status);
 
-    @GET("pengguna/{idpengguna}/pemesanan/{status}")
+    @GET("toko/{idpengguna}/pemesanan/{status}")
     Observable<List<PesananMasuk>> getPesananDiterima(@Path("idpengguna") String idPengguna,@Path("status") String status);
 
     @FormUrlEncoded

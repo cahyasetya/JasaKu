@@ -67,7 +67,6 @@ public class HalamanUtamaFragment extends Fragment implements HalamanUtamaFragme
     }
 
     private void init(){
-
         tokoSearchview.onActionViewExpanded();
         tokoSearchview.clearFocus();
     }

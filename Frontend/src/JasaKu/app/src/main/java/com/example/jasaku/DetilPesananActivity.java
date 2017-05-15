@@ -10,10 +10,8 @@ import android.widget.Button;
 
 import com.example.jasaku.adapter.DetilPesananAdapter;
 import com.example.jasaku.model.Belanjaan;
-import com.example.jasaku.model.Jasa;
 import com.example.jasaku.model.KeranjangBelanja;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;

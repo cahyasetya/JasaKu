@@ -1,7 +1,6 @@
 package com.example.jasaku.penjual.adapter;
 
 import android.content.Context;
-import android.support.annotation.BinderThread;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;

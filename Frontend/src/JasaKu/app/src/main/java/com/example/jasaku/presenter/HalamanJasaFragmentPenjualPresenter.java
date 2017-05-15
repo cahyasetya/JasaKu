@@ -2,12 +2,10 @@ package com.example.jasaku.presenter;
 
 import com.example.jasaku.api.ServiceGenerator;
 import com.example.jasaku.api.ServiceInterface;
-import com.example.jasaku.interfaces.HalamanJasaFragmentInterfaces;
 import com.example.jasaku.interfaces.HalamanJasaFragmentPenjualInterface;
 import com.example.jasaku.model.Jasa;
 
 import java.util.List;
-import java.util.Map;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;

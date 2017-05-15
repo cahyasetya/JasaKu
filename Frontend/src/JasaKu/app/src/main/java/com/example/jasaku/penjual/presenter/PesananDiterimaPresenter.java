@@ -14,18 +14,18 @@ import io.reactivex.schedulers.Schedulers;
  * Created by cahyasetya on 5/15/2017.
  */
 
-public class PesananDiterimaAdapter {
+public class PesananDiterimaPresenter {
 
     PesananDiterimaInterfaces callback;
     ServiceInterface serviceInterface;
 
-    public PesananDiterimaAdapter(PesananDiterimaInterfaces callback) {
+    public PesananDiterimaPresenter(PesananDiterimaInterfaces callback) {
         this.callback = callback;
         serviceInterface= ServiceGenerator.createService(ServiceInterface.class);
     }
 
     public void loadPesananDiterima(String idPengguna){
-        serviceInterface.getPesananDiterima(idPengguna,"diterima").subscribeOn(Schedulers.io())
+        serviceInterface.getPesananDiterima(idPengguna,"2").subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::dataLoaded,this::dataLoadError);
     }

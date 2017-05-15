@@ -2,7 +2,6 @@ package com.example.jasaku.presenter;
 
 import com.example.jasaku.api.ServiceGenerator;
 import com.example.jasaku.api.ServiceInterface;
-import com.example.jasaku.interfaces.HalamanRegisterActivityInterface;
 import com.example.jasaku.interfaces.HalamanRegisterTokoActivityInterface;
 import com.example.jasaku.model.Kategori;
 

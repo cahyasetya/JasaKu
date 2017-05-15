@@ -15,7 +15,6 @@ import com.google.gson.Gson;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class ProfileActivity extends AppCompatActivity {
 

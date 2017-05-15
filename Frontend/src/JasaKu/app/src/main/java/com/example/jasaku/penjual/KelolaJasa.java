@@ -3,18 +3,14 @@ package com.example.jasaku.penjual;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.jasaku.R;
-import com.example.jasaku.interfaces.HalamanJasaFragmentPenjualInterface;
 import com.example.jasaku.interfaces.HalamanKelolaJasaActivityInterface;
 import com.example.jasaku.penjual.interfaces.UpdateJasaInterface;
 import com.example.jasaku.penjual.presenter.UpdateJasaPresenter;
-import com.example.jasaku.presenter.HalamanJasaFragmentPenjualPresenter;
 import com.example.jasaku.presenter.HalamanKelolaJasaActivityPresenter;
 
 import java.util.HashMap;

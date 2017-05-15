@@ -1,12 +1,8 @@
 package com.example.jasaku.penjual.fragment;
 
-
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.TaskStackBuilder;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -16,16 +12,12 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.jasaku.R;
-import com.example.jasaku.interfaces.HalamanJasaFragmentInterfaces;
 import com.example.jasaku.interfaces.HalamanJasaFragmentPenjualInterface;
 import com.example.jasaku.model.Jasa;
 import com.example.jasaku.penjual.KelolaJasa;
 import com.example.jasaku.penjual.adapter.JasaAdapter;
-import com.example.jasaku.penjual.adapter.PesananMasukAdapter;
 import com.example.jasaku.presenter.HalamanJasaFragmentPenjualPresenter;
-import com.example.jasaku.presenter.HalamanJasaFragmentPresenter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;

@@ -1,7 +1,5 @@
 package com.example.jasaku.model;
 
-import android.support.v7.widget.LinearSmoothScroller;
-
 import java.util.ArrayList;
 import java.util.List;
 

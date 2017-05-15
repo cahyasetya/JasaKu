@@ -27,7 +27,7 @@ public class PesananMasukPresenter {
     }
 
     public void getPesananMasuk(String idToko){
-        serviceInterface.getPesananMasuk(idToko).subscribeOn(Schedulers.io())
+        serviceInterface.getPesananMasuk(idToko,"1").subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::pesananMasukLoaded,this::pesananMasukLoadFailed);
     }
