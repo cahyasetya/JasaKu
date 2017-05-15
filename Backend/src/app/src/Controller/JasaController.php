@@ -20,7 +20,7 @@ final class JasaController {
 
             $jasa = new Jasa();
 
-            $jasa->id = (Jasa::all()->last()->id)+1;
+            // $jasa->id = (Jasa::all()->last()->id)+1;
             $jasa->id_toko = $post['id_toko'];
             $jasa->nama = $post['nama'];
             $jasa->harga = $post['harga'];

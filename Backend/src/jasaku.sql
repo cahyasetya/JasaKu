@@ -117,12 +117,13 @@ CREATE TABLE `pengguna` (
   `kontak` varchar(20) NOT NULL,
   `username` varchar(256) NOT NULL,
   `password` varchar(256) NOT NULL,
+  `token` varchar(9999) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `pengguna` */
 
-insert  into `pengguna`(`id`,`nama`,`alamat`,`jenisKelamin`,`kontak`,`username`,`password`) values (1,'Amin','Jl Pahlawan Rt 2 No 1','L','08133546789','admin','admin'),(2,'Sueb','Jl Keputih 3 no 21','P','3987089','admin2','admin2'),(3,'Adik','Jl Dr Wahidin SH','P','031567892','admin3','admin');
+insert  into `pengguna`(`id`,`nama`,`alamat`,`jenisKelamin`,`kontak`,`username`,`password`,`token`) values (1,'Amin','Jl Pahlawan Rt 2 No 1','L','08133546789','admin','admin','asdasd'),(2,'Sueb','Jl Keputih 3 no 21','P','3987089','admin2','admin2',''),(3,'Adik','Jl Dr Wahidin SH','P','031567892','admin3','admin',''),(4,'sgsg','dfgfdg','P','3534534345','amin','amin',''),(5,'ass','ass','L','122','ass','ass','');
 
 /*Table structure for table `provinsi` */
 
@@ -150,7 +151,7 @@ CREATE TABLE `status_pemesanan` (
 
 /*Data for the table `status_pemesanan` */
 
-insert  into `status_pemesanan`(`id`,`nama`) values (1,'Menunggu Persetujuan Penjual'),(2,'Disetujui Penjual'),(3,'Ditolak Penjual');
+insert  into `status_pemesanan`(`id`,`nama`) values (1,'Masuk'),(2,'Diterima'),(3,'Ditolak');
 
 /*Table structure for table `toko` */
 
@@ -178,7 +179,7 @@ CREATE TABLE `toko` (
 
 /*Data for the table `toko` */
 
-insert  into `toko`(`id`,`nama`,`alamat`,`kontak`,`deskripsi`,`jamOperasional`,`rating`,`id_pengguna`,`id_kategori`,`id_kecamatan`) values (1,'Bengkel','Jl Keputih No 2 , Surabaya','0897865789','Menerima Spededa 4 tak dan matik','8.00-16.00',3,2,6,16),(2,'Laundry','Jl Mulyorejo No 1, Surabaya','3987654','Menerima Segala macam cucian','07.00-15.00',3.5,1,1,20),(3,'jahitin23','Jl Gebang timur no 27, Surabaya','089980789567','Menerima permak jeans, jahit seragam, memperbaiki tas,dll','07.00-17.00',4,2,5,16),(4,'Jahitin2','Jl Gebang timur no 27, Surabaya','089980789567','Menerima permak jeans, jahit seragam, memperbaiki tas,dll','07.00-17.00',0,2,6,16);
+insert  into `toko`(`id`,`nama`,`alamat`,`kontak`,`deskripsi`,`jamOperasional`,`rating`,`id_pengguna`,`id_kategori`,`id_kecamatan`) values (1,'Bengkel','Jl Keputih No 2 , Surabaya','0897865789','Menerima Spededa 4 tak dan matik','8.00-16.00',3,2,6,16),(2,'Laundry','Jl Mulyorejo No 1, Surabaya','3987654','Menerima Segala macam cucian','07.00-15.00',3.5,1,1,20),(3,'jahitin23','Jl Gebang timur no 27, Surabaya','089980789567','Menerima permak jeans, jahit seragam, memperbaiki tas,dll','07.00-17.00',4,3,5,16),(4,'Jahitin2','Jl Gebang timur no 27, Surabaya','089980789567','Menerima permak jeans, jahit seragam, memperbaiki tas,dll','07.00-17.00',0,4,6,16);
 
 /*Table structure for table `transaksi` */
 

@@ -18,7 +18,7 @@ final class KecamatanController {
 
             $kecamatan = new Kecamatan();
 
-            $kecamatan->id = (Kecamatan::all()->last()->id)+1;
+            // $kecamatan->id = (Kecamatan::all()->last()->id)+1;
             $kecamatan->nama = $post['nama'];
             $kecamatan->id_kabupaten = $post['id_kabupaten'];
             $kecamatan->save();

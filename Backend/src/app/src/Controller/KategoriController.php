@@ -18,7 +18,7 @@ final class KategoriController {
 
             $kategori = new Kategori();
 
-            $kategori->id = (Kategori::all()->last()->id)+1;
+            // $kategori->id = (Kategori::all()->last()->id)+1;
             $kategori->nama = $post['nama'];
             $kategori->save();
 

@@ -18,7 +18,7 @@ final class ProvinsiController {
 
             $provinsi = new Provinsi();
 
-            $provinsi->id = (Provinsi::all()->last()->id)+1;
+            // $provinsi->id = (Provinsi::all()->last()->id)+1;
             $provinsi->nama = $post['nama'];
             $provinsi->save();
 
