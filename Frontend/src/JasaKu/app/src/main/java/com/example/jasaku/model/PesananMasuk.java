@@ -7,6 +7,8 @@ import com.google.gson.annotations.SerializedName;
  */
 
 public class PesananMasuk {
+    @SerializedName("id_transaksi")
+    private String idTransaksi;
     @SerializedName("id_jasa")
     private String idJasa;
     @SerializedName("nama")
@@ -56,5 +58,13 @@ public class PesananMasuk {
 
     public void setPembeli(Pengguna pembeli) {
         this.pembeli = pembeli;
+    }
+
+    public String getIdTransaksi() {
+        return idTransaksi;
+    }
+
+    public void setIdTransaksi(String idTransaksi) {
+        this.idTransaksi = idTransaksi;
     }
 }

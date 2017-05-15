@@ -77,9 +77,9 @@ public class JasaAdapter extends RecyclerView.Adapter<JasaAdapter.JasaViewHolder
         TextView namaJasaTextView;
         @BindView(R.id.harga_jasa)
         TextView hargaJasaTextView;
-        @BindView(R.id.hapusButton)
+        @BindView(R.id.tolak_button)
         ImageButton hapusButton;
-        @BindView(R.id.selesaiButton)
+        @BindView(R.id.terima_button)
         ImageButton ubahButton;
 
         public JasaViewHolder(View itemView) {

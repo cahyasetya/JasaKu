@@ -38,7 +38,7 @@
         </LinearLayout>
 
         <ImageButton
-            android:id="@+id/selesaiButton"
+            android:id="@+id/terima_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="8dp"
@@ -50,13 +50,13 @@
             android:layout_marginEnd="8dp" />
 
         <ImageButton
-            android:id="@+id/hapusButton"
+            android:id="@+id/tolak_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/white"
-            app:layout_constraintBottom_toBottomOf="@+id/selesaiButton"
-            app:layout_constraintRight_toLeftOf="@+id/selesaiButton"
-            app:layout_constraintTop_toTopOf="@+id/selesaiButton"
+            app:layout_constraintBottom_toBottomOf="@+id/terima_button"
+            app:layout_constraintRight_toLeftOf="@+id/terima_button"
+            app:layout_constraintTop_toTopOf="@+id/terima_button"
             app:layout_constraintVertical_bias="0.0"
             app:srcCompat="@mipmap/ic_close_black_24dp" />
 
@@ -70,7 +70,7 @@
             android:layout_marginTop="8dp"
             android:orientation="vertical"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toLeftOf="@+id/hapusButton"
+            app:layout_constraintRight_toLeftOf="@+id/tolak_button"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginEnd="8dp">
 

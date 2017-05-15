@@ -32,6 +32,8 @@ public class PesananMasukFragment extends Fragment implements PesananMasukInterf
     private LinearLayoutManager llm;
     private PesananMasukAdapter adapter;
     private List<PesananMasuk> pesananMasukList;
+    private String idToko;
+    private PesananMasukPresenter presenter;
 
     public PesananMasukFragment() {
         // Required empty public constructor
@@ -46,10 +48,9 @@ public class PesananMasukFragment extends Fragment implements PesananMasukInterf
 
         ButterKnife.bind(this,view);
 
-        String idToko=getArguments().getString("id_toko");
+        idToko=getArguments().getString("id_toko");
 
-        PesananMasukPresenter presenter=new PesananMasukPresenter(this);
-        presenter.getPesananMasuk(idToko);
+        presenter=new PesananMasukPresenter(this);
 
         return view;
     }
@@ -59,12 +60,29 @@ public class PesananMasukFragment extends Fragment implements PesananMasukInterf
         llm=new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
         jasaRecyclerView.setLayoutManager(llm);
         this.pesananMasukList=pesananMasukList;
-        adapter=new PesananMasukAdapter(getContext(),this.pesananMasukList);
+        adapter=new PesananMasukAdapter(getContext(),this.pesananMasukList, presenter);
         jasaRecyclerView.setAdapter(adapter);
     }
 
     @Override
     public void onPesananMasukLoadFailed() {
         Toast.makeText(getContext(),"Gangguan jaringan",Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onPesananDiterima() {
+        onResume();
+        Toast.makeText(getContext(),"Pesanan diterima",Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onPesananDiterimaError() {
+        Toast.makeText(getContext(),"Gangguan jaringan",Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        presenter.getPesananMasuk(idToko);
     }
 }

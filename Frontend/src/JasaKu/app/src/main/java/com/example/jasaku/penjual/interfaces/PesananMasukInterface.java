@@ -11,4 +11,6 @@ import java.util.List;
 public interface PesananMasukInterface {
     void onPesananMasukLoaded(List<PesananMasuk> pesananMasukList);
     void onPesananMasukLoadFailed();
+    void onPesananDiterima();
+    void onPesananDiterimaError();
 }

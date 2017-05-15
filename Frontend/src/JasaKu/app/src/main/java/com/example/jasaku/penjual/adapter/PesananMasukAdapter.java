@@ -5,13 +5,17 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.jasaku.R;
 import com.example.jasaku.model.PesananMasuk;
+import com.example.jasaku.penjual.presenter.PesananMasukPresenter;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -24,10 +28,14 @@ public class PesananMasukAdapter extends RecyclerView.Adapter<PesananMasukAdapte
 
     private Context context;
     private List<PesananMasuk> pesananMasukList;
+    private String idToko;
+    private PesananMasukPresenter presenter;
 
-    public PesananMasukAdapter(Context context, List<PesananMasuk> pesananMasukList){
+    public PesananMasukAdapter(Context context, List<PesananMasuk> pesananMasukList, PesananMasukPresenter presenter){
         this.context=context;
         this.pesananMasukList = pesananMasukList;
+        this.idToko=idToko;
+        this.presenter=presenter;
     }
 
     @Override
@@ -53,6 +61,15 @@ public class PesananMasukAdapter extends RecyclerView.Adapter<PesananMasukAdapte
                     holder.pembeliContainer.setVisibility(View.VISIBLE);
             }
         });
+        holder.terimaButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Map<String, String> fields=new HashMap<String, String>();
+                fields.put("id",pesananMasuk.getIdTransaksi());
+                fields.put("id_jasa",pesananMasuk.getIdJasa());
+                presenter.terimaPesanan(fields);
+            }
+        });
     }
 
     @Override
@@ -74,6 +91,10 @@ public class PesananMasukAdapter extends RecyclerView.Adapter<PesananMasukAdapte
         LinearLayout pembeliContainer;
         @BindView(R.id.alamat)
         TextView alamatTextView;
+        @BindView(R.id.terima_button)
+        ImageButton terimaButton;
+        @BindView(R.id.tolak_button)
+        ImageButton tolakButton;
 
         public PesananMasukViewHolder(View itemView) {
             super(itemView);

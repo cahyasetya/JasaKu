@@ -71,6 +71,10 @@ public interface ServiceInterface {
     @GET("toko/{id}/pemesanan")
     Observable<List<PesananMasuk>> getPesananMasuk(@Path("id") String idToko);
 
-    @GET("pengguna/{idpengguna}/pesanan/{status}")
+    @GET("pengguna/{idpengguna}/pemesanan/{status}")
     Observable<List<PesananMasuk>> getPesananDiterima(@Path("idpengguna") String idPengguna,@Path("status") String status);
+
+    @FormUrlEncoded
+    @POST("transaksi/disetujui")
+    Observable<ResponseBody> terimaPesanan(@FieldMap Map<String, String> fields);
 }
