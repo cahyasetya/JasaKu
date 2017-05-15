@@ -81,6 +81,17 @@ public class PesananMasukFragment extends Fragment implements PesananMasukInterf
     }
 
     @Override
+    public void onPesananDitolak() {
+        onResume();
+        Toast.makeText(getContext(),"Pesanan ditolak",Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onPesananDitolakError() {
+        Toast.makeText(getContext(),"Gangguan jaringan",Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
         presenter.getPesananMasuk(idToko);

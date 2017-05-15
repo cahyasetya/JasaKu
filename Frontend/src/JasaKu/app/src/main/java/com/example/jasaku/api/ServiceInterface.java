@@ -77,4 +77,8 @@ public interface ServiceInterface {
     @FormUrlEncoded
     @POST("transaksi/disetujui")
     Observable<ResponseBody> terimaPesanan(@FieldMap Map<String, String> fields);
+
+    @FormUrlEncoded
+    @POST("transaksi/ditolak")
+    Observable<ResponseBody> tolakPesanan(@FieldMap Map<String, String> fields);
 }

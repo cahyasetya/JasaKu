@@ -38,6 +38,20 @@ public class PesananMasukPresenter {
                 .subscribe(this::pesananDiterima,this::pesananDiterimaError);
     }
 
+    public void tolakPesanan(Map<String, String> fields){
+        serviceInterface.tolakPesanan(fields).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(this::pesananDitolak,this::pesananDitolakError);
+    }
+
+    private void pesananDitolakError(Throwable throwable) {
+        callback.onPesananDitolakError();
+    }
+
+    private void pesananDitolak(ResponseBody responseBody) {
+        callback.onPesananDitolak();
+    }
+
     private void pesananDiterimaError(Throwable throwable) {
         callback.onPesananDiterimaError();
     }

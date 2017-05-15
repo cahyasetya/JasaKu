@@ -28,13 +28,11 @@ public class PesananMasukAdapter extends RecyclerView.Adapter<PesananMasukAdapte
 
     private Context context;
     private List<PesananMasuk> pesananMasukList;
-    private String idToko;
     private PesananMasukPresenter presenter;
 
     public PesananMasukAdapter(Context context, List<PesananMasuk> pesananMasukList, PesananMasukPresenter presenter){
         this.context=context;
         this.pesananMasukList = pesananMasukList;
-        this.idToko=idToko;
         this.presenter=presenter;
     }
 
@@ -68,6 +66,15 @@ public class PesananMasukAdapter extends RecyclerView.Adapter<PesananMasukAdapte
                 fields.put("id",pesananMasuk.getIdTransaksi());
                 fields.put("id_jasa",pesananMasuk.getIdJasa());
                 presenter.terimaPesanan(fields);
+            }
+        });
+        holder.tolakButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Map<String, String> fields=new HashMap<String, String>();
+                fields.put("id",pesananMasuk.getIdTransaksi());
+                fields.put("id_jasa",pesananMasuk.getIdJasa());
+                presenter.tolakPesanan(fields);
             }
         });
     }

@@ -13,4 +13,6 @@ public interface PesananMasukInterface {
     void onPesananMasukLoadFailed();
     void onPesananDiterima();
     void onPesananDiterimaError();
+    void onPesananDitolak();
+    void onPesananDitolakError();
 }
