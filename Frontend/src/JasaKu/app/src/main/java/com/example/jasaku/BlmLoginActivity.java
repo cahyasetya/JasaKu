@@ -11,6 +11,7 @@ import butterknife.OnClick;
 
 public class BlmLoginActivity extends AppCompatActivity {
 
+    @BindView(R.id.buttonClose) Button buttonClose;
     @BindView(R.id.buttonLogin) Button buttonLogin;
     @BindView(R.id.buttonRegister) Button buttonRegister;
 
@@ -19,10 +20,13 @@ public class BlmLoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_blm_login);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         ButterKnife.bind(this);
 
+    }
+
+    @OnClick(R.id.buttonClose)
+    public void toMainPage() {
+        startActivity(new Intent(BlmLoginActivity.this, MainActivity.class));
     }
 
     @OnClick(R.id.buttonLogin)

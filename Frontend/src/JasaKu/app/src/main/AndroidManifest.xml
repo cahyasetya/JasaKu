@@ -85,7 +85,6 @@
 
         <activity
             android:name=".BlmLoginActivity"
-            android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
