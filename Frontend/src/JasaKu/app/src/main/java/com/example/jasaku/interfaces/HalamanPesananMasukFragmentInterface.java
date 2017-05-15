@@ -5,10 +5,10 @@ import com.example.jasaku.model.Jasa;
 import java.util.List;
 
 /**
- * Created by light on 04/05/17.
+ * Created by light on 14/05/17.
  */
 
-public interface HalamanJasaFragmentInterfaces {
+public interface HalamanPesananMasukFragmentInterface {
     void onDataLoaded(List<Jasa> jasaList);
-    void onDataLoadError(Throwable t);
+    void onDataLoadFailed();
 }

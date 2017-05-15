@@ -1,8 +1,9 @@
 package com.example.jasaku.api;
 
-import com.android.volley.Response;
 import com.example.jasaku.model.Jasa;
+import com.example.jasaku.model.Kategori;
 import com.example.jasaku.model.Pengguna;
+import com.example.jasaku.model.PesananMasuk;
 import com.example.jasaku.model.RequestMembeli;
 import com.example.jasaku.model.Toko;
 
@@ -11,12 +12,13 @@ import java.util.Map;
 
 import io.reactivex.Observable;
 import okhttp3.ResponseBody;
-import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.QueryMap;
 
@@ -34,17 +36,38 @@ public interface ServiceInterface {
     @GET("jasa/id_toko/{idtoko}")
     Observable<List<Jasa>> getJasa(@Path("idtoko") String idtoko);
 
-    @GET("transaksi/pengguna/{idpengguna}/pesananmasuk")
-    Observable<List<Jasa>> getPesananMasuk(@Path("idpengguna") String idpengguna);
-
     @FormUrlEncoded
     @POST("register")
     Observable<ResponseBody> register(@FieldMap Map<String,String> field);
 
     @FormUrlEncoded
     @POST("login")
-    Observable<List<Pengguna>> login(@FieldMap Map<String,String> field);
+    Observable<Pengguna> login(@FieldMap Map<String,String> field);
 
     @POST("membeli")
     Observable<ResponseBody> beli(@Body RequestMembeli body);
+
+    @GET("kategori")
+    Observable<List<Kategori>> getKategori();
+
+    @FormUrlEncoded
+    @POST("toko")
+    Observable<ResponseBody> buatToko(@FieldMap Map<String, String> field);
+
+    @FormUrlEncoded
+    @POST("jasa")
+    Observable<ResponseBody> insertJasa(@FieldMap Map<String, String> fields);
+
+    @GET("toko/id_pengguna/{id_pengguna}")
+    Observable<List<Toko>> getTokoByIdPengguna(@Path("id_pengguna") String id_pengguna);
+
+    @DELETE("jasa/{id}")
+    Observable<ResponseBody> hapusJasa(@Path("id") String id);
+
+    @FormUrlEncoded
+    @PUT("jasa")
+    Observable<ResponseBody> ubahJasa(@FieldMap Map<String, String> fields);
+
+    @GET("toko/{id}/pemesanan")
+    Observable<List<PesananMasuk>> getPesananMasuk(@Path("id") String idToko);
 }

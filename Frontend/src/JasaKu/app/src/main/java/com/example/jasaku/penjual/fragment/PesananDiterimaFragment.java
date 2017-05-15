@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 
 import com.example.jasaku.R;
 import com.example.jasaku.model.Jasa;
+import com.example.jasaku.model.PesananMasuk;
 import com.example.jasaku.penjual.adapter.PesananMasukAdapter;
 
 import java.util.ArrayList;
@@ -29,7 +30,7 @@ public class PesananDiterimaFragment extends Fragment {
 
     private LinearLayoutManager llm;
     private PesananMasukAdapter adapter;
-    private List<Jasa> jasaList;
+    private List<PesananMasuk> jasaList;
 
     public PesananDiterimaFragment() {
         // Required empty public constructor
@@ -44,7 +45,7 @@ public class PesananDiterimaFragment extends Fragment {
 
         ButterKnife.bind(this,view);
 
-        init();
+        //init();
 
         return view;
     }
@@ -57,7 +58,7 @@ public class PesananDiterimaFragment extends Fragment {
         jasa.setNama("Gayung");
         jasa.setHarga(5000);
         for(int i=0; i<20; i++){
-            jasaList.add(jasa);
+            //jasaList.add(jasa);
         }
         adapter=new PesananMasukAdapter(getContext(),jasaList);
         jasaRecyclerView.setAdapter(adapter);

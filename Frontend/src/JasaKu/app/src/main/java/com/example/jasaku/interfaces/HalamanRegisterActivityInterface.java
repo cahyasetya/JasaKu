@@ -5,6 +5,6 @@ package com.example.jasaku.interfaces;
  */
 
 public interface HalamanRegisterActivityInterface {
-    public void onRegisterSuccessful();
-    public void onRegisterFailed(Throwable t);
+    void onRegisterSuccessful();
+    void onRegisterFailed(Throwable t);
 }

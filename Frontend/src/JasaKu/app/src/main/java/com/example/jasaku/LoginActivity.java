@@ -53,6 +53,7 @@ public class LoginActivity extends AppCompatActivity implements HalamanLoginActi
     @Override
     public void onLoginSuccess() {
         startActivity(new Intent(LoginActivity.this,MainActivity.class));
+        finish();
     }
 
     @Override

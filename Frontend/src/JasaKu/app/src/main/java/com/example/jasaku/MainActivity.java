@@ -3,8 +3,6 @@ package com.example.jasaku;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -14,10 +12,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.jasaku.api.ServiceGenerator;
+import com.example.jasaku.api.ServiceInterface;
 import com.example.jasaku.fragment.HalamanUtamaFragment;
-import com.example.jasaku.fragment.KelolaTokoFragment;
+import com.example.jasaku.model.Toko;
 import com.example.jasaku.penjual.EditTokoActivity;
+import com.google.gson.Gson;
+
+import java.util.List;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -37,23 +45,37 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
         Menu menu=navigationView.getMenu();
+        MenuItem buatToko=menu.findItem(R.id.buat_toko);
         MenuItem kelolaToko=menu.findItem(R.id.kelola_toko);
+        MenuItem keluar=menu.findItem(R.id.keluar);
+        MenuItem masuk=menu.findItem(R.id.masuk);
+
         SharedPreferences preferences=getSharedPreferences("jasaku",MODE_PRIVATE);
         SharedPreferences.Editor editor=preferences.edit();
-        editor.putString("id_user","1");
         editor.commit();
         boolean isLoggedIn=preferences.getBoolean("isLoggedIn",false);
-        isLoggedIn=true;
-        if(!isLoggedIn){
+        int hasToko=preferences.getInt("has_toko",0);
+        if(isLoggedIn){
+            keluar.setVisible(true);
+            masuk.setVisible(false);
+            if(hasToko==1){
+                kelolaToko.setVisible(true);
+            }else
+                kelolaToko.setVisible(false);
+        }else{
+            keluar.setVisible(false);
+            masuk.setVisible(true);
             if(kelolaToko.isVisible()){
                 kelolaToko.setVisible(false);
             }
-        }else{
-            if(!kelolaToko.isVisible()){
-                kelolaToko.setVisible(true);
-            }
         }
+
+        View headerView=navigationView.getHeaderView(0);
+        TextView nama=(TextView)headerView.findViewById(R.id.nama_pengguna);
+        String namaPengguna=preferences.getString("nama",null);
+        nama.setText(namaPengguna);
 
         getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.content_main,new HalamanUtamaFragment()).commit();
     }
@@ -95,15 +117,31 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+        SharedPreferences preferences=getSharedPreferences("jasaku",MODE_PRIVATE);
+        boolean isLoggedIn=preferences.getBoolean("isLoggedIn",false);
 
         if (id == R.id.buat_toko) {
-            startActivity(new Intent(this, RegisterTokoActivity.class));
+            if(isLoggedIn){
+                startActivity(new Intent(this, RegisterTokoActivity.class));
+            }
+            else {
+                startActivity(new Intent(this, BlmLoginActivity.class));
+            }
         } else if (id == R.id.kelola_toko) {
-            startActivity(new Intent(this, EditTokoActivity.class));
+            getToko();
         } else if (id == R.id.profil) {
-            startActivity(new Intent(this,ProfileActivity.class));
+            if(isLoggedIn){
+                startActivity(new Intent(this, ProfileActivity.class));
+            }
+            else{
+                startActivity(new Intent(this, BlmLoginActivity.class));
+            }
         } else if (id == R.id.keluar) {
-
+            SharedPreferences.Editor editor=preferences.edit();
+            editor.clear();
+            editor.commit();
+            startActivity(new Intent(this,LoginActivity.class));
+            finish();
         }else if(id==R.id.masuk){
             startActivity(new Intent(this, LoginActivity.class));
         }else if(id==R.id.beranda){
@@ -113,5 +151,33 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void getToko(){
+        SharedPreferences preferences=getSharedPreferences("jasaku",MODE_PRIVATE);
+        String userId=preferences.getString("id_user",null);
+
+        ServiceInterface serviceInterface= ServiceGenerator.createService(ServiceInterface.class);
+        serviceInterface.getTokoByIdPengguna(userId).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(this::getTokoSuccess,this::getTokoFailed);
+    }
+
+    private void getTokoSuccess(List<Toko> tokoList){
+        Toko toko=tokoList.get(0);
+
+        Gson gson=new Gson();
+        String tokoString=gson.toJson(toko);
+
+        Intent intent=new Intent(this, EditTokoActivity.class);
+        intent.putExtra("id_toko",toko.getId());
+        intent.putExtra("nama_toko",toko.getNama());
+        intent.putExtra("toko",tokoString);
+
+        startActivity(intent);
+    }
+
+    private void getTokoFailed(Throwable t){
+        Toast.makeText(this,"Gangguan jaringan",Toast.LENGTH_SHORT).show();
     }
 }

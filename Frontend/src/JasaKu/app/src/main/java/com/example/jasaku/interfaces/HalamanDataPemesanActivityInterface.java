@@ -5,6 +5,6 @@ package com.example.jasaku.interfaces;
  */
 
 public interface HalamanDataPemesanActivityInterface {
-    public void onPembelianSuccess();
-    public void onPembelianFailed();
+    void onPembelianSuccess();
+    void onPembelianFailed();
 }

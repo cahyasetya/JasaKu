@@ -3,6 +3,7 @@ package com.example.jasaku.fragment;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -27,6 +28,8 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static android.content.Context.MODE_PRIVATE;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -56,7 +59,7 @@ public class HalamanJasaFragment extends Fragment implements View.OnClickListene
 
         String idToko=getArguments().getString("id_toko",null);
 
-        if(idToko!=null || !idToko.equals("")){
+        if(idToko!=null){
             HalamanJasaFragmentPresenter presenter=new HalamanJasaFragmentPresenter(this);
             presenter.loadData(idToko);
         }
@@ -79,12 +82,20 @@ public class HalamanJasaFragment extends Fragment implements View.OnClickListene
 
     @Override
     public void onDataLoaded(List<Jasa> jasaList) {
+        SharedPreferences preferences = getContext().getSharedPreferences("jasaku", MODE_PRIVATE);
         this.jasaList=jasaList;
         llm=new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
         jasaRecyclerView.setLayoutManager(llm);
         adapter=new JasaAdapter(getContext(),this.jasaList);
         jasaRecyclerView.setAdapter(adapter);
-        pesanButton.setOnClickListener(this);
+        boolean isLoggedIn=preferences.getBoolean("isLoggedIn",false);
+        if(isLoggedIn){
+            pesanButton.setVisibility(View.VISIBLE);
+            pesanButton.setOnClickListener(this);
+        }
+        else{
+            pesanButton.setVisibility(View.GONE);
+        }
     }
 
     @Override

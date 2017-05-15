@@ -12,6 +12,7 @@ public class Pengguna implements Serializable{
     private String jenisKelamin;
     private String alamat;
     private String kontak;
+    private int toko;
 
     public String getNama() {
         return nama;
@@ -51,5 +52,13 @@ public class Pengguna implements Serializable{
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getToko() {
+        return toko;
+    }
+
+    public void setToko(int toko) {
+        this.toko = toko;
     }
 }

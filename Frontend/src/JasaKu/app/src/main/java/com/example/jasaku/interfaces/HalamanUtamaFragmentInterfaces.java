@@ -9,6 +9,6 @@ import java.util.List;
  */
 
 public interface HalamanUtamaFragmentInterfaces {
-    public void onDataLoaded(List<Toko> tokoList);
-    public void onDataLoadError(Throwable t);
+    void onDataLoaded(List<Toko> tokoList);
+    void onDataLoadError(Throwable t);
 }
