@@ -12,6 +12,8 @@ import android.widget.Toast;
 import com.example.jasaku.R;
 import com.example.jasaku.interfaces.HalamanJasaFragmentPenjualInterface;
 import com.example.jasaku.interfaces.HalamanKelolaJasaActivityInterface;
+import com.example.jasaku.penjual.interfaces.UpdateJasaInterface;
+import com.example.jasaku.penjual.presenter.UpdateJasaPresenter;
 import com.example.jasaku.presenter.HalamanJasaFragmentPenjualPresenter;
 import com.example.jasaku.presenter.HalamanKelolaJasaActivityPresenter;
 
@@ -22,7 +24,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class KelolaJasa extends AppCompatActivity implements HalamanKelolaJasaActivityInterface{
+public class KelolaJasa extends AppCompatActivity implements HalamanKelolaJasaActivityInterface, UpdateJasaInterface {
 
     @BindView(R.id.textViewJudul)
     TextView textViewJudul;
@@ -31,12 +33,13 @@ public class KelolaJasa extends AppCompatActivity implements HalamanKelolaJasaAc
     @BindView(R.id.editTextHarga)
     EditText hargaEditText;
 
+    Integer update;
     String IdJasa;
     String namaJasa;
     String hargaJasa;
 
     HalamanKelolaJasaActivityPresenter presenter;
-    private HalamanJasaFragmentPenjualPresenter presenterUpdate;
+    UpdateJasaPresenter presenterUpdate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,56 +50,56 @@ public class KelolaJasa extends AppCompatActivity implements HalamanKelolaJasaAc
 
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
+        update = bundle.getInt("update");
 
-        if (bundle != null){
+        if (update == 1){
             ifUpdateJasa(bundle);
-            //presenterUpdate = new HalamanJasaFragmentPenjualPresenter(this);
         }
-        else{
-            namaJasa = namaJasaEditText.getText().toString();
-            hargaJasa = hargaEditText.getText().toString();
-            presenter=new HalamanKelolaJasaActivityPresenter(this);
-        }
+
+        presenterUpdate = new UpdateJasaPresenter(this);
+        presenter=new HalamanKelolaJasaActivityPresenter(this);
+
     }
 
     public void ifUpdateJasa(Bundle bundle) {
-        String idToko="1";
-        String idJasa = bundle.getString("jasaId");
         namaJasa = bundle.getString("jasaNama");
         hargaJasa = bundle.getString("jasaHarga");
 
         textViewJudul.setText("Perbarui Jasa");
         namaJasaEditText.setText(namaJasa);
-        hargaEditText.setText(hargaJasa);
-
-        Button buttonSimpan = (Button) findViewById(R.id.buttonSimpan);
-        buttonSimpan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v){
-                String fixNamaJasa = namaJasaEditText.getText().toString();
-                String fixHargaJasa = hargaEditText.getText().toString();
-
-                Map<String, String> fields = new HashMap<>();
-                fields.put("id_toko", idToko);
-                fields.put("nama", fixNamaJasa);
-                fields.put("harga", fixHargaJasa);
-
-                //presenter.ubahJasa(fields);
-            }
-        });
+        hargaEditText.setText(String.valueOf(hargaJasa));
     }
 
     @OnClick(R.id.buttonSimpan)
     public void simpanJasa(){
-        String idToko="1";
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+        update = bundle.getInt("update");
 
-        Map<String, String> fields=new HashMap<>();
-        fields.put("id_toko",idToko);
-        fields.put("nama",namaJasa);
-        fields.put("harga",hargaJasa);
+        if(update == 1){
+            IdJasa = bundle.getString("jasaId");
+            String fixNamaJasa = namaJasaEditText.getText().toString();
+            String fixHargaJasa = hargaEditText.getText().toString();
 
-        presenter.insertJasa(fields);
+            Map<String, String> fields = new HashMap<>();
+            fields.put("id", IdJasa);
+            fields.put("nama", fixNamaJasa);
+            fields.put("harga", fixHargaJasa);
 
+            presenterUpdate.ubahJasa(fields);
+        }
+        else {
+            String idToko = bundle.getString("jasaIdToko");
+            namaJasa = namaJasaEditText.getText().toString();
+            hargaJasa = hargaEditText.getText().toString();
+
+            Map<String, String> fields = new HashMap<>();
+            fields.put("id_toko", idToko);
+            fields.put("nama", namaJasa);
+            fields.put("harga", hargaJasa);
+
+            presenter.insertJasa(fields);
+        }
     }
 
     @Override
@@ -107,5 +110,15 @@ public class KelolaJasa extends AppCompatActivity implements HalamanKelolaJasaAc
     @Override
     public void onDataInsertFailed() {
         Toast.makeText(this,"Gangguan server",Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onJasaEdited() {
+        Toast.makeText(this,"Berhasil diupdate",Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onJasaEditFailed() {
+        Toast.makeText(this,"Gagal memperbarui jasa",Toast.LENGTH_SHORT).show();
     }
 }

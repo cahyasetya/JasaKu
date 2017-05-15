@@ -68,7 +68,10 @@ public class HalamanJasaFragment extends Fragment implements View.OnClickListene
 
     @Override
     public void onClick(View v) {
-        startActivity(new Intent(getContext(), KelolaJasa.class));
+        Intent tmbhIntent = new Intent(getContext(), KelolaJasa.class);
+        String idToko = getArguments().getString("id_toko");
+        tmbhIntent.putExtra("jasaIdToko", idToko);
+        startActivity(tmbhIntent);
     }
 
     @Override
@@ -96,15 +99,5 @@ public class HalamanJasaFragment extends Fragment implements View.OnClickListene
     @Override
     public void onJasaDeleteFailed() {
         Toast.makeText(getContext(),"Gangguan jaringan", Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void onJasaEdited() {
-        Toast.makeText(getContext(),"Jasa berhasil diubah",Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void onJasaEditFailed() {
-        Toast.makeText(getContext(),"Gangguan jaringan",Toast.LENGTH_SHORT).show();
     }
 }

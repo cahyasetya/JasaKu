@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     tools:context="com.example.jasaku.penjual.fragment.HalamanTokoFragment">
 
-    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -13,96 +13,102 @@
             android:layout_height="wrap_content"
             android:paddingBottom="100dp">
 
-            <LinearLayout
-                android:id="@+id/imageHolder"
-                android:scaleType="fitXY"
+            <ImageView
+                android:id="@+id/imageViewToko"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:scaleType="fitXY"
+                android:src="@drawable/contoh_image" />
 
-                <ImageView
-                    android:id="@+id/imageViewToko"
-                    android:scaleType="fitXY"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/contoh_image"/>
+            <TextView
+                android:id="@+id/editGambar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Edit Gambar"
+                android:textColor="@color/white"
+                android:layout_alignBottom="@+id/imageViewToko"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="13dp"
+                android:layout_marginEnd="13dp"
+                android:layout_marginBottom="13dp" />
 
-            </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/textDescriptionHolder"
-                android:layout_marginTop="200dp"
-                android:padding="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_marginTop="200dp"
+                android:orientation="vertical"
+                android:padding="10dp">
 
                 <TextView
                     android:id="@+id/textViewNamaToko"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:paddingLeft="10dp"
                     android:text="Raharjo Company"
                     android:textSize="30sp"
-                    android:textStyle="bold"
-                    android:paddingLeft="10dp"/>
+                    android:textStyle="bold" />
 
                 <EditText
                     android:id="@+id/editTextDescription"
-                    android:layout_margin="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="15sp"
-                    android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book." />
+                    android:layout_margin="10dp"
+                    android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+                    android:textSize="15sp" />
 
                 <TextView
                     android:id="@+id/textViewTitleAlamat"
-                    android:layout_marginLeft="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
                     android:text="Alamat"
                     android:textSize="20sp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
                 <EditText
                     android:id="@+id/editTextAlamat"
-                    android:layout_margin="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="15sp"
-                    android:text="Keputih gang Makam Blok H-19A"/>
+                    android:layout_margin="10dp"
+                    android:text="Keputih gang Makam Blok H-19A"
+                    android:textSize="15sp" />
 
                 <TextView
                     android:id="@+id/textViewTitleKontak"
-                    android:layout_marginLeft="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
                     android:text="No Telp"
                     android:textSize="20sp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
                 <EditText
                     android:id="@+id/editTextKontak"
-                    android:layout_margin="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="15sp"
-                    android:text="085728976789"/>
+                    android:layout_margin="10dp"
+                    android:text="085728976789"
+                    android:textSize="15sp" />
 
                 <TextView
                     android:id="@+id/textViewTitleBuka"
-                    android:layout_marginLeft="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
                     android:text="Jam Operasional"
                     android:textSize="20sp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
                 <EditText
                     android:id="@+id/editTextBuka"
-                    android:layout_margin="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="15sp"
-                    android:text="15.00 WIB - 22.00 WIB"/>
+                    android:layout_margin="10dp"
+                    android:text="15.00 WIB - 22.00 WIB"
+                    android:textSize="15sp" />
 
             </LinearLayout>
 

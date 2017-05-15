@@ -39,20 +39,6 @@ public class HalamanJasaFragmentPenjualPresenter {
                 .subscribe(this::jasaDeleted,this::jasaDeleteFailed);
     }
 
-    public void ubahJasa(Map<String, String> fields){
-        serviceInterface.ubahJasa(fields).subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(this::jasaEdited,this::jasaEditFailed);
-    }
-
-    private void jasaEdited(ResponseBody responseBody){
-
-    }
-
-    private void jasaEditFailed(Throwable t){
-
-    }
-
     private void jasaDeleted(ResponseBody responseBody){
         callback.onJasaDeleted();
     }

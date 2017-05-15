@@ -13,6 +13,4 @@ public interface HalamanJasaFragmentPenjualInterface {
     void onDataLoadError(Throwable t);
     void onJasaDeleted();
     void onJasaDeleteFailed();
-    void onJasaEdited();
-    void onJasaEditFailed();
 }

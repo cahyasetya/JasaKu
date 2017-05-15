@@ -56,10 +56,12 @@ public class JasaAdapter extends RecyclerView.Adapter<JasaAdapter.JasaViewHolder
         holder.ubahButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Integer update = 1;
                 Intent intent = new Intent(context, KelolaJasa.class);
+                intent.putExtra("update", update);
                 intent.putExtra("jasaId", jasa.getId());
                 intent.putExtra("jasaNama", jasa.getNama());
-                intent.putExtra("jasaHarga", jasa.getHarga());
+                intent.putExtra("jasaHarga", String.valueOf(jasa.getHarga()));
                 context.startActivity(intent);
             }
         });
