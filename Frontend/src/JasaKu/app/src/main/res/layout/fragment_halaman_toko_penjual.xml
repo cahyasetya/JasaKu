@@ -21,7 +21,7 @@
                 android:src="@drawable/contoh_image" />
 
             <TextView
-                android:id="@+id/editGambar"
+                android:id="@+id/buttonEditGambar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Edit Gambar"
