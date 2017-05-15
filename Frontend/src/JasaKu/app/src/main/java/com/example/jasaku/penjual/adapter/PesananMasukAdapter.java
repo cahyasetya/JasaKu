@@ -5,10 +5,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.jasaku.R;
-import com.example.jasaku.model.Jasa;
+import com.example.jasaku.model.PesananMasuk;
 
 import java.util.List;
 
@@ -22,11 +23,11 @@ import butterknife.ButterKnife;
 public class PesananMasukAdapter extends RecyclerView.Adapter<PesananMasukAdapter.PesananMasukViewHolder>{
 
     private Context context;
-    private List<Jasa> jasaList;
+    private List<PesananMasuk> pesananMasukList;
 
-    public PesananMasukAdapter(Context context, List<Jasa> jasaList){
+    public PesananMasukAdapter(Context context, List<PesananMasuk> pesananMasukList){
         this.context=context;
-        this.jasaList=jasaList;
+        this.pesananMasukList = pesananMasukList;
     }
 
     @Override
@@ -37,14 +38,26 @@ public class PesananMasukAdapter extends RecyclerView.Adapter<PesananMasukAdapte
 
     @Override
     public void onBindViewHolder(PesananMasukViewHolder holder, int position) {
-        Jasa jasa=jasaList.get(position);
-        holder.namaJasaTextView.setText(jasa.getNama());
-        holder.hargaJasaTextView.setText(String.valueOf(jasa.getHarga()));
+        PesananMasuk pesananMasuk= pesananMasukList.get(position);
+        holder.namaJasaTextView.setText(pesananMasuk.getNama());
+        holder.hargaJasaTextView.setText(String.valueOf(pesananMasuk.getHarga()));
+        holder.namaPembeliTextView.setText(pesananMasuk.getPembeli().getNama());
+        holder.kontakPembeliTextView.setText(pesananMasuk.getPembeli().getKontak());
+        holder.alamatTextView.setText(pesananMasuk.getPembeli().getAlamat());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(holder.pembeliContainer.getVisibility()==View.VISIBLE)
+                    holder.pembeliContainer.setVisibility(View.GONE);
+                else
+                    holder.pembeliContainer.setVisibility(View.VISIBLE);
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
-        return jasaList.size();
+        return pesananMasukList.size();
     }
 
     public class PesananMasukViewHolder extends RecyclerView.ViewHolder{
@@ -53,6 +66,14 @@ public class PesananMasukAdapter extends RecyclerView.Adapter<PesananMasukAdapte
         TextView namaJasaTextView;
         @BindView(R.id.harga_jasa)
         TextView hargaJasaTextView;
+        @BindView(R.id.nama_pembeli)
+        TextView namaPembeliTextView;
+        @BindView(R.id.kontak_pembeli)
+        TextView kontakPembeliTextView;
+        @BindView(R.id.pembeli_container)
+        LinearLayout pembeliContainer;
+        @BindView(R.id.alamat)
+        TextView alamatTextView;
 
         public PesananMasukViewHolder(View itemView) {
             super(itemView);

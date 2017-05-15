@@ -7,7 +7,6 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.jasaku.adapter.KategoriSpinner;
-import com.example.jasaku.interfaces.HalamanRegisterActivityInterface;
 import com.example.jasaku.interfaces.HalamanRegisterTokoActivityInterface;
 import com.example.jasaku.model.Kategori;
 import com.example.jasaku.presenter.HalamanRegisterTokoActivityPresenter;

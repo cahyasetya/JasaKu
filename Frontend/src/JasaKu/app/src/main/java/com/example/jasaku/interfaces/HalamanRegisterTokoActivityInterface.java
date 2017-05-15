@@ -9,8 +9,8 @@ import java.util.List;
  */
 
 public interface HalamanRegisterTokoActivityInterface {
-    public void onKategoriLoadedSuccessfully(List<Kategori> kategoriList);
-    public void onKategoriLoadFailed();
-    public void onBuatTokoSuccessful();
-    public void onBuatTokoFailed();
+    void onKategoriLoadedSuccessfully(List<Kategori> kategoriList);
+    void onKategoriLoadFailed();
+    void onBuatTokoSuccessful();
+    void onBuatTokoFailed();
 }

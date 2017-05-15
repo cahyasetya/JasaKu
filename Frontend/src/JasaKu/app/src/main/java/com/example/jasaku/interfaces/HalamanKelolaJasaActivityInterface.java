@@ -5,6 +5,6 @@ package com.example.jasaku.interfaces;
  */
 
 public interface HalamanKelolaJasaActivityInterface {
-    public void onDataInserted();
-    public void onDataInsertFailed();
+    void onDataInserted();
+    void onDataInsertFailed();
 }

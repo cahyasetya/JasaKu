@@ -9,6 +9,6 @@ import java.util.List;
  */
 
 public interface HalamanPesananMasukFragmentInterface {
-    public void onDataLoaded(List<Jasa> jasaList);
-    public void onDataLoadFailed();
+    void onDataLoaded(List<Jasa> jasaList);
+    void onDataLoadFailed();
 }

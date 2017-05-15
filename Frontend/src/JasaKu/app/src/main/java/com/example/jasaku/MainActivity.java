@@ -3,8 +3,6 @@ package com.example.jasaku;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -20,7 +18,6 @@ import android.widget.Toast;
 import com.example.jasaku.api.ServiceGenerator;
 import com.example.jasaku.api.ServiceInterface;
 import com.example.jasaku.fragment.HalamanUtamaFragment;
-import com.example.jasaku.fragment.KelolaTokoFragment;
 import com.example.jasaku.model.Toko;
 import com.example.jasaku.penjual.EditTokoActivity;
 import com.google.gson.Gson;
@@ -48,17 +45,27 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
         Menu menu=navigationView.getMenu();
         MenuItem kelolaToko=menu.findItem(R.id.kelola_toko);
+        MenuItem keluar=menu.findItem(R.id.keluar);
+        MenuItem masuk=menu.findItem(R.id.masuk);
+
         SharedPreferences preferences=getSharedPreferences("jasaku",MODE_PRIVATE);
         SharedPreferences.Editor editor=preferences.edit();
         editor.commit();
         boolean isLoggedIn=preferences.getBoolean("isLoggedIn",false);
-        if(!isLoggedIn){
-            if(kelolaToko.isVisible()){
+        int hasToko=preferences.getInt("has_toko",0);
+        if(isLoggedIn){
+            keluar.setVisible(true);
+            masuk.setVisible(false);
+            if(hasToko==1){
                 kelolaToko.setVisible(false);
-            }
+            }else
+                kelolaToko.setVisible(false);
         }else{
+            keluar.setVisible(false);
+            masuk.setVisible(true);
             if(!kelolaToko.isVisible()){
                 kelolaToko.setVisible(true);
             }

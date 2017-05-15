@@ -5,6 +5,6 @@ package com.example.jasaku.interfaces;
  */
 
 public interface HalamanLoginActivityInterface {
-    public void onLoginSuccess();
-    public void onLoginError();
+    void onLoginSuccess();
+    void onLoginError();
 }

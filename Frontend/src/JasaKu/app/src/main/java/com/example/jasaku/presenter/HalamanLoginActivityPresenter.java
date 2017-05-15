@@ -8,12 +8,10 @@ import android.widget.Toast;
 import com.example.jasaku.LoginActivity;
 import com.example.jasaku.api.ServiceGenerator;
 import com.example.jasaku.api.ServiceInterface;
-import com.example.jasaku.interfaces.HalamanLoginActivityInterface;
 import com.example.jasaku.model.Pengguna;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.gson.Gson;
 
-import java.util.List;
 import java.util.Map;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -47,6 +45,7 @@ public class HalamanLoginActivityPresenter {
         editor.putBoolean("isLoggedIn",true);
         editor.putString("id_user",String.valueOf(pengguna.getId()));
         editor.putString("pengguna",penggunaString);
+        editor.putInt("has_toko",pengguna.getToko());
         editor.putString("nama",pengguna.getNama());
         editor.commit();
 

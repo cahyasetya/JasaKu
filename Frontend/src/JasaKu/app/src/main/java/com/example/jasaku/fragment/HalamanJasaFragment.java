@@ -56,7 +56,7 @@ public class HalamanJasaFragment extends Fragment implements View.OnClickListene
 
         String idToko=getArguments().getString("id_toko",null);
 
-        if(idToko!=null || !idToko.equals("")){
+        if(idToko!=null){
             HalamanJasaFragmentPresenter presenter=new HalamanJasaFragmentPresenter(this);
             presenter.loadData(idToko);
         }
