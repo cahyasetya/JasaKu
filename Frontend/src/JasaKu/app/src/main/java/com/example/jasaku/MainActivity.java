@@ -124,7 +124,11 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.profil) {
             startActivity(new Intent(this,ProfileActivity.class));
         } else if (id == R.id.keluar) {
-
+            SharedPreferences preferences=getSharedPreferences("jasaku",MODE_PRIVATE);
+            SharedPreferences.Editor editor=preferences.edit();
+            editor.clear();
+            editor.commit();
+            startActivity(new Intent(this,LoginActivity.class));
         }else if(id==R.id.masuk){
             startActivity(new Intent(this, LoginActivity.class));
         }else if(id==R.id.beranda){
