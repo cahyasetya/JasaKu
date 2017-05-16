@@ -97,7 +97,7 @@ public class HalamanTokoFragment extends Fragment {
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(Intent.createChooser(intent, "Complete action using"), IMAGE_REQUEST_CODE);
-        uploadMultipart();
+        //uploadMultipart();
     }
 
     @Override
