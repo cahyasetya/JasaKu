@@ -32,8 +32,6 @@ public class HalamanTokoFragment extends Fragment {
     TextView kontakTextView;
     @BindView(R.id.textViewBuka)
     TextView jamOperasionalTextView;
-    @BindView(R.id.imageViewToko)
-    ImageView imageViewToko;
 
     public HalamanTokoFragment() {
         // Required empty public constructor
@@ -55,7 +53,6 @@ public class HalamanTokoFragment extends Fragment {
     private void init(){
         Toko toko=(Toko)getArguments().getSerializable("toko");
 
-        imageViewToko.setImageResource(R.drawable.avatar_toko);
         namaTokoTextView.setText(toko.getNama());
         deskripsiTokoTextView.setText(toko.getDeskripsi());
         alamatTextView.setText(toko.getAlamat());
