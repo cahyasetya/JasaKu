@@ -50,7 +50,7 @@ public class ProfileActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         collapsingToolbarLayout.setTitle(pengguna.getNama());
-        imageViewProfileImg.setImageResource(R.drawable.ibaratkan_toko);
+        imageViewProfileImg.setImageResource(R.drawable.avatar);
 
         Context context = this;
         collapsingToolbarLayout.setContentScrimColor(ContextCompat.getColor(context, R.color.colorPrimary));

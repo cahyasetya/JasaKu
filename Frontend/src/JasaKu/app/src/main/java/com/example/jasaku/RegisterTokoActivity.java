@@ -26,7 +26,7 @@ public class RegisterTokoActivity extends AppCompatActivity implements HalamanRe
 
     HalamanRegisterTokoActivityPresenter presenter;
     List<Kategori> kategoriList;
-    ProgressDialog pd;
+    //ProgressDialog pd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,11 +37,11 @@ public class RegisterTokoActivity extends AppCompatActivity implements HalamanRe
 
         ButterKnife.bind(this);
 
-        pd.setMessage("Harap menunggu...");
-        pd.setCancelable(false);
+        //pd.setMessage("Harap menunggu...");
+        //pd.setCancelable(false);
 
         presenter=new HalamanRegisterTokoActivityPresenter(this);
-        pd.show();
+        //pd.show();
         presenter.loadKategori();
     }
 
@@ -63,13 +63,13 @@ public class RegisterTokoActivity extends AppCompatActivity implements HalamanRe
         this.kategoriList=kategoriList;
         KategoriSpinner spinner=new KategoriSpinner(this,this.kategoriList);
         kategoriSpinner.setAdapter(spinner);
-        pd.dismiss();
+        //pd.dismiss();
     }
 
     @Override
     public void onKategoriLoadFailed() {
         Toast.makeText(this,"Gangguan Jaringan",Toast.LENGTH_SHORT).show();
-        pd.dismiss();
+        //pd.dismiss();
     }
 
     @Override
