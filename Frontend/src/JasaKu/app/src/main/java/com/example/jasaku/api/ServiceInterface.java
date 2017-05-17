@@ -1,9 +1,12 @@
 package com.example.jasaku.api;
 
 import com.example.jasaku.model.Jasa;
+import com.example.jasaku.model.Kabupaten;
 import com.example.jasaku.model.Kategori;
+import com.example.jasaku.model.Kecamatan;
 import com.example.jasaku.model.Pengguna;
 import com.example.jasaku.model.PesananMasuk;
+import com.example.jasaku.model.Provinsi;
 import com.example.jasaku.model.RequestMembeli;
 import com.example.jasaku.model.Toko;
 
@@ -81,4 +84,13 @@ public interface ServiceInterface {
     @FormUrlEncoded
     @POST("transaksi/ditolak")
     Observable<ResponseBody> tolakPesanan(@FieldMap Map<String, String> fields);
+
+    @GET("provinsi/")
+    Observable<List<Provinsi>> getProvinsi();
+
+    @GET("kabupaten/id_provinsi/{idprovinsi}")
+    Observable<List<Kabupaten>> getKabupatenByProvinsi(@Path("idprovinsi") String idProvinsi);
+
+    @GET("kecamatan/id_kabupaten/{idkabupaten}")
+    Observable<List<Kecamatan>> getKecamatanByKabupaten(@Path("idkabupaten") String idKabupaten);
 }

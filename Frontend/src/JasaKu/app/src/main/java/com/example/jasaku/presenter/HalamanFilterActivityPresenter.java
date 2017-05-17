@@ -3,7 +3,10 @@ package com.example.jasaku.presenter;
 import com.example.jasaku.api.ServiceGenerator;
 import com.example.jasaku.api.ServiceInterface;
 import com.example.jasaku.interfaces.HalamanFilterActivityInterface;
+import com.example.jasaku.model.Kabupaten;
 import com.example.jasaku.model.Kategori;
+import com.example.jasaku.model.Kecamatan;
+import com.example.jasaku.model.Provinsi;
 
 import java.util.List;
 
@@ -34,11 +37,31 @@ public class HalamanFilterActivityPresenter {
 
     }
 
+    public void loadKabupaten(){
+
+    }
+
+    public void loadKecamatan(){
+
+    }
+
     private void loadFailed(Throwable throwable) {
         callback.onLoadFailed();
     }
 
     private void kategoriLoaded(List<Kategori> kategoriList) {
         callback.onKategoriLoaded(kategoriList);
+    }
+
+    private void provinsiLoaded(List<Provinsi> provinsiList){
+
+    }
+
+    private void loadKabupaten(List<Kabupaten> kabupatenList){
+
+    }
+
+    private void loadKecamatan(List<Kecamatan> kecamatanList){
+
     }
 }
