@@ -52,7 +52,7 @@ public class HalamanFilterActivityPresenter {
     }
 
     private void loadFailed(Throwable throwable) {
-        callback.onLoadFailed();
+        callback.onLoadFailed(throwable);
     }
 
     private void kategoriLoaded(List<Kategori> kategoriList) {

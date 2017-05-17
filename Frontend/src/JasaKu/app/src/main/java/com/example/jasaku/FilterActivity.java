@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.jasaku.adapter.KabupatenAdapter;
@@ -21,6 +22,7 @@ import com.example.jasaku.model.Kategori;
 import com.example.jasaku.model.Kecamatan;
 import com.example.jasaku.model.Provinsi;
 import com.example.jasaku.presenter.HalamanFilterActivityPresenter;
+import com.jakewharton.retrofit2.adapter.rxjava2.HttpException;
 
 import java.util.List;
 
@@ -37,6 +39,10 @@ public class FilterActivity extends AppCompatActivity implements KategoriInterfa
     Spinner kabupatenSpinner;
     @BindView(R.id.kecamatan_spinner)
     Spinner kecamatanSpinner;
+    @BindView(R.id.kabupaten_label)
+    TextView kabupatenLabel;
+    @BindView(R.id.kecamatan_label)
+    TextView kecamatanLabel;
 
     HalamanFilterActivityPresenter presenter;
 
@@ -84,8 +90,10 @@ public class FilterActivity extends AppCompatActivity implements KategoriInterfa
     }
 
     @Override
-    public void onLoadFailed() {
-        Toast.makeText(this,"Gangguan jaringan",Toast.LENGTH_SHORT).show();
+    public void onLoadFailed(Throwable t) {
+        if(((HttpException)t).response().code()!=400) {
+            Toast.makeText(this, "Gangguan jaringan", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
@@ -97,15 +105,29 @@ public class FilterActivity extends AppCompatActivity implements KategoriInterfa
 
     @Override
     public void onKabupatenLoaded(List<Kabupaten> kabupatenList) {
-        KabupatenAdapter adapter=new KabupatenAdapter(this,kabupatenList);
-        kabupatenSpinner.setAdapter(adapter);
-        kabupatenSpinner.setOnItemSelectedListener(this);
+        if(kabupatenList.size()>0){
+            KabupatenAdapter adapter=new KabupatenAdapter(this,kabupatenList);
+            kabupatenSpinner.setAdapter(adapter);
+            kabupatenSpinner.setOnItemSelectedListener(this);
+            kabupatenLabel.setVisibility(View.VISIBLE);
+            kabupatenSpinner.setVisibility(View.VISIBLE);
+        }else{
+            kabupatenLabel.setVisibility(View.GONE);
+            kabupatenSpinner.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
     public void onKecamatanLoaded(List<Kecamatan> kecamatanList) {
-        KecamatanAdapter adapter=new KecamatanAdapter(this,kecamatanList);
-        kecamatanSpinner.setAdapter(adapter);
+        if(kecamatanList.size()>0) {
+            KecamatanAdapter adapter = new KecamatanAdapter(this, kecamatanList);
+            kecamatanSpinner.setAdapter(adapter);
+            kecamatanLabel.setVisibility(View.VISIBLE);
+            kecamatanSpinner.setVisibility(View.VISIBLE);
+        }else{
+            kecamatanLabel.setVisibility(View.GONE);
+            kecamatanLabel.setVisibility(View.GONE);
+        }
     }
 
     @Override
