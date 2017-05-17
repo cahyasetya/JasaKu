@@ -55,6 +55,7 @@ public class FilterActivity extends AppCompatActivity implements KategoriInterfa
     List<Kategori> kategoriList;
 
     String idKategori;
+    String idKecamatan;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -148,6 +149,9 @@ public class FilterActivity extends AppCompatActivity implements KategoriInterfa
             case R.id.kabupaten_container:
                 presenter.loadKecamatan(String.valueOf(id));
                 break;
+            case R.id.kecamatan_container:
+                this.idKecamatan=String.valueOf(id);
+                break;
         }
     }
 
@@ -161,6 +165,7 @@ public class FilterActivity extends AppCompatActivity implements KategoriInterfa
         //getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.content_main,new HalamanUtamaFragment()).commit();
         Intent intent=new Intent(this,MainActivity.class);
         intent.putExtra("id_kategori",idKategori);
+        intent.putExtra("id_kecamatan",idKecamatan);
         startActivity(intent);
     }
 }

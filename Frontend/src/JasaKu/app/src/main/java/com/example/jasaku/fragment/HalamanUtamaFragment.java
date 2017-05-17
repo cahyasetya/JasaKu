@@ -107,7 +107,7 @@ public class HalamanUtamaFragment extends Fragment implements HalamanUtamaFragme
         String idKategori=getArguments().getString("id_kategori",null);
         String idKecamatan=getArguments().getString("id_kecamatan",null);
         String sort=getArguments().getString("sort",null);
-        if(idKategori==null)
+        if(idKategori==null&&idKecamatan==null)
             presenter.loadData();
         else {
             Map<String, String> fields=new HashMap<>();
