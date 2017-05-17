@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -47,6 +48,8 @@ public class FilterActivity extends AppCompatActivity implements KategoriInterfa
     TextView kabupatenLabel;
     @BindView(R.id.kecamatan_label)
     TextView kecamatanLabel;
+    @BindView(R.id.terapkan_button)
+    Button terapkanButton;
 
     HalamanFilterActivityPresenter presenter;
 
@@ -72,6 +75,8 @@ public class FilterActivity extends AppCompatActivity implements KategoriInterfa
     @Override
     public void onKategoriSelected(String idKategori) {
         this.idKategori=idKategori;
+        if(terapkanButton.getVisibility()==View.GONE)
+            terapkanButton.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -121,6 +126,7 @@ public class FilterActivity extends AppCompatActivity implements KategoriInterfa
             kabupatenLabel.setVisibility(View.VISIBLE);
             kabupatenSpinner.setVisibility(View.VISIBLE);
         }else{
+            Toast.makeText(this,"Tidak ada penyedia jasa terkait di daerah yang dipilih",Toast.LENGTH_SHORT).show();
             kabupatenLabel.setVisibility(View.GONE);
             kabupatenSpinner.setVisibility(View.VISIBLE);
         }
@@ -144,14 +150,17 @@ public class FilterActivity extends AppCompatActivity implements KategoriInterfa
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         switch (view.getId()){
             case R.id.provinsi_container:
-                if(position!=0)
+                if(position!=0) {
                     presenter.loadKabupaten(String.valueOf(id));
+                    idKecamatan=null;
+                }
                 break;
             case R.id.kabupaten_container:
                 presenter.loadKecamatan(String.valueOf(id));
                 break;
             case R.id.kecamatan_container:
                 this.idKecamatan=String.valueOf(id);
+                terapkanButton.setVisibility(View.VISIBLE);
                 break;
         }
     }
