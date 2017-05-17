@@ -139,16 +139,72 @@
                 </android.support.design.widget.TextInputLayout>
 
                 <TextView
+                    android:id="@+id/textViewKategori"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Kategori"
                     android:textStyle="bold"
                     android:layout_marginLeft="8dp"
-                    android:layout_marginTop="8dp"/>
+                    android:layout_marginTop="8dp" />
+
                 <android.support.v7.widget.AppCompatSpinner
                     android:id="@+id/kategori_spinner"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
+
+                </android.support.v7.widget.AppCompatSpinner>
+
+                <TextView
+                    android:id="@+id/textViewProvinsi"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Provinsi"
+                    android:textStyle="bold"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="8dp"
+                    android:visibility="gone"/>
+
+                <android.support.v7.widget.AppCompatSpinner
+                    android:id="@+id/provinsi_spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone" >
+
+                </android.support.v7.widget.AppCompatSpinner>
+
+                <TextView
+                    android:id="@+id/textViewKabupaten"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Kabupaten"
+                    android:textStyle="bold"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="8dp"
+                    android:visibility="gone"/>
+
+                <android.support.v7.widget.AppCompatSpinner
+                    android:id="@+id/kabupaten_spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone" >
+
+                </android.support.v7.widget.AppCompatSpinner>
+
+                <TextView
+                    android:id="@+id/textViewKecamatan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Kecamatan"
+                    android:textStyle="bold"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="8dp"
+                    android:visibility="gone"/>
+
+                <android.support.v7.widget.AppCompatSpinner
+                    android:id="@+id/kecamatan_spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone" >
 
                 </android.support.v7.widget.AppCompatSpinner>
 
