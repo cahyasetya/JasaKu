@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import com.example.jasaku.R;
 import com.example.jasaku.interfaces.HalamanKelolaJasaActivityInterface;
+import com.example.jasaku.penjual.fragment.HalamanJasaFragment;
 import com.example.jasaku.penjual.interfaces.UpdateJasaInterface;
 import com.example.jasaku.penjual.presenter.UpdateJasaPresenter;
 import com.example.jasaku.presenter.HalamanKelolaJasaActivityPresenter;
@@ -73,9 +74,8 @@ public class KelolaJasa extends AppCompatActivity implements HalamanKelolaJasaAc
         Bundle bundle = intent.getExtras();
         update = bundle.getInt("update");
 
-        /*if(update == 1){
-            //IdJasa = bundle.getString("jasaId");
-            IdJasa = "2";
+        if(update == 1){
+            IdJasa = bundle.getString("jasaId");
             String fixNamaJasa = namaJasaEditText.getText().toString();
             String fixHargaJasa = hargaEditText.getText().toString();
 
@@ -86,23 +86,24 @@ public class KelolaJasa extends AppCompatActivity implements HalamanKelolaJasaAc
 
             presenterUpdate.ubahJasa(fields);
         }
-        else {*/
+        else {
             idToko = bundle.getString("jasaIdToko");
-            String nama = namaJasaEditText.getText().toString();
-            String harga = hargaEditText.getText().toString();
 
             Map<String, String> fields = new HashMap<>();
-            fields.put("id_toko", idToko);
-            fields.put("nama", nama);
-            fields.put("harga", harga);
+            fields.put("id_toko", bundle.getString("jasaIdToko"));
+            fields.put("nama", namaJasaEditText.getText().toString());
+            fields.put("harga", hargaEditText.getText().toString());
 
             presenter.insertJasa(fields);
-        //}
+        }
     }
 
     @Override
     public void onDataInserted() {
+        Toast.makeText(this,idToko+" "+namaJasaEditText.getText()+" "+hargaEditText.getText(),Toast.LENGTH_SHORT).show();
+        //startActivity(new Intent(this, HalamanJasaFragment.class));
         Toast.makeText(this,"Berhasil disimpan",Toast.LENGTH_SHORT).show();
+        //finish();
     }
 
     @Override
@@ -113,11 +114,15 @@ public class KelolaJasa extends AppCompatActivity implements HalamanKelolaJasaAc
 
     @Override
     public void onJasaEdited() {
+        Toast.makeText(this,IdJasa+" "+namaJasaEditText.getText()+" "+hargaEditText.getText(),Toast.LENGTH_SHORT).show();
+        startActivity(new Intent(this, HalamanJasaFragment.class));
         Toast.makeText(this,"Berhasil diupdate",Toast.LENGTH_SHORT).show();
+        finish();
     }
 
     @Override
     public void onJasaEditFailed() {
+        Toast.makeText(this,IdJasa+namaJasaEditText.getText()+hargaEditText.getText(),Toast.LENGTH_SHORT).show();
         Toast.makeText(this,"Gagal memperbarui jasa",Toast.LENGTH_SHORT).show();
     }
 }
