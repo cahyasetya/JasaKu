@@ -30,7 +30,7 @@ public class HalamanLoginActivityPresenter {
     }
 
     public void login(Map<String, String> field){
-        ServiceInterface serviceInterface= ServiceGenerator.createService(ServiceInterface.class);
+        ServiceInterface serviceInterface = ServiceGenerator.createService(ServiceInterface.class);
         serviceInterface.login(field).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::loginSuccess,this::loginFailed);

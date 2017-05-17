@@ -46,6 +46,8 @@ public class KelolaJasa extends AppCompatActivity implements HalamanKelolaJasaAc
 
         ButterKnife.bind(this);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         update = bundle.getInt("update");
@@ -101,9 +103,9 @@ public class KelolaJasa extends AppCompatActivity implements HalamanKelolaJasaAc
     @Override
     public void onDataInserted() {
         Toast.makeText(this,idToko+" "+namaJasaEditText.getText()+" "+hargaEditText.getText(),Toast.LENGTH_SHORT).show();
-        //startActivity(new Intent(this, HalamanJasaFragment.class));
         Toast.makeText(this,"Berhasil disimpan",Toast.LENGTH_SHORT).show();
-        //finish();
+        startActivity(new Intent(this, HalamanJasaFragment.class));
+        finish();
     }
 
     @Override
