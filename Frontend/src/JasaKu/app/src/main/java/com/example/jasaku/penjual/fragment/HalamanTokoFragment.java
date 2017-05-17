@@ -84,6 +84,8 @@ public class HalamanTokoFragment extends Fragment {
 
     private void init(){
         Toko toko=(Toko)getArguments().getSerializable("toko");
+
+        profileImg.setImageResource(R.drawable.avatar_toko);
         namaTokoTextView.setText(toko.getNama());
         deskripsiEditText.setText(toko.getDeskripsi());
         alamatEditText.setText(toko.getAlamat());

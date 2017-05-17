@@ -1,6 +1,9 @@
 package com.example.jasaku.fragment;
 
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -32,6 +35,8 @@ public class HalamanTokoFragment extends Fragment {
     TextView kontakTextView;
     @BindView(R.id.textViewBuka)
     TextView jamOperasionalTextView;
+    @BindView(R.id.imageViewToko)
+    ImageView imageViewToko;
 
     public HalamanTokoFragment() {
         // Required empty public constructor
@@ -53,6 +58,7 @@ public class HalamanTokoFragment extends Fragment {
     private void init(){
         Toko toko=(Toko)getArguments().getSerializable("toko");
 
+        imageViewToko.setImageResource(R.drawable.avatar_toko);
         namaTokoTextView.setText(toko.getNama());
         deskripsiTokoTextView.setText(toko.getDeskripsi());
         alamatTextView.setText(toko.getAlamat());
