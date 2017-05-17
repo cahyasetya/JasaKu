@@ -26,7 +26,7 @@ public class RegisterTokoActivity extends AppCompatActivity implements HalamanRe
 
     HalamanRegisterTokoActivityPresenter presenter;
     List<Kategori> kategoriList;
-    ProgressDialog pd;
+    private ProgressDialog pd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +41,7 @@ public class RegisterTokoActivity extends AppCompatActivity implements HalamanRe
         pd.setCancelable(false);
 
         presenter=new HalamanRegisterTokoActivityPresenter(this);
-        pd.show();
+        //pd.show();
         presenter.loadKategori();
     }
 

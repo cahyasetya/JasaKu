@@ -84,6 +84,8 @@ public class HalamanTokoFragment extends Fragment {
 
     private void init(){
         Toko toko=(Toko)getArguments().getSerializable("toko");
+
+        profileImg.setImageResource(R.drawable.avatar_toko);
         namaTokoTextView.setText(toko.getNama());
         deskripsiEditText.setText(toko.getDeskripsi());
         alamatEditText.setText(toko.getAlamat());
@@ -97,7 +99,7 @@ public class HalamanTokoFragment extends Fragment {
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(Intent.createChooser(intent, "Complete action using"), IMAGE_REQUEST_CODE);
-        uploadMultipart();
+        //uploadMultipart();
     }
 
     @Override

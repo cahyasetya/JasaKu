@@ -33,6 +33,7 @@ public class KelolaJasa extends AppCompatActivity implements HalamanKelolaJasaAc
     String IdJasa;
     String namaJasa;
     String hargaJasa;
+    String idToko;
 
     HalamanKelolaJasaActivityPresenter presenter;
     UpdateJasaPresenter presenterUpdate;
@@ -72,8 +73,9 @@ public class KelolaJasa extends AppCompatActivity implements HalamanKelolaJasaAc
         Bundle bundle = intent.getExtras();
         update = bundle.getInt("update");
 
-        if(update == 1){
-            IdJasa = bundle.getString("jasaId");
+        /*if(update == 1){
+            //IdJasa = bundle.getString("jasaId");
+            IdJasa = "2";
             String fixNamaJasa = namaJasaEditText.getText().toString();
             String fixHargaJasa = hargaEditText.getText().toString();
 
@@ -84,18 +86,18 @@ public class KelolaJasa extends AppCompatActivity implements HalamanKelolaJasaAc
 
             presenterUpdate.ubahJasa(fields);
         }
-        else {
-            String idToko = bundle.getString("jasaIdToko");
-            namaJasa = namaJasaEditText.getText().toString();
-            hargaJasa = hargaEditText.getText().toString();
+        else {*/
+            idToko = bundle.getString("jasaIdToko");
+            String nama = namaJasaEditText.getText().toString();
+            String harga = hargaEditText.getText().toString();
 
             Map<String, String> fields = new HashMap<>();
             fields.put("id_toko", idToko);
-            fields.put("nama", namaJasa);
-            fields.put("harga", hargaJasa);
+            fields.put("nama", nama);
+            fields.put("harga", harga);
 
             presenter.insertJasa(fields);
-        }
+        //}
     }
 
     @Override
@@ -105,6 +107,7 @@ public class KelolaJasa extends AppCompatActivity implements HalamanKelolaJasaAc
 
     @Override
     public void onDataInsertFailed() {
+        Toast.makeText(this,idToko+namaJasaEditText.getText()+hargaEditText.getText(),Toast.LENGTH_SHORT).show();
         Toast.makeText(this,"Gangguan server",Toast.LENGTH_SHORT).show();
     }
 
