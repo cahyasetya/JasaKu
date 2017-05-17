@@ -133,6 +133,7 @@ public class FilterActivity extends AppCompatActivity implements KategoriInterfa
             kecamatanSpinner.setAdapter(adapter);
             kecamatanLabel.setVisibility(View.VISIBLE);
             kecamatanSpinner.setVisibility(View.VISIBLE);
+            kecamatanSpinner.setOnItemSelectedListener(this);
         }else{
             kecamatanLabel.setVisibility(View.GONE);
             kecamatanLabel.setVisibility(View.GONE);
