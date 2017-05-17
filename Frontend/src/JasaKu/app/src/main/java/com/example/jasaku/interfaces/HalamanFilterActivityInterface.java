@@ -13,7 +13,7 @@ import java.util.List;
 
 public interface HalamanFilterActivityInterface {
     public void onKategoriLoaded(List<Kategori> kategoriList);
-    public void onLoadFailed();
+    public void onLoadFailed(Throwable t);
     public void onProvinsiLoaded(List<Provinsi> provinsiList);
     public void onKabupatenLoaded(List<Kabupaten> kabupatenList);
     public void onKecamatanLoaded(List<Kecamatan> kecamatanList);
