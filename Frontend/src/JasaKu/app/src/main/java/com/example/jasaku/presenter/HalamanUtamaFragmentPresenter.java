@@ -18,20 +18,23 @@ import io.reactivex.schedulers.Schedulers;
 public class HalamanUtamaFragmentPresenter {
 
     HalamanUtamaFragment callback;
+    ServiceInterface serviceInterface;
 
     public HalamanUtamaFragmentPresenter(HalamanUtamaFragment callback) {
         this.callback=callback;
+        serviceInterface= ServiceGenerator.createService(ServiceInterface.class);
     }
 
     public void loadData(){
-        ServiceInterface serviceInterface= ServiceGenerator.createService(ServiceInterface.class);
         serviceInterface.getToko().subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::dataLoaded,this::dataLoadError);
     }
 
     public void filter(Map<String, String> fields){
-
+        serviceInterface.getTokoFiltered(fields).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(this::dataLoaded,this::dataLoadError);
     }
 
     private void dataLoaded(List<Toko> tokoList){

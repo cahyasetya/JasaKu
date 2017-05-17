@@ -26,6 +26,7 @@ import com.example.jasaku.model.Provinsi;
 import com.example.jasaku.presenter.HalamanFilterActivityPresenter;
 import com.jakewharton.retrofit2.adapter.rxjava2.HttpException;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -101,6 +102,10 @@ public class FilterActivity extends AppCompatActivity implements KategoriInterfa
 
     @Override
     public void onProvinsiLoaded(List<Provinsi> provinsiList) {
+        Provinsi provinsi=new Provinsi();
+        provinsi.setId("-1");
+        provinsi.setNama("-");
+        provinsiList.add(0,provinsi);
         ProvinsiAdapter adapter=new ProvinsiAdapter(this, provinsiList);
         provinsiSpinner.setAdapter(adapter);
         provinsiSpinner.setOnItemSelectedListener(this);
@@ -137,7 +142,8 @@ public class FilterActivity extends AppCompatActivity implements KategoriInterfa
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         switch (view.getId()){
             case R.id.provinsi_container:
-                presenter.loadKabupaten(String.valueOf(id));
+                if(position!=0)
+                    presenter.loadKabupaten(String.valueOf(id));
                 break;
             case R.id.kabupaten_container:
                 presenter.loadKecamatan(String.valueOf(id));

@@ -114,6 +114,7 @@ public class HalamanUtamaFragment extends Fragment implements HalamanUtamaFragme
             fields.put("id_kategori",idKategori);
             fields.put("id_kecamatan",idKecamatan);
             fields.put("sort",sort);
+            presenter.filter(fields);
         }
     }
 
