@@ -10,6 +10,8 @@ import android.widget.Toast;
 
 import com.example.jasaku.interfaces.HalamanRegisterActivityInterface;
 import com.example.jasaku.presenter.HalamanRegistereActivityPresenter;
+import com.google.firebase.analytics.FirebaseAnalytics;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -61,6 +63,7 @@ public class RegisterActivity extends AppCompatActivity implements HalamanRegist
         field.put("kontak",editTextKontak.getText().toString());
         field.put("username",editTextUsername.getText().toString());
         field.put("password",editTextPassword.getText().toString());
+        field.put("token", FirebaseInstanceId.getInstance().getToken());
         presenter.register(field);
     }
 
