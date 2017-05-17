@@ -61,6 +61,7 @@ public class MainActivity extends AppCompatActivity
             keluar.setVisible(true);
             masuk.setVisible(false);
             if(hasToko==1){
+                buatToko.setVisible(false);
                 kelolaToko.setVisible(true);
             }else
                 kelolaToko.setVisible(false);
