@@ -34,15 +34,21 @@ public class HalamanFilterActivityPresenter {
     }
 
     public void loadProvinsi(){
-
+        serviceInterface.getProvinsi().subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(this::provinsiLoaded,this::loadFailed);
     }
 
-    public void loadKabupaten(){
-
+    public void loadKabupaten(String idProvinsi){
+        serviceInterface.getKabupatenByProvinsi(idProvinsi).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(this::kabupatenLoaded,this::loadFailed);
     }
 
-    public void loadKecamatan(){
-
+    public void loadKecamatan(String idKabupaten){
+        serviceInterface.getKecamatanByKabupaten(idKabupaten).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(this::kecamatanLoaded,this::loadFailed);
     }
 
     private void loadFailed(Throwable throwable) {
@@ -54,14 +60,14 @@ public class HalamanFilterActivityPresenter {
     }
 
     private void provinsiLoaded(List<Provinsi> provinsiList){
-
+        callback.onProvinsiLoaded(provinsiList);
     }
 
-    private void loadKabupaten(List<Kabupaten> kabupatenList){
-
+    private void kabupatenLoaded(List<Kabupaten> kabupatenList){
+        callback.onKabupatenLoaded(kabupatenList);
     }
 
-    private void loadKecamatan(List<Kecamatan> kecamatanList){
-
+    private void kecamatanLoaded(List<Kecamatan> kecamatanList){
+        callback.onKecamatanLoaded(kecamatanList);
     }
 }

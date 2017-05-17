@@ -51,7 +51,9 @@
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
                     android:text="Provinsi"/>
+
                 <Spinner
+                    android:id="@+id/provinsi_spinner"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:entries="@array/provinsi"
