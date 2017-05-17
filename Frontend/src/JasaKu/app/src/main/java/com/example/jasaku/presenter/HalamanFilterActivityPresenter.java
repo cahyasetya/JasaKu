@@ -27,15 +27,15 @@ public class HalamanFilterActivityPresenter {
     public void loadKategori() {
         serviceInterface.getKategori().subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(this::kategoriLoaded,this::kategoriLoadFailed);
+                .subscribe(this::kategoriLoaded,this::loadFailed);
     }
 
     public void loadProvinsi(){
 
     }
 
-    private void kategoriLoadFailed(Throwable throwable) {
-        callback.onKategoriLoadFailed();
+    private void loadFailed(Throwable throwable) {
+        callback.onLoadFailed();
     }
 
     private void kategoriLoaded(List<Kategori> kategoriList) {

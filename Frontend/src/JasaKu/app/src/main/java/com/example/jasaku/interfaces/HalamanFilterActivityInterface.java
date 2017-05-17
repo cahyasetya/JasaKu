@@ -1,6 +1,9 @@
 package com.example.jasaku.interfaces;
 
+import com.example.jasaku.model.Kabupaten;
 import com.example.jasaku.model.Kategori;
+import com.example.jasaku.model.Kecamatan;
+import com.example.jasaku.model.Provinsi;
 
 import java.util.List;
 
@@ -10,5 +13,8 @@ import java.util.List;
 
 public interface HalamanFilterActivityInterface {
     public void onKategoriLoaded(List<Kategori> kategoriList);
-    public void onKategoriLoadFailed();
+    public void onLoadFailed();
+    public void onProvinsiLoaded(List<Provinsi> provinsiList);
+    public void onKabupatenLoaded(List<Kabupaten> kabupatenList);
+    public void onKecamatanLoaded(List<Kecamatan> kecamatanList);
 }
