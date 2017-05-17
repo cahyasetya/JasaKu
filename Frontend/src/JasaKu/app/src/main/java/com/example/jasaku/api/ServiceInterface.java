@@ -20,6 +20,7 @@ import retrofit2.http.DELETE;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
@@ -58,7 +59,7 @@ public interface ServiceInterface {
     Observable<ResponseBody> buatToko(@FieldMap Map<String, String> field);
 
     @FormUrlEncoded
-    @POST("/jasa")
+    @POST("jasa/")
     Observable<ResponseBody> insertJasa(@FieldMap Map<String, String> fields);
 
     @GET("toko/id_pengguna/{id_pengguna}")
@@ -68,7 +69,7 @@ public interface ServiceInterface {
     Observable<ResponseBody> hapusJasa(@Path("id") String id);
 
     @FormUrlEncoded
-    @PUT("/jasa")
+    @PUT("jasa/")
     Observable<ResponseBody> ubahJasa(@FieldMap Map<String, String> fields);
 
     @GET("toko/{id}/pemesanan/{status}")

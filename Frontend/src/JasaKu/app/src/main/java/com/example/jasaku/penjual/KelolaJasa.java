@@ -7,6 +7,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.jasaku.MainActivity;
 import com.example.jasaku.R;
 import com.example.jasaku.interfaces.HalamanKelolaJasaActivityInterface;
 import com.example.jasaku.penjual.fragment.HalamanJasaFragment;
@@ -104,13 +105,13 @@ public class KelolaJasa extends AppCompatActivity implements HalamanKelolaJasaAc
     public void onDataInserted() {
         Toast.makeText(this,idToko+" "+namaJasaEditText.getText()+" "+hargaEditText.getText(),Toast.LENGTH_SHORT).show();
         Toast.makeText(this,"Berhasil disimpan",Toast.LENGTH_SHORT).show();
-        startActivity(new Intent(this, HalamanJasaFragment.class));
+        startActivity(new Intent(KelolaJasa.this, EditTokoActivity.class));
         finish();
     }
 
     @Override
     public void onDataInsertFailed() {
-        Toast.makeText(this,idToko+namaJasaEditText.getText()+hargaEditText.getText(),Toast.LENGTH_SHORT).show();
+        Toast.makeText(this,idToko+" "+namaJasaEditText.getText()+" "+hargaEditText.getText(),Toast.LENGTH_SHORT).show();
         Toast.makeText(this,"Gangguan server",Toast.LENGTH_SHORT).show();
     }
 
@@ -124,7 +125,7 @@ public class KelolaJasa extends AppCompatActivity implements HalamanKelolaJasaAc
 
     @Override
     public void onJasaEditFailed() {
-        Toast.makeText(this,IdJasa+namaJasaEditText.getText()+hargaEditText.getText(),Toast.LENGTH_SHORT).show();
+        Toast.makeText(this,IdJasa+" "+namaJasaEditText.getText()+" "+hargaEditText.getText(),Toast.LENGTH_SHORT).show();
         Toast.makeText(this,"Gagal memperbarui jasa",Toast.LENGTH_SHORT).show();
     }
 }

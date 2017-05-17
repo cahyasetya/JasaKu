@@ -17,11 +17,9 @@ import okhttp3.ResponseBody;
 public class UpdateJasaPresenter {
 
     private UpdateJasaInterface callback;
-    //private ServiceInterface serviceInterface;
 
     public UpdateJasaPresenter(UpdateJasaInterface callback) {
         this.callback = callback;
-        //serviceInterface = ServiceGenerator.createService(ServiceInterface.class);
     }
 
     public void ubahJasa(Map<String, String> fields){
