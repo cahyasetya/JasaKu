@@ -18,6 +18,8 @@ public class Toko implements Serializable{
     private long hargaMinimal;
     @SerializedName("id_pengguna")
     private String idPengguna;
+    @SerializedName("harga_terendah")
+    private String hargaTerendah;
 
     public String getNama() {
         return nama;
@@ -73,5 +75,21 @@ public class Toko implements Serializable{
 
     public String getIdPengguna() {
         return idPengguna;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setIdPengguna(String idPengguna) {
+        this.idPengguna = idPengguna;
+    }
+
+    public String getHargaTerendah() {
+        return hargaTerendah;
+    }
+
+    public void setHargaTerendah(String hargaTerendah) {
+        this.hargaTerendah = hargaTerendah;
     }
 }

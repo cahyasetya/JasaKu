@@ -97,4 +97,7 @@ public interface ServiceInterface {
 
     @GET("toko/")
     Observable<List<Toko>> getTokoFiltered(@QueryMap Map<String, String> queries);
+
+    @GET("toko/search/{q}")
+    Observable<List<Toko>> searchToko(@Path("q") String q);
 }

@@ -31,8 +31,14 @@ public class HalamanUtamaFragmentPresenter {
                 .subscribe(this::dataLoaded,this::dataLoadError);
     }
 
-    public void filter(Map<String, String> fields){
+    public void filterToko(Map<String, String> fields){
         serviceInterface.getTokoFiltered(fields).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(this::dataLoaded,this::dataLoadError);
+    }
+
+    public void searchToko(String q){
+        serviceInterface.searchToko(q).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::dataLoaded,this::dataLoadError);
     }

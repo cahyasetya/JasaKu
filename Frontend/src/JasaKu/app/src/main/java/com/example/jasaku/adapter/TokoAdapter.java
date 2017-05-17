@@ -46,7 +46,7 @@ public class TokoAdapter extends RecyclerView.Adapter<TokoAdapter.TokoViewHolder
         holder.namaTokoTextView.setText(toko.getNama());
         holder.deskripsiTokoTextView.setText(toko.getDeskripsi());
         holder.alamatToko.setText(toko.getAlamat());
-        holder.hargaMinimal.setText(String.valueOf(toko.getHargaMinimal()));
+        holder.hargaMinimal.setText(String.valueOf(toko.getHargaTerendah()));
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

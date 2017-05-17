@@ -35,7 +35,7 @@ import butterknife.ButterKnife;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class HalamanUtamaFragment extends Fragment implements HalamanUtamaFragmentInterfaces{
+public class HalamanUtamaFragment extends Fragment implements HalamanUtamaFragmentInterfaces, SearchView.OnQueryTextListener{
 
     @BindView(R.id.toko_recyclerview)
     RecyclerView tokoRecyclerView;
@@ -71,6 +71,7 @@ public class HalamanUtamaFragment extends Fragment implements HalamanUtamaFragme
     private void init(){
         tokoSearchview.onActionViewExpanded();
         tokoSearchview.clearFocus();
+        tokoSearchview.setOnQueryTextListener(this);
     }
 
     @Override
@@ -83,7 +84,7 @@ public class HalamanUtamaFragment extends Fragment implements HalamanUtamaFragme
         sortIcon.mutate().setColorFilter(ContextCompat.getColor(getContext(),R.color.white), PorterDuff.Mode.SRC_IN);
         sort.setIcon(sortIcon);
 
-        //custom filter icon
+        //custom filterToko icon
         MenuItem filter=menu.findItem(R.id.filter);
         Drawable filterIcon=filter.getIcon();
         filterIcon.mutate().setColorFilter(ContextCompat.getColor(getContext(),R.color.white),PorterDuff.Mode.SRC_IN);
@@ -96,6 +97,16 @@ public class HalamanUtamaFragment extends Fragment implements HalamanUtamaFragme
         switch (item.getItemId()){
             case R.id.filter:
                 startActivity(new Intent(getContext(), FilterActivity.class));
+                break;
+            case R.id.harga_ascending:
+                Map<String, String> q=new HashMap<>();
+                q.put("sort","harga_asc");
+                presenter.filterToko(q);
+                break;
+            case R.id.harga_descending:
+                q=new HashMap<>();
+                q.put("sort","harga_dsc");
+                presenter.filterToko(q);
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -117,7 +128,7 @@ public class HalamanUtamaFragment extends Fragment implements HalamanUtamaFragme
                 fields.put("id_kecamatan",idKecamatan);
             if(sort!=null)
                 fields.put("sort",sort);
-            presenter.filter(fields);
+            presenter.filterToko(fields);
         }
     }
 
@@ -133,5 +144,16 @@ public class HalamanUtamaFragment extends Fragment implements HalamanUtamaFragme
     @Override
     public void onDataLoadError(Throwable t) {
         Toast.makeText(getContext(),"Gangguan jaringan",Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        presenter.searchToko(query);
+        return true;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        return false;
     }
 }

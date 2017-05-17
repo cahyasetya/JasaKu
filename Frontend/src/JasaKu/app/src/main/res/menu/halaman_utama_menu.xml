@@ -3,7 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/sort"
-        android:icon="@mipmap/ic_sort_black_24dp"
         android:title="Sort"
         app:showAsAction="always">
         <menu>
@@ -13,29 +12,16 @@
                 <menu>
                     <item
                         android:id="@+id/harga_ascending"
-                        android:title="A -> Z" />
+                        android:title="Ascending" />
                     <item
                         android:id="@+id/harga_descending"
-                        android:title="Z -> A" />
-                </menu>
-            </item>
-            <item
-                android:id="@+id/rating"
-                android:title="Rating">
-                <menu>
-                    <item
-                        android:id="@+id/rating_ascending"
-                        android:title="A -> Z" />
-                    <item
-                        android:id="@+id/rating_descending"
-                        android:title="Z -> A" />
+                        android:title="Descending" />
                 </menu>
             </item>
         </menu>
     </item>
     <item
         android:id="@+id/filter"
-        android:icon="@mipmap/ic_filter_list_black_24dp"
-        android:title="Filter"
+        android:title="Saring"
         app:showAsAction="always" />
 </menu>
