@@ -57,9 +57,9 @@ public interface ServiceInterface {
     @POST("toko")
     Observable<ResponseBody> buatToko(@FieldMap Map<String, String> field);
 
-    //@FormUrlEncoded
+    @FormUrlEncoded
     @POST("/jasa")
-    Observable<ResponseBody> insertJasa(@Body Map<String, String> fields);
+    Observable<ResponseBody> insertJasa(@FieldMap Map<String, String> fields);
 
     @GET("toko/id_pengguna/{id_pengguna}")
     Observable<List<Toko>> getTokoByIdPengguna(@Path("id_pengguna") String id_pengguna);
@@ -67,9 +67,9 @@ public interface ServiceInterface {
     @DELETE("jasa/{id}")
     Observable<ResponseBody> hapusJasa(@Path("id") String id);
 
-    //@FormUrlEncoded
+    @FormUrlEncoded
     @PUT("/jasa")
-    Observable<ResponseBody> ubahJasa(@Body Map<String, String> fields);
+    Observable<ResponseBody> ubahJasa(@FieldMap Map<String, String> fields);
 
     @GET("toko/{id}/pemesanan/{status}")
     Observable<List<PesananMasuk>> getPesananMasuk(@Path("id") String idToko,@Path("status") String status);
