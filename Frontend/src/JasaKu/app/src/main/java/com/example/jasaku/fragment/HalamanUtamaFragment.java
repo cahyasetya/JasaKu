@@ -79,7 +79,7 @@ public class HalamanUtamaFragment extends Fragment implements HalamanUtamaFragme
         inflater.inflate(R.menu.halaman_utama_menu,menu);
 
         //custom sort icon
-        MenuItem sort=menu.findItem(R.id.sort);
+        /*MenuItem sort=menu.findItem(R.id.sort);
         Drawable sortIcon=sort.getIcon();
         sortIcon.mutate().setColorFilter(ContextCompat.getColor(getContext(),R.color.white), PorterDuff.Mode.SRC_IN);
         sort.setIcon(sortIcon);
@@ -88,7 +88,7 @@ public class HalamanUtamaFragment extends Fragment implements HalamanUtamaFragme
         MenuItem filter=menu.findItem(R.id.filter);
         Drawable filterIcon=filter.getIcon();
         filterIcon.mutate().setColorFilter(ContextCompat.getColor(getContext(),R.color.white),PorterDuff.Mode.SRC_IN);
-        filter.setIcon(filterIcon);
+        filter.setIcon(filterIcon);*/
         super.onCreateOptionsMenu(menu, inflater);
     }
 
