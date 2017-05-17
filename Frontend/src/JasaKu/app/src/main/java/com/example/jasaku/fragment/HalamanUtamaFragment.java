@@ -111,9 +111,12 @@ public class HalamanUtamaFragment extends Fragment implements HalamanUtamaFragme
             presenter.loadData();
         else {
             Map<String, String> fields=new HashMap<>();
-            fields.put("id_kategori",idKategori);
-            fields.put("id_kecamatan",idKecamatan);
-            fields.put("sort",sort);
+            if(idKategori!=null)
+                fields.put("id_kategori",idKategori);
+            if(idKecamatan!=null)
+                fields.put("id_kecamatan",idKecamatan);
+            if(sort!=null)
+                fields.put("sort",sort);
             presenter.filter(fields);
         }
     }

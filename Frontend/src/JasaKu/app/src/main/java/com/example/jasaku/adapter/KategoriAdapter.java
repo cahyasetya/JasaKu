@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.jasaku.R;
+import com.example.jasaku.interfaces.KategoriInterface;
 import com.example.jasaku.model.Kategori;
 
 import java.util.List;
@@ -48,6 +49,7 @@ public class KategoriAdapter extends RecyclerView.Adapter<KategoriAdapter.Katego
                     currViewHolder.kategoriCheck.setVisibility(View.INVISIBLE);
                 holder.kategoriCheck.setVisibility(View.VISIBLE);
                 currViewHolder=holder;
+                ((KategoriInterface)context).onKategoriSelected(String.valueOf(kategori.getId()));
             }
         });
     }
