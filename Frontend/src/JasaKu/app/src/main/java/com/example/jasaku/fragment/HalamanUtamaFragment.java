@@ -25,7 +25,9 @@ import com.example.jasaku.interfaces.HalamanUtamaFragmentInterfaces;
 import com.example.jasaku.model.Toko;
 import com.example.jasaku.presenter.HalamanUtamaFragmentPresenter;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -102,7 +104,17 @@ public class HalamanUtamaFragment extends Fragment implements HalamanUtamaFragme
     @Override
     public void onResume() {
         super.onResume();
-        presenter.loadData();
+        String idKategori=getArguments().getString("id_kategori",null);
+        String idKecamatan=getArguments().getString("id_kecamatan",null);
+        String sort=getArguments().getString("sort",null);
+        if(idKategori==null)
+            presenter.loadData();
+        else {
+            Map<String, String> fields=new HashMap<>();
+            fields.put("id_kategori",idKategori);
+            fields.put("id_kecamatan",idKecamatan);
+            fields.put("sort",sort);
+        }
     }
 
     @Override

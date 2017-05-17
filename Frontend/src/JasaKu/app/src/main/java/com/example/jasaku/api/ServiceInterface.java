@@ -94,4 +94,7 @@ public interface ServiceInterface {
 
     @GET("kecamatan/id_kabupaten/{idkabupaten}")
     Observable<List<Kecamatan>> getKecamatanByKabupaten(@Path("idkabupaten") String idKabupaten);
+
+    @GET("toko/")
+    Observable<List<Toko>> getTokoFiltered(@QueryMap Map<String, String> queries);
 }

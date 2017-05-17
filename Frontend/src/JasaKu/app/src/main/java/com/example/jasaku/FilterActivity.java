@@ -1,5 +1,6 @@
 package com.example.jasaku;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
@@ -15,6 +16,7 @@ import com.example.jasaku.adapter.KabupatenAdapter;
 import com.example.jasaku.adapter.KategoriAdapter;
 import com.example.jasaku.adapter.KecamatanAdapter;
 import com.example.jasaku.adapter.ProvinsiAdapter;
+import com.example.jasaku.fragment.HalamanUtamaFragment;
 import com.example.jasaku.interfaces.HalamanFilterActivityInterface;
 import com.example.jasaku.interfaces.KategoriInterface;
 import com.example.jasaku.model.Kabupaten;
@@ -28,6 +30,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class FilterActivity extends AppCompatActivity implements KategoriInterface, HalamanFilterActivityInterface,AdapterView.OnItemSelectedListener{
 
@@ -59,7 +62,7 @@ public class FilterActivity extends AppCompatActivity implements KategoriInterfa
 
         ButterKnife.bind(this);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         presenter=new HalamanFilterActivityPresenter(this);
     }
@@ -145,5 +148,13 @@ public class FilterActivity extends AppCompatActivity implements KategoriInterfa
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
+    }
+
+    @OnClick(R.id.terapkan_button)
+    public void terapkan(){
+        //getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.content_main,new HalamanUtamaFragment()).commit();
+        Intent intent=new Intent(this,MainActivity.class);
+        intent.putExtra("id_kategori",idKategori);
+        startActivity(intent);
     }
 }

@@ -6,6 +6,7 @@ import com.example.jasaku.fragment.HalamanUtamaFragment;
 import com.example.jasaku.model.Toko;
 
 import java.util.List;
+import java.util.Map;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -27,6 +28,10 @@ public class HalamanUtamaFragmentPresenter {
         serviceInterface.getToko().subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::dataLoaded,this::dataLoadError);
+    }
+
+    public void filter(Map<String, String> fields){
+
     }
 
     private void dataLoaded(List<Toko> tokoList){

@@ -77,7 +77,13 @@ public class MainActivity extends AppCompatActivity
         String namaPengguna=preferences.getString("nama",null);
         nama.setText(namaPengguna);
 
-        getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.content_main,new HalamanUtamaFragment()).commit();
+        Bundle bundle=new Bundle();
+        bundle.putString("id_kategori",getIntent().getStringExtra("id_kategori"));
+
+        HalamanUtamaFragment huf=new HalamanUtamaFragment();
+        huf.setArguments(bundle);
+
+        getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.content_main,huf).commit();
     }
 
     @Override
