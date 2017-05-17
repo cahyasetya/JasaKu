@@ -1,6 +1,7 @@
 package com.example.jasaku.penjual;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.EditText;
@@ -9,18 +10,25 @@ import android.widget.Toast;
 
 import com.example.jasaku.MainActivity;
 import com.example.jasaku.R;
+import com.example.jasaku.api.ServiceGenerator;
+import com.example.jasaku.api.ServiceInterface;
 import com.example.jasaku.interfaces.HalamanKelolaJasaActivityInterface;
+import com.example.jasaku.model.Toko;
 import com.example.jasaku.penjual.fragment.HalamanJasaFragment;
 import com.example.jasaku.penjual.interfaces.UpdateJasaInterface;
 import com.example.jasaku.penjual.presenter.UpdateJasaPresenter;
 import com.example.jasaku.presenter.HalamanKelolaJasaActivityPresenter;
+import com.google.gson.Gson;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 public class KelolaJasa extends AppCompatActivity implements HalamanKelolaJasaActivityInterface, UpdateJasaInterface {
 
@@ -103,29 +111,54 @@ public class KelolaJasa extends AppCompatActivity implements HalamanKelolaJasaAc
 
     @Override
     public void onDataInserted() {
-        Toast.makeText(this,idToko+" "+namaJasaEditText.getText()+" "+hargaEditText.getText(),Toast.LENGTH_SHORT).show();
+        getToko();
         Toast.makeText(this,"Berhasil disimpan",Toast.LENGTH_SHORT).show();
-        startActivity(new Intent(KelolaJasa.this, EditTokoActivity.class));
         finish();
     }
 
     @Override
     public void onDataInsertFailed() {
-        Toast.makeText(this,idToko+" "+namaJasaEditText.getText()+" "+hargaEditText.getText(),Toast.LENGTH_SHORT).show();
-        Toast.makeText(this,"Gangguan server",Toast.LENGTH_SHORT).show();
+        Toast.makeText(this,"Gagal menambah jasa",Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onJasaEdited() {
-        Toast.makeText(this,IdJasa+" "+namaJasaEditText.getText()+" "+hargaEditText.getText(),Toast.LENGTH_SHORT).show();
-        Toast.makeText(this,"Berhasil diupdate",Toast.LENGTH_SHORT).show();
-        startActivity(new Intent(this, EditTokoActivity.class));
+        getToko();
+        Toast.makeText(this,"Berhasil disimpan",Toast.LENGTH_SHORT).show();
         finish();
     }
 
     @Override
     public void onJasaEditFailed() {
-        Toast.makeText(this,IdJasa+" "+namaJasaEditText.getText()+" "+hargaEditText.getText(),Toast.LENGTH_SHORT).show();
         Toast.makeText(this,"Gagal memperbarui jasa",Toast.LENGTH_SHORT).show();
+    }
+
+    private void getToko(){
+        SharedPreferences preferences=getSharedPreferences("jasaku",MODE_PRIVATE);
+        String userId=preferences.getString("id_user",null);
+
+        ServiceInterface serviceInterface= ServiceGenerator.createService(ServiceInterface.class);
+        serviceInterface.getTokoByIdPengguna(userId).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(this::getTokoSuccess,this::getTokoFailed);
+    }
+
+    private void getTokoSuccess(List<Toko> tokoList){
+        Toko toko=tokoList.get(0);
+
+        Gson gson=new Gson();
+        String tokoString=gson.toJson(toko);
+
+        Intent intent=new Intent(this, EditTokoActivity.class);
+        intent.putExtra("id_toko",toko.getId());
+        intent.putExtra("nama_toko",toko.getNama());
+        intent.putExtra("toko",tokoString);
+        intent.putExtra("pos", "ada");
+
+        startActivity(intent);
+    }
+
+    private void getTokoFailed(Throwable t){
+        Toast.makeText(this,"Gangguan jaringan",Toast.LENGTH_SHORT).show();
     }
 }

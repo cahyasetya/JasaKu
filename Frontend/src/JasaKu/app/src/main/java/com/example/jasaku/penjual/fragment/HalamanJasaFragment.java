@@ -3,6 +3,7 @@ package com.example.jasaku.penjual.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -36,6 +37,7 @@ public class HalamanJasaFragment extends Fragment implements View.OnClickListene
     private LinearLayoutManager llm;
     private JasaAdapter adapter;
     private List<Jasa> jasaList;
+    private Integer condition;
     private HalamanJasaFragmentPenjualPresenter presenter;
 
     public HalamanJasaFragment() {

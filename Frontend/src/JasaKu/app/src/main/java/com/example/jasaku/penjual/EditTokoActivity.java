@@ -132,8 +132,10 @@ public class EditTokoActivity extends AppCompatActivity {
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
+
             Bundle bundle=new Bundle();
             bundle.putString("id_toko",this.idToko);
+
             switch (position){
                 case 0:
                     bundle.putSerializable("toko",this.toko);
@@ -163,6 +165,7 @@ public class EditTokoActivity extends AppCompatActivity {
 
         @Override
         public CharSequence getPageTitle(int position) {
+
             switch (position) {
                 case 0:
                     return "Beranda";
