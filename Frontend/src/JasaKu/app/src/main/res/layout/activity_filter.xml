@@ -10,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -46,6 +47,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:padding="8dp">
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -56,19 +58,39 @@
                     android:id="@+id/provinsi_spinner"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:entries="@array/provinsi"
                     android:prompt="@string/sumatera_utara"></Spinner>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
                     android:text="Kabupaten/Kota"/>
+
                 <Spinner
+                    android:id="@+id/kabupaten_spinner"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:entries="@array/kota"
                     android:prompt="@string/nias"></Spinner>
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Kecamatan"
+                    android:textStyle="bold" />
+
+                <Spinner
+                    android:id="@+id/kecamatan_spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
             </LinearLayout>
         </android.support.v7.widget.CardView>
+
+        <Button
+            android:id="@+id/terapkan_button"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Button" />
     </LinearLayout>
 </ScrollView>
