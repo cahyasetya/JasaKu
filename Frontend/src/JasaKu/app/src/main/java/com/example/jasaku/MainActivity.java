@@ -80,6 +80,7 @@ public class MainActivity extends AppCompatActivity
 
         Bundle bundle=new Bundle();
         bundle.putString("id_kategori",getIntent().getStringExtra("id_kategori"));
+        bundle.putString("id_kecamatan",getIntent().getStringExtra("id_kecamatan"));
 
         HalamanUtamaFragment huf=new HalamanUtamaFragment();
         huf.setArguments(bundle);
