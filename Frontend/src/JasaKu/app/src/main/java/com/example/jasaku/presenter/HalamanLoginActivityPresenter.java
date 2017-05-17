@@ -50,7 +50,7 @@ public class HalamanLoginActivityPresenter {
         editor.putString("kontak", pengguna.getKontak());
         editor.commit();
 
-        Toast.makeText(callback,"Token anda: "+FirebaseInstanceId.getInstance().getToken(),Toast.LENGTH_SHORT).show();
+        //Toast.makeText(callback,"Token anda: "+FirebaseInstanceId.getInstance().getToken(),Toast.LENGTH_SHORT).show();
         Log.d(this.getClass().getSimpleName(),"token: "+FirebaseInstanceId.getInstance().getToken());
         callback.onLoginSuccess();
     }

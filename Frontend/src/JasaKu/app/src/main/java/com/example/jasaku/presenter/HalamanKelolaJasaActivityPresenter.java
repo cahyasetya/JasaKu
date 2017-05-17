@@ -3,6 +3,9 @@ package com.example.jasaku.presenter;
 import com.example.jasaku.api.ServiceGenerator;
 import com.example.jasaku.api.ServiceInterface;
 import com.example.jasaku.interfaces.HalamanKelolaJasaActivityInterface;
+import com.example.jasaku.model.Jasa;
+import com.fernandocejas.frodo.annotation.RxLogObservable;
+import com.google.gson.Gson;
 
 import java.util.Map;
 
