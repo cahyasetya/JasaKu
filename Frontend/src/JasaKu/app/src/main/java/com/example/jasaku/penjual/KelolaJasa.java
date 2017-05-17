@@ -118,8 +118,8 @@ public class KelolaJasa extends AppCompatActivity implements HalamanKelolaJasaAc
     @Override
     public void onJasaEdited() {
         Toast.makeText(this,IdJasa+" "+namaJasaEditText.getText()+" "+hargaEditText.getText(),Toast.LENGTH_SHORT).show();
-        startActivity(new Intent(this, HalamanJasaFragment.class));
         Toast.makeText(this,"Berhasil diupdate",Toast.LENGTH_SHORT).show();
+        startActivity(new Intent(this, EditTokoActivity.class));
         finish();
     }
 
