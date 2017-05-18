@@ -86,34 +86,6 @@
                 android:paddingLeft="15dp"
                 android:text="Keputih gang Makam Blok H-19A" />
 
-            <TextView
-                android:id="@+id/textViewKecamatan"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingLeft="15dp"
-                android:text="Sukolilo" />
-
-            <TextView
-                android:id="@+id/textViewKabKota"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingLeft="15dp"
-                android:text="Surabaya" />
-
-            <TextView
-                android:id="@+id/textViewProvinsi"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingLeft="15dp"
-                android:text="Jawa Timur" />
-
-            <TextView
-                android:id="@+id/textViewKontak"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingLeft="15dp"
-                android:text="085728876876" />
-
         </LinearLayout>
 
     </android.support.v7.widget.CardView>
