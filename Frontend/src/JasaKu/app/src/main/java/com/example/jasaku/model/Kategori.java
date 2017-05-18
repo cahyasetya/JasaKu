@@ -8,7 +8,7 @@ public class Kategori {
     private int id;
     private String nama;
 
-    public Kategori(String nama) {
+    public Kategori() {
         this.nama = nama;
     }
 
@@ -24,7 +24,7 @@ public class Kategori {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 }

@@ -117,9 +117,13 @@ public class RegisterTokoActivity extends AppCompatActivity implements HalamanRe
     @Override
     public void onKategoriLoadedSuccessfully(List<Kategori> kategoriList) {
         this.kategoriList=kategoriList;
+        Kategori kategori = new Kategori();
+        kategori.setId(-1);
+        kategori.setNama("-");
+        kategoriList.add(0,kategori);
         KategoriSpinner spinner=new KategoriSpinner(this,this.kategoriList);
         kategoriSpinner.setAdapter(spinner);
-        kabupatenSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        kategoriSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 id_kategori = String.valueOf(id);
@@ -160,21 +164,23 @@ public class RegisterTokoActivity extends AppCompatActivity implements HalamanRe
 
     @Override
     public void onProvinsiLoaded(List<Provinsi> provinsiList) {
-        tvProv.setVisibility(View.VISIBLE);
-        provinsiSpinner.setVisibility(View.VISIBLE);
-        ProvinsiAdapter adapter=new ProvinsiAdapter(this, provinsiList);
-        provinsiSpinner.setAdapter(adapter);
-        provinsiSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                presenter.loadKabupaten(String.valueOf(id));
-            }
+        if (!id_kategori.equals("-1")){
+            tvProv.setVisibility(View.VISIBLE);
+            provinsiSpinner.setVisibility(View.VISIBLE);
+            ProvinsiAdapter adapter=new ProvinsiAdapter(this, provinsiList);
+            provinsiSpinner.setAdapter(adapter);
+            provinsiSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    presenter.loadKabupaten(String.valueOf(id));
+                }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
 
-            }
-        });
+                }
+            });
+        }
     }
 
     @Override
