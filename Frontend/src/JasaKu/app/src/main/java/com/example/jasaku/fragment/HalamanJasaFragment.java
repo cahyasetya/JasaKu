@@ -57,14 +57,20 @@ public class HalamanJasaFragment extends Fragment implements View.OnClickListene
         View view=inflater.inflate(R.layout.fragment_halaman_jasa, container, false);
         ButterKnife.bind(this,view);
 
+        pesanButton.setOnClickListener(this);
+
+        return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
         String idToko=getArguments().getString("id_toko",null);
 
         if(idToko!=null){
             HalamanJasaFragmentPresenter presenter=new HalamanJasaFragmentPresenter(this);
             presenter.loadData(idToko);
         }
-
-        return view;
     }
 
     @Override
@@ -82,16 +88,24 @@ public class HalamanJasaFragment extends Fragment implements View.OnClickListene
 
     @Override
     public void onDataLoaded(List<Jasa> jasaList) {
-        SharedPreferences preferences = getContext().getSharedPreferences("jasaku", MODE_PRIVATE);
         this.jasaList=jasaList;
         llm=new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
         jasaRecyclerView.setLayoutManager(llm);
-        adapter=new JasaAdapter(getContext(),this.jasaList);
+        adapter=new JasaAdapter(getContext(),this.jasaList,this);
         jasaRecyclerView.setAdapter(adapter);
+    }
+
+    @Override
+    public void onDataLoadError(Throwable t) {
+        Toast.makeText(getContext(),"Gangguan jaringan",Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onJasaSelected() {
+        SharedPreferences preferences = getContext().getSharedPreferences("jasaku", MODE_PRIVATE);
         boolean isLoggedIn=preferences.getBoolean("isLoggedIn",false);
         if(isLoggedIn){
             pesanButton.setVisibility(View.VISIBLE);
-            pesanButton.setOnClickListener(this);
         }
         else{
             pesanButton.setVisibility(View.GONE);
@@ -99,8 +113,8 @@ public class HalamanJasaFragment extends Fragment implements View.OnClickListene
     }
 
     @Override
-    public void onDataLoadError(Throwable t) {
-        Toast.makeText(getContext(),"Gangguan jaringan",Toast.LENGTH_SHORT).show();
+    public void onJasaNotSelected() {
+        pesanButton.setVisibility(View.GONE);
     }
 }
 
@@ -108,10 +122,12 @@ class JasaAdapter extends RecyclerView.Adapter<JasaAdapter.JasaViewHolder>{
 
     private Context context;
     private List<Jasa> jasaList;
+    private HalamanJasaFragmentInterfaces callback;
 
-    public JasaAdapter(Context context, List<Jasa> jasaList){
+    public JasaAdapter(Context context, List<Jasa> jasaList, HalamanJasaFragmentInterfaces callback){
         this.context=context;
         this.jasaList=jasaList;
+        this.callback=callback;
     }
 
     @Override
@@ -128,10 +144,23 @@ class JasaAdapter extends RecyclerView.Adapter<JasaAdapter.JasaViewHolder>{
         holder.checkBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (holder.checkBox.isChecked())
+                if (holder.checkBox.isChecked()) {
                     jasa.setSelected(true);
-                else
+                    callback.onJasaSelected();
+                }else {
                     jasa.setSelected(false);
+                    boolean jasaSelected=false;
+                    for(Jasa j:jasaList){
+                        if(j.isSelected()==true){
+                            jasaSelected=true;
+                        }
+                    }
+                    if(jasaSelected){
+                        callback.onJasaSelected();
+                    }else{
+                        callback.onJasaNotSelected();
+                    }
+                }
             }
         });
     }

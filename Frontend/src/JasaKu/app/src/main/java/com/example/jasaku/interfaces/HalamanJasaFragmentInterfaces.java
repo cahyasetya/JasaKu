@@ -11,4 +11,6 @@ import java.util.List;
 public interface HalamanJasaFragmentInterfaces {
     void onDataLoaded(List<Jasa> jasaList);
     void onDataLoadError(Throwable t);
+    void onJasaSelected();
+    void onJasaNotSelected();
 }
