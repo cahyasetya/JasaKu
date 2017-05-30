@@ -38,14 +38,6 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp">
 
-        <TextView
-            android:id="@+id/textbiasa"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Nantinya Logo Tulisan"
-            tools:layout_editor_absoluteX="8dp"
-            tools:layout_editor_absoluteY="43dp" />
-
         <ImageView
             android:id="@+id/imageViewTextLogo"
             android:layout_width="wrap_content"
@@ -66,14 +58,6 @@
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp">
-
-        <TextView
-            android:id="@+id/textbiasalagi"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Nantinya gambar Logo"
-            tools:layout_editor_absoluteX="8dp"
-            tools:layout_editor_absoluteY="0dp" />
 
         <ImageView
             android:id="@+id/imageViewLogo"

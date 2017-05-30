@@ -55,7 +55,7 @@ public interface ServiceInterface {
     Observable<List<Kategori>> getKategori();
 
     @FormUrlEncoded
-    @POST("toko")
+    @POST("toko/")
     Observable<ResponseBody> buatToko(@FieldMap Map<String, String> field);
 
     @FormUrlEncoded

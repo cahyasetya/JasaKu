@@ -115,20 +115,24 @@ public class HalamanUtamaFragment extends Fragment implements HalamanUtamaFragme
     @Override
     public void onResume() {
         super.onResume();
-        String idKategori=getArguments().getString("id_kategori",null);
-        String idKecamatan=getArguments().getString("id_kecamatan",null);
-        String sort=getArguments().getString("sort",null);
-        if(idKategori==null&&idKecamatan==null)
+        if(getArguments()!=null) {
+            String idKategori = getArguments().getString("id_kategori", null);
+            String idKecamatan = getArguments().getString("id_kecamatan", null);
+            String sort = getArguments().getString("sort", null);
+            if (idKategori == null && idKecamatan == null)
+                presenter.loadData();
+            else {
+                Map<String, String> fields = new HashMap<>();
+                if (idKategori != null)
+                    fields.put("id_kategori", idKategori);
+                if (idKecamatan != null)
+                    fields.put("id_kecamatan", idKecamatan);
+                if (sort != null)
+                    fields.put("sort", sort);
+                presenter.filterToko(fields);
+            }
+        }else {
             presenter.loadData();
-        else {
-            Map<String, String> fields=new HashMap<>();
-            if(idKategori!=null)
-                fields.put("id_kategori",idKategori);
-            if(idKecamatan!=null)
-                fields.put("id_kecamatan",idKecamatan);
-            if(sort!=null)
-                fields.put("sort",sort);
-            presenter.filterToko(fields);
         }
     }
 

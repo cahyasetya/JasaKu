@@ -5,8 +5,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.jasaku.R;
 import com.example.jasaku.model.PesananMasuk;
@@ -53,6 +55,12 @@ public class PesananDiterimaAdapter extends RecyclerView.Adapter<PesananDiterima
                     holder.pembeliContainer.setVisibility(View.VISIBLE);
             }
         });
+        holder.terimaButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context,"Pesanan selesai",Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
@@ -74,6 +82,8 @@ public class PesananDiterimaAdapter extends RecyclerView.Adapter<PesananDiterima
         TextView kontakPembeliTextView;
         @BindView(R.id.pembeli_container)
         LinearLayout pembeliContainer;
+        @BindView(R.id.terima_button)
+        ImageButton terimaButton;
 
         public PesanDiterimaViewHolder(View itemView) {
             super(itemView);

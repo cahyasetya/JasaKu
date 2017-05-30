@@ -96,10 +96,8 @@ public class RegisterTokoActivity extends AppCompatActivity implements HalamanRe
 
     @OnClick(R.id.buttonBuatToko)
     public void buatToko(){
-        SharedPreferences preferences=getSharedPreferences("jasaku",MODE_PRIVATE);
-        Gson gson=new Gson();
-        Pengguna pengguna=gson.fromJson(preferences.getString("pengguna",null),Pengguna.class);
-        id_user = String.valueOf(pengguna.getId());
+        SharedPreferences preferences=getSharedPreferences("jasaku", MODE_PRIVATE);
+        String id=preferences.getString("id_user",null);
 
         Map<String, String> fields=new HashMap<>();
         fields.put("nama", etNamaToko.getText().toString());
@@ -107,7 +105,7 @@ public class RegisterTokoActivity extends AppCompatActivity implements HalamanRe
         fields.put("kontak", etKontak.getText().toString());
         fields.put("deskripsi", etDeskripsi.getText().toString());
         fields.put("jamOperasional", etBuka.getText().toString());
-        fields.put("id_pengguna", id_user);
+        fields.put("id_pengguna", id);
         fields.put("id_kategori", id_kategori);
         fields.put("id_kecamatan", id_kecamatan);
 
@@ -146,6 +144,9 @@ public class RegisterTokoActivity extends AppCompatActivity implements HalamanRe
 
     @Override
     public void onBuatTokoSuccessful() {
+        SharedPreferences.Editor editor=getSharedPreferences("jasaku",MODE_PRIVATE).edit();
+        editor.putInt("has_toko",1);
+        editor.commit();
         Toast.makeText(this,"Berhasil",Toast.LENGTH_SHORT).show();
         getToko();
     }
